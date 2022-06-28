@@ -13,18 +13,18 @@
 <!-- PROJECT SHIELDS -->
 <p align="center">
   <a href="https://github.com/JamesLafritz/RPG/graphs/contributors">
-	  <img src="https://img.shields.io/github/contributors/JamesLafritz/RPG.svg?style=for-the-badge" title="forks Badge" alt="forks Badge"/>
+	  <img src="https://img.shields.io/github/contributors/JamesLafritz/RPG.svg?style=for-the-badge" title="contributors Badge" alt="contributors Badge"/>
   </a>
-  <a href="https://img.shields.io/github/forks/JamesLafritz/RPG.svg?style=for-the-badge">
-	  <img src="https://img.shields.io/github/forks/JamesLafritz/RPG.svg?style=for-the-badge" title="stargazers Badge" alt="stargazers Badge"/>
+  <a href="https://github.com/JamesLaFritz/RPG/fork">
+	  <img src="https://img.shields.io/github/forks/JamesLafritz/RPG.svg?style=for-the-badge" title="fork Badge" alt="fork Badge"/>
   </a>
   <a href="https://github.com/JamesLafritz/RPG/stargazers">
-	  <img src="https://img.shields.io/github/stars/JamesLafritz/RPG.svg?style=for-the-badge" title="Contributors Badge" alt="Contributors Badge"/>
+	  <img src="https://img.shields.io/github/stars/JamesLafritz/RPG.svg?style=for-the-badge" title="stargazers Badge" alt="stargazers Badge"/>
   </a>
   <a href="https://github.com/JamesLafritz/RPG/issues">
 	  <img src="https://img.shields.io/github/issues/JamesLafritz/RPG.svg?style=for-the-badge" title="issues Badge" alt="issues Badge"/>
   </a>
-  <a href="https://img.shields.io/github/license/JamesLafritz/RPG.svg?style=for-the-badge">
+  <a href="https://github.com/JamesLaFritz/RPG/blob/main/LICENSE.md">
 	  <img src="https://img.shields.io/github/license/JamesLafritz/RPG.svg?style=for-the-badge" title="License Badge" alt="License Badge"/>
   </a>
 </p>
@@ -88,7 +88,7 @@ Shows How to use Await, Async, Tasks in Unity comparing their performance with C
 
 ### Built With
 
-* <a href="https://www.linkedin.com/in/james-lafritz/"><img src="https://img.shields.io/badge/Unity-100000?style=for-the-badge&logo=unity&logoColor=white"/></a>
+* <a href="https://unity.com/download"><img src="https://img.shields.io/badge/Unity-100000?style=for-the-badge&logo=unity&logoColor=white"/> V2021.3.5f1</a>
 
 
 <!-- Installation -->
@@ -110,7 +110,7 @@ Check Out [Third Party Notices](Third Party Notices.md) for additional assets th
 <!-- ROADMAP -->
 ## Roadmap
 
-See the [open issues](https://github.com/JamesLaFritz/[package-name]/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/JamesLaFritz/RPG/issues) for a list of proposed features (and known issues).
 
 
 
@@ -118,7 +118,7 @@ See the [open issues](https://github.com/JamesLaFritz/[package-name]/issues) for
 ## License
 
 Distributed under the MIT License. See 
-  <a href="https://img.shields.io/github/license/JamesLafritz/RPG.svg?style=for-the-badge">
+  <a href="https://github.com/JamesLaFritz/RPG/blob/main/LICENSE.md">
 	  <img src="https://img.shields.io/github/license/JamesLafritz/RPG.svg?style=for-the-badge" title="License Badge" alt="License Badge"/>
   </a> for more information.
 
