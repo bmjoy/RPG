@@ -41,7 +41,7 @@
       "source_relative_path": "../License/Asset Licenses.md",
       "output": {
         ".html": {
-          "relative_path": "License/Asset Licenses.html",
+          "relative_path": "../License/Asset Licenses.html",
           "hash": "IlynlJxRIaJnDX27gZaCYDbHq4xPNvD/mLWnUjvPcHo="
         }
       },

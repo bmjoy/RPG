@@ -5,27 +5,25 @@
 <p align="center">
 	<img src ="https://github-readme-stats-jameslafritz.vercel.app/api/pin?username=JamesLaFritz&repo=RPG&theme=react" alt="Git Repo Title and Info" title="Repo Info"/>'
 	<br />
-	<a href="https://github.com/JamesLaFritz/RPG/issues">Report Bug</a>
-        ·
-        <a href="https://github.com/JamesLaFritz/RPG/issues">Request Feature</a>
+	<a href="https://github.com/JamesLaFritz/RPG/issues">Report Bug or Request Feature</a>
 </p>
 
 <!-- PROJECT SHIELDS -->
 <p align="center">
   <a href="https://github.com/JamesLafritz/RPG/graphs/contributors">
-	  <img src="https://img.shields.io/github/contributors/JamesLafritz/RPG.svg?style=for-the-badge" title="contributors Badge" alt="contributors Badge"/>
+	  <img src="https://img.shields.io/github/contributors/JamesLafritz/RPG.svg?style=for-the-badge" title="Contributors Badge" alt="Contributors Badge">
   </a>
   <a href="https://github.com/JamesLaFritz/RPG/fork">
-	  <img src="https://img.shields.io/github/forks/JamesLafritz/RPG.svg?style=for-the-badge" title="fork Badge" alt="fork Badge"/>
+	  <img src="https://img.shields.io/github/forks/JamesLafritz/RPG.svg?style=for-the-badge" title="fork Badge" alt="fork Badge">
   </a>
   <a href="https://github.com/JamesLafritz/RPG/stargazers">
-	  <img src="https://img.shields.io/github/stars/JamesLafritz/RPG.svg?style=for-the-badge" title="stargazers Badge" alt="stargazers Badge"/>
+	  <img src="https://img.shields.io/github/stars/JamesLafritz/RPG.svg?style=for-the-badge" title="stargazers Badge" alt="stargazers Badge">
   </a>
   <a href="https://github.com/JamesLafritz/RPG/issues">
-	  <img src="https://img.shields.io/github/issues/JamesLafritz/RPG.svg?style=for-the-badge" title="issues Badge" alt="issues Badge"/>
+	  <img src="https://img.shields.io/github/issues/JamesLafritz/RPG.svg?style=for-the-badge" title="issues Badge" alt="issues Badge">
   </a>
   <a href="https://github.com/JamesLaFritz/RPG/blob/main/LICENSE.md">
-	  <img src="https://img.shields.io/github/license/JamesLafritz/RPG.svg?style=for-the-badge" title="License Badge" alt="License Badge"/>
+	  <img src="https://img.shields.io/github/license/JamesLafritz/RPG.svg?style=for-the-badge" title="License Badge" alt="License Badge">
   </a>
 </p>
 
@@ -65,12 +63,8 @@
       <ul>
         <li><a href="#installation">Articles</a></li>
       </ul>
-      <ul>
-        <li><a href="#articles">Built With</a></li>
-      </ul>
     </li>
     <li><a href="#license">License</a></li>
-    <li><a href="#acknowledgements">Acknowledgements</a></li>
   </ol>
 </details>
 
@@ -83,7 +77,7 @@
 
 [Documentation](https://jameslafritz.github.io/RPG)
 
-Shows How to use Await, Async, Tasks in Unity comparing their performance with Corutines, Wait, and Unity's C# Job System.
+A Complete RPG Action Adventure Project.
 
 
 ### Built With
@@ -95,16 +89,7 @@ Shows How to use Await, Async, Tasks in Unity comparing their performance with C
 ### Installation
 To install this into your project for modifications
 Clone or Download the code from Git Hub into your project.
-Check Out [Third Party Notices](Third Party Notices.md) for additional assets that where used in this project that you can get from the asset store.
-
-
-<!-- Articles -->
-### Articles
-
-* []()
-* []()
-* []()
-
+Check Out [Third Party Notices](https://github.com/JamesLaFritz/RGP/Third Party Notices.md) for additional assets that where used in this project that you can get from the asset store.
 
 
 <!-- ROADMAP -->
@@ -121,8 +106,3 @@ Distributed under the MIT License. See
   <a href="https://github.com/JamesLaFritz/RPG/blob/main/LICENSE.md">
 	  <img src="https://img.shields.io/github/license/JamesLafritz/RPG.svg?style=for-the-badge" title="License Badge" alt="License Badge"/>
   </a> for more information.
-
-
-<!-- ACKNOWLEDGEMENTS -->
-## Acknowledgements
-* []()
