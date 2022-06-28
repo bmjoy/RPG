@@ -1,0 +1,12 @@
+/Documentation~/****
+**Temp**
+.idea/**
+**.csproj
+**.sln
+Library/**
+Logs/**
+**/obj/**
+**/obj.meta
+Assets/Asset Store**
+Assets/Asset Packs**
+Assets/Samples**
