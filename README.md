@@ -89,7 +89,7 @@ A Complete RPG Action Adventure Project.
 ### Installation
 To install this into your project for modifications
 Clone or Download the code from Git Hub into your project.
-Check Out [Third Party Notices](https://github.com/JamesLaFritz/RGP/Third Party Notices.md) for additional assets that where used in this project that you can get from the asset store.
+Check Out [Third Party Notices](https://github.com/JamesLaFritz/RPG/blob/main/Third%20Party%20Notices.md) for additional assets that where used in this project that you can get from the asset store.
 
 
 <!-- ROADMAP -->
