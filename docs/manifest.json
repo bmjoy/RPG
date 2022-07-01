@@ -14,50 +14,11 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "../CHANGELOG.md",
+      "source_relative_path": "CHANGELOG.md",
       "output": {
         ".html": {
-          "relative_path": "articles/CHANGELOG.html",
-          "hash": "p7E5CI6lIbmtt1k0WkePKogFxtbcOZ0dnHz56+aB/us="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "../LICENSE.md",
-      "output": {
-        ".html": {
-          "relative_path": "articles/LICENSE.html",
-          "hash": "FTpcSFh4OBxIp7jEFz7QnWsj7AkSiaqpDy6HDZE3l3w="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "../License/Asset Licenses.md",
-      "output": {
-        ".html": {
-          "relative_path": "../License/Asset Licenses.html",
-          "hash": "IlynlJxRIaJnDX27gZaCYDbHq4xPNvD/mLWnUjvPcHo="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "log_codes": [
-        "InvalidFileLink"
-      ],
-      "type": "Conceptual",
-      "source_relative_path": "../Third Party Notices.md",
-      "output": {
-        ".html": {
-          "relative_path": "articles/Third Party Notices.html",
-          "hash": "VZgNsfjBBvF1IYsfo7lHoG/mQxfCsI7qzGr5721KgM8="
+          "relative_path": "CHANGELOG.html",
+          "hash": "51pLRN8wgDX0j6YPTCcZ8ObOw9Ff6cw9HVgoeAx5yvw="
         }
       },
       "is_incremental": false,
@@ -80,6 +41,50 @@
       "output": {
         "resource": {
           "relative_path": "Images/Logo.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "Images/Mixamo/AnimationSettingsNonRepeat.png",
+      "output": {
+        "resource": {
+          "relative_path": "Images/Mixamo/AnimationSettingsNonRepeat.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "Images/Mixamo/AnimationSettingsRepeat.png",
+      "output": {
+        "resource": {
+          "relative_path": "Images/Mixamo/AnimationSettingsRepeat.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "Images/Mixamo/DifferentSettings.gif",
+      "output": {
+        "resource": {
+          "relative_path": "Images/Mixamo/DifferentSettings.gif"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "Images/Mixamo/RigImportSettings.png",
+      "output": {
+        "resource": {
+          "relative_path": "Images/Mixamo/RigImportSettings.png"
         }
       },
       "is_incremental": false,
@@ -119,6 +124,99 @@
       "version": ""
     },
     {
+      "type": "Conceptual",
+      "source_relative_path": "License/Asset Licenses.md",
+      "output": {
+        ".html": {
+          "relative_path": "License/Asset Licenses.html",
+          "hash": "oNIG4Y3atNViZvQKWY40EeN7TPze+Ke4q6SOiEv6dhg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "License/LICENSE.md",
+      "output": {
+        ".html": {
+          "relative_path": "License/LICENSE.html",
+          "hash": "O+ut2Y3u05FZ1Ik2G78yQ0D3nNtnHvBW23oHkxbmEw0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "License/Third Party Notices.md",
+      "output": {
+        ".html": {
+          "relative_path": "License/Third Party Notices.html",
+          "hash": "0gP2pEXrXKxX8iCpaOs6dFIj1F/voXLhe/0FweR/T5g="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
+      "type": "Toc",
+      "source_relative_path": "License/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "License/toc.html",
+          "hash": "1gSSQq4rGWS0mo8YJzoL26JzMWl0A/VbPtq/2c4YDHw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Manual/MixamoAnimations.md",
+      "output": {
+        ".html": {
+          "relative_path": "Manual/MixamoAnimations.html",
+          "hash": "aFkTfk1eYGfPRD0QBUKOiJan0X0wNxenxQ02SkC0ccQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "Manual/about.md",
+      "output": {
+        ".html": {
+          "relative_path": "Manual/about.html",
+          "hash": "nXe5yK7QNgICRQdu5rO7bgVcqOxgA7Y4+MzlokCk+sk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "Manual/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Manual/toc.html",
+          "hash": "jKaE+M85u1TRBg4PTU+Utsno5Zzz2E5hW5xc7nWu8Y8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
       "type": "Toc",
       "source_relative_path": "api/toc.md",
       "output": {
@@ -136,7 +234,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "qZQam02GbO1UZOiwGUccE2gINrlVh572+w2Iwln0Sj8="
+          "hash": "fN3AvSsSRANJPWGy7Hdb6pd/28i769RlN124aQiR86c="
         }
       },
       "is_incremental": false,
@@ -148,7 +246,7 @@
       "output": {
         ".html": {
           "relative_path": "toc.html",
-          "hash": "8FwgwdapwiXSe+e93yWoUD3OBfJ2AYUyIWWIFkqH5cE="
+          "hash": "oBzDllplXGwh+2C+OJXQatRvs4cpToZ2FXS8CtsH4XI="
         }
       },
       "is_incremental": false,
@@ -169,7 +267,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 5,
+          "total_file_count": 7,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {
