@@ -764,14 +764,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: -0.30467266, y: 0.36614382, z: -0.12823847, w: -0.8698668}
-  m_LocalPosition: {x: 36.62735, y: 22.94833, z: -16.06669}
+  m_LocalRotation: {x: -0.25241247, y: 0.599073, z: -0.20680073, w: -0.731186}
+  m_LocalPosition: {x: 51.6174, y: 26.124113, z: -14.684409}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 40, y: -45, z: 0}
 --- !u!1001 &1096939298
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1002,7 +1002,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 223641291381166980, guid: 7451c03c073dd074795e801bd6368f3c, type: 3}
       propertyPath: m_Name
-      value: P_PROP_box_05
+      value: NavMeshObstacle
       objectReference: {fileID: 0}
     - target: {fileID: 223641291381166980, guid: 7451c03c073dd074795e801bd6368f3c, type: 3}
       propertyPath: m_StaticEditorFlags
