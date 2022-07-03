@@ -26,7 +26,10 @@ namespace RPG.Movement
         private Transform target;
 
         /// <value>Cache the <a href="https://docs.unity3d.com/ScriptReference/AI.NavMeshAgent.html">UnityEngine.AI.NaveMeshAgent</a></value>
-        NavMeshAgent m_navMeshAgent;
+        private NavMeshAgent m_navMeshAgent;
+
+        /// <value>Cache the last <a href="https://docs.unity3d.com/ScriptReference/Ray.html">UnityEngine.Ray</a> that was created.</value>
+        private Ray m_lastRay;
 
         #region Unity Methods
 
@@ -53,6 +56,15 @@ namespace RPG.Movement
         /// </summary>
         private void Update()
         {
+            // If the Left Mouse Button is pressed.
+            if (Input.GetMouseButtonDown(0))
+            {
+                m_lastRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+            }
+
+            // Draw the last Ray.
+            Debug.DrawRay(m_lastRay.origin, m_lastRay.direction * 100, Color.red);
+
             // If the target is null, return.
             if (target == null) return;
 
