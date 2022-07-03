@@ -28,9 +28,6 @@ namespace RPG.Movement
         /// <value>Cache the <a href="https://docs.unity3d.com/ScriptReference/AI.NavMeshAgent.html">UnityEngine.AI.NaveMeshAgent</a></value>
         private NavMeshAgent m_navMeshAgent;
 
-        /// <value>Cache the last <a href="https://docs.unity3d.com/ScriptReference/Ray.html">UnityEngine.Ray</a> that was created.</value>
-        private Ray m_lastRay;
-
         #region Unity Methods
 
         /// <summary>
@@ -59,19 +56,20 @@ namespace RPG.Movement
             // If the Left Mouse Button is pressed.
             if (Input.GetMouseButtonDown(0))
             {
-                m_lastRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+                MoveToCursor();
             }
-
-            // Draw the last Ray.
-            Debug.DrawRay(m_lastRay.origin, m_lastRay.direction * 100, Color.red);
-
-            // If the target is null, return.
-            if (target == null) return;
-
-            // Set the nav mesh agent's destination to the target's position
-            m_navMeshAgent!.destination = target.position;
         }
 
         #endregion
+
+        private void MoveToCursor()
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            bool hasHIt = Physics.Raycast(ray, out RaycastHit hit);
+            if (hasHIt)
+            {
+                m_navMeshAgent!.destination = hit.point;
+            }
+        }
     }
 }
