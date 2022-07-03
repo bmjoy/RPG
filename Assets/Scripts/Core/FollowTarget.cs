@@ -33,9 +33,9 @@ namespace RPG.Core
         }
 
         /// <summary>
-        /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.Update.html"/>
+        /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.LateUpdate.html"/>
         /// </summary>
-        private void Update()
+        private void LateUpdate()
         {
             if (target == null) return;
 

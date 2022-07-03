@@ -68,7 +68,7 @@ namespace RPG.Movement
         private void Update()
         {
             // If the Left Mouse Button is pressed.
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButton(0))
             {
                 MoveToCursor();
             }
