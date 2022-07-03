@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c509dbaa7b6f416409e3195321a2187e, type: 3}
+  m_Name: Fantasy Kingdom Layer Palette
+  m_EditorClassIdentifier: 
+  PaletteLayers:
+  - {fileID: 8574412962073106934, guid: e9f8d76d71b5c5e4fb2ba7b2edda2d4d, type: 2}
+  - {fileID: 8574412962073106934, guid: 160bad6bf0486f6428e60d9734b69657, type: 2}
+  - {fileID: 8574412962073106934, guid: 45fcec3f04635c84da55036bc7ee989b, type: 2}
+  - {fileID: 8574412962073106934, guid: dd278fad2a5c50841979412b9531de79, type: 2}
+  - {fileID: 8574412962073106934, guid: f1d028b72a1c7cb4e9488c752b75685c, type: 2}
+  - {fileID: 8574412962073106934, guid: a33c5206d687ae34a92f9619f8e2366a, type: 2}
+  - {fileID: 8574412962073106934, guid: cac81c4e56bbac647a7175af8d65af92, type: 2}
+  - {fileID: 8574412962073106934, guid: cb86716946494794cbed6d75f6ec073b, type: 2}
+  - {fileID: 8574412962073106934, guid: 0086f8ed8115a274198aca6214ce0e84, type: 2}
+  - {fileID: 8574412962073106934, guid: 2b3e96bf0fc14564e824f955b593a9a8, type: 2}
+  - {fileID: 8574412962073106934, guid: 9ac5c7a9ff3aa08438e954ef12c92c38, type: 2}
+  - {fileID: 8574412962073106934, guid: 897d62b79e082e34484d76a0f64d049a, type: 2}
+  - {fileID: 8574412962073106934, guid: b4eab112e8a94bc49ae898da31bcacc1, type: 2}
+  - {fileID: 8574412962073106934, guid: 0f4f1d3930257df41a7ad998b6b5adf2, type: 2}
+  - {fileID: 8574412962073106934, guid: 6c5ea07f5fa831141b8045bf3bc391ea, type: 2}
