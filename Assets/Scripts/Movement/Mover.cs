@@ -28,6 +28,12 @@ namespace RPG.Movement
         /// <value>Cache the <a href="https://docs.unity3d.com/ScriptReference/AI.NavMeshAgent.html">UnityEngine.AI.NaveMeshAgent</a></value>
         private NavMeshAgent m_navMeshAgent;
 
+        /// <value>Cache the <a href="https://docs.unity3d.com/ScriptReference/Animator.html">UnityEngine.Animator</a></value>
+        private Animator m_animator;
+
+        private bool m_hasAnimator;
+        private static int _forwardSpeed;
+
         #region Unity Methods
 
         /// <summary>
@@ -35,6 +41,14 @@ namespace RPG.Movement
         /// </summary>
         private void Awake()
         {
+            m_animator = GetComponentInChildren<Animator>();
+            m_hasAnimator = m_animator != null;
+
+            if (m_hasAnimator)
+            {
+                _forwardSpeed = Animator.StringToHash("ForwardSpeed");
+            }
+
             // Cache the NavMeshAgent component.
             m_navMeshAgent = GetComponent<NavMeshAgent>();
 
@@ -58,6 +72,8 @@ namespace RPG.Movement
             {
                 MoveToCursor();
             }
+
+            UpdateAnimator();
         }
 
         #endregion
@@ -70,6 +86,17 @@ namespace RPG.Movement
             {
                 m_navMeshAgent!.destination = hit.point;
             }
+        }
+
+        private void UpdateAnimator()
+        {
+            if (!m_hasAnimator) return;
+
+            Vector3 velocity = m_navMeshAgent.velocity;
+            Vector3 localVelocity = transform.InverseTransformDirection(velocity);
+            float speed = localVelocity.z;
+
+            m_animator.SetFloat(_forwardSpeed, speed);
         }
     }
 }
