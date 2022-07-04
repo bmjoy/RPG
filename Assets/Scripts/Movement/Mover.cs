@@ -20,13 +20,10 @@ namespace RPG.Movement
     [RequireComponent(typeof(NavMeshAgent))]
     public class Mover : MonoBehaviour
     {
-        /// <value>The target to move to.</value>>
-        [Tooltip("The Target to move too.")]
-        [SerializeField]
-        private Transform target;
-
         /// <value>Cache the <a href="https://docs.unity3d.com/ScriptReference/AI.NavMeshAgent.html">UnityEngine.AI.NaveMeshAgent</a></value>
         private NavMeshAgent m_navMeshAgent;
+
+        private bool m_hasAgent;
 
         /// <value>Cache the <a href="https://docs.unity3d.com/ScriptReference/Animator.html">UnityEngine.Animator</a></value>
         private Animator m_animator;
@@ -49,15 +46,12 @@ namespace RPG.Movement
                 _forwardSpeed = Animator.StringToHash("ForwardSpeed");
             }
 
-            // Cache the NavMeshAgent component.
             m_navMeshAgent = GetComponent<NavMeshAgent>();
+            m_hasAgent = m_navMeshAgent != null;
 
             // ReSharper disable Unity.InefficientPropertyAccess
-            // If the GameObject has a NavMeshAgent component return.
-            if (m_navMeshAgent != null) return;
-            // Otherwise Log an error noting that the GameObject does not have a NavMeshAgent component.
+            if (m_hasAgent) return;
             Debug.LogError($"{gameObject.name} requires a(n) {nameof(m_navMeshAgent)} in order to work", gameObject);
-            // Disable the GameObject.
             enabled = false;
             // ReSharper restore Unity.InefficientPropertyAccess
         }
@@ -67,12 +61,10 @@ namespace RPG.Movement
         /// </summary>
         private void Update()
         {
-            // If the Left Mouse Button is pressed.
-            if (Input.GetMouseButton(0))
-            {
-                MoveToCursor();
-            }
-
+            // if (Input.GetMouseButton(0))
+            // {
+            //     MoveToCursor();
+            // }
             UpdateAnimator();
         }
 
@@ -84,8 +76,30 @@ namespace RPG.Movement
             bool hasHIt = Physics.Raycast(ray, out RaycastHit hit);
             if (hasHIt)
             {
-                m_navMeshAgent!.destination = hit.point;
+                MoveTo(hit.point);
             }
+        }
+
+        /// <summary>
+        /// Move to the destination.
+        /// </summary>
+        /// <param name="destination"><a href="https://docs.unity3d.com/2021.3/Documentation/ScriptReference/Vector3.html">UnityEngine.Vector3</a> To move To</param>
+        public void MoveTo(Vector3 destination)
+        {
+            if (m_hasAgent)
+            {
+                MoveNavMeshAgentTo(destination);
+            }
+        }
+
+        /// <summary>
+        /// Tell the <a href="https://docs.unity3d.com/2021.3/Documentation/ScriptReference/AI.NavMeshAgent.html">UnityEngine.AI.NaveMeshAgent</a>
+        /// to move to the destination.
+        /// </summary>
+        /// <param name="destination"><a href="https://docs.unity3d.com/2021.3/Documentation/ScriptReference/Vector3.html">UnityEngine.Vector3</a> To move To</param>
+        private void MoveNavMeshAgentTo(Vector3 destination)
+        {
+            m_navMeshAgent!.destination = destination;
         }
 
         private void UpdateAnimator()
