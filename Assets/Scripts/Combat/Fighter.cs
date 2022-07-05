@@ -37,6 +37,12 @@ namespace RPG.Combat
         /// <value>Cache the <see cref="ActionScheduler"/></value>
         private ActionScheduler m_actionScheduler;
 
+        /// <value>Cache the <a href="https://docs.unity3d.com/ScriptReference/Animator.html">UnityEngine.Animator</a></value>
+        private Animator m_animator;
+
+        private bool m_hasAnimator;
+        private static int _attackHash;
+
         #region Unity Methods
 
         /// <summary>
@@ -46,6 +52,15 @@ namespace RPG.Combat
         {
             m_mover = GetComponent<Mover>();
             m_actionScheduler = GetComponent<ActionScheduler>();
+
+            m_animator = GetComponentInChildren<Animator>();
+            m_hasAnimator = m_animator != null;
+
+            if (m_hasAnimator)
+            {
+                _attackHash = Animator.StringToHash("Attack");
+            }
+
             string errorObject = "";
             if (m_mover == null) errorObject = nameof(m_mover);
             if (m_actionScheduler == null) errorObject += nameof(m_actionScheduler);
@@ -114,8 +129,16 @@ namespace RPG.Combat
         {
             if (!m_hasTarget) return;
             m_mover.Cancel();
-            Debug.Log($"{name}  attacks  {m_target.name}");
+
+            if (m_hasAnimator)
+                m_animator.SetTrigger(_attackHash);
         }
+
+        /// <summary>
+        /// Need for Animation Event.
+        /// Will Damage the target in sync with the animation.
+        /// </summary>
+        private void Hit() { }
 
         #endregion
     }
