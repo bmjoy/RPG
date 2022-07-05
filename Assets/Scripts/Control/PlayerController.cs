@@ -2,6 +2,7 @@
 // 07-03-2022
 // James LaFritz
 
+using RPG.Combat;
 using RPG.Movement;
 using UnityEngine;
 
@@ -23,6 +24,11 @@ namespace RPG.Control
         /// <value>Cache the <see cref="Mover"/></value>
         private Mover m_mover;
 
+        /// <value>Cache the <see cref="Fighter"/></value>
+        private Fighter m_fighter;
+
+        bool m_hasFighter;
+
         #region Unity Methods
 
         /// <summary>
@@ -30,6 +36,8 @@ namespace RPG.Control
         /// </summary>
         private void Awake()
         {
+            m_fighter = GetComponent<Fighter>();
+            m_hasFighter = m_fighter != null;
             m_mover = GetComponent<Mover>();
             // ReSharper disable Unity.InefficientPropertyAccess
             if (m_mover != null) return;
@@ -43,18 +51,43 @@ namespace RPG.Control
         /// </summary>
         private void Update()
         {
+            InteractWithCombat();
+            InteractWithMovement();
+        }
+
+        #endregion
+
+        private static Ray GetMouseFromMainCameraScreenPointToRay()
+        {
+            return Camera.main.ScreenPointToRay(Input.mousePosition);
+        }
+
+        private void InteractWithCombat()
+        {
+            if (!m_hasFighter) return;
+            RaycastHit[] hits = Physics.RaycastAll(GetMouseFromMainCameraScreenPointToRay());
+            foreach (RaycastHit hit in hits)
+            {
+                CombatTarget target = hit.transform.GetComponent<CombatTarget>();
+                if (target == null) continue;
+                if (Input.GetMouseButtonDown(0))
+                {
+                    m_fighter.Attack(target);
+                }
+            }
+        }
+
+        private void InteractWithMovement()
+        {
             if (Input.GetMouseButton(0))
             {
                 MoveToCursor();
             }
         }
 
-        #endregion
-
         private void MoveToCursor()
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            bool hasHIt = Physics.Raycast(ray, out RaycastHit hit);
+            bool hasHIt = Physics.Raycast(GetMouseFromMainCameraScreenPointToRay(), out RaycastHit hit);
             if (hasHIt)
             {
                 m_mover.MoveTo(hit.point);
