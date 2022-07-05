@@ -51,8 +51,9 @@ namespace RPG.Control
         /// </summary>
         private void Update()
         {
-            InteractWithCombat();
+            if (InteractWithCombat()) return;
             InteractWithMovement();
+            Debug.Log("Nothing To Do");
         }
 
         #endregion
@@ -62,9 +63,9 @@ namespace RPG.Control
             return Camera.main.ScreenPointToRay(Input.mousePosition);
         }
 
-        private void InteractWithCombat()
+        private bool InteractWithCombat()
         {
-            if (!m_hasFighter) return;
+            if (!m_hasFighter) return false;
             RaycastHit[] hits = Physics.RaycastAll(GetMouseFromMainCameraScreenPointToRay());
             foreach (RaycastHit hit in hits)
             {
@@ -74,7 +75,11 @@ namespace RPG.Control
                 {
                     m_fighter.Attack(target);
                 }
+
+                return true;
             }
+
+            return false;
         }
 
         private void InteractWithMovement()
