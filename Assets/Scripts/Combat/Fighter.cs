@@ -24,7 +24,8 @@ namespace RPG.Combat
         private Mover m_mover;
 
         private Transform m_target;
-        private bool m_hasTarget;
+
+        public bool IsAttacking { get; private set; }
 
         #region Unity Methods
 
@@ -46,7 +47,7 @@ namespace RPG.Combat
         /// </summary>
         private void Update()
         {
-            if (!m_hasTarget) return;
+            if (!IsAttacking) return;
 
             if (!GetIsInRange(m_target))
             {
@@ -69,7 +70,13 @@ namespace RPG.Combat
         public void Attack(CombatTarget target)
         {
             m_target = target.transform;
-            m_hasTarget = m_target != null;
+            IsAttacking = m_target != null;
+        }
+
+        public void Cancel()
+        {
+            IsAttacking = false;
+            m_target = null;
         }
 
         #endregion
@@ -84,7 +91,7 @@ namespace RPG.Combat
 
         private void AttackBehavior()
         {
-            if (!m_hasTarget) return;
+            if (!IsAttacking) return;
             m_mover.StopMovement();
             Debug.Log($"{name}  attacks  {m_target.name}");
         }

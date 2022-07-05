@@ -90,12 +90,11 @@ namespace RPG.Control
         private bool MoveToCursor()
         {
             bool hasHIt = Physics.Raycast(GetMouseFromMainCameraScreenPointToRay(), out RaycastHit hit);
-            if (hasHIt && Input.GetMouseButton(0))
-            {
-                m_mover.MoveTo(hit.point);
-            }
+            if (!hasHIt || !Input.GetMouseButton(0)) return hasHIt;
 
-            return hasHIt;
+            m_mover.StartMoveAction(hit.point);
+
+            return true;
         }
     }
 }

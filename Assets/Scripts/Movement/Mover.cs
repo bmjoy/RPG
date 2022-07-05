@@ -2,6 +2,7 @@
 // 06-30-2022
 // James LaFritz
 
+using RPG.Combat;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -69,6 +70,17 @@ namespace RPG.Movement
         #region Public Methods
 
         /// <summary>
+        /// Cancel any previous Actions and Move to the destination.
+        /// </summary>
+        /// <param name="destination"><a href="https://docs.unity3d.com/2021.3/Documentation/ScriptReference/Vector3.html">UnityEngine.Vector3</a> To move To</param>
+        public void StartMoveAction(Vector3 destination)
+        {
+            Fighter fighter = GetComponent<Fighter>();
+            if (fighter != null) fighter.Cancel();
+            MoveTo(destination);
+        }
+
+        /// <summary>
         /// Move to the destination.
         /// </summary>
         /// <param name="destination"><a href="https://docs.unity3d.com/2021.3/Documentation/ScriptReference/Vector3.html">UnityEngine.Vector3</a> To move To</param>
@@ -80,6 +92,9 @@ namespace RPG.Movement
             }
         }
 
+        /// <summary>
+        /// Stop the game object from moving.
+        /// </summary>
         public void StopMovement()
         {
             if (m_hasAgent)
