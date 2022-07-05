@@ -27,9 +27,7 @@ namespace RPG.Combat
     public class Fighter : MonoBehaviour, IAction
     {
         [SerializeField] float weaponRange = 2f;
-
-        private Transform m_target;
-        private bool m_hasTarget;
+        [SerializeField] float timeBetweenAttacks = 1f;
 
         /// <value>Cache the <see cref="Mover"/></value>
         private Mover m_mover;
@@ -42,6 +40,11 @@ namespace RPG.Combat
 
         private bool m_hasAnimator;
         private static int _attackHash;
+
+        private Transform m_target;
+        private bool m_hasTarget;
+
+        private float m_timeSinceLastAttack = 0;
 
         #region Unity Methods
 
@@ -77,6 +80,8 @@ namespace RPG.Combat
         /// </summary>
         private void Update()
         {
+            m_timeSinceLastAttack += Time.deltaTime;
+
             if (!m_hasTarget) return;
 
             if (!GetIsInRange(m_target))
@@ -130,15 +135,26 @@ namespace RPG.Combat
             if (!m_hasTarget) return;
             m_mover.Cancel();
 
+            if (m_timeSinceLastAttack < timeBetweenAttacks) return;
+            m_timeSinceLastAttack = 0;
             if (m_hasAnimator)
+            {
                 m_animator.SetTrigger(_attackHash);
+            }
+            else
+            {
+                Hit();
+            }
         }
 
         /// <summary>
         /// Need for Animation Event.
         /// Will Damage the target in sync with the animation.
         /// </summary>
-        private void Hit() { }
+        private void Hit()
+        {
+            
+        }
 
         #endregion
     }
