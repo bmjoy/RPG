@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4157036876591580310}
+  - component: {fileID: 1641288577}
   - component: {fileID: 7564771196449081388}
   m_Layer: 0
   m_Name: Enemy
@@ -24,7 +25,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4157036876591580311}
-  m_LocalRotation: {x: -0, y: 0.9698774, z: -0, w: -0.2435934}
+  m_LocalRotation: {x: 0, y: 0.96987844, z: -0, w: -0.24358955}
   m_LocalPosition: {x: 28.69, y: 0, z: 5.49}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -33,6 +34,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 208.197, z: 0}
+--- !u!136 &1641288577
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4157036876591580311}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &7564771196449081388
 MonoBehaviour:
   m_ObjectHideFlags: 0
