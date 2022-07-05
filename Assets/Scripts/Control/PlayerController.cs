@@ -52,7 +52,7 @@ namespace RPG.Control
         private void Update()
         {
             if (InteractWithCombat()) return;
-            InteractWithMovement();
+            if (InteractWithMovement()) return;
             Debug.Log("Nothing To Do");
         }
 
@@ -82,21 +82,20 @@ namespace RPG.Control
             return false;
         }
 
-        private void InteractWithMovement()
+        private bool InteractWithMovement()
         {
-            if (Input.GetMouseButton(0))
-            {
-                MoveToCursor();
-            }
+            return MoveToCursor();
         }
 
-        private void MoveToCursor()
+        private bool MoveToCursor()
         {
             bool hasHIt = Physics.Raycast(GetMouseFromMainCameraScreenPointToRay(), out RaycastHit hit);
-            if (hasHIt)
+            if (hasHIt && Input.GetMouseButton(0))
             {
                 m_mover.MoveTo(hit.point);
             }
+
+            return hasHIt;
         }
     }
 }
