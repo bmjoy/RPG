@@ -61,24 +61,12 @@ namespace RPG.Movement
         /// </summary>
         private void Update()
         {
-            // if (Input.GetMouseButton(0))
-            // {
-            //     MoveToCursor();
-            // }
             UpdateAnimator();
         }
 
         #endregion
 
-        private void MoveToCursor()
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            bool hasHIt = Physics.Raycast(ray, out RaycastHit hit);
-            if (hasHIt)
-            {
-                MoveTo(hit.point);
-            }
-        }
+        #region Public Methods
 
         /// <summary>
         /// Move to the destination.
@@ -92,6 +80,18 @@ namespace RPG.Movement
             }
         }
 
+        public void StopMovement()
+        {
+            if (m_hasAgent)
+            {
+                m_navMeshAgent.isStopped = true;
+            }
+        }
+
+        #endregion
+
+        #region Private Methods
+
         /// <summary>
         /// Tell the <a href="https://docs.unity3d.com/2021.3/Documentation/ScriptReference/AI.NavMeshAgent.html">UnityEngine.AI.NaveMeshAgent</a>
         /// to move to the destination.
@@ -99,9 +99,15 @@ namespace RPG.Movement
         /// <param name="destination"><a href="https://docs.unity3d.com/2021.3/Documentation/ScriptReference/Vector3.html">UnityEngine.Vector3</a> To move To</param>
         private void MoveNavMeshAgentTo(Vector3 destination)
         {
+            if (!m_hasAgent) return;
             m_navMeshAgent!.destination = destination;
+            m_navMeshAgent!.isStopped = false;
         }
 
+        /// <summary>
+        /// If there is an <a href="https://docs.unity3d.com/ScriptReference/Animator.html">UnityEngine.Animator</a>
+        /// then set the "ForwardSpeed" of the Animator to the local velocity on the z access of the navmesh agent.
+        /// </summary>
         private void UpdateAnimator()
         {
             if (!m_hasAnimator) return;
@@ -112,5 +118,7 @@ namespace RPG.Movement
 
             m_animator.SetFloat(_forwardSpeed, speed);
         }
+
+        #endregion
     }
 }
