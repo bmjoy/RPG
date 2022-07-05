@@ -2,6 +2,7 @@
 // 07-03-2022
 // James LaFritz
 
+using RPG.Core;
 using RPG.Movement;
 using UnityEngine;
 
@@ -12,20 +13,29 @@ namespace RPG.Combat
     /// is a Fighter in the game.
     /// Once the target is set by the attack method it will move towards the target and attack it.
     /// <p>
-    /// <a href="https://docs.unity3d.com/ScriptReference/RequireComponent.html">UnityEngine.RequireComponent(</a>
-    /// <see cref="Mover"/>
+    /// Implements
+    /// <see cref="IAction"/>
+    /// </p>
+    /// <p>
+    /// <a href="https://docs.unity3d.com/ScriptReference/RequireComponent.html">UnityEngine.RequireComponent</a>(
+    /// typeof(<see cref="Mover"/>)
+    /// , typeof(<see cref="ActionScheduler"/>)
     /// )</p>
     /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html"/>
     /// </summary>
-    public class Fighter : MonoBehaviour
+    [RequireComponent(typeof(Mover), typeof(ActionScheduler))]
+    public class Fighter : MonoBehaviour, IAction
     {
         [SerializeField] float weaponRange = 2f;
 
+        private Transform m_target;
+        private bool m_hasTarget;
+
+        /// <value>Cache the <see cref="Mover"/></value>
         private Mover m_mover;
 
-        private Transform m_target;
-
-        public bool IsAttacking { get; private set; }
+        /// <value>Cache the <see cref="ActionScheduler"/></value>
+        private ActionScheduler m_actionScheduler;
 
         #region Unity Methods
 
@@ -35,9 +45,14 @@ namespace RPG.Combat
         private void Awake()
         {
             m_mover = GetComponent<Mover>();
+            m_actionScheduler = GetComponent<ActionScheduler>();
+            string errorObject = "";
+            if (m_mover == null) errorObject = nameof(m_mover);
+            if (m_actionScheduler == null) errorObject += nameof(m_actionScheduler);
+            if (string.IsNullOrEmpty(errorObject)) return;
+
             // ReSharper disable Unity.InefficientPropertyAccess
-            if (m_mover != null) return;
-            Debug.LogError($"{gameObject.name} requires a(n) {nameof(m_mover)} in order to work", gameObject);
+            Debug.LogError($"{gameObject.name} requires a(n) {errorObject} in order to work", gameObject);
             enabled = false;
             // ReSharper restore Unity.InefficientPropertyAccess
         }
@@ -47,7 +62,7 @@ namespace RPG.Combat
         /// </summary>
         private void Update()
         {
-            if (!IsAttacking) return;
+            if (!m_hasTarget) return;
 
             if (!GetIsInRange(m_target))
             {
@@ -61,6 +76,17 @@ namespace RPG.Combat
 
         #endregion
 
+        #region Implementation of IAction
+
+        /// <inheritdoc />
+        public void Cancel()
+        {
+            m_hasTarget = false;
+            m_target = null;
+        }
+
+        #endregion
+
         #region Public Methods
 
         /// <summary>
@@ -69,14 +95,9 @@ namespace RPG.Combat
         /// <param name="target">The <see cref="CombatTarget"/> to attack.</param>
         public void Attack(CombatTarget target)
         {
+            m_actionScheduler.StartAction(this);
             m_target = target.transform;
-            IsAttacking = m_target != null;
-        }
-
-        public void Cancel()
-        {
-            IsAttacking = false;
-            m_target = null;
+            m_hasTarget = m_target != null;
         }
 
         #endregion
@@ -91,8 +112,8 @@ namespace RPG.Combat
 
         private void AttackBehavior()
         {
-            if (!IsAttacking) return;
-            m_mover.StopMovement();
+            if (!m_hasTarget) return;
+            m_mover.Cancel();
             Debug.Log($"{name}  attacks  {m_target.name}");
         }
 

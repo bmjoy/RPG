@@ -13,8 +13,8 @@ namespace RPG.Control
     /// Controls a Player in game.
     /// to move a game object to a targets position.
     /// <p>
-    /// <a href="https://docs.unity3d.com/ScriptReference/RequireComponent.html">UnityEngine.RequireComponent(</a>
-    /// <see cref="Mover"/>
+    /// <a href="https://docs.unity3d.com/ScriptReference/RequireComponent.html">UnityEngine.RequireComponent</a>(
+    /// typeof(<see cref="Mover"/>)
     /// )</p>
     /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html"/>
     /// </summary>

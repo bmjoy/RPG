@@ -2,7 +2,7 @@
 // 06-30-2022
 // James LaFritz
 
-using RPG.Combat;
+using RPG.Core;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -13,13 +13,18 @@ namespace RPG.Movement
     /// uses a <a href="https://docs.unity3d.com/2021.3/Documentation/ScriptReference/AI.NavMeshAgent.html">UnityEngine.AI.NaveMeshAgent</a>
     /// to move a game object to a targets position.
     /// <p>
-    /// <a href="https://docs.unity3d.com/ScriptReference/RequireComponent.html">UnityEngine.RequireComponent(</a>
-    /// <a href="https://docs.unity3d.com/2021.3/Documentation/ScriptReference/AI.NavMeshAgent.html">typeof(UnityEngine.AI.NaveMeshAgent)</a>
+    /// Implements
+    /// <see cref="IAction"/>
+    /// </p>
+    /// <p>
+    /// <a href="https://docs.unity3d.com/ScriptReference/RequireComponent.html">UnityEngine.RequireComponent</a>(
+    /// typeof(<a href="https://docs.unity3d.com/2021.3/Documentation/ScriptReference/AI.NavMeshAgent.html">UnityEngine.AI.NaveMeshAgent</a>)
+    /// , typeof(<see cref="ActionScheduler"/>)
     /// )</p>
     /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html"/>
     /// </summary>
-    [RequireComponent(typeof(NavMeshAgent))]
-    public class Mover : MonoBehaviour
+    [RequireComponent(typeof(NavMeshAgent), typeof(ActionScheduler))]
+    public class Mover : MonoBehaviour, IAction
     {
         /// <value>Cache the <a href="https://docs.unity3d.com/ScriptReference/AI.NavMeshAgent.html">UnityEngine.AI.NaveMeshAgent</a></value>
         private NavMeshAgent m_navMeshAgent;
@@ -31,6 +36,9 @@ namespace RPG.Movement
 
         private bool m_hasAnimator;
         private static int _forwardSpeed;
+
+        /// <value>Cache the <see cref="ActionScheduler"/></value>
+        private ActionScheduler m_actionScheduler;
 
         #region Unity Methods
 
@@ -50,9 +58,14 @@ namespace RPG.Movement
             m_navMeshAgent = GetComponent<NavMeshAgent>();
             m_hasAgent = m_navMeshAgent != null;
 
+            m_actionScheduler = GetComponent<ActionScheduler>();
+
+            if (m_hasAgent && m_actionScheduler != null) return;
+
+            string errorObject = !m_hasAgent ? nameof(m_navMeshAgent) : nameof(m_actionScheduler);
+
             // ReSharper disable Unity.InefficientPropertyAccess
-            if (m_hasAgent) return;
-            Debug.LogError($"{gameObject.name} requires a(n) {nameof(m_navMeshAgent)} in order to work", gameObject);
+            Debug.LogError($"{gameObject.name} requires a(n) {errorObject} in order to work", gameObject);
             enabled = false;
             // ReSharper restore Unity.InefficientPropertyAccess
         }
@@ -67,6 +80,19 @@ namespace RPG.Movement
 
         #endregion
 
+        #region Implementation of IAction
+
+        /// <inheritdoc />
+        public void Cancel()
+        {
+            if (m_hasAgent)
+            {
+                m_navMeshAgent.isStopped = true;
+            }
+        }
+
+        #endregion
+
         #region Public Methods
 
         /// <summary>
@@ -75,8 +101,7 @@ namespace RPG.Movement
         /// <param name="destination"><a href="https://docs.unity3d.com/2021.3/Documentation/ScriptReference/Vector3.html">UnityEngine.Vector3</a> To move To</param>
         public void StartMoveAction(Vector3 destination)
         {
-            Fighter fighter = GetComponent<Fighter>();
-            if (fighter != null) fighter.Cancel();
+            m_actionScheduler.StartAction(this);
             MoveTo(destination);
         }
 
@@ -89,17 +114,6 @@ namespace RPG.Movement
             if (m_hasAgent)
             {
                 MoveNavMeshAgentTo(destination);
-            }
-        }
-
-        /// <summary>
-        /// Stop the game object from moving.
-        /// </summary>
-        public void StopMovement()
-        {
-            if (m_hasAgent)
-            {
-                m_navMeshAgent.isStopped = true;
             }
         }
 
