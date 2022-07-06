@@ -6,9 +6,9 @@ namespace RPG.Core
 {
     public static class StringReferences
     {
-        public const string ForwardSpeedFloat = "ForwardSpeed";
-        public const string AttackTrigger = "Attack";
-        public const string StopAttackTrigger = "StopAttack";
-        public const string DeathTrigger = "Death";
+        public static string forwardSpeedFloat = "ForwardSpeed";
+        public static string attackTrigger = "Attack";
+        public static string stopAttackTrigger = "StopAttack";
+        public static string deathTrigger = "Die";
     }
 }
