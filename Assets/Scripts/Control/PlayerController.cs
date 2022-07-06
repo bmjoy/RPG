@@ -9,17 +9,11 @@ using UnityEngine;
 namespace RPG.Control
 {
     /// <summary>
-    /// A <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html">UnityEngine.MonoBehavior</a> that
-    /// Controls a Player in game.
-    /// to move a game object to a targets position.
-    /// <p>
-    /// <a href="https://docs.unity3d.com/ScriptReference/RequireComponent.html">UnityEngine.RequireComponent</a>(
-    /// typeof(<see cref="Mover"/>)
-    /// )</p>
-    /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html"/>
+    /// A <see cref="RPGController"/> that
+    /// Controls a User Controlled Player in Game.
     /// </summary>
     [RequireComponent(typeof(Mover))]
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : RPGController
     {
         #region Private Fields
 
@@ -27,51 +21,47 @@ namespace RPG.Control
 
         #endregion
 
-        #region Component References
-
-        #region Required
-
-        /// <value>Cache the <see cref="Mover"/></value>
-        private Mover m_mover;
-
-        #endregion
-
-        #region Optional
-
-        /// <value>Cache the <see cref="Fighter"/></value>
-        private Fighter m_fighter;
-
-        bool m_hasFighter;
-
-        #endregion
-
-        #endregion
-
         #region Unity Messages
 
-        /// <summary>
-        /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.Awake.html"/>
-        /// </summary>
-        private void Awake()
+        #region Overrides of RPGController
+
+        /// <inheritdoc />
+        protected override void Update()
         {
-            m_fighter = GetComponent<Fighter>();
-            m_hasFighter = m_fighter != null;
-            m_mover = GetComponent<Mover>();
-            // ReSharper disable Unity.InefficientPropertyAccess
-            if (m_mover != null) return;
-            Debug.LogError($"{gameObject.name} requires a(n) {nameof(m_mover)} in order to work", gameObject);
-            enabled = false;
-            // ReSharper restore Unity.InefficientPropertyAccess
+            base.Update();
+            Debug.Log("Nothing To Do");
         }
 
-        /// <summary>
-        /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.Update.html"/>
-        /// </summary>
-        private void Update()
+        #endregion
+
+        #endregion
+
+        #region Overrides of RPGController
+
+        /// <inheritdoc />
+        protected override bool IsInCombat()
         {
-            if (InteractWithCombat()) return;
-            if (InteractWithMovement()) return;
-            Debug.Log("Nothing To Do");
+            int hits = Physics.RaycastNonAlloc(GetMouseFromMainCameraScreenPointToRay(), m_combatHits);
+            if (hits == 0) return false;
+            for (int i = 0; i < hits; i++)
+            {
+                RaycastHit hit = m_combatHits[i];
+                CombatTarget target = hit.transform.GetComponent<CombatTarget>();
+                if (!fighter.CanAttack(target)) continue;
+                if (!Input.GetMouseButtonDown(0)) return true;
+                Debug.Assert(target != null, nameof(target) + " != null");
+                fighter.Attack(target);
+
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <inheritdoc />
+        protected override bool IsMoving()
+        {
+            return MoveToCursor();
         }
 
         #endregion
@@ -83,37 +73,12 @@ namespace RPG.Control
             return Camera.main.ScreenPointToRay(Input.mousePosition);
         }
 
-        private bool InteractWithCombat()
-        {
-            if (!m_hasFighter) return false;
-            int hits = Physics.RaycastNonAlloc(GetMouseFromMainCameraScreenPointToRay(), m_combatHits);
-            if (hits == 0) return false;
-            for (int i = 0; i < hits; i++)
-            {
-                RaycastHit hit = m_combatHits[i];
-                CombatTarget target = hit.transform.GetComponent<CombatTarget>();
-                if (!m_fighter.CanAttack(target)) continue;
-                if (!Input.GetMouseButtonDown(0)) return true;
-                Debug.Assert(target != null, nameof(target) + " != null");
-                m_fighter.Attack(target);
-
-                return true;
-            }
-
-            return false;
-        }
-
-        private bool InteractWithMovement()
-        {
-            return MoveToCursor();
-        }
-
         private bool MoveToCursor()
         {
             bool hasHIt = Physics.Raycast(GetMouseFromMainCameraScreenPointToRay(), out RaycastHit hit);
             if (!hasHIt || !Input.GetMouseButton(0)) return hasHIt;
 
-            m_mover.StartMoveAction(hit.point);
+            mover.StartMoveAction(hit.point);
 
             return true;
         }
