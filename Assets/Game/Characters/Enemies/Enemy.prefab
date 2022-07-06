@@ -1,128 +1,159 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4157036876591580311
+--- !u!1001 &8180959688631046664
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1576178308592006924, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1576178308592006924, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1576178308592006924, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1576178308592006924, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1576178308592006924, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1576178308592006924, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1576178308592006924, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1576178308592006924, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1576178308592006924, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1576178308592006924, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1576178308592006924, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2492308187424828470, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: d06688f72e50aaa48b0dea3435bfe092, type: 3}
+    - target: {fileID: 5792556325803201955, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+      propertyPath: max
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6487327744266254528, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+      propertyPath: m_Name
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 7217525226749447344, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+      propertyPath: weaponRange
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7217525226749447344, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+      propertyPath: weapondamage
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7217525226749447344, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+      propertyPath: timeBetweenAttacks
+      value: 2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+--- !u!1 &3138733273306524360 stripped
 GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 6487327744266254528, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+  m_PrefabInstance: {fileID: 8180959688631046664}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4157036876591580310}
-  - component: {fileID: 1641288577}
-  - component: {fileID: 7564771196449081388}
-  m_Layer: 0
-  m_Name: Enemy
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4157036876591580310
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4157036876591580311}
-  m_LocalRotation: {x: 0, y: 0.96987844, z: -0, w: -0.24358955}
-  m_LocalPosition: {x: 28.69, y: 0, z: 5.49}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 7679374981465878307}
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 208.197, z: 0}
---- !u!136 &1641288577
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4157036876591580311}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &7564771196449081388
+--- !u!114 &5608208298674717199
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4157036876591580311}
+  m_GameObject: {fileID: 3138733273306524360}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a58f30fb4eec475e97f435e1d4f4837a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1001 &7679374981466011051
+--- !u!4 &7230299043453838596 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1576178308592006924, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+  m_PrefabInstance: {fileID: 8180959688631046664}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8981692231537310627
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 4157036876591580310}
+    m_TransformParent: {fileID: 7230299043453838596}
     m_Modifications:
-    - target: {fileID: 100008, guid: d06688f72e50aaa48b0dea3435bfe092, type: 3}
-      propertyPath: m_Name
-      value: Dungeon Mason_Mini Legion Footman
-      objectReference: {fileID: 0}
-    - target: {fileID: 400008, guid: d06688f72e50aaa48b0dea3435bfe092, type: 3}
+    - target: {fileID: 7751837462977072168, guid: 807de6a0d13fd244e843df42abdba077, type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 400008, guid: d06688f72e50aaa48b0dea3435bfe092, type: 3}
+    - target: {fileID: 7751837462977072168, guid: 807de6a0d13fd244e843df42abdba077, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 400008, guid: d06688f72e50aaa48b0dea3435bfe092, type: 3}
+    - target: {fileID: 7751837462977072168, guid: 807de6a0d13fd244e843df42abdba077, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 400008, guid: d06688f72e50aaa48b0dea3435bfe092, type: 3}
+    - target: {fileID: 7751837462977072168, guid: 807de6a0d13fd244e843df42abdba077, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 400008, guid: d06688f72e50aaa48b0dea3435bfe092, type: 3}
+    - target: {fileID: 7751837462977072168, guid: 807de6a0d13fd244e843df42abdba077, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 400008, guid: d06688f72e50aaa48b0dea3435bfe092, type: 3}
+    - target: {fileID: 7751837462977072168, guid: 807de6a0d13fd244e843df42abdba077, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 400008, guid: d06688f72e50aaa48b0dea3435bfe092, type: 3}
+    - target: {fileID: 7751837462977072168, guid: 807de6a0d13fd244e843df42abdba077, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 400008, guid: d06688f72e50aaa48b0dea3435bfe092, type: 3}
+    - target: {fileID: 7751837462977072168, guid: 807de6a0d13fd244e843df42abdba077, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 400008, guid: d06688f72e50aaa48b0dea3435bfe092, type: 3}
+    - target: {fileID: 7751837462977072168, guid: 807de6a0d13fd244e843df42abdba077, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 400008, guid: d06688f72e50aaa48b0dea3435bfe092, type: 3}
+    - target: {fileID: 7751837462977072168, guid: 807de6a0d13fd244e843df42abdba077, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 400008, guid: d06688f72e50aaa48b0dea3435bfe092, type: 3}
+    - target: {fileID: 7751837462977072168, guid: 807de6a0d13fd244e843df42abdba077, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 13700000, guid: d06688f72e50aaa48b0dea3435bfe092, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: d00167a3bf66725439ef5da3c0bbe05a, type: 2}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: d06688f72e50aaa48b0dea3435bfe092, type: 3}
---- !u!4 &7679374981465878307 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 400008, guid: d06688f72e50aaa48b0dea3435bfe092, type: 3}
-  m_PrefabInstance: {fileID: 7679374981466011051}
-  m_PrefabAsset: {fileID: 0}
+    - target: {fileID: 7751837462977564680, guid: 807de6a0d13fd244e843df42abdba077, type: 3}
+      propertyPath: m_Name
+      value: Dungeon Mason_Mini Legion Footman
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 7751837462984827840, guid: 807de6a0d13fd244e843df42abdba077, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 807de6a0d13fd244e843df42abdba077, type: 3}
