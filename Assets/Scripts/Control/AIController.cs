@@ -36,6 +36,8 @@ namespace RPG.Control
         private void Update()
         {
             if (IsChasing()) return;
+
+            if (hasFighter) fighter.Cancel();
         }
 
         #endregion
@@ -70,13 +72,11 @@ namespace RPG.Control
         private bool IsChasing()
         {
             CombatTarget[] combatTargets = GetAllCombatTargetsInRange(chaseRange);
-
             if (combatTargets.Length == 0) return false;
-
             CombatTarget closestTarget = combatTargets[0];
-            if (closestTarget == null) return false;
+            if (closestTarget == null || !hasFighter || !fighter.CanAttack(closestTarget)) return false;
 
-            mover.StartMoveAction(closestTarget.transform.position);
+            fighter.Attack(closestTarget);
             return true;
         }
 
