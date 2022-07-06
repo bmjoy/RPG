@@ -16,5 +16,20 @@ namespace RPG.Combat
     /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html"/>
     /// </summary>
     [RequireComponent(typeof(Health))]
-    public class CombatTarget : MonoBehaviour { }
+    public class CombatTarget : MonoBehaviour
+    {
+        #region Inspector Fields
+
+        /// <value>The Type of <see cref="CombatTarget"/> this is.</value>
+        [SerializeField] private CombatTargetType type = CombatTargetType.Enemy;
+
+        #endregion
+
+        #region Properties
+
+        /// <value>The Type of <see cref="CombatTarget"/> this is.</value>
+        public CombatTargetType Type => type;
+
+        #endregion
+    }
 }

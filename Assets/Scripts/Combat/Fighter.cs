@@ -35,6 +35,8 @@ namespace RPG.Combat
         [SerializeField] float timeBetweenAttacks = 1f;
         [SerializeField] float weapondamage = 10f;
 
+        [SerializeField] private CombatTargetType combatTargetType = CombatTargetType.Player;
+
         #endregion
 
         #region Private Fields
@@ -158,6 +160,7 @@ namespace RPG.Combat
         public bool CanAttack(CombatTarget combatTarget)
         {
             if (combatTarget == null) return false;
+            if (combatTarget.Type != combatTargetType) return false;
             Health targetHealth = combatTarget.GetComponent<Health>();
             return targetHealth != null && !targetHealth.IsDead;
         }

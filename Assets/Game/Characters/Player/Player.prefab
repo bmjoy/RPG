@@ -120,9 +120,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6587453408859046323, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+      propertyPath: type
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7217525226749447344, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
       propertyPath: weapondamage
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7217525226749447344, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+      propertyPath: combatTargetType
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
