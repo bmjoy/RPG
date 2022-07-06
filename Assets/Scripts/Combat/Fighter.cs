@@ -163,6 +163,13 @@ namespace RPG.Combat
             }
         }
 
+        public bool CanAttack(CombatTarget combatTarget)
+        {
+            if (combatTarget == null) return false;
+            Health targetHealth = combatTarget.GetComponent<Health>();
+            return targetHealth != null && !targetHealth.IsDead;
+        }
+
         #endregion
 
         #region Private Methods
