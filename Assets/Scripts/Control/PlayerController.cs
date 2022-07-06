@@ -23,7 +23,7 @@ namespace RPG.Control
     {
         #region Private Fields
 
-        private RaycastHit[] m_combatHits = new RaycastHit[10];
+        private readonly RaycastHit[] m_combatHits = new RaycastHit[10];
 
         #endregion
 
@@ -93,10 +93,9 @@ namespace RPG.Control
                 RaycastHit hit = m_combatHits[i];
                 CombatTarget target = hit.transform.GetComponent<CombatTarget>();
                 if (!m_fighter.CanAttack(target)) continue;
-                if (Input.GetMouseButtonDown(0))
-                {
-                    m_fighter.Attack(target);
-                }
+                if (!Input.GetMouseButtonDown(0)) return true;
+                Debug.Assert(target != null, nameof(target) + " != null");
+                m_fighter.Attack(target);
 
                 return true;
             }
