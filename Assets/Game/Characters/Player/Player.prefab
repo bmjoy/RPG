@@ -120,6 +120,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6487327744266254528, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 6587453408859046323, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
       propertyPath: type
       value: 0
@@ -151,6 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7afce2fda5cd4a6793ddc1e2309d0cfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  combatTargetType: 0
 --- !u!4 &5798768902406184713 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1576178308592006924, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}

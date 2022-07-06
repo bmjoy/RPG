@@ -78,7 +78,7 @@ namespace RPG.Attributes
 
             m_value = math.min(math.max(m_value - damage, 0), max);
 
-            Debug.Log($"{name} takes {damage} damage. Health is now {m_value}");
+            //Debug.Log($"{name} takes {damage} damage. Health is now {m_value}");
 
             if (m_value == 0)
             {
