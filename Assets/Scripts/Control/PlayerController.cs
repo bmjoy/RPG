@@ -23,23 +23,21 @@ namespace RPG.Control
 
         #region Unity Messages
 
-        #region Overrides of RPGController
-
-        /// <inheritdoc />
-        protected override void Update()
+        /// <summary>
+        /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.Update.html"/>
+        /// </summary>
+        private void Update()
         {
-            base.Update();
+            if (InteractWithCombat()) return;
+            if (InteractWithMovement()) return;
             Debug.Log("Nothing To Do");
         }
 
         #endregion
 
-        #endregion
+        #region Private Methods
 
-        #region Overrides of RPGController
-
-        /// <inheritdoc />
-        protected override bool IsInCombat()
+        private bool InteractWithCombat()
         {
             int hits = Physics.RaycastNonAlloc(GetMouseFromMainCameraScreenPointToRay(), m_combatHits);
             if (hits == 0) return false;
@@ -58,19 +56,9 @@ namespace RPG.Control
             return false;
         }
 
-        /// <inheritdoc />
-        protected override bool IsMoving()
+        private bool InteractWithMovement()
         {
             return MoveToCursor();
-        }
-
-        #endregion
-
-        #region Private Methods
-
-        private Ray GetMouseFromMainCameraScreenPointToRay()
-        {
-            return Camera.main.ScreenPointToRay(Input.mousePosition);
         }
 
         private bool MoveToCursor()
@@ -81,6 +69,11 @@ namespace RPG.Control
             mover.StartMoveAction(hit.point);
 
             return true;
+        }
+
+        private Ray GetMouseFromMainCameraScreenPointToRay()
+        {
+            return Camera.main.ScreenPointToRay(Input.mousePosition);
         }
 
         #endregion

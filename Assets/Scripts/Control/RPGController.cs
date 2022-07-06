@@ -21,10 +21,6 @@ namespace RPG.Control
     {
         #region Inspector Fields
 
-        [SerializeField] protected float weaponRange = 2f;
-        [SerializeField] protected float timeBetweenAttacks = 1f;
-        [SerializeField] protected float weapondamage = 10f;
-
         [SerializeField] protected CombatTargetType combatTargetType = CombatTargetType.Player;
 
         #endregion
@@ -49,22 +45,6 @@ namespace RPG.Control
 
         #endregion
 
-        #region Abstract Methods
-
-        /// <summary>
-        /// Are we moving
-        /// </summary>
-        /// <returns>True if we are moving, False if not.</returns>
-        protected abstract bool IsMoving();
-
-        /// <summary>
-        /// Is the Controller Interacting with Combat.
-        /// </summary>
-        /// <returns>True if it is else return false.</returns>
-        protected abstract bool IsInCombat();
-
-        #endregion
-
         #region Unity Messages
 
         /// <summary>
@@ -80,30 +60,6 @@ namespace RPG.Control
             Debug.LogError($"{gameObject.name} requires a(n) {nameof(mover)} in order to work", gameObject);
             enabled = false;
             // ReSharper restore Unity.InefficientPropertyAccess
-        }
-
-        /// <summary>
-        /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.Update.html"/>
-        /// </summary>
-        protected virtual void Update()
-        {
-            if (InCombat()) return;
-            if (IsMoving()) return;
-        }
-
-        #endregion
-
-        #region Private Methods
-
-        /// <summary>
-        /// Are we in combat.
-        /// </summary>
-        /// <returns>if there is not a fighter component returns false, else returns IsInCombat()</returns>
-        private bool InCombat()
-        {
-            if (!hasFighter) return false;
-
-            return IsInCombat();
         }
 
         #endregion
