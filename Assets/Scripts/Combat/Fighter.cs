@@ -2,6 +2,7 @@
 // 07-03-2022
 // James LaFritz
 
+using RPG.Attributes;
 using RPG.Core;
 using RPG.Movement;
 using UnityEngine;
@@ -28,6 +29,7 @@ namespace RPG.Combat
     {
         [SerializeField] float weaponRange = 2f;
         [SerializeField] float timeBetweenAttacks = 1f;
+        [SerializeField] float weapondamage = 10f;
 
         /// <value>Cache the <see cref="Mover"/></value>
         private Mover m_mover;
@@ -139,6 +141,7 @@ namespace RPG.Combat
             m_timeSinceLastAttack = 0;
             if (m_hasAnimator)
             {
+                // This will trigger Hit() from the Animation Event.
                 m_animator.SetTrigger(_attackHash);
             }
             else
@@ -153,7 +156,11 @@ namespace RPG.Combat
         /// </summary>
         private void Hit()
         {
-            
+            if (!m_hasTarget) return;
+
+            Health targetHealth = m_target.GetComponent<Health>();
+            if (targetHealth == null) return;
+            targetHealth.TakeDamage(weapondamage);
         }
 
         #endregion
