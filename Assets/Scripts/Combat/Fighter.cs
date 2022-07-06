@@ -2,6 +2,7 @@
 // 07-03-2022
 // James LaFritz
 
+using JetBrains.Annotations;
 using RPG.Attributes;
 using RPG.Core;
 using RPG.Movement;
@@ -38,7 +39,7 @@ namespace RPG.Combat
 
         #region Private Fields
 
-        private Transform m_target;
+        private Health m_target;
         private bool m_hasTarget;
 
         private float m_timeSinceLastAttack;
@@ -64,6 +65,7 @@ namespace RPG.Combat
 
         private bool m_hasAnimator;
         private static int _attackHash;
+        private static int _stopAttackHash;
 
         #endregion
 
@@ -85,6 +87,7 @@ namespace RPG.Combat
             if (m_hasAnimator)
             {
                 _attackHash = Animator.StringToHash(attackTrigger);
+                _stopAttackHash = Animator.StringToHash(stopAttackTrigger);
             }
 
             string errorObject = "";
@@ -107,9 +110,15 @@ namespace RPG.Combat
 
             if (!m_hasTarget) return;
 
-            if (!GetIsInRange(m_target))
+            if (m_target.IsDead)
             {
-                m_mover.MoveTo(m_target.position);
+                Cancel();
+                return;
+            }
+
+            if (!GetIsInRange(m_target.transform))
+            {
+                m_mover.MoveTo(m_target.transform.position);
             }
             else
             {
@@ -126,6 +135,11 @@ namespace RPG.Combat
         {
             m_hasTarget = false;
             m_target = null;
+
+            if (m_hasAnimator)
+            {
+                m_animator.SetTrigger(_stopAttackHash);
+            }
         }
 
         #endregion
@@ -136,11 +150,16 @@ namespace RPG.Combat
         /// Attack a target.
         /// </summary>
         /// <param name="target">The <see cref="CombatTarget"/> to attack.</param>
-        public void Attack(CombatTarget target)
+        public void Attack([NotNull] CombatTarget target)
         {
             m_actionScheduler.StartAction(this);
-            m_target = target.transform;
+            m_target = target.GetComponent<Health>();
             m_hasTarget = m_target != null;
+            if (m_hasAnimator)
+            {
+                m_animator.ResetTrigger(_attackHash);
+                m_animator.ResetTrigger(_stopAttackHash);
+            }
         }
 
         #endregion
@@ -179,9 +198,7 @@ namespace RPG.Combat
         {
             if (!m_hasTarget) return;
 
-            Health targetHealth = m_target.GetComponent<Health>();
-            if (targetHealth == null) return;
-            targetHealth.TakeDamage(weapondamage);
+            m_target.TakeDamage(weapondamage);
         }
 
         #endregion
