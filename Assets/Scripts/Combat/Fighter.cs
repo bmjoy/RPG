@@ -122,6 +122,7 @@ namespace RPG.Combat
             }
             else
             {
+                m_mover.Cancel();
                 AttackBehavior();
             }
         }
@@ -175,10 +176,10 @@ namespace RPG.Combat
         private void AttackBehavior()
         {
             if (!m_hasTarget) return;
-            m_mover.Cancel();
 
             if (m_timeSinceLastAttack < timeBetweenAttacks) return;
             m_timeSinceLastAttack = 0;
+            transform.LookAt(m_target.transform);
             if (m_hasAnimator)
             {
                 // This will trigger Hit() from the Animation Event.
