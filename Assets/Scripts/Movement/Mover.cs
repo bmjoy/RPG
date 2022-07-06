@@ -5,6 +5,7 @@
 using RPG.Core;
 using UnityEngine;
 using UnityEngine.AI;
+using static RPG.Core.StringReferences;
 
 namespace RPG.Movement
 {
@@ -64,7 +65,7 @@ namespace RPG.Movement
 
             if (m_hasAnimator)
             {
-                _forwardSpeed = Animator.StringToHash("ForwardSpeed");
+                _forwardSpeed = Animator.StringToHash(ForwardSpeedFloat);
             }
 
             m_navMeshAgent = GetComponent<NavMeshAgent>();

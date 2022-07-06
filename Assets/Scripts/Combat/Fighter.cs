@@ -6,6 +6,7 @@ using RPG.Attributes;
 using RPG.Core;
 using RPG.Movement;
 using UnityEngine;
+using static RPG.Core.StringReferences;
 
 namespace RPG.Combat
 {
@@ -83,7 +84,7 @@ namespace RPG.Combat
 
             if (m_hasAnimator)
             {
-                _attackHash = Animator.StringToHash("Attack");
+                _attackHash = Animator.StringToHash(AttackTrigger);
             }
 
             string errorObject = "";

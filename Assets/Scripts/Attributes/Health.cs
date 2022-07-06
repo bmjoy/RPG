@@ -4,6 +4,7 @@
 
 using Unity.Mathematics;
 using UnityEngine;
+using static RPG.Core.StringReferences;
 
 namespace RPG.Attributes
 {
@@ -57,7 +58,7 @@ namespace RPG.Attributes
 
             if (m_hasAnimator)
             {
-                _dieHash = Animator.StringToHash("Die");
+                _dieHash = Animator.StringToHash(DeathTrigger);
             }
         }
 
