@@ -137,10 +137,7 @@ namespace RPG.Combat
             m_hasTarget = false;
             m_target = null;
 
-            if (m_hasAnimator)
-            {
-                m_animator.SetTrigger(_stopAttackHash);
-            }
+            TriggerCancelAttack();
         }
 
         #endregion
@@ -156,11 +153,6 @@ namespace RPG.Combat
             m_actionScheduler.StartAction(this);
             m_target = target.GetComponent<Health>();
             m_hasTarget = m_target != null;
-            if (m_hasAnimator)
-            {
-                m_animator.ResetTrigger(_attackHash);
-                m_animator.ResetTrigger(_stopAttackHash);
-            }
         }
 
         public bool CanAttack(CombatTarget combatTarget)
@@ -187,8 +179,14 @@ namespace RPG.Combat
             if (m_timeSinceLastAttack < timeBetweenAttacks) return;
             m_timeSinceLastAttack = 0;
             transform.LookAt(m_target.transform);
+            TriggerAttack();
+        }
+
+        private void TriggerAttack()
+        {
             if (m_hasAnimator)
             {
+                m_animator.ResetTrigger(_stopAttackHash);
                 // This will trigger Hit() from the Animation Event.
                 m_animator.SetTrigger(_attackHash);
             }
@@ -196,6 +194,13 @@ namespace RPG.Combat
             {
                 Hit();
             }
+        }
+
+        private void TriggerCancelAttack()
+        {
+            if (!m_hasAnimator) return;
+            m_animator.ResetTrigger(_attackHash);
+            m_animator.SetTrigger(_stopAttackHash);
         }
 
         /// <summary>
