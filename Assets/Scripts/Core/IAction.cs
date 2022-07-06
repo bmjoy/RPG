@@ -10,6 +10,13 @@ namespace RPG.Core
     /// </summary>
     public interface IAction
     {
+        #region Public Methods
+
+        /// <summary>
+        /// Cancel The Action
+        /// </summary>
         void Cancel();
+
+        #endregion
     }
 }

@@ -13,11 +13,15 @@ namespace RPG.Core
     /// </summary>
     public class FollowTarget : MonoBehaviour
     {
+        #region Inspector Fields
+
         /// <value>The target to follow.</value>>
         [Tooltip("The target to follow.")] [SerializeField]
         private Transform target;
 
-        #region Unity Methods
+        #endregion
+
+        #region Unity Messages
 
         /// <summary>
         /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.Awake.html"/>

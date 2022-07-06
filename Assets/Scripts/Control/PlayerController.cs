@@ -21,15 +21,33 @@ namespace RPG.Control
     [RequireComponent(typeof(Mover))]
     public class PlayerController : MonoBehaviour
     {
+        #region Private Fields
+
+        private RaycastHit[] m_combatHits = new RaycastHit[10];
+
+        #endregion
+
+        #region Component References
+
+        #region Required
+
         /// <value>Cache the <see cref="Mover"/></value>
         private Mover m_mover;
+
+        #endregion
+
+        #region Optional
 
         /// <value>Cache the <see cref="Fighter"/></value>
         private Fighter m_fighter;
 
         bool m_hasFighter;
 
-        #region Unity Methods
+        #endregion
+
+        #endregion
+
+        #region Unity Messages
 
         /// <summary>
         /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.Awake.html"/>
@@ -58,7 +76,9 @@ namespace RPG.Control
 
         #endregion
 
-        private static Ray GetMouseFromMainCameraScreenPointToRay()
+        #region Private Methods
+
+        private Ray GetMouseFromMainCameraScreenPointToRay()
         {
             return Camera.main.ScreenPointToRay(Input.mousePosition);
         }
@@ -66,9 +86,11 @@ namespace RPG.Control
         private bool InteractWithCombat()
         {
             if (!m_hasFighter) return false;
-            RaycastHit[] hits = Physics.RaycastAll(GetMouseFromMainCameraScreenPointToRay());
-            foreach (RaycastHit hit in hits)
+            int hits = Physics.RaycastNonAlloc(GetMouseFromMainCameraScreenPointToRay(), m_combatHits);
+            if (hits == 0) return false;
+            for (int i = 0; i < hits; i++)
             {
+                RaycastHit hit = m_combatHits[i];
                 CombatTarget target = hit.transform.GetComponent<CombatTarget>();
                 if (target == null) continue;
                 if (Input.GetMouseButtonDown(0))
@@ -96,5 +118,7 @@ namespace RPG.Control
 
             return true;
         }
+
+        #endregion
     }
 }

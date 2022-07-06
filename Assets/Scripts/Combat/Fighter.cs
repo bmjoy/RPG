@@ -27,9 +27,26 @@ namespace RPG.Combat
     [RequireComponent(typeof(Mover), typeof(ActionScheduler))]
     public class Fighter : MonoBehaviour, IAction
     {
+        #region Inspector Fields
+
         [SerializeField] float weaponRange = 2f;
         [SerializeField] float timeBetweenAttacks = 1f;
         [SerializeField] float weapondamage = 10f;
+
+        #endregion
+
+        #region Private Fields
+
+        private Transform m_target;
+        private bool m_hasTarget;
+
+        private float m_timeSinceLastAttack;
+
+        #endregion
+
+        #region Component References
+
+        #region Required
 
         /// <value>Cache the <see cref="Mover"/></value>
         private Mover m_mover;
@@ -37,18 +54,21 @@ namespace RPG.Combat
         /// <value>Cache the <see cref="ActionScheduler"/></value>
         private ActionScheduler m_actionScheduler;
 
+        #endregion
+
+        #region Optional
+
         /// <value>Cache the <a href="https://docs.unity3d.com/ScriptReference/Animator.html">UnityEngine.Animator</a></value>
         private Animator m_animator;
 
         private bool m_hasAnimator;
         private static int _attackHash;
 
-        private Transform m_target;
-        private bool m_hasTarget;
+        #endregion
 
-        private float m_timeSinceLastAttack = 0;
+        #endregion
 
-        #region Unity Methods
+        #region Unity Messages
 
         /// <summary>
         /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.Awake.html"/>

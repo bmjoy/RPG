@@ -13,7 +13,11 @@ namespace RPG.Core
     /// </summary>
     public class ActionScheduler : MonoBehaviour
     {
+        #region Private Fields
+
         private IAction m_currentAction;
+
+        #endregion
 
         #region Public Methods
 

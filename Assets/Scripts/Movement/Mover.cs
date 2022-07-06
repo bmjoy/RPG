@@ -26,6 +26,17 @@ namespace RPG.Movement
     [RequireComponent(typeof(NavMeshAgent), typeof(ActionScheduler))]
     public class Mover : MonoBehaviour, IAction
     {
+        #region Component References
+
+        #region Required
+
+        /// <value>Cache the <see cref="ActionScheduler"/></value>
+        private ActionScheduler m_actionScheduler;
+
+        #endregion
+
+        #region Optional
+
         /// <value>Cache the <a href="https://docs.unity3d.com/ScriptReference/AI.NavMeshAgent.html">UnityEngine.AI.NaveMeshAgent</a></value>
         private NavMeshAgent m_navMeshAgent;
 
@@ -37,10 +48,11 @@ namespace RPG.Movement
         private bool m_hasAnimator;
         private static int _forwardSpeed;
 
-        /// <value>Cache the <see cref="ActionScheduler"/></value>
-        private ActionScheduler m_actionScheduler;
+        #endregion
 
-        #region Unity Methods
+        #endregion
+
+        #region Unity Messages
 
         /// <summary>
         /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.Awake.html"/>
