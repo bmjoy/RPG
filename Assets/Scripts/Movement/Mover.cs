@@ -65,7 +65,7 @@ namespace RPG.Movement
 
             if (m_hasAnimator)
             {
-                _forwardSpeed = Animator.StringToHash(ForwardSpeedFloat);
+                _forwardSpeed = Animator.StringToHash(forwardSpeedFloat);
             }
 
             m_navMeshAgent = GetComponent<NavMeshAgent>();

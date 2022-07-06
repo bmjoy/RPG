@@ -84,7 +84,7 @@ namespace RPG.Combat
 
             if (m_hasAnimator)
             {
-                _attackHash = Animator.StringToHash(AttackTrigger);
+                _attackHash = Animator.StringToHash(attackTrigger);
             }
 
             string errorObject = "";
