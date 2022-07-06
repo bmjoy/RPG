@@ -63,6 +63,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 6863629442196216029, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+      propertyPath: m_Speed
+      value: 2.97
+      objectReference: {fileID: 0}
     - target: {fileID: 7217525226749447344, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
       propertyPath: weaponRange
       value: 3
@@ -77,6 +81,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+--- !u!1 &3138733273306524360 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6487327744266254528, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+  m_PrefabInstance: {fileID: 8180959688631046664}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &660215013825396072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3138733273306524360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e92be3f58ad4247a0f583c70ac0972e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  combatTargetType: 0
+  chaseRange: 5
 --- !u!4 &7230299043453838596 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1576178308592006924, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
