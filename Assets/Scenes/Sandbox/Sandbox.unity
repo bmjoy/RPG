@@ -9185,6 +9185,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1156592910}
     m_Modifications:
+    - target: {fileID: 660215013825396072, guid: dd093df38a0c4374790dc4a9aeb9c387, type: 3}
+      propertyPath: chaseSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 660215013825396072, guid: dd093df38a0c4374790dc4a9aeb9c387, type: 3}
+      propertyPath: patrolPath
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 660215013825396072, guid: dd093df38a0c4374790dc4a9aeb9c387, type: 3}
+      propertyPath: patrolSpeed
+      value: 0.45
+      objectReference: {fileID: 0}
     - target: {fileID: 1558623196858982072, guid: dd093df38a0c4374790dc4a9aeb9c387, type: 3}
       propertyPath: weapondamage
       value: 6
@@ -9200,6 +9212,26 @@ PrefabInstance:
     - target: {fileID: 3138733273306524360, guid: dd093df38a0c4374790dc4a9aeb9c387, type: 3}
       propertyPath: m_Name
       value: Tough Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 3370972783140948693, guid: dd093df38a0c4374790dc4a9aeb9c387, type: 3}
+      propertyPath: m_Height
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3370972783140948693, guid: dd093df38a0c4374790dc4a9aeb9c387, type: 3}
+      propertyPath: m_Radius
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5538812478568706367, guid: dd093df38a0c4374790dc4a9aeb9c387, type: 3}
+      propertyPath: m_Height
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5538812478568706367, guid: dd093df38a0c4374790dc4a9aeb9c387, type: 3}
+      propertyPath: m_Radius
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5538812478568706367, guid: dd093df38a0c4374790dc4a9aeb9c387, type: 3}
+      propertyPath: m_Center.y
+      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 5989486691149545022, guid: dd093df38a0c4374790dc4a9aeb9c387, type: 3}
       propertyPath: m_Avatar

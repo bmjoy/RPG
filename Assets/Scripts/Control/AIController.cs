@@ -28,11 +28,17 @@ namespace RPG.Control
         ///<value>The Range that the Enemy will chase a Combat Target.</value>
         [SerializeField] private float chaseRange = 5f;
 
+        ///<value>The Speed to move when chasing.</value>
+        [SerializeField] private float chaseSpeed = 2f;
+
         ///<value>The amount of time to look for target after target has been lost.</value>
         [SerializeField] private float lookTime = 5f;
 
         ///<value>The <see cref="patrolPath"/> to patrol.</value>
         [SerializeField] private PatrolPath patrolPath;
+
+        ///<value>The Speed to walk when patrolling.</value>
+        [SerializeField] private float patrolSpeed = 1.508f;
 
         ///<value>How far from the way point the ai needs to be before moving to the next waypoint.</value>
         [SerializeField] private float waypointTolerance = 1f;
@@ -122,6 +128,7 @@ namespace RPG.Control
         private void AttackBehavior([NotNull] CombatTarget closestTarget)
         {
             m_timeSinceLastSawTarget = 0;
+            mover.SetMoveSpeed(chaseSpeed);
             fighter.Attack(closestTarget);
         }
 
@@ -133,6 +140,7 @@ namespace RPG.Control
         private void PatrolBehavior()
         {
             Vector3 nextPosition = m_startPosition;
+            mover.SetMoveSpeed(patrolSpeed);
 
             if (patrolPath != null)
             {

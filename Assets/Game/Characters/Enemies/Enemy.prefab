@@ -69,7 +69,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6863629442196216029, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
       propertyPath: m_Speed
-      value: 2
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6863629442196216029, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
       propertyPath: m_AutoBraking
@@ -81,7 +81,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7217525226749447344, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
       propertyPath: weaponRange
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7217525226749447344, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
       propertyPath: weapondamage
@@ -111,10 +111,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   combatTargetType: 0
-  chaseRange: 5
+  chaseRange: 6
+  chaseSpeed: 5.5
   lookTime: 4
   patrolPath: {fileID: 0}
-  waypointTolerance: 0.25
+  patrolSpeed: 0.5
+  waypointTolerance: 0.3
   waypointTime: 3
 --- !u!4 &7230299043453838596 stripped
 Transform:

@@ -140,6 +140,12 @@ namespace RPG.Movement
             }
         }
 
+        public void SetMoveSpeed(float speed)
+        {
+            if (!m_hasAgent) return;
+            m_navMeshAgent.speed = speed;
+        }
+
         #endregion
 
         #region Private Methods
