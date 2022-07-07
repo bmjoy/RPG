@@ -55,9 +55,13 @@ PrefabInstance:
       propertyPath: m_Avatar
       value: 
       objectReference: {fileID: 9000000, guid: d06688f72e50aaa48b0dea3435bfe092, type: 3}
+    - target: {fileID: 2492308187424828470, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: 872aa8a819584e54ab25beba33cfc744, type: 2}
     - target: {fileID: 5792556325803201955, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
       propertyPath: max
-      value: 10
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6487327744266254528, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
       propertyPath: m_Name
@@ -65,15 +69,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6863629442196216029, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
       propertyPath: m_Speed
-      value: 2.97
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863629442196216029, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+      propertyPath: m_AutoBraking
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863629442196216029, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 7217525226749447344, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
       propertyPath: weaponRange
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7217525226749447344, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
       propertyPath: weapondamage
-      value: 8
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7217525226749447344, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
       propertyPath: timeBetweenAttacks
@@ -100,6 +112,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   combatTargetType: 0
   chaseRange: 5
+  lookTime: 4
+  patrolPath: {fileID: 0}
+  waypointTolerance: 0.25
+  waypointTime: 3
 --- !u!4 &7230299043453838596 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1576178308592006924, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}

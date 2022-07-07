@@ -159,5 +159,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponRange: 2
   timeBetweenAttacks: 1
-  weapondamage: 10
+  weapondamage: 2
   combatTargetType: 0
