@@ -3,8 +3,11 @@
 // James LaFritz
 
 using System.Linq;
+using JetBrains.Annotations;
 using RPG.Attributes;
 using RPG.Combat;
+using RPG.Core;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace RPG.Control
@@ -12,13 +15,36 @@ namespace RPG.Control
     /// <summary>
     /// A <see cref="RPGController"/> that
     /// Controls an Ai Agent in game, Ie Enemy, Player NPC.
+    /// <p>
+    /// <a href="https://docs.unity3d.com/ScriptReference/RequireComponent.html">UnityEngine.RequireComponent</a>(
+    /// typeof(<see cref="ActionScheduler"/>)
+    /// )</p>
     /// </summary>
+    [RequireComponent(typeof(ActionScheduler))]
     public class AIController : RPGController
     {
         #region Inspector Fields
 
         ///<value>The Range that the Enemy will chase a Combat Target.</value>
         [SerializeField] private float chaseRange = 5f;
+
+        ///<value>The amount of time to to look for target after target has been lost.</value>
+        [SerializeField] private float lookTime = 5f;
+
+        #endregion
+
+        #region Component References
+
+        #region Required
+
+        /// <value>Cache the <see cref="ActionScheduler"/></value>
+        private ActionScheduler m_actionScheduler;
+
+        #endregion
+
+        #region Optional
+
+        #endregion
 
         #endregion
 
@@ -27,10 +53,22 @@ namespace RPG.Control
         private readonly Collider[] m_combatTargetColliders = new Collider[100];
 
         private Vector3 m_startPosition;
+        private float m_timeSinceLastSawTarget = math.INFINITY;
 
         #endregion
 
         #region Unity Messages
+
+        #region Overrides of RPGController
+
+        /// <inheritdoc />
+        protected override void Awake()
+        {
+            base.Awake();
+            m_actionScheduler = GetComponent<ActionScheduler>();
+        }
+
+        #endregion
 
         /// <summary>
         /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.Start.html"/>
@@ -46,8 +84,15 @@ namespace RPG.Control
         private void Update()
         {
             if (health.IsDead) return;
-            if (IsChasing()) return;
-            mover.StartMoveAction(m_startPosition);
+            CombatTarget closestTarget = GetClosestTarget(chaseRange);
+            if (IsChasing(closestTarget) && hasFighter && fighter.CanAttack(closestTarget))
+                AttackBehavior(closestTarget!);
+            else if (IsLookingForTarget())
+                SuspiciousBehavior();
+            else
+                ReturnToStartPosition();
+
+            m_timeSinceLastSawTarget += Time.deltaTime;
         }
 
         /// <summary>
@@ -61,7 +106,45 @@ namespace RPG.Control
 
         #endregion
 
+        #region Behavior Methods
+
+        private void AttackBehavior([NotNull] CombatTarget closestTarget)
+        {
+            m_timeSinceLastSawTarget = 0;
+            fighter.Attack(closestTarget);
+        }
+
+        private void SuspiciousBehavior()
+        {
+            m_actionScheduler.CancelCurrentAction();
+        }
+
+        private void ReturnToStartPosition()
+        {
+            mover.StartMoveAction(m_startPosition);
+        }
+
+        private bool IsChasing(CombatTarget closestTarget)
+        {
+            return closestTarget != null;
+        }
+
+        private bool IsLookingForTarget()
+        {
+            return m_timeSinceLastSawTarget < lookTime;
+        }
+
+        #endregion
+
         #region Private Methods
+
+        private CombatTarget GetClosestTarget(float range)
+        {
+            CombatTarget[] combatTargets = GetAllCombatTargetsInRange(range);
+            if (combatTargets.Length == 0) return null;
+            CombatTarget closestTarget = combatTargets[0];
+            return closestTarget;
+        }
 
         /// <summary>
         /// Get All the Combat Targets that are in range.
@@ -86,17 +169,6 @@ namespace RPG.Control
         private float GetTargetDistance(CombatTarget target)
         {
             return Vector3.Distance(target.transform.position, transform.position);
-        }
-
-        private bool IsChasing()
-        {
-            CombatTarget[] combatTargets = GetAllCombatTargetsInRange(chaseRange);
-            if (combatTargets.Length == 0) return false;
-            CombatTarget closestTarget = combatTargets[0];
-            if (closestTarget == null || !hasFighter || !fighter.CanAttack(closestTarget)) return false;
-
-            fighter.Attack(closestTarget);
-            return true;
         }
 
         #endregion

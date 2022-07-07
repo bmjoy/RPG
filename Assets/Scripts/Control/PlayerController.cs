@@ -12,7 +12,6 @@ namespace RPG.Control
     /// A <see cref="RPGController"/> that
     /// Controls a User Controlled Player in Game.
     /// </summary>
-    [RequireComponent(typeof(Mover))]
     public class PlayerController : RPGController
     {
         #region Private Fields
@@ -46,7 +45,7 @@ namespace RPG.Control
             {
                 RaycastHit hit = m_combatHits[i];
                 CombatTarget target = hit.transform.GetComponent<CombatTarget>();
-                if (!fighter.CanAttack(target)) continue;
+                if (!hasFighter && !fighter.CanAttack(target)) continue;
                 if (!Input.GetMouseButtonDown(0)) return true;
                 Debug.Assert(target != null, nameof(target) + " != null");
                 fighter.Attack(target);
