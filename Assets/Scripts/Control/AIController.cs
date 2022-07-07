@@ -28,8 +28,17 @@ namespace RPG.Control
         ///<value>The Range that the Enemy will chase a Combat Target.</value>
         [SerializeField] private float chaseRange = 5f;
 
-        ///<value>The amount of time to to look for target after target has been lost.</value>
+        ///<value>The amount of time to look for target after target has been lost.</value>
         [SerializeField] private float lookTime = 5f;
+
+        ///<value>The <see cref="patrolPath"/> to patrol.</value>
+        [SerializeField] private PatrolPath patrolPath;
+
+        ///<value>How far from the way point the ai needs to be before moving to the next waypoint.</value>
+        [SerializeField] private float waypointTolerance = 1f;
+
+        //<value>The amount of time to wait before moving to the next way point.</value>
+        [SerializeField] private float waypointTime = 6f;
 
         #endregion
 
@@ -54,6 +63,7 @@ namespace RPG.Control
 
         private Vector3 m_startPosition;
         private float m_timeSinceLastSawTarget = math.INFINITY;
+        private float m_timeSinceLastWaypoint = math.INFINITY;
 
         #endregion
 
@@ -90,9 +100,10 @@ namespace RPG.Control
             else if (IsLookingForTarget())
                 SuspiciousBehavior();
             else
-                ReturnToStartPosition();
+                PatrolBehavior();
 
             m_timeSinceLastSawTarget += Time.deltaTime;
+            m_timeSinceLastWaypoint += Time.deltaTime;
         }
 
         /// <summary>
@@ -119,9 +130,42 @@ namespace RPG.Control
             m_actionScheduler.CancelCurrentAction();
         }
 
-        private void ReturnToStartPosition()
+        private void PatrolBehavior()
         {
-            mover.StartMoveAction(m_startPosition);
+            Vector3 nextPosition = m_startPosition;
+
+            if (patrolPath != null)
+            {
+                if (AtWaypoint())
+                    CycleWaypoint();
+                nextPosition = GetCurrentWaypoint();
+            }
+
+            if (m_timeSinceLastWaypoint < waypointTime)
+            {
+                SuspiciousBehavior();
+            }
+            else
+            {
+                mover.StartMoveAction(nextPosition);
+            }
+        }
+
+        private bool AtWaypoint()
+        {
+            return GetTargetDistance(GetCurrentWaypoint()) <= waypointTolerance;
+        }
+
+        private void CycleWaypoint()
+        {
+            if (patrolPath == null) return;
+            patrolPath.NextIndex();
+            m_timeSinceLastWaypoint = 0;
+        }
+
+        private Vector3 GetCurrentWaypoint()
+        {
+            return patrolPath == null ? m_startPosition : patrolPath.GetWaypoint();
         }
 
         private bool IsChasing(CombatTarget closestTarget)
@@ -163,12 +207,12 @@ namespace RPG.Control
                     let targetHealth = target.GetComponent<Health>()
                     where targetHealth != null
                     where !targetHealth.IsDead
-                    select target).OrderBy(GetTargetDistance).ToArray();
+                    select target).OrderBy(d => GetTargetDistance(d.transform.position)).ToArray();
         }
 
-        private float GetTargetDistance(CombatTarget target)
+        private float GetTargetDistance(Vector3 target)
         {
-            return Vector3.Distance(target.transform.position, transform.position);
+            return Vector3.Distance(target, transform.position);
         }
 
         #endregion
