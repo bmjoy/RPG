@@ -26,9 +26,19 @@ namespace RPG.Control
 
         private readonly Collider[] m_combatTargetColliders = new Collider[100];
 
+        private Vector3 m_startPosition;
+
         #endregion
 
         #region Unity Messages
+
+        /// <summary>
+        /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.Start.html"/>
+        /// </summary>
+        private void Start()
+        {
+            m_startPosition = transform.position;
+        }
 
         /// <summary>
         /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.Update.html"/>
@@ -37,8 +47,7 @@ namespace RPG.Control
         {
             if (health.IsDead) return;
             if (IsChasing()) return;
-
-            if (hasFighter) fighter.Cancel();
+            mover.StartMoveAction(m_startPosition);
         }
 
         /// <summary>
