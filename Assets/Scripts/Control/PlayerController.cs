@@ -28,6 +28,7 @@ namespace RPG.Control
         /// </summary>
         private void Update()
         {
+            if(health.IsDead) return;
             if (InteractWithCombat()) return;
             if (InteractWithMovement()) return;
             Debug.Log("Nothing To Do");

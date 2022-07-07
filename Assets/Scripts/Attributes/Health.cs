@@ -2,12 +2,23 @@
 // 07-05-2022
 // James LaFritz
 
+using RPG.Core;
 using Unity.Mathematics;
 using UnityEngine;
 using static RPG.Core.StringReferences;
 
 namespace RPG.Attributes
 {
+    /// <summary>
+    /// A <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html">UnityEngine.MonoBehavior</a> that
+    /// represents The Health Attribute.
+    /// <p>
+    /// <a href="https://docs.unity3d.com/ScriptReference/RequireComponent.html">UnityEngine.RequireComponent</a>(
+    /// typeof(<see cref="ActionScheduler"/>)
+    /// )</p>
+    /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html"/>
+    /// </summary>
+    [RequireComponent(typeof(ActionScheduler))]
     public class Health : MonoBehaviour
     {
         #region Inspector Fields
@@ -24,6 +35,12 @@ namespace RPG.Attributes
         #endregion
 
         #region Component References
+
+        #region Required
+
+        private ActionScheduler m_actionScheduler;
+
+        #endregion
 
         #region Optional
 
@@ -52,6 +69,8 @@ namespace RPG.Attributes
         private void Awake()
         {
             m_value = max;
+
+            m_actionScheduler = GetComponent<ActionScheduler>();
 
             m_animator = GetComponentInChildren<Animator>();
             m_hasAnimator = m_animator != null;
@@ -94,6 +113,7 @@ namespace RPG.Attributes
         {
             if (IsDead) return;
             IsDead = true;
+            m_actionScheduler.CancelCurrentAction();
             if (m_hasAnimator)
             {
                 m_animator.SetTrigger(_dieHash);

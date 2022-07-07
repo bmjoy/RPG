@@ -6,6 +6,7 @@ using JetBrains.Annotations;
 using RPG.Attributes;
 using RPG.Core;
 using RPG.Movement;
+using Unity.Mathematics;
 using UnityEngine;
 using static RPG.Core.StringReferences;
 
@@ -44,7 +45,7 @@ namespace RPG.Combat
         private Health m_target;
         private bool m_hasTarget;
 
-        private float m_timeSinceLastAttack;
+        private float m_timeSinceLastAttack = math.INFINITY;
 
         #endregion
 
@@ -180,7 +181,6 @@ namespace RPG.Combat
             if (!m_hasTarget) return;
 
             if (m_timeSinceLastAttack < timeBetweenAttacks) return;
-            m_timeSinceLastAttack = 0;
             transform.LookAt(m_target.transform);
             TriggerAttack();
         }

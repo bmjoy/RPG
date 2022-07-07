@@ -27,18 +27,16 @@ namespace RPG.Core
         /// <param name="action">The Action To Start.</param>
         public void StartAction(IAction action)
         {
-            CancelCurrentAction(action);
+            if (m_currentAction != null && m_currentAction != action) m_currentAction.Cancel();
             m_currentAction = action;
         }
 
-        #endregion
-
-        #region Private Methods
-
-        private void CancelCurrentAction(IAction action)
+        /// <summary>
+        /// Cancels the current Action.
+        /// </summary>
+        public void CancelCurrentAction()
         {
-            if (m_currentAction == null || m_currentAction == action) return;
-            m_currentAction.Cancel();
+            StartAction(null);
         }
 
         #endregion

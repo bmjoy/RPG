@@ -35,6 +35,7 @@ namespace RPG.Control
         /// </summary>
         private void Update()
         {
+            if (health.IsDead) return;
             if (IsChasing()) return;
 
             if (hasFighter) fighter.Cancel();

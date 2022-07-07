@@ -2,6 +2,7 @@
 // 06-30-2022
 // James LaFritz
 
+using RPG.Attributes;
 using RPG.Core;
 using UnityEngine;
 using UnityEngine.AI;
@@ -21,10 +22,11 @@ namespace RPG.Movement
     /// <a href="https://docs.unity3d.com/ScriptReference/RequireComponent.html">UnityEngine.RequireComponent</a>(
     /// typeof(<a href="https://docs.unity3d.com/2021.3/Documentation/ScriptReference/AI.NavMeshAgent.html">UnityEngine.AI.NaveMeshAgent</a>)
     /// , typeof(<see cref="ActionScheduler"/>)
+    /// , typeof(<see cref="Health"/>)
     /// )</p>
     /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html"/>
     /// </summary>
-    [RequireComponent(typeof(NavMeshAgent), typeof(ActionScheduler))]
+    [RequireComponent(typeof(NavMeshAgent), typeof(ActionScheduler), typeof(Health))]
     public class Mover : MonoBehaviour, IAction
     {
         #region Component References
@@ -33,6 +35,9 @@ namespace RPG.Movement
 
         /// <value>Cache the <see cref="ActionScheduler"/></value>
         private ActionScheduler m_actionScheduler;
+
+        /// <value>Cache the <see cref="Health"/></value>
+        private Health m_health;
 
         #endregion
 
@@ -73,14 +78,7 @@ namespace RPG.Movement
 
             m_actionScheduler = GetComponent<ActionScheduler>();
 
-            if (m_hasAgent && m_actionScheduler != null) return;
-
-            string errorObject = !m_hasAgent ? nameof(m_navMeshAgent) : nameof(m_actionScheduler);
-
-            // ReSharper disable Unity.InefficientPropertyAccess
-            Debug.LogError($"{gameObject.name} requires a(n) {errorObject} in order to work", gameObject);
-            enabled = false;
-            // ReSharper restore Unity.InefficientPropertyAccess
+            m_health = GetComponent<Health>();
         }
 
         /// <summary>
@@ -88,6 +86,18 @@ namespace RPG.Movement
         /// </summary>
         private void Update()
         {
+            if (m_navMeshAgent.isActiveAndEnabled && m_health.IsDead)
+            {
+                m_navMeshAgent.destination = transform.position;
+                m_navMeshAgent.ResetPath();
+                m_navMeshAgent.velocity = Vector3.zero;
+                m_navMeshAgent.isStopped = true;
+                UpdateAnimator();
+                m_navMeshAgent.enabled = false;
+            }
+
+            if (m_health.IsDead) return;
+
             UpdateAnimator();
         }
 

@@ -2,6 +2,7 @@
 // 07-06-2022
 // James LaFritz
 
+using RPG.Attributes;
 using RPG.Combat;
 using RPG.Movement;
 using UnityEngine;
@@ -13,10 +14,11 @@ namespace RPG.Control
     /// <p>
     /// <a href="https://docs.unity3d.com/ScriptReference/RequireComponent.html">UnityEngine.RequireComponent</a>(
     /// typeof(<see cref="Mover"/>)
+    /// , typeof(<see cref="Health"/>)
     /// )</p>
     /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html"/>
     /// </summary>
-    [RequireComponent(typeof(Mover))]
+    [RequireComponent(typeof(Mover), typeof(Health))]
     public abstract class RPGController : MonoBehaviour
     {
         #region Inspector Fields
@@ -31,6 +33,9 @@ namespace RPG.Control
 
         /// <value>Cache the <see cref="Mover"/></value>
         protected Mover mover;
+
+        /// <value>Cache the <see cref="Health"/></value>
+        protected Health health;
 
         #endregion
 
@@ -55,11 +60,7 @@ namespace RPG.Control
             fighter = GetComponent<Fighter>();
             hasFighter = fighter != null;
             mover = GetComponent<Mover>();
-            // ReSharper disable Unity.InefficientPropertyAccess
-            if (mover != null) return;
-            Debug.LogError($"{gameObject.name} requires a(n) {nameof(mover)} in order to work", gameObject);
-            enabled = false;
-            // ReSharper restore Unity.InefficientPropertyAccess
+            health = GetComponent<Health>();
         }
 
         #endregion
