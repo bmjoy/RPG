@@ -41,6 +41,15 @@ namespace RPG.Control
             if (hasFighter) fighter.Cancel();
         }
 
+        /// <summary>
+        /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.OnDrawGizmos.html"/>
+        /// </summary>
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(transform.position, chaseRange);
+        }
+
         #endregion
 
         #region Private Methods

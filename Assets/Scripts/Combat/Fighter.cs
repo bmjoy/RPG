@@ -130,6 +130,15 @@ namespace RPG.Combat
             }
         }
 
+        /// <summary>
+        /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.OnDrawGizmos.html"/>
+        /// </summary>
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, weaponRange);
+        }
+
         #endregion
 
         #region Implementation of IAction
