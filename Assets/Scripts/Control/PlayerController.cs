@@ -47,7 +47,7 @@ namespace RPG.Control
                 RaycastHit hit = m_combatHits[i];
                 CombatTarget target = hit.transform.GetComponent<CombatTarget>();
                 if (!fighter.CanAttack(target)) continue;
-                if (!Input.GetMouseButtonDown(0)) return true;
+                if (!Input.GetMouseButton(0)) return true;
                 Debug.Assert(target != null, nameof(target) + " != null");
                 fighter.Attack(target);
 
