@@ -39,13 +39,14 @@ namespace RPG.Control
 
         private bool InteractWithCombat()
         {
+            if (!hasFighter) return false;
             int hits = Physics.RaycastNonAlloc(GetMouseFromMainCameraScreenPointToRay(), m_combatHits);
             if (hits == 0) return false;
             for (int i = 0; i < hits; i++)
             {
                 RaycastHit hit = m_combatHits[i];
                 CombatTarget target = hit.transform.GetComponent<CombatTarget>();
-                if (!hasFighter && !fighter.CanAttack(target)) continue;
+                if (!fighter.CanAttack(target)) continue;
                 if (!Input.GetMouseButtonDown(0)) return true;
                 Debug.Assert(target != null, nameof(target) + " != null");
                 fighter.Attack(target);
