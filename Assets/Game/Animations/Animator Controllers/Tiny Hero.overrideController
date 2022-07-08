@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Tiny Hero
+  m_Controller: {fileID: 9100000, guid: 9c776d0d271edd54283e40236ab705bb, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: -203655887218126122, guid: 762d2630375693847b9f23948b540408, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: b80eeb877a644004b9a1aab03292eacd, type: 3}
+  - m_OriginalClip: {fileID: -203655887218126122, guid: 309efc32423e4164db36a13eaf163b50, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: 3502e15a7de777f46bfb7546a6f25f3d, type: 3}
+  - m_OriginalClip: {fileID: -203655887218126122, guid: 41dc7147085bc3d40b9d59e13fcc96e8, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: e4dbac59d4f6fb5409cca744caf542f4, type: 3}
+  - m_OriginalClip: {fileID: -203655887218126122, guid: cee3dd6511557ec48b2334c9f203e6b1, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: 392dc25dd8bd7f24387ce049f5e53ee2, type: 3}
+  - m_OriginalClip: {fileID: -203655887218126122, guid: 86874c949ddbf954faf07f082c5ec1a3, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: 1315bcd7509173f44bc6655b2673dd4d, type: 3}
