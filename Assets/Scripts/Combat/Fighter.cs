@@ -148,7 +148,7 @@ namespace RPG.Combat
         {
             m_hasTarget = false;
             m_target = null;
-
+            m_mover.Cancel();
             TriggerCancelAttack();
         }
 
