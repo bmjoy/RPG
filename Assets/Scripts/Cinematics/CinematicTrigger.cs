@@ -20,10 +20,11 @@ namespace RPG.Cinematics
     /// <p>
     /// <a href="https://docs.unity3d.com/ScriptReference/RequireComponent.html">UnityEngine.RequireComponent</a>(
     /// typeof(<a href="https://docs.unity3d.com/2021.3/Documentation/ScriptReference/Playables.PlayableDirector.html">UnityEngine.Playables.PlayableDirector</a>)
+    /// , typeof(<see cref="SaveableEntity"/>)
     /// )</p>
     /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html"/>
     /// </summary>
-    [RequireComponent(typeof(PlayableDirector))]
+    [RequireComponent(typeof(PlayableDirector), typeof(SaveableEntity))]
     public class CinematicTrigger : MonoBehaviour, ISaveable
     {
         #region Component References
@@ -66,11 +67,17 @@ namespace RPG.Cinematics
         /// <inheritdoc />
         public object CaptureState()
         {
-            return null;
+            return triggered;
         }
 
         /// <inheritdoc />
-        public void RestoreState(object state) { }
+        public void RestoreState(object state)
+        {
+            triggered = (bool)state;
+            if (!triggered) return;
+            m_director.Play();
+            m_director.time = m_director.duration;
+        }
 
         #endregion
     }
