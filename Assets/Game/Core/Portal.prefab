@@ -114,4 +114,4 @@ MonoBehaviour:
     portal: 0
   fadeOutTime: 0.5
   fadeInTime: 1
-  fadeWaitTime: 0.5
+  fadeWaitTime: 0.75

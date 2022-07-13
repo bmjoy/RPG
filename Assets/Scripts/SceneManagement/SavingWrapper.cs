@@ -59,12 +59,12 @@ namespace RPG.SceneManagement
 
         #endregion
 
-        private void Load()
+        public void Load()
         {
             m_savingSystem.Load(DefaultSaveFile);
         }
 
-        private void Save()
+        public void Save()
         {
             m_savingSystem.Save(DefaultSaveFile);
         }

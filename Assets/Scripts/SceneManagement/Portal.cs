@@ -98,7 +98,13 @@ namespace RPG.SceneManagement
 
             if (hasFader) yield return fader.FadeOut(fadeOutTime);
 
+            SavingWrapper savingWrapper = FindObjectOfType<SavingWrapper>();
+            bool hasSaving = savingWrapper != null;
+            if (hasSaving) savingWrapper.Save();
+
             yield return SceneManager.LoadSceneAsync(destination.scene);
+
+            if (hasSaving) savingWrapper.Load();
 
             Portal otherPortal = GetOtherPortal();
             UpdatePlayer(otherPortal);
