@@ -4,6 +4,7 @@
 
 using RPG.Attributes;
 using RPG.Core;
+using RPG.Saving;
 using UnityEngine;
 using UnityEngine.AI;
 using static RPG.Core.StringReferences;
@@ -27,7 +28,7 @@ namespace RPG.Movement
     /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html"/>
     /// </summary>
     [RequireComponent(typeof(NavMeshAgent), typeof(ActionScheduler), typeof(Health))]
-    public class Mover : MonoBehaviour, IAction
+    public class Mover : MonoBehaviour, IAction, ISaveable
     {
         #region Component References
 
@@ -112,6 +113,25 @@ namespace RPG.Movement
             {
                 m_navMeshAgent.isStopped = true;
             }
+        }
+
+        #endregion
+
+        #region Implementation of ISaveable
+
+        /// <inheritdoc />
+        public object CaptureState()
+        {
+            return new SerializableVector3(transform.position);
+        }
+
+        /// <inheritdoc />
+        public void RestoreState(object state)
+        {
+            if (state is not SerializableVector3 position) return;
+            if (m_hasAgent) m_navMeshAgent.enabled = false;
+            transform.position = position.ToVector();
+            if (m_hasAgent) m_navMeshAgent.enabled = true;
         }
 
         #endregion
