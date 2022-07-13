@@ -2,6 +2,7 @@
 // 07-13-2022
 // James LaFritz
 
+using System.Collections;
 using RPG.Saving;
 using UnityEngine;
 
@@ -39,6 +40,14 @@ namespace RPG.SceneManagement
         private void Awake()
         {
             m_savingSystem = GetComponent<SavingSystem>();
+        }
+
+        /// <summary>
+        /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.Start.html"/>
+        /// </summary>
+        private IEnumerator Start()
+        {
+            yield return m_savingSystem.LoadLastScene(DefaultSaveFile);
         }
 
         /// <summary>

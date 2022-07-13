@@ -111,6 +111,8 @@ namespace RPG.SceneManagement
 
             yield return new WaitForSeconds(fadeWaitTime);
 
+            if (hasSaving) savingWrapper.Save();
+
             if (hasFader) yield return fader.FadeIn(fadeInTime);
 
             Destroy(gameObject);
