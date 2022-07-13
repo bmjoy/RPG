@@ -29,6 +29,13 @@ namespace RPG.SceneManagement.Editor
         /// <inheritdoc />
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
+            if (Application.isPlaying)
+            {
+                // ReSharper disable once Unity.PropertyDrawerOnGUIBase
+                base.OnGUI(position, property, label);
+                return;
+            }
+
             if (property == null) return;
 
             if (property.propertyType != SerializedPropertyType.Integer)
