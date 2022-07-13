@@ -30,7 +30,7 @@ namespace RPG.Attributes
 
         #region Private Fields
 
-        private float m_value;
+        [ReadOnly, SerializeField] private float m_value;
 
         #endregion
 
