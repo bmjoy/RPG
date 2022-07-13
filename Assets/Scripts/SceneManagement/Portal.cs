@@ -31,7 +31,7 @@ namespace RPG.SceneManagement
         [SerializeField] private Transform spawnPoint;
         [SerializeField] private DestinationPortal destination;
 
-        public int index
+        public int Index
         {
             get => portalIndex;
             set => portalIndex = value;

@@ -2,7 +2,6 @@
 // 07-12-2022
 // James LaFritz
 
-using System;
 using UnityEngine;
 
 namespace RPG.SceneManagement
@@ -15,7 +14,8 @@ namespace RPG.SceneManagement
     /// [Scene] public int sceneInt;
     /// </code>
     /// </example>
+    /// <seealso href="https://docs.unity3d.com/ScriptReference/PropertyAttribute.html"/>
     /// </summary>
-    [AttributeUsage(AttributeTargets.Field)]
+    [System.AttributeUsage(System.AttributeTargets.Field)]
     public class SceneAttribute : PropertyAttribute { }
 }

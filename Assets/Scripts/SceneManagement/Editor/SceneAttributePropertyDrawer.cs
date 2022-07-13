@@ -2,7 +2,6 @@
 // 07-12-2022
 // James LaFritz
 
-using System;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Unity.Mathematics;
@@ -13,8 +12,8 @@ namespace RPG.SceneManagement.Editor
 {
     /// <summary>
     /// The scene attribute property drawer class
+    /// <seealso href="https://docs.unity3d.com/ScriptReference/PropertyDrawer.html"/>
     /// </summary>
-    /// <seealso cref="PropertyDrawer"/>
     [CustomPropertyDrawer(typeof(SceneAttribute))]
     public class SceneAttributePropertyDrawer : PropertyDrawer
     {
@@ -119,11 +118,11 @@ namespace RPG.SceneManagement.Editor
             if (property == null) return;
             if (scenes == null) return;
 
-            int index = math.clamp(Array.IndexOf(scenes, property.stringValue), 0, scenes.Length - 1);
+            int index = math.clamp(System.Array.IndexOf(scenes, property.stringValue), 0, scenes.Length - 1);
             int newIndex = EditorGUI.Popup(rect, label != null ? label.text : "", index, sceneOptions);
             string newScene = scenes[newIndex];
 
-            if (property.stringValue?.Equals(newScene, StringComparison.Ordinal) == false)
+            if (property.stringValue?.Equals(newScene, System.StringComparison.Ordinal) == false)
             {
                 property.stringValue = scenes[newIndex];
             }

@@ -12,6 +12,10 @@ using UnityEngine.SceneManagement;
 
 namespace RPG.SceneManagement.Editor
 {
+    /// <summary>
+    /// The portal index attribute property drawer class
+    /// <seealso href="https://docs.unity3d.com/ScriptReference/PropertyDrawer.html"/>
+    /// </summary>
     [CustomPropertyDrawer(typeof(PortalIndexAttribute))]
     public class PortalIndexAttributePropertyDrawer : PropertyDrawer
     {
@@ -91,9 +95,9 @@ namespace RPG.SceneManagement.Editor
             }
 
             int portalIndex = 0;
-            foreach (Portal portal in portalObjects.OrderBy(a => a.index))
+            foreach (Portal portal in portalObjects.OrderBy(a => a.Index))
             {
-                if (portal.index != portalIndex) portal.index = portalIndex;
+                if (portal.Index != portalIndex) portal.Index = portalIndex;
                 portalIndex++;
             }
 

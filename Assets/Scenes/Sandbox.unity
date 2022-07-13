@@ -3766,7 +3766,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6006046643045634663, guid: 869db8178bf86c7479148b1d7b09001a, type: 3}
       propertyPath: m_Name
-      value: Portal (1)
+      value: EndLevel
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 869db8178bf86c7479148b1d7b09001a, type: 3}
@@ -12417,7 +12417,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6006046643045634663, guid: 869db8178bf86c7479148b1d7b09001a, type: 3}
       propertyPath: m_Name
-      value: Portal
+      value: BeginLevel
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 869db8178bf86c7479148b1d7b09001a, type: 3}
