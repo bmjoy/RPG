@@ -2179,7 +2179,7 @@ Transform:
   - {fileID: 1244257145}
   - {fileID: 2136497132}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &434586572
 PrefabInstance:
@@ -3670,7 +3670,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1530329697}
     m_Modifications:
     - target: {fileID: 958361880189824349, guid: 869db8178bf86c7479148b1d7b09001a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3694,7 +3694,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1941050965550418954, guid: 869db8178bf86c7479148b1d7b09001a, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1941050965550418954, guid: 869db8178bf86c7479148b1d7b09001a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3739,6 +3739,14 @@ PrefabInstance:
     - target: {fileID: 2760127795097277359, guid: 869db8178bf86c7479148b1d7b09001a, type: 3}
       propertyPath: portalIndex
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760127795097277359, guid: 869db8178bf86c7479148b1d7b09001a, type: 3}
+      propertyPath: spawnTo.scene
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760127795097277359, guid: 869db8178bf86c7479148b1d7b09001a, type: 3}
+      propertyPath: spawnTo.portal
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2760127795097277359, guid: 869db8178bf86c7479148b1d7b09001a, type: 3}
       propertyPath: sceneBuildIndex
@@ -6021,6 +6029,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1903400936436775734, guid: 482bc0ab7048f714397feaa48c778fb4, type: 3}
   m_PrefabInstance: {fileID: 965246428}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &989571594 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1941050965550418954, guid: 869db8178bf86c7479148b1d7b09001a, type: 3}
+  m_PrefabInstance: {fileID: 601109257}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &992454240
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6392,6 +6405,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dd093df38a0c4374790dc4a9aeb9c387, type: 3}
+--- !u!4 &1050303147 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1941050965550418954, guid: 869db8178bf86c7479148b1d7b09001a, type: 3}
+  m_PrefabInstance: {fileID: 9184424398319097202}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1051764995
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6839,7 +6857,7 @@ Transform:
   - {fileID: 763600466}
   - {fileID: 1146202441}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1157375258
 PrefabInstance:
@@ -8560,6 +8578,39 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4454022584780715283, guid: 135801783341f89449d30c5b11075d82, type: 3}
   m_PrefabInstance: {fileID: 1525977405}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1530329696
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1530329697}
+  m_Layer: 0
+  m_Name: Portals
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1530329697
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1530329696}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1050303147}
+  - {fileID: 989571594}
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1534947263
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10516,7 +10567,7 @@ Transform:
   - {fileID: 2098282464}
   - {fileID: 1363711852}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1940327513
 GameObject:
@@ -12254,7 +12305,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1530329697}
     m_Modifications:
     - target: {fileID: 958361880189824349, guid: 869db8178bf86c7479148b1d7b09001a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12290,7 +12341,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1941050965550418954, guid: 869db8178bf86c7479148b1d7b09001a, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1941050965550418954, guid: 869db8178bf86c7479148b1d7b09001a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12333,11 +12384,23 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2760127795097277359, guid: 869db8178bf86c7479148b1d7b09001a, type: 3}
+      propertyPath: spawnTo.scene
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760127795097277359, guid: 869db8178bf86c7479148b1d7b09001a, type: 3}
+      propertyPath: spawnTo.portal
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760127795097277359, guid: 869db8178bf86c7479148b1d7b09001a, type: 3}
       propertyPath: sceneBuildIndex
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2760127795097277359, guid: 869db8178bf86c7479148b1d7b09001a, type: 3}
       propertyPath: spawnPortalIndex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760127795097277359, guid: 869db8178bf86c7479148b1d7b09001a, type: 3}
+      propertyPath: spawnTo.spawnPoint
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6006046643045634663, guid: 869db8178bf86c7479148b1d7b09001a, type: 3}

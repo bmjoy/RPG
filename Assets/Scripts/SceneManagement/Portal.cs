@@ -9,6 +9,13 @@ using UnityEngine.SceneManagement;
 
 namespace RPG.SceneManagement
 {
+    [System.Serializable]
+    public struct SpawnTo
+    {
+        [Scene] public int scene;
+        [PortalIndex(scene = "scene")] public int portal;
+    }
+
     /// <summary>
     /// A <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html">UnityEngine.MonoBehavior</a> that
     /// Teleports a player to another scene. You do not have to set the spawn point if the portal contains a Game Object with the name "SpawnPoint".
@@ -21,9 +28,14 @@ namespace RPG.SceneManagement
     public class Portal : MonoBehaviour
     {
         [SerializeField] private int portalIndex = 0;
-        [SerializeField] private int sceneBuildIndex = -1;
-        [SerializeField] private int spawnPortalIndex = -1;
         [SerializeField] private Transform spawnPoint;
+        [SerializeField] private SpawnTo spawnTo;
+
+        public int index
+        {
+            get => portalIndex;
+            set => portalIndex = value;
+        }
 
         #region Component References
 
@@ -63,21 +75,20 @@ namespace RPG.SceneManagement
 
         private IEnumerator Transition()
         {
-            if (sceneBuildIndex < 0)
+            if (spawnTo.scene < 0)
             {
                 Debug.LogWarning("Scene To Load is not Set");
                 yield break;
             }
 
-            if (SceneManager.sceneCountInBuildSettings < sceneBuildIndex)
+            if (SceneManager.sceneCountInBuildSettings < spawnTo.scene)
             {
-                Debug.LogWarning($"Build Settings does not contain a scene at {sceneBuildIndex}");
+                Debug.LogWarning($"Build Settings does not contain a scene at {spawnTo.scene}");
                 yield break;
             }
 
             DontDestroyOnLoad(gameObject);
-            yield return SceneManager.LoadSceneAsync(sceneBuildIndex);
-            yield return null;
+            yield return SceneManager.LoadSceneAsync(spawnTo.scene);
             Portal otherPortal = GetOtherPortal();
             UpdatePlayer(otherPortal);
             Destroy(gameObject);
@@ -85,7 +96,7 @@ namespace RPG.SceneManagement
 
         private Portal GetOtherPortal()
         {
-            if (spawnPortalIndex == -1)
+            if (spawnTo.portal == -1)
             {
                 Debug.LogWarning("No Portal set.");
                 return null;
@@ -94,11 +105,11 @@ namespace RPG.SceneManagement
             foreach (Portal portal in FindObjectsOfType<Portal>())
             {
                 if (portal == this) continue;
-                if (portal.portalIndex != spawnPortalIndex) continue; 
+                if (portal.portalIndex != spawnTo.portal) continue; 
                 return portal;
             }
 
-            Debug.LogWarning($"Could not find a Portal with an index of {spawnPortalIndex} in scene {SceneManager.GetActiveScene().name}");
+            Debug.LogWarning($"Could not find a Portal with an index of {spawnTo.portal} in scene {SceneManager.GetActiveScene().name}");
             return null;
         }
 
