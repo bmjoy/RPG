@@ -18,6 +18,7 @@ namespace RPG.Movement
     /// <p>
     /// Implements
     /// <see cref="IAction"/>
+    /// <see cref="ISaveable"/>
     /// </p>
     /// <p>
     /// <a href="https://docs.unity3d.com/ScriptReference/RequireComponent.html">UnityEngine.RequireComponent</a>(

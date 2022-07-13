@@ -3,6 +3,7 @@
 // James LaFritz
 
 using RPG.Core;
+using RPG.Saving;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -13,13 +14,17 @@ namespace RPG.Cinematics
     /// triggers a <a href="https://docs.unity3d.com/ScriptReference/Playables.PlayableDirector.html">UnityEngine.Playables.PlayableDirector</a>
     /// to play a cut scene.
     /// <p>
+    /// Implements
+    /// <see cref="ISaveable"/>
+    /// </p>
+    /// <p>
     /// <a href="https://docs.unity3d.com/ScriptReference/RequireComponent.html">UnityEngine.RequireComponent</a>(
     /// typeof(<a href="https://docs.unity3d.com/2021.3/Documentation/ScriptReference/Playables.PlayableDirector.html">UnityEngine.Playables.PlayableDirector</a>)
     /// )</p>
     /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html"/>
     /// </summary>
     [RequireComponent(typeof(PlayableDirector))]
-    public class CinematicTrigger : MonoBehaviour
+    public class CinematicTrigger : MonoBehaviour, ISaveable
     {
         #region Component References
 
@@ -53,6 +58,19 @@ namespace RPG.Cinematics
             triggered = true;
             m_director.Play();
         }
+
+        #endregion
+
+        #region Implementation of ISaveable
+
+        /// <inheritdoc />
+        public object CaptureState()
+        {
+            return null;
+        }
+
+        /// <inheritdoc />
+        public void RestoreState(object state) { }
 
         #endregion
     }

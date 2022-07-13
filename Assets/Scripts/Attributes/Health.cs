@@ -14,6 +14,10 @@ namespace RPG.Attributes
     /// A <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html">UnityEngine.MonoBehavior</a> that
     /// represents The Health Attribute.
     /// <p>
+    /// Implements
+    /// <see cref="ISaveable"/>
+    /// </p>
+    /// <p>
     /// <a href="https://docs.unity3d.com/ScriptReference/RequireComponent.html">UnityEngine.RequireComponent</a>(
     /// typeof(<see cref="ActionScheduler"/>)
     /// )</p>
@@ -31,7 +35,7 @@ namespace RPG.Attributes
 
         #region Private Fields
 
-        [ReadOnly, SerializeField] private float m_value;
+        [ReadOnly, SerializeField] private float value;
 
         #endregion
 
@@ -69,7 +73,7 @@ namespace RPG.Attributes
         /// </summary>
         private void Awake()
         {
-            m_value = max;
+            value = max;
 
             m_actionScheduler = GetComponent<ActionScheduler>();
 
@@ -89,14 +93,14 @@ namespace RPG.Attributes
         /// <inheritdoc />
         public object CaptureState()
         {
-            return m_value;
+            return value;
         }
 
         /// <inheritdoc />
         public void RestoreState(object state)
         {
-            m_value = (float)state;
-            if (m_value == 0)
+            value = (float)state;
+            if (value == 0)
             {
                 Die();
             }
@@ -116,11 +120,11 @@ namespace RPG.Attributes
         {
             if (IsDead) return;
 
-            m_value = math.min(math.max(m_value - damage, 0), max);
+            value = math.min(math.max(value - damage, 0), max);
 
             //Debug.Log($"{name} takes {damage} damage. Health is now {m_value}");
 
-            if (m_value == 0)
+            if (value == 0)
             {
                 Die();
             }
