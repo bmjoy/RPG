@@ -2,7 +2,6 @@
 // 07-12-2022
 // James LaFritz
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using RPG.Core.Editor;
@@ -76,7 +75,10 @@ namespace RPG.SceneManagement.Editor
         private static string[] PortalNames(SerializedProperty sceneProp)
         {
             EditorBuildSettingsScene editorScene = EditorBuildSettings.scenes[sceneProp.intValue];
-            Scene scene = EditorSceneManager.OpenScene(editorScene.path, OpenSceneMode.Additive);
+            Scene scene = EditorSceneManager.GetActiveScene().buildIndex != sceneProp.intValue
+                ? EditorSceneManager.OpenScene(editorScene.path, OpenSceneMode.Additive)
+                : EditorSceneManager.GetActiveScene();
+
             GameObject[] sceneObjects = scene.GetRootGameObjects();
             List<Portal> portalObjects = new List<Portal>();
             foreach (GameObject sceneObject in sceneObjects)
@@ -96,7 +98,7 @@ namespace RPG.SceneManagement.Editor
             }
 
             string[] portalNames = portalObjects.Select(a => a.name).ToArray();
-            EditorSceneManager.CloseScene(scene, true);
+            if (scene != EditorSceneManager.GetActiveScene()) EditorSceneManager.CloseScene(scene, true);
             return portalNames;
         }
 

@@ -3756,6 +3756,10 @@ PrefabInstance:
       propertyPath: spawnPortalIndex
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2760127795097277359, guid: 869db8178bf86c7479148b1d7b09001a, type: 3}
+      propertyPath: destination.scene
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3450034713582733856, guid: 869db8178bf86c7479148b1d7b09001a, type: 3}
       propertyPath: m_Size.x
       value: 4.56
@@ -12397,6 +12401,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2760127795097277359, guid: 869db8178bf86c7479148b1d7b09001a, type: 3}
       propertyPath: spawnPortalIndex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760127795097277359, guid: 869db8178bf86c7479148b1d7b09001a, type: 3}
+      propertyPath: destination.scene
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760127795097277359, guid: 869db8178bf86c7479148b1d7b09001a, type: 3}
+      propertyPath: destination.portal
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2760127795097277359, guid: 869db8178bf86c7479148b1d7b09001a, type: 3}

@@ -2645,6 +2645,10 @@ PrefabInstance:
       propertyPath: spawnPortalIndex
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2760127795097277359, guid: 869db8178bf86c7479148b1d7b09001a, type: 3}
+      propertyPath: destination.portal
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3450034713582733856, guid: 869db8178bf86c7479148b1d7b09001a, type: 3}
       propertyPath: m_Size.x
       value: 6
@@ -4894,6 +4898,10 @@ PrefabInstance:
       propertyPath: spawnPortalIndex
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2760127795097277359, guid: 869db8178bf86c7479148b1d7b09001a, type: 3}
+      propertyPath: destination.scene
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6006046643045634663, guid: 869db8178bf86c7479148b1d7b09001a, type: 3}
       propertyPath: m_Name
       value: Portal (1)
@@ -5741,7 +5749,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3660190515615210792}
   m_LocalRotation: {x: -0.30278027, y: 0.5896994, z: -0.25342754, w: -0.70452344}
-  m_LocalPosition: {x: 38.919174, y: 13.188382, z: 37.891487}
+  m_LocalPosition: {x: -7.950828, y: 13.688377, z: -26.298523}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

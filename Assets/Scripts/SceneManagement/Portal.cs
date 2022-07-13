@@ -10,7 +10,7 @@ using UnityEngine.SceneManagement;
 namespace RPG.SceneManagement
 {
     [System.Serializable]
-    public struct SpawnTo
+    public struct DestinationPortal
     {
         [Scene] public int scene;
         [PortalIndex(scene = "scene")] public int portal;
@@ -29,7 +29,7 @@ namespace RPG.SceneManagement
     {
         [SerializeField] private int portalIndex = 0;
         [SerializeField] private Transform spawnPoint;
-        [SerializeField] private SpawnTo spawnTo;
+        [SerializeField] private DestinationPortal destination;
 
         public int index
         {
@@ -75,20 +75,20 @@ namespace RPG.SceneManagement
 
         private IEnumerator Transition()
         {
-            if (spawnTo.scene < 0)
+            if (destination.scene < 0)
             {
                 Debug.LogWarning("Scene To Load is not Set");
                 yield break;
             }
 
-            if (SceneManager.sceneCountInBuildSettings < spawnTo.scene)
+            if (SceneManager.sceneCountInBuildSettings < destination.scene)
             {
-                Debug.LogWarning($"Build Settings does not contain a scene at {spawnTo.scene}");
+                Debug.LogWarning($"Build Settings does not contain a scene at {destination.scene}");
                 yield break;
             }
 
             DontDestroyOnLoad(gameObject);
-            yield return SceneManager.LoadSceneAsync(spawnTo.scene);
+            yield return SceneManager.LoadSceneAsync(destination.scene);
             Portal otherPortal = GetOtherPortal();
             UpdatePlayer(otherPortal);
             Destroy(gameObject);
@@ -96,7 +96,7 @@ namespace RPG.SceneManagement
 
         private Portal GetOtherPortal()
         {
-            if (spawnTo.portal == -1)
+            if (destination.portal == -1)
             {
                 Debug.LogWarning("No Portal set.");
                 return null;
@@ -105,11 +105,11 @@ namespace RPG.SceneManagement
             foreach (Portal portal in FindObjectsOfType<Portal>())
             {
                 if (portal == this) continue;
-                if (portal.portalIndex != spawnTo.portal) continue; 
+                if (portal.portalIndex != destination.portal) continue; 
                 return portal;
             }
 
-            Debug.LogWarning($"Could not find a Portal with an index of {spawnTo.portal} in scene {SceneManager.GetActiveScene().name}");
+            Debug.LogWarning($"Could not find a Portal with an index of {destination.portal} in scene {SceneManager.GetActiveScene().name}");
             return null;
         }
 
