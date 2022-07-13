@@ -30,6 +30,9 @@ namespace RPG.SceneManagement
         [SerializeField] private int portalIndex = 0;
         [SerializeField] private Transform spawnPoint;
         [SerializeField] private DestinationPortal destination;
+        [SerializeField] float fadeOutTime = 1f;
+        [SerializeField] float fadeInTime = 2f;
+        [SerializeField] float fadeWaitTime = 0.5f;
 
         public int Index
         {
@@ -87,10 +90,23 @@ namespace RPG.SceneManagement
                 yield break;
             }
 
+            Fader fader = FindObjectOfType<Fader>();
+            bool hasFader = fader != null;
+
+            transform.parent = null;
             DontDestroyOnLoad(gameObject);
+
+            if (hasFader) yield return fader.FadeOut(fadeOutTime);
+
             yield return SceneManager.LoadSceneAsync(destination.scene);
+
             Portal otherPortal = GetOtherPortal();
             UpdatePlayer(otherPortal);
+
+            yield return new WaitForSeconds(fadeWaitTime);
+
+            if (hasFader) yield return fader.FadeIn(fadeInTime);
+
             Destroy(gameObject);
         }
 

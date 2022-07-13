@@ -31,26 +31,12 @@ namespace RPG.SceneManagement
             m_canvasGroup = GetComponent<CanvasGroup>();
         }
 
-        private void Start()
-        {
-            StartCoroutine(FadeOutIn());
-        }
-
         #endregion
 
         /// <summary>
         /// <seealso href="https://docs.unity3d.com/ScriptReference/Coroutine.html"/>
         /// </summary>
-        private IEnumerator FadeOutIn()
-        {
-            yield return FadeOut(3f);
-            yield return FadeIn(2f);
-        }
-
-        /// <summary>
-        /// <seealso href="https://docs.unity3d.com/ScriptReference/Coroutine.html"/>
-        /// </summary>
-        private IEnumerator FadeOut(float time)
+        public IEnumerator FadeOut(float time)
         {
             while (m_canvasGroup.alpha < 1)
             {
@@ -64,7 +50,7 @@ namespace RPG.SceneManagement
         /// <summary>
         /// <seealso href="https://docs.unity3d.com/ScriptReference/Coroutine.html"/>
         /// </summary>
-        private IEnumerator FadeIn(float time)
+        public IEnumerator FadeIn(float time)
         {
             while (m_canvasGroup.alpha > 0)
             {
