@@ -3,6 +3,7 @@
 // James LaFritz
 
 using RPG.Core;
+using RPG.Saving;
 using Unity.Mathematics;
 using UnityEngine;
 using static RPG.Core.StringReferences;
@@ -19,7 +20,7 @@ namespace RPG.Attributes
     /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html"/>
     /// </summary>
     [RequireComponent(typeof(ActionScheduler))]
-    public class Health : MonoBehaviour
+    public class Health : MonoBehaviour, ISaveable
     {
         #region Inspector Fields
 
@@ -78,6 +79,26 @@ namespace RPG.Attributes
             if (m_hasAnimator)
             {
                 _dieHash = Animator.StringToHash(deathTrigger);
+            }
+        }
+
+        #endregion
+
+        #region Implementation of ISaveable
+
+        /// <inheritdoc />
+        public object CaptureState()
+        {
+            return m_value;
+        }
+
+        /// <inheritdoc />
+        public void RestoreState(object state)
+        {
+            m_value = (float)state;
+            if (m_value == 0)
+            {
+                Die();
             }
         }
 
