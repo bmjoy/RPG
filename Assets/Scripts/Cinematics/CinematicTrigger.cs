@@ -2,6 +2,7 @@
 // 07-07-2022
 // James LaFritz
 
+using RPG.Core;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -31,7 +32,7 @@ namespace RPG.Cinematics
 
         #endregion
 
-        private bool m_triggered;
+        [ReadOnly, SerializeField] private bool triggered;
 
         #region Unity Messages
 
@@ -48,8 +49,8 @@ namespace RPG.Cinematics
         /// </summary>
         private void OnTriggerEnter(Collider other)
         {
-            if (m_triggered || !other.CompareTag("Player")) return;
-            m_triggered = true;
+            if (triggered || !other.CompareTag("Player")) return;
+            triggered = true;
             m_director.Play();
         }
 
