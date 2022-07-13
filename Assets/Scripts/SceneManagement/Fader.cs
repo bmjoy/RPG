@@ -33,6 +33,11 @@ namespace RPG.SceneManagement
 
         #endregion
 
+        public void FadeOutImmediate()
+        {
+            m_canvasGroup.alpha = 1;
+        }
+
         /// <summary>
         /// <seealso href="https://docs.unity3d.com/ScriptReference/Coroutine.html"/>
         /// </summary>

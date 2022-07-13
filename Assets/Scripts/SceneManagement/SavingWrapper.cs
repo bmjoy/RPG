@@ -22,6 +22,8 @@ namespace RPG.SceneManagement
     {
         private const string DefaultSaveFile = "save";
 
+        [SerializeField] float fadeInTime = 0.75f;
+
         #region Component References
 
         #region Required
@@ -47,7 +49,14 @@ namespace RPG.SceneManagement
         /// </summary>
         private IEnumerator Start()
         {
+            Fader fader = FindObjectOfType<Fader>();
+            bool hasFader = fader != null;
+
+            if (hasFader) fader.FadeOutImmediate();
+
             yield return m_savingSystem.LoadLastScene(DefaultSaveFile);
+
+            if (hasFader) yield return fader.FadeIn(fadeInTime);
         }
 
         /// <summary>
