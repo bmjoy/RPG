@@ -2,6 +2,7 @@
 // 06-30-2022
 // James LaFritz
 
+using System.Collections.Generic;
 using RPG.Attributes;
 using RPG.Core;
 using RPG.Saving;
@@ -18,7 +19,7 @@ namespace RPG.Movement
     /// <p>
     /// Implements
     /// <see cref="IAction"/>
-    /// <see cref="ISaveable"/>
+    /// <see cref="ISavable"/>
     /// </p>
     /// <p>
     /// <a href="https://docs.unity3d.com/ScriptReference/RequireComponent.html">UnityEngine.RequireComponent</a>(
@@ -29,7 +30,7 @@ namespace RPG.Movement
     /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html"/>
     /// </summary>
     [RequireComponent(typeof(NavMeshAgent), typeof(ActionScheduler), typeof(Health))]
-    public class Mover : MonoBehaviour, IAction, ISaveable
+    public class Mover : MonoBehaviour, IAction, ISavable
     {
         #region Component References
 
@@ -118,22 +119,48 @@ namespace RPG.Movement
 
         #endregion
 
+        #region Saving and Loading
+
+        [System.Serializable]
+        struct MoverSaveData
+        {
+            public SerializableVector3 position;
+            public SerializableVector3 rotation;
+        }
+
         #region Implementation of ISaveable
 
         /// <inheritdoc />
         public object CaptureState()
         {
-            return new SerializableVector3(transform.position);
+            MoverSaveData data = new MoverSaveData();
+            Transform transform1 = transform;
+            data.position = new SerializableVector3(transform1.position);
+            data.rotation = new SerializableVector3(transform1.eulerAngles);
+
+            return data;
         }
 
         /// <inheritdoc />
-        public void RestoreState(object state)
+        public void RestoreState(object state, int version)
         {
-            if (state is not SerializableVector3 position) return;
             if (m_hasAgent) m_navMeshAgent.enabled = false;
-            transform.position = position.ToVector();
+
+            if (version > 0)
+            {
+                MoverSaveData data = (MoverSaveData)state;
+                transform.position = data.position.ToVector();
+                transform.eulerAngles = data.rotation.ToVector();
+            }
+            else
+            {
+                Debug.LogError("Unexpected save data");
+            }
+
             if (m_hasAgent) m_navMeshAgent.enabled = true;
         }
+
+        #endregion
 
         #endregion
 

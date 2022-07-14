@@ -70,7 +70,7 @@ namespace RPG.Saving
         /// Will restore the state that was captured by `CaptureState`.
         /// </summary>
         /// <param name="state">The same object that was returned by `CaptureState`.</param>
-        public void RestoreState(object state)
+        public void RestoreState(object state, int currentFileVersion)
         {
             foreach (ISavable savable in GetComponents<ISavable>())
             {
@@ -78,7 +78,7 @@ namespace RPG.Saving
                 string typeString = savable.GetType().ToString()!;
                 if (stateDict.ContainsKey(typeString))
                 {
-                    savable.RestoreState(stateDict[typeString]);
+                    savable.RestoreState(stateDict[typeString], currentFileVersion);
                 }
             }
         }

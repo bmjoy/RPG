@@ -99,7 +99,22 @@ namespace RPG.Saving
 
             BinaryFormatter formatter = new BinaryFormatter();
             using FileStream stream = File.Open(path!, FileMode.Open);
-            return (Dictionary<string, object>)formatter.Deserialize(stream);
+
+            Dictionary<string, object> state = (Dictionary<string, object>)formatter.Deserialize(stream);
+
+            int currentFileVersion = 0;
+            if (state.ContainsKey("CurrentFileVersion"))
+            {
+                currentFileVersion = (int)state["CurrentFileVersion"];
+            }
+
+            if (currentFileVersion is >= VersionControl.CurrentFileVersion or >= VersionControl.MinFileVersion)
+                return state;
+            Debug.LogWarning($"Save file is from an older version of the game and is not supported. " +
+                             $"Expected version: {VersionControl.CurrentFileVersion}, " +
+                             $"Minimum Expected version: {VersionControl.MinFileVersion}, " +
+                             $"Current version: {currentFileVersion}");
+            return new Dictionary<string, object>();
         }
 
         private void SaveFile(string saveFile, object state)
@@ -113,6 +128,7 @@ namespace RPG.Saving
 
         private void CaptureState(Dictionary<string, object> state)
         {
+            state["CurrentFileVersion"] = VersionControl.CurrentFileVersion;
             foreach (SavableEntity entity in FindObjectsOfType<SavableEntity>(includeInactive))
             {
                 state[entity.GetUniqueIdentifier()!] = entity.CaptureState();
@@ -123,12 +139,18 @@ namespace RPG.Saving
 
         private void RestoreState(Dictionary<string, object> state)
         {
+            int currentFileVersion = 0;
+            if (state.ContainsKey("CurrentFileVersion"))
+            {
+                currentFileVersion = (int)state["CurrentFileVersion"];
+            }
+
             foreach (SavableEntity entity in FindObjectsOfType<SavableEntity>(includeInactive))
             {
                 string id = entity.GetUniqueIdentifier();
                 if (!string.IsNullOrWhiteSpace(id) && state.ContainsKey(id))
                 {
-                    entity.RestoreState(state[id]);
+                    entity.RestoreState(state[id], currentFileVersion);
                 }
             }
         }

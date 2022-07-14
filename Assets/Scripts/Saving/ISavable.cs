@@ -23,6 +23,6 @@ namespace RPG.Saving
         /// that that was returned byCaptureState when saving.
         /// </param>
         /// <param name="version">The version number of the saved data.</param>
-        void RestoreState(object state);
+        void RestoreState(object state, int version);
     }
 }

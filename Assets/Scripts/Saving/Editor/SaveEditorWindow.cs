@@ -2,6 +2,7 @@
 // 07-13-2022
 // James LaFritz
 
+using System;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
@@ -131,7 +132,7 @@ namespace RPG.Saving.Editor
 
         private void UpdateVersionNumber()
         {
-            string path = GetVersionPath();
+            string path = GetVersionPath(false);
 
             string[] code =
             {
@@ -140,7 +141,7 @@ namespace RPG.Saving.Editor
                 "\tpublic static class VersionControl",
                 "\t{",
                 $"\t\tpublic const int CurrentFileVersion = {m_cachedVersionNumber};",
-                $"\t\tpublic const int MIN_FILE_VERSION = {m_cachedMinVersionNumber};",
+                $"\t\tpublic const int MinFileVersion = {m_cachedMinVersionNumber};",
                 "\t}",
                 "}"
             };
@@ -149,20 +150,25 @@ namespace RPG.Saving.Editor
 
             // Recompile
             AssetDatabase.SaveAssets();
-            AssetDatabase.ImportAsset(path);
+            AssetDatabase.ImportAsset(GetVersionPath(true));
         }
 
         #endregion
 
         #region Path Management
 
-        private string GetVersionPath()
+        private string GetVersionPath(bool relative)
         {
             string path = AssetDatabase.GetAssetPath(MonoScript.FromScriptableObject(this));
             path = Path.GetDirectoryName(path);
             path = path.Replace("Assets", "");
             path = path.Replace("Editor", "");
             path = Path.Combine(Application.dataPath + path, "VersionControl.cs");
+
+            if (relative)
+            {
+                path = path.Substring(path.IndexOf("Assets", StringComparison.Ordinal));
+            }
 
             return path;
         }
