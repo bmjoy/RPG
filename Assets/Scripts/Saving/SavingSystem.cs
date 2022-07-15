@@ -4,6 +4,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static RPG.Saving.VersionControl;
 
 namespace RPG.Saving
 {
@@ -108,11 +109,12 @@ namespace RPG.Saving
                 currentFileVersion = (int)state["CurrentFileVersion"];
             }
 
-            if (currentFileVersion is >= VersionControl.CurrentFileVersion or >= VersionControl.MinFileVersion)
+            if (currentFileVersion >= VersionControl.currentFileVersion || currentFileVersion >= minFileVersion)
                 return state;
+
             Debug.LogWarning($"Save file is from an older version of the game and is not supported. " +
-                             $"Expected version: {VersionControl.CurrentFileVersion}, " +
-                             $"Minimum Expected version: {VersionControl.MinFileVersion}, " +
+                             $"Expected version: {VersionControl.currentFileVersion}, " +
+                             $"Minimum Expected version: {minFileVersion}, " +
                              $"Current version: {currentFileVersion}");
             return new Dictionary<string, object>();
         }
@@ -128,7 +130,7 @@ namespace RPG.Saving
 
         private void CaptureState(Dictionary<string, object> state)
         {
-            state["CurrentFileVersion"] = VersionControl.CurrentFileVersion;
+            state["CurrentFileVersion"] = currentFileVersion;
             foreach (SavableEntity entity in FindObjectsOfType<SavableEntity>(includeInactive))
             {
                 state[entity.GetUniqueIdentifier()!] = entity.CaptureState();

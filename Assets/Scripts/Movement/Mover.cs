@@ -2,7 +2,6 @@
 // 06-30-2022
 // James LaFritz
 
-using System.Collections.Generic;
 using RPG.Attributes;
 using RPG.Core;
 using RPG.Saving;
@@ -146,7 +145,7 @@ namespace RPG.Movement
         {
             if (m_hasAgent) m_navMeshAgent.enabled = false;
 
-            if (version > 0)
+            if (version < 2)
             {
                 MoverSaveData data = (MoverSaveData)state;
                 transform.position = data.position.ToVector();
@@ -154,7 +153,7 @@ namespace RPG.Movement
             }
             else
             {
-                Debug.LogError("Unexpected save data");
+                Debug.LogWarning("Unexpected save data");
             }
 
             if (m_hasAgent) m_navMeshAgent.enabled = true;

@@ -70,6 +70,7 @@ namespace RPG.Saving
         /// Will restore the state that was captured by `CaptureState`.
         /// </summary>
         /// <param name="state">The same object that was returned by `CaptureState`.</param>
+        /// <param name="currentFileVersion">The current version of the save file.</param>
         public void RestoreState(object state, int currentFileVersion)
         {
             foreach (ISavable savable in GetComponents<ISavable>())
@@ -116,6 +117,7 @@ namespace RPG.Saving
 
         private bool IsUnique(string candidate)
         {
+            if (string.IsNullOrWhiteSpace(candidate)) return false;
             if (!_globalLookup.ContainsKey(candidate)) return true;
 
             if (_globalLookup[candidate] == this) return true;
