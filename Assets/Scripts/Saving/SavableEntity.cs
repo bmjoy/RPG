@@ -38,7 +38,7 @@ namespace RPG.Saving
         /// <summary>
         /// <para>Cached State.</para>
         /// </summary>
-        private static Dictionary<string, SavableEntity> _globalLookup = new Dictionary<string, SavableEntity>();
+        private static readonly Dictionary<string, SavableEntity> GlobalLookup = new Dictionary<string, SavableEntity>();
 
         #region Public Methods
 
@@ -107,7 +107,7 @@ namespace RPG.Saving
                 serializedObject.ApplyModifiedProperties();
             }
 
-            _globalLookup[property.stringValue] = this;
+            GlobalLookup[property.stringValue] = this;
         }
         #endif
 
@@ -118,18 +118,18 @@ namespace RPG.Saving
         private bool IsUnique(string candidate)
         {
             if (string.IsNullOrWhiteSpace(candidate)) return false;
-            if (!_globalLookup.ContainsKey(candidate)) return true;
+            if (!GlobalLookup.ContainsKey(candidate)) return true;
 
-            if (_globalLookup[candidate] == this) return true;
+            if (GlobalLookup[candidate] == this) return true;
 
-            if (_globalLookup[candidate] == null)
+            if (GlobalLookup[candidate] == null)
             {
-                _globalLookup.Remove(candidate);
+                GlobalLookup.Remove(candidate);
                 return true;
             }
 
-            if (_globalLookup[candidate].GetUniqueIdentifier() == candidate) return false;
-            _globalLookup.Remove(candidate);
+            if (GlobalLookup[candidate].GetUniqueIdentifier() == candidate) return false;
+            GlobalLookup.Remove(candidate);
             return true;
         }
 

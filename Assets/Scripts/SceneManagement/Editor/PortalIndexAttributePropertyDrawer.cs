@@ -9,6 +9,7 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static UnityEditor.SceneManagement.EditorSceneManager;
 
 namespace RPG.SceneManagement.Editor
 {
@@ -86,30 +87,22 @@ namespace RPG.SceneManagement.Editor
         private static string[] PortalNames(SerializedProperty sceneProp)
         {
             EditorBuildSettingsScene editorScene = EditorBuildSettings.scenes[sceneProp.intValue];
-            Scene scene = EditorSceneManager.GetActiveScene().buildIndex != sceneProp.intValue
-                ? EditorSceneManager.OpenScene(editorScene.path, OpenSceneMode.Additive)
-                : EditorSceneManager.GetActiveScene();
+            Scene scene = SceneManager.GetActiveScene().buildIndex != sceneProp.intValue
+                ? OpenScene(editorScene.path, OpenSceneMode.Additive)
+                : SceneManager.GetActiveScene();
 
             GameObject[] sceneObjects = scene.GetRootGameObjects();
-            List<Portal> portalObjects = new List<Portal>();
-            foreach (GameObject sceneObject in sceneObjects)
-            {
-                Portal[] portals = sceneObject.GetComponentsInChildren<Portal>();
-                foreach (Portal portal in portals)
-                {
-                    portalObjects.Add(portal);
-                }
-            }
+            List<Portal> portalObjects = sceneObjects!.SelectMany(sceneObject => sceneObject!.GetComponentsInChildren<Portal>()).ToList();
 
             int portalIndex = 0;
-            foreach (Portal portal in portalObjects.OrderBy(a => a.Index))
+            foreach (Portal portal in portalObjects.OrderBy(a => a!.Index))
             {
-                if (portal.Index != portalIndex) portal.Index = portalIndex;
+                if (portal!.Index != portalIndex) portal.Index = portalIndex;
                 portalIndex++;
             }
 
             string[] portalNames = portalObjects.Select(a => a.name).ToArray();
-            if (scene != EditorSceneManager.GetActiveScene()) EditorSceneManager.CloseScene(scene, true);
+            if (scene != SceneManager.GetActiveScene()) CloseScene(scene, true);
             return portalNames;
         }
 

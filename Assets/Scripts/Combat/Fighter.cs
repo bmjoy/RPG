@@ -8,6 +8,7 @@ using RPG.Core;
 using RPG.Movement;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Serialization;
 using static RPG.Core.StringReferences;
 
 namespace RPG.Combat
@@ -32,9 +33,9 @@ namespace RPG.Combat
     {
         #region Inspector Fields
 
-        [SerializeField] float weaponRange = 2f;
-        [SerializeField] float timeBetweenAttacks = 1f;
-        [SerializeField] float weapondamage = 10f;
+        [SerializeField] private float weaponRange = 2f;
+        [SerializeField] private float timeBetweenAttacks = 1f;
+        [FormerlySerializedAs("weapondamage")] [SerializeField] private float weaponDamage = 10f;
 
         [SerializeField] private CombatTargetType combatTargetType = CombatTargetType.Player;
 
@@ -223,7 +224,7 @@ namespace RPG.Combat
         {
             if (!m_hasTarget) return;
 
-            m_target.TakeDamage(weapondamage);
+            m_target.TakeDamage(weaponDamage);
         }
 
         #endregion

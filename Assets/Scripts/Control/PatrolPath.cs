@@ -18,7 +18,7 @@ namespace RPG.Control
         [SerializeField] private Color waypointEndColor = Color.red;
         [SerializeField] private Color waypointPathColor = Color.gray;
 
-        private int m_currentWaypointIndex = 0;
+        private int m_currentWaypointIndex;
         private int m_currentDirection = 1;
 
         private const float WaypointGizmoRadius = .3f;

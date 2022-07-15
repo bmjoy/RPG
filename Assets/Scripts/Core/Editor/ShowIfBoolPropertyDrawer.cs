@@ -37,8 +37,8 @@ namespace RPG.Core.Editor
             EditorGUI.indentLevel = 0;
             using (new EditorGUI.PropertyScope(position, label, property))
             {
-                if (showIfProp.boolValue && attr.show ||
-                    !showIfProp.boolValue && !attr.show)
+                if ((showIfProp.boolValue && attr.show) ||
+                    (!showIfProp.boolValue && !attr.show))
                 {
                     EditorGUI.PropertyField(position, property, label, true);
                 }
@@ -53,8 +53,8 @@ namespace RPG.Core.Editor
             ShowIfBoolAttribute attr = attribute as ShowIfBoolAttribute;
             SerializedProperty showIfProp = PropertyDrawerHelper.FindProperty(property, attr.boolName, out m_errorMessage);
             if (showIfProp == null) return base.GetPropertyHeight(property, label);
-            if (showIfProp.boolValue && attr.show ||
-                !showIfProp.boolValue && !attr.show)
+            if ((showIfProp.boolValue && attr.show) ||
+                (!showIfProp.boolValue && !attr.show))
                 return EditorGUI.GetPropertyHeight(property, label, true);
             return -EditorGUIUtility.standardVerticalSpacing;
         }
