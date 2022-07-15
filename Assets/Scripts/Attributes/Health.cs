@@ -2,13 +2,13 @@
 // 07-05-2022
 // James LaFritz
 
-using RPG.Core;
-using RPG.Saving;
+using RPGEngine.Core;
+using RPGEngine.Saving;
 using Unity.Mathematics;
 using UnityEngine;
-using static RPG.Core.StringReferences;
+using static RPGEngine.Core.StringReferences;
 
-namespace RPG.Attributes
+namespace RPGEngine.Attributes
 {
     /// <summary>
     /// A <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html">UnityEngine.MonoBehavior</a> that

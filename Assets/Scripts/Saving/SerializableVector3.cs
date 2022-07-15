@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace RPG.Saving
+namespace RPGEngine.Saving
 {
     /// <summary>
     /// A `System.Serializable` wrapper for the `Vector3` class.

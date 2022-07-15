@@ -2,12 +2,12 @@
 // 07-06-2022
 // James LaFritz
 
-using RPG.Attributes;
-using RPG.Combat;
-using RPG.Movement;
+using RPGEngine.Attributes;
+using RPGEngine.Combat;
+using RPGEngine.Movement;
 using UnityEngine;
 
-namespace RPG.Control
+namespace RPGEngine.Control
 {
     /// <summary>
     /// A <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html">UnityEngine.MonoBehavior</a> that is the Base for all Controllers in Game.

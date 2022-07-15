@@ -3,15 +3,15 @@
 // James LaFritz
 
 using JetBrains.Annotations;
-using RPG.Attributes;
-using RPG.Core;
-using RPG.Movement;
+using RPGEngine.Attributes;
+using RPGEngine.Core;
+using RPGEngine.Movement;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Serialization;
-using static RPG.Core.StringReferences;
+using static RPGEngine.Core.StringReferences;
 
-namespace RPG.Combat
+namespace RPGEngine.Combat
 {
     /// <summary>
     /// A <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html">UnityEngine.MonoBehavior</a> that

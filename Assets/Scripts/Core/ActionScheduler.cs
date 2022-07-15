@@ -4,7 +4,7 @@
 
 using UnityEngine;
 
-namespace RPG.Core
+namespace RPGEngine.Core
 {
     /// <summary>
     /// A <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html">UnityEngine.MonoBehavior</a> that

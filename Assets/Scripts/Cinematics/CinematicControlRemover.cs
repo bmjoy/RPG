@@ -2,12 +2,12 @@
 // 07-07-2022
 // James LaFritz
 
-using RPG.Control;
-using RPG.Core;
+using RPGEngine.Control;
+using RPGEngine.Core;
 using UnityEngine;
 using UnityEngine.Playables;
 
-namespace RPG.Cinematics
+namespace RPGEngine.Cinematics
 {
     /// <summary>
     /// A <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html">UnityEngine.MonoBehavior</a> that

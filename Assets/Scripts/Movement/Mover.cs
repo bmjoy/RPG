@@ -2,14 +2,14 @@
 // 06-30-2022
 // James LaFritz
 
-using RPG.Attributes;
-using RPG.Core;
-using RPG.Saving;
+using RPGEngine.Attributes;
+using RPGEngine.Core;
+using RPGEngine.Saving;
 using UnityEngine;
 using UnityEngine.AI;
-using static RPG.Core.StringReferences;
+using static RPGEngine.Core.StringReferences;
 
-namespace RPG.Movement
+namespace RPGEngine.Movement
 {
     /// <summary>
     /// A <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html">UnityEngine.MonoBehavior</a> that

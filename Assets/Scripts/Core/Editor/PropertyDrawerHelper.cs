@@ -4,7 +4,7 @@
 
 using UnityEditor;
 
-namespace RPG.Core.Editor
+namespace RPGEditor.Core
 {
     /// <summary>
     /// Collection of helper methods when coding a PropertyDrawer editor.

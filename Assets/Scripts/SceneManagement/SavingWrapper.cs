@@ -3,10 +3,10 @@
 // James LaFritz
 
 using System.Collections;
-using RPG.Saving;
+using RPGEngine.Saving;
 using UnityEngine;
 
-namespace RPG.SceneManagement
+namespace RPGEngine.SceneManagement
 {
     /// <summary>
     /// A <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html">UnityEngine.MonoBehavior</a> that

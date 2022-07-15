@@ -4,7 +4,7 @@
 
 using UnityEngine;
 
-namespace RPG.Core
+namespace RPGEngine.Core
 {
     /// <summary>
     /// Use this attribute to make a field appear as read only in the <i><b>Inspector</b></i>.

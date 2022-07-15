@@ -4,7 +4,7 @@
 
 using UnityEngine;
 
-namespace RPG.Core
+namespace RPGEngine.Core
 {
     /// <summary>
     /// Show/Hide a field based on a bool value in the same script.

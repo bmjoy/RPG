@@ -2,7 +2,7 @@
 // 07-05-2022
 // James LaFritz
 
-namespace RPG.Core
+namespace RPGEngine.Core
 {
     /// <summary>
     /// Interface for Actions that can be performed by Game Objects in the Game.

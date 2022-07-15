@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 
-namespace RPG.SceneManagement
+namespace RPGEngine.SceneManagement
 {
     [System.Serializable]
     public struct DestinationPortal

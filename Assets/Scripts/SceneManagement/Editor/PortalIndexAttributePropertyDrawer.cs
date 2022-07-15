@@ -4,14 +4,15 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using RPG.Core.Editor;
+using RPGEditor.Core;
+using RPGEngine.SceneManagement;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static UnityEditor.SceneManagement.EditorSceneManager;
 
-namespace RPG.SceneManagement.Editor
+namespace RPGEditor.SceneManagement
 {
     /// <summary>
     /// The portal index attribute property drawer class

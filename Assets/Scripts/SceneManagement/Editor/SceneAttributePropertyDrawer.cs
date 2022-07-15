@@ -4,11 +4,12 @@
 
 using System.Linq;
 using System.Text.RegularExpressions;
+using RPGEngine.SceneManagement;
 using Unity.Mathematics;
 using UnityEditor;
 using UnityEngine;
 
-namespace RPG.SceneManagement.Editor
+namespace RPGEditor.SceneManagement
 {
     /// <summary>
     /// The scene attribute property drawer class

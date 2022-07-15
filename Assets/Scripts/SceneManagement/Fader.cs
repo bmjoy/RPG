@@ -5,7 +5,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace RPG.SceneManagement
+namespace RPGEngine.SceneManagement
 {
     /// <summary>
     /// A <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html">UnityEngine.MonoBehavior</a> that

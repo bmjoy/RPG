@@ -2,10 +2,11 @@
 // 07-13-2022
 // James LaFritz
 
+using RPGEngine.Core;
 using UnityEditor;
 using UnityEngine;
 
-namespace RPG.Core.Editor
+namespace RPGEditor.Core
 {
     /// <summary>
     /// A property drawer for ReadOnlyAttribute

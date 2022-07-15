@@ -3,11 +3,12 @@
 // James LaFritz
 
 using System.IO;
+using RPGEngine.Saving;
 using UnityEditor;
 using UnityEngine;
 using static UnityEngine.Screen;
 
-namespace RPG.Saving.Editor
+namespace RPGEditor.Saving
 {
     /// <summary>
     /// A custom editor window

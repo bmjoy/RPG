@@ -2,10 +2,10 @@
 // 07-03-2022
 // James LaFritz
 
-using RPG.Attributes;
+using RPGEngine.Attributes;
 using UnityEngine;
 
-namespace RPG.Combat
+namespace RPGEngine.Combat
 {
     /// <summary>
     /// A <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html">UnityEngine.MonoBehavior</a> that

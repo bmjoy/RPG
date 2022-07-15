@@ -4,13 +4,13 @@
 
 using System.Linq;
 using JetBrains.Annotations;
-using RPG.Attributes;
-using RPG.Combat;
-using RPG.Core;
+using RPGEngine.Attributes;
+using RPGEngine.Combat;
+using RPGEngine.Core;
 using Unity.Mathematics;
 using UnityEngine;
 
-namespace RPG.Control
+namespace RPGEngine.Control
 {
     /// <summary>
     /// A <see cref="RPGController"/> that

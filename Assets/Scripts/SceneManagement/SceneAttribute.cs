@@ -4,7 +4,7 @@
 
 using UnityEngine;
 
-namespace RPG.SceneManagement
+namespace RPGEngine.SceneManagement
 {
     /// <summary>
     /// Displays a dropdown list of available build settings Scenes (must be used with a 'string' or 'integer' typed field).

@@ -2,10 +2,11 @@
 // 07-12-2022
 // James LaFritz
 
+using RPGEngine.Core;
 using UnityEditor;
 using UnityEngine;
 
-namespace RPG.Core.Editor
+namespace RPGEditor.Core
 {
     /// <summary>
     /// The show if bool property drawer class

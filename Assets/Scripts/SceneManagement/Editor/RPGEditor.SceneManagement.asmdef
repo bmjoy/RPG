@@ -1,0 +1,24 @@
+{
+    "name": "RPGEditor.SceneManagement",
+    "rootNamespace": "RPGEditor.SceneManagement",
+    "references": [
+        "GUID:d8b63aba1907145bea998dd612889d6b",
+        "GUID:769b05a56efd36f4c9998c991fd8f464",
+        "GUID:c21b703a3bc3b0a4b910e478f1bd60e5",
+        "GUID:343deaaf83e0cee4ca978e7df0b80d21",
+        "GUID:2bafac87e7f4b9b418d9448d219b01ab",
+        "GUID:27619889b8ba8c24980f49ee34dbb44a",
+        "GUID:0acc523941302664db1f4e527237feb3"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

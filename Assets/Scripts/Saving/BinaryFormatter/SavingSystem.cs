@@ -4,9 +4,9 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static RPG.Saving.VersionControl;
+using static RPGEngine.Saving.VersionControl;
 
-namespace RPG.Saving
+namespace RPGEngine.Saving
 {
     /// <summary>
     /// A <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html">UnityEngine.MonoBehavior</a> that

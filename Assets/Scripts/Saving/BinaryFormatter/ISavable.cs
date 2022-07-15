@@ -1,13 +1,12 @@
-namespace RPG.Saving
+namespace RPGEngine.Saving
 {
     /// <summary>
     /// An Interface to Implement in any component that has state to save/restore.
-    /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html"/>
     /// </summary>
     public interface ISavable
     {
         /// <summary>
-        /// Called when saving to capture the state of the component.
+        /// Called when saving to capture the state of the Component.
         /// </summary>
         /// <returns>The `System.Serializable`
         /// <a href="https://docs.microsoft.com/en-us/dotnet/api/System.Object?view=net-6.0">Object</a>
@@ -16,7 +15,7 @@ namespace RPG.Saving
         object CaptureState();
 
         /// <summary>
-        /// Called when restoring the state of a scene.
+        /// Called when restoring the state of the Component using the information in Serailized Onject.
         /// </summary>
         /// <param name="state">The `System.Serializable`
         /// <a href="https://docs.microsoft.com/en-us/dotnet/api/System.Object?view=net-6.0">Object</a>

@@ -1,8 +1,8 @@
 using UnityEditor;
 using UnityEngine;
-using static RPG.Core.StringReferences;
+using static RPGEngine.Core.StringReferences;
 
-namespace RPG.Core.Editor
+namespace RPGEditor.Core
 {
     public class StringReferencesEditor : EditorWindow
     {

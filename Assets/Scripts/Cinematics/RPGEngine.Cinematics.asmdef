@@ -1,0 +1,20 @@
+{
+    "name": "RPGEngine.Cinematics",
+    "rootNamespace": "RPGEngine.Cinematics",
+    "references": [
+        "GUID:af582b87786f1fa4e9c93b3740c979c3",
+        "GUID:b6b23992e5296894c99425d9ed52deab",
+        "GUID:bdbbfebdee7cf194a959b5d651eb5398",
+        "GUID:343deaaf83e0cee4ca978e7df0b80d21",
+        "GUID:2bafac87e7f4b9b418d9448d219b01ab"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

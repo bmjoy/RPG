@@ -4,7 +4,7 @@
 
 using UnityEngine;
 
-namespace RPG.Control
+namespace RPGEngine.Control
 {
     public class PatrolPath : MonoBehaviour
     {

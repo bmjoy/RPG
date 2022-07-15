@@ -2,7 +2,7 @@
 // 07-06-2022
 // James LaFritz
 
-namespace RPG.Combat
+namespace RPGEngine.Combat
 {
     /// <summary>
     /// The Available Target Types

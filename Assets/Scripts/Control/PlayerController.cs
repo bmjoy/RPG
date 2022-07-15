@@ -2,10 +2,10 @@
 // 07-03-2022
 // James LaFritz
 
-using RPG.Combat;
+using RPGEngine.Combat;
 using UnityEngine;
 
-namespace RPG.Control
+namespace RPGEngine.Control
 {
     /// <summary>
     /// A <see cref="RPGController"/> that

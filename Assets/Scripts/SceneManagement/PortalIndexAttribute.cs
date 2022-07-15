@@ -4,7 +4,7 @@
 
 using UnityEngine;
 
-namespace RPG.SceneManagement
+namespace RPGEngine.SceneManagement
 {
     /// <summary>
     /// Displays a dropdown list of available portals (must be used with a 'integer' typed field).

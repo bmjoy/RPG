@@ -2,7 +2,7 @@
 // 07-06-2022
 // James LaFritz
 
-namespace RPG.Core
+namespace RPGEngine.Core
 {
     public static class StringReferences
     {
