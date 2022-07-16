@@ -94,23 +94,22 @@ namespace RPGEngine.Attributes
         /// <inheritdoc />
         public JToken CaptureAsJToken()
         {
-            //return value;
-            return null;
+            return JToken.FromObject(value);
         }
 
         /// <inheritdoc />
         public void RestoreFromJToken(JToken state, int version)
         {
-            // value = (float)state;
-            // if (value <= 0)
-            // {
-            //     value = 0;
-            //     Die();
-            // }
-            // else
-            // {
-            //     IsDead = false;
-            // }
+            value = state.ToObject<float>();
+            if (value <= 0)
+            {
+                value = 0;
+                Die();
+            }
+            else
+            {
+                IsDead = false;
+            }
         }
 
         #endregion
