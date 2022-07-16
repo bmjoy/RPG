@@ -16,7 +16,7 @@ namespace RPGEngine.Attributes
     /// represents The Health Attribute.
     /// <p>
     /// Implements
-    /// <see cref="IJsonSavable"/>
+    /// <see cref="ISavable"/>
     /// </p>
     /// <p>
     /// <a href="https://docs.unity3d.com/ScriptReference/RequireComponent.html">UnityEngine.RequireComponent</a>(
@@ -25,7 +25,7 @@ namespace RPGEngine.Attributes
     /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html"/>
     /// </summary>
     [RequireComponent(typeof(ActionScheduler))]
-    public class Health : MonoBehaviour, IJsonSavable
+    public class Health : MonoBehaviour, ISavable
     {
         #region Inspector Fields
 

@@ -15,12 +15,12 @@ namespace RPGEngine.Saving
     /// provides the interface to the Json saving system.
     /// <p>
     /// Uses <a hfre="https://www.newtonsoft.com/json/help/html/Introduction.htm">Json.NET</a>
-    /// to provide methods to save and restore all <see cref="JsonSavableEntity"/> in a scene.
+    /// to provide methods to save and restore all <see cref="SavableEntity"/> in a scene.
     /// </p>
     /// <p>This component should be created once and shared between all subsequent scenes.</p>
     /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html"/>
     /// </summary>
-    public class JsonSaveSystem : MonoBehaviour
+    public class SaveSystem : MonoBehaviour
     {
         private const string Extension = ".json";
         private const string SaveFolder = "Saves";
@@ -150,7 +150,7 @@ namespace RPGEngine.Saving
         private void CaptureState(IDictionary<string, JToken> state)
         {
             state["CurrentFileVersion"] = currentFileVersion;
-            foreach (JsonSavableEntity entity in FindObjectsOfType<JsonSavableEntity>(includeInactive))
+            foreach (SavableEntity entity in FindObjectsOfType<SavableEntity>(includeInactive))
             {
                 state[entity.GetUniqueIdentifier()!] = entity.Capture();
             }
@@ -166,7 +166,7 @@ namespace RPGEngine.Saving
                 currentFileVersion = (int)state["CurrentFileVersion"];
             }
 
-            foreach (JsonSavableEntity entity in FindObjectsOfType<JsonSavableEntity>(includeInactive))
+            foreach (SavableEntity entity in FindObjectsOfType<SavableEntity>(includeInactive))
             {
                 string id = entity.GetUniqueIdentifier();
                 if (!string.IsNullOrWhiteSpace(id) && state.ContainsKey(id))

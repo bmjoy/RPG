@@ -142,7 +142,7 @@ namespace RPGEditor.Saving
 
         private string GetSaveFolderPath()
         {
-            string basePath = JsonSaveSystem.BasePath;
+            string basePath = SaveSystem.BasePath;
 
             if (!Directory.Exists(basePath)) Directory.CreateDirectory(basePath!);
 

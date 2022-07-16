@@ -10,7 +10,7 @@ namespace RPGEngine.Saving
     /// An Interface to Implement in any component that has state to save/restore.
     /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html"/>
     /// </summary>
-    public interface IJsonSavable
+    public interface ISavable
     {
         /// <summary>
         /// Called when saving to capture the state of the Component.

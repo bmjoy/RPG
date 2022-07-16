@@ -21,7 +21,7 @@ namespace RPGEngine.Movement
     /// <p>
     /// Implements
     /// <see cref="IAction"/>
-    /// <see cref="IJsonSavable"/>
+    /// <see cref="ISavable"/>
     /// </p>
     /// <p>
     /// <a href="https://docs.unity3d.com/ScriptReference/RequireComponent.html">UnityEngine.RequireComponent</a>(
@@ -32,7 +32,7 @@ namespace RPGEngine.Movement
     /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html"/>
     /// </summary>
     [RequireComponent(typeof(NavMeshAgent), typeof(ActionScheduler), typeof(Health))]
-    public class Mover : MonoBehaviour, IAction, IJsonSavable
+    public class Mover : MonoBehaviour, IAction, ISavable
     {
         #region Component References
 

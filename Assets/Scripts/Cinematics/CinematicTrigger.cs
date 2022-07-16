@@ -16,17 +16,17 @@ namespace RPGEngine.Cinematics
     /// to play a cut scene.
     /// <p>
     /// Implements
-    /// <see cref="IJsonSavable"/>
+    /// <see cref="ISavable"/>
     /// </p>
     /// <p>
     /// <a href="https://docs.unity3d.com/ScriptReference/RequireComponent.html">UnityEngine.RequireComponent</a>(
     /// typeof(<a href="https://docs.unity3d.com/2021.3/Documentation/ScriptReference/Playables.PlayableDirector.html">UnityEngine.Playables.PlayableDirector</a>)
-    /// , typeof(<see cref="JsonSavableEntity"/>)
+    /// , typeof(<see cref="SavableEntity"/>)
     /// )</p>
     /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html"/>
     /// </summary>
-    [RequireComponent(typeof(PlayableDirector), typeof(JsonSavableEntity))]
-    public class CinematicTrigger : MonoBehaviour, IJsonSavable
+    [RequireComponent(typeof(PlayableDirector), typeof(SavableEntity))]
+    public class CinematicTrigger : MonoBehaviour, ISavable
     {
         #region Component References
 
