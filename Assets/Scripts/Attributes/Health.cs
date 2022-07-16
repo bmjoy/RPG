@@ -100,6 +100,7 @@ namespace RPGEngine.Attributes
         /// <inheritdoc />
         public void RestoreFromJToken(JToken state, int version)
         {
+            if (state == null) return;
             value = state.ToObject<float>();
             if (value <= 0)
             {
