@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -22,17 +21,14 @@ namespace RPGEngine.Saving
     /// </summary>
     public class SaveSystem : MonoBehaviour
     {
-        private const string Extension = ".json";
-        private const string SaveFolder = "Saves";
-
-        public static string BasePath => Path.Combine(Application.persistentDataPath!, SaveFolder);
-
         #region Inspector Fields
 
         [Header("Config Data")]
         [Tooltip("Toggle this to true if you want the saving system to save state for inactive objects.")]
         [SerializeField]
         private bool includeInactive;
+
+        [SerializeField] SavingStrategy strategy;
 
         #endregion
 
@@ -94,14 +90,15 @@ namespace RPGEngine.Saving
         /// <param name="saveFile">The name of the save file to Delete</param>
         public void Delete(string saveFile)
         {
-            string path = GetPath(saveFile);
-            Debug.Log($"Deleting {path}");
-            File.Delete(path!);
+            if (strategy == null) return;
+            File.Delete(strategy.GetPath(saveFile)!);
         }
 
         public IEnumerable<string> ListSaves()
         {
-            return Directory.EnumerateFiles(BasePath!, "*" + Extension)
+            if (strategy == null) return Enumerable.Empty<string>();
+
+            return Directory.EnumerateFiles(SavingStrategy.BasePath!, "*" + strategy.Extension)
                 .Select(Path.GetFileNameWithoutExtension);
         }
 
@@ -111,14 +108,14 @@ namespace RPGEngine.Saving
 
         private IDictionary<string, JToken> LoadFile(string saveFile)
         {
-            string path = GetPath(saveFile);
-            if (!File.Exists(path)) return new JObject().ToObject<IDictionary<string, JToken>>();
+            if (strategy == null)
+            {
+                Debug.LogError("Saving strategy is null. Please set a saving strategy in the inspector.");
+                new JObject().ToObject<IDictionary<string, JToken>>();
+            }
 
-            using StreamReader textReader = File.OpenText(path!);
-            using JsonTextReader reader = new JsonTextReader(textReader);
-            reader.FloatParseHandling = FloatParseHandling.Double;
+            JObject stateObject = strategy.LoadFromFile(saveFile);
 
-            JObject stateObject = JObject.Load(reader);
             IDictionary<string, JToken> state = stateObject.ToObject<JObject>();
 
             int currentFileVersion = 0;
@@ -139,12 +136,13 @@ namespace RPGEngine.Saving
 
         private void SaveFile(string saveFile, IDictionary<string, JToken> state)
         {
-            string path = GetPath(saveFile);
-            Debug.Log($"Saving to {path}");
-            using StreamWriter textWriter = File.CreateText(path!);
-            using JsonTextWriter writer = new JsonTextWriter(textWriter);
-            writer.Formatting = Formatting.Indented;
-            JObject.FromObject(state!).WriteTo(writer);
+            if (strategy == null)
+            {
+                Debug.LogError("Saving strategy is null. Please set a saving strategy in the inspector.");
+                return;
+            }
+
+            strategy.SavetoFile(saveFile, JObject.FromObject(state!));
         }
 
         private void CaptureState(IDictionary<string, JToken> state)
@@ -174,13 +172,6 @@ namespace RPGEngine.Saving
                     entity.Restore(state[id], currentFileVersion);
                 }
             }
-        }
-
-        private string GetPath(string saveFile)
-        {
-            if (!Directory.Exists(BasePath)) Directory.CreateDirectory(BasePath!);
-
-            return Path.Combine(BasePath, saveFile + Extension);
         }
 
         #endregion

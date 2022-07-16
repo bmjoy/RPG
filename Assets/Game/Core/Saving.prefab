@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   includeInactive: 0
+  strategy: {fileID: 11400000, guid: debd1ee9f5f39414ab563fb5803ea304, type: 2}
 --- !u!114 &8507360338487777894
 MonoBehaviour:
   m_ObjectHideFlags: 0

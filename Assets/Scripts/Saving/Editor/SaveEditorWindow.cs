@@ -142,7 +142,7 @@ namespace RPGEditor.Saving
 
         private string GetSaveFolderPath()
         {
-            string basePath = SaveSystem.BasePath;
+            string basePath = SavingStrategy.BasePath;
 
             if (!Directory.Exists(basePath)) Directory.CreateDirectory(basePath!);
 
