@@ -133,22 +133,23 @@ namespace RPGEngine.Movement
         /// <inheritdoc />
         public JToken CaptureAsJToken()
         {
-            //MoverSaveData data = new MoverSaveData();
-            //Transform transform1 = transform;
-            //data.position = new SerializableVector3(transform1.position);
-            //data.rotation = new SerializableVector3(transform1.eulerAngles);
+            MoverSaveData data = new MoverSaveData();
+            Transform transform1 = transform;
+            data.position = new SerializableVector3(transform1.position);
+            data.rotation = new SerializableVector3(transform1.eulerAngles);
 
-            return null;
+            return JToken.FromObject(data);
         }
 
         /// <inheritdoc />
         public void RestoreFromJToken(JToken state, int version)
         {
+            if (state == null || version < 4) return;
             if (m_hasAgent) m_navMeshAgent.enabled = false;
 
-            //MoverSaveData data = (MoverSaveData)state;
-            //transform.position = data.position.ToVector();
-            //transform.eulerAngles = data.rotation.ToVector();
+            MoverSaveData data = state.ToObject<MoverSaveData>();
+            transform.position = data.position.ToVector();
+            transform.eulerAngles = data.rotation.ToVector();
 
             if (m_hasAgent) m_navMeshAgent.enabled = true;
         }

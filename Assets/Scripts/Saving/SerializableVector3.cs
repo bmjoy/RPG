@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using UnityEngine;
 
 namespace RPGEngine.Saving
@@ -8,7 +9,9 @@ namespace RPGEngine.Saving
     [System.Serializable]
     public struct SerializableVector3
     {
-        private float m_x, m_y, m_z;
+        [JsonProperty] private float m_x;
+        [JsonProperty] private float m_y;
+        [JsonProperty] private float m_z;
 
         /// <summary>
         /// Create a new SerializableVector3 from a Vector3.
