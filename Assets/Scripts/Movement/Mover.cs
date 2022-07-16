@@ -2,6 +2,8 @@
 // 06-30-2022
 // James LaFritz
 
+using System.Collections.Generic;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RPGEngine.Attributes;
 using RPGEngine.Core;
@@ -128,17 +130,22 @@ namespace RPGEngine.Movement
             public SerializableVector3 rotation;
         }
 
+        struct MoverLoadData
+        {
+            public Vector3 position;
+            public Vector3 rotation;
+        }
+
         #region Implementation of IJsonSavable
 
         /// <inheritdoc />
         public JToken CaptureAsJToken()
         {
-            MoverSaveData data = new MoverSaveData();
-            Transform transform1 = transform;
-            data.position = new SerializableVector3(transform1.position);
-            data.rotation = new SerializableVector3(transform1.eulerAngles);
-
-            return JToken.FromObject(data);
+            JObject state = new JObject();
+            IDictionary<string, JToken> stateDict = state;
+            stateDict["Position"] = transform.position.ToToken();
+            stateDict["Rotation"] = transform.eulerAngles.ToToken();
+            return state;
         }
 
         /// <inheritdoc />
@@ -147,9 +154,28 @@ namespace RPGEngine.Movement
             if (state == null || version < 4) return;
             if (m_hasAgent) m_navMeshAgent.enabled = false;
 
-            MoverSaveData data = state.ToObject<MoverSaveData>();
-            transform.position = data.position.ToVector();
-            transform.eulerAngles = data.rotation.ToVector();
+            MoverLoadData data = new MoverLoadData();
+            switch (version)
+            {
+                case 4:
+                {
+                    MoverSaveData sd = state.ToObject<MoverSaveData>();
+                    data.position = sd.position.ToVector();
+                    data.rotation = sd.rotation.ToVector();
+                    break;
+                }
+                case > 4:
+                    data = new MoverLoadData()
+                    {
+                        position = state.ToObject<MoverLoadData>().position,
+                        rotation = state.ToObject<MoverLoadData>().rotation
+                    };
+                    break;
+            }
+
+            Transform transform1 = transform;
+            transform1.position = data.position;
+            transform1.eulerAngles = data.rotation;
 
             if (m_hasAgent) m_navMeshAgent.enabled = true;
         }
