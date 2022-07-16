@@ -87,17 +87,17 @@ namespace RPGEngine.Cinematics
         /// <inheritdoc />
         public JToken CaptureAsJToken()
         {
-            //return triggered;
-            return null;
+            return JToken.FromObject(triggered);
         }
 
         /// <inheritdoc />
         public void RestoreFromJToken(JToken state, int version)
         {
-            // triggered = (bool)state;
-            // if (!triggered) return;
-            // m_director.Play();
-            // m_director.time = m_director.duration;
+            if (state == null || version < 2) return;
+            triggered = state.ToObject<bool>();
+            if (!triggered) return;
+            m_director.Play();
+            m_director.time = m_director.duration;
         }
 
         #endregion
