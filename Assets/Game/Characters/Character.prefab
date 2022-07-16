@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 2492308187424828470}
   - component: {fileID: 4419522053908095799}
   - component: {fileID: 6863629442196216029}
+  - component: {fileID: 146272141616909365}
   - component: {fileID: 8558057351939896882}
   - component: {fileID: 6863629442196216028}
-  - component: {fileID: 392222836725279100}
   - component: {fileID: 6587453408859046323}
   - component: {fileID: 5792556325803201955}
   - component: {fileID: 7217525226749447344}
@@ -96,6 +96,19 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &146272141616909365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6487327744266254528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ad8df335d04e44bd87c704e4ad5551, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueIdentifier: 
 --- !u!114 &8558057351939896882
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,19 +133,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60ef095666b349f4ab2301ebd2119d2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &392222836725279100
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6487327744266254528}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ea9374b509b70f4bba37e4a2ca8cf00, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  uniqueIdentifier: 
 --- !u!114 &6587453408859046323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,6 +159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   max: 100
+  value: 0
 --- !u!114 &7217525226749447344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,5 +174,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponRange: 2
   timeBetweenAttacks: 1
-  weapondamage: 2
+  weaponDamage: 2
   combatTargetType: 0

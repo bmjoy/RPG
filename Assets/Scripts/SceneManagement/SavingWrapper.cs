@@ -13,11 +13,11 @@ namespace RPGEngine.SceneManagement
     /// Is used to interface with the saving system.
     /// <p>
     /// <a href="https://docs.unity3d.com/ScriptReference/RequireComponent.html">UnityEngine.RequireComponent</a>(
-    /// typeof(<see cref="SavingSystem"/>)
+    /// typeof(<see cref="JsonSaveSystem"/>)
     /// )</p>
     /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html"/>
     /// </summary>
-    [RequireComponent(typeof(SavingSystem))]
+    [RequireComponent(typeof(JsonSaveSystem))]
     public class SavingWrapper : MonoBehaviour
     {
         private const string DefaultSaveFile = "save";
@@ -28,7 +28,7 @@ namespace RPGEngine.SceneManagement
 
         #region Required
 
-        SavingSystem m_savingSystem;
+        JsonSaveSystem m_savingSystem;
 
         #endregion
 
@@ -41,7 +41,7 @@ namespace RPGEngine.SceneManagement
         /// </summary>
         private void Awake()
         {
-            m_savingSystem = GetComponent<SavingSystem>();
+            m_savingSystem = GetComponent<JsonSaveSystem>();
         }
 
         /// <summary>

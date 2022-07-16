@@ -435,6 +435,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: -27.086
       objectReference: {fileID: 0}
+    - target: {fileID: 8745589152697182713, guid: c28dd1e32ca2bec409c7b57be15137d0, type: 3}
+      propertyPath: uniqueIdentifier
+      value: Enemy-adf2a91f-d686-408e-addf-7525b0658f80
+      objectReference: {fileID: 0}
     - target: {fileID: 9090603623696862384, guid: c28dd1e32ca2bec409c7b57be15137d0, type: 3}
       propertyPath: uniqueIdentifier
       value: Enemy-3b0b4517-3fa7-4286-8a09-7c835a377096
@@ -2835,6 +2839,10 @@ PrefabInstance:
     - target: {fileID: 7230299043453838596, guid: dd093df38a0c4374790dc4a9aeb9c387, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8326930048648502845, guid: dd093df38a0c4374790dc4a9aeb9c387, type: 3}
+      propertyPath: uniqueIdentifier
+      value: Enemy (1)-1c1402a2-f231-4853-b218-e434081079d8
       objectReference: {fileID: 0}
     - target: {fileID: 8429031963845376884, guid: dd093df38a0c4374790dc4a9aeb9c387, type: 3}
       propertyPath: uniqueIdentifier
@@ -6234,6 +6242,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8326930048648502845, guid: dd093df38a0c4374790dc4a9aeb9c387, type: 3}
+      propertyPath: uniqueIdentifier
+      value: Enemy-2c568b88-7383-4853-8584-eaf59a11159b
+      objectReference: {fileID: 0}
     - target: {fileID: 8429031963845376884, guid: dd093df38a0c4374790dc4a9aeb9c387, type: 3}
       propertyPath: uniqueIdentifier
       value: Enemy-9317fabe-a3c0-45be-b978-5bc8ca21f442
@@ -6401,6 +6413,10 @@ PrefabInstance:
     - target: {fileID: 5961753707283544323, guid: c28dd1e32ca2bec409c7b57be15137d0, type: 3}
       propertyPath: loop
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8745589152697182713, guid: c28dd1e32ca2bec409c7b57be15137d0, type: 3}
+      propertyPath: uniqueIdentifier
+      value: Enemy-0ea1678b-e76c-4567-ba0f-435b9c0518ad
       objectReference: {fileID: 0}
     - target: {fileID: 9090603623696862384, guid: c28dd1e32ca2bec409c7b57be15137d0, type: 3}
       propertyPath: uniqueIdentifier
@@ -10223,6 +10239,10 @@ PrefabInstance:
       value: 0.45
       objectReference: {fileID: 0}
     - target: {fileID: 1558623196858982072, guid: dd093df38a0c4374790dc4a9aeb9c387, type: 3}
+      propertyPath: weaponDamage
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1558623196858982072, guid: dd093df38a0c4374790dc4a9aeb9c387, type: 3}
       propertyPath: weapondamage
       value: 6
       objectReference: {fileID: 0}
@@ -10309,6 +10329,10 @@ PrefabInstance:
     - target: {fileID: 7230299043453838596, guid: dd093df38a0c4374790dc4a9aeb9c387, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8326930048648502845, guid: dd093df38a0c4374790dc4a9aeb9c387, type: 3}
+      propertyPath: uniqueIdentifier
+      value: Tough Enemy-8f7a1007-9ae6-4a9a-8129-1f85b473f2c4
       objectReference: {fileID: 0}
     - target: {fileID: 8429031963845376884, guid: dd093df38a0c4374790dc4a9aeb9c387, type: 3}
       propertyPath: uniqueIdentifier
@@ -10961,7 +10985,7 @@ GameObject:
   - component: {fileID: 2029010362}
   - component: {fileID: 2029010365}
   - component: {fileID: 2029010364}
-  - component: {fileID: 2029010367}
+  - component: {fileID: 2029010368}
   - component: {fileID: 2029010363}
   - component: {fileID: 2029010366}
   m_Layer: 2
@@ -11078,7 +11102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1d698d09d30432aaa9a3e3b95d6f8d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2029010367
+--- !u!114 &2029010368
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -11087,10 +11111,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2029010360}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ea9374b509b70f4bba37e4a2ca8cf00, type: 3}
+  m_Script: {fileID: 11500000, guid: f9ad8df335d04e44bd87c704e4ad5551, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uniqueIdentifier: Intro Sequence-0c3acf7e-4ebd-4da6-8236-90219ee4969d
+  uniqueIdentifier: Intro Sequence-09810c25-a882-4e46-8007-c277d46d6e87
 --- !u!1001 &2040310692
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11909,6 +11933,10 @@ PrefabInstance:
     - target: {fileID: 5961753707283544323, guid: c28dd1e32ca2bec409c7b57be15137d0, type: 3}
       propertyPath: loop
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8745589152697182713, guid: c28dd1e32ca2bec409c7b57be15137d0, type: 3}
+      propertyPath: uniqueIdentifier
+      value: Enemy-09383970-3612-4bc7-bbc0-9b562575ee74
       objectReference: {fileID: 0}
     - target: {fileID: 9090603623696862384, guid: c28dd1e32ca2bec409c7b57be15137d0, type: 3}
       propertyPath: uniqueIdentifier

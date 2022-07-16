@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
+using System.Linq;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static RPGEngine.Saving.VersionControl;
@@ -10,13 +12,21 @@ namespace RPGEngine.Saving
 {
     /// <summary>
     /// A <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html">UnityEngine.MonoBehavior</a> that
-    /// provides the interface to the saving system. It provides methods to save and restore a scene.
-    ///
-    /// This component should be created once and shared between all subsequent scenes.
+    /// provides the interface to the Json saving system.
+    /// <p>
+    /// Uses <a hfre="https://www.newtonsoft.com/json/help/html/Introduction.htm">Json.NET</a>
+    /// to provide methods to save and restore all <see cref="JsonSavableEntity"/> in a scene.
+    /// </p>
+    /// <p>This component should be created once and shared between all subsequent scenes.</p>
     /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html"/>
     /// </summary>
-    public class SavingSystem : MonoBehaviour
+    public class JsonSaveSystem : MonoBehaviour
     {
+        private const string Extension = ".json";
+        private const string SaveFolder = "Saves";
+
+        public static string BasePath => Path.Combine(Application.persistentDataPath!, SaveFolder);
+
         #region Inspector Fields
 
         [Header("Config Data")]
@@ -37,7 +47,7 @@ namespace RPGEngine.Saving
         public IEnumerator LoadLastScene(string saveFile)
         {
             int buildIndex = SceneManager.GetActiveScene().buildIndex;
-            Dictionary<string, object> state = LoadFile(saveFile);
+            IDictionary<string, JToken> state = LoadFile(saveFile);
             if (state.ContainsKey("lastSceneBuildIndex"))
             {
                 buildIndex = (int)state["lastSceneBuildIndex"];
@@ -64,7 +74,7 @@ namespace RPGEngine.Saving
         /// <param name="saveFile">The name of the file to save to.</param>
         public void Save(string saveFile)
         {
-            Dictionary<string, object> state = LoadFile(saveFile);
+            IDictionary<string, JToken> state = LoadFile(saveFile);
             CaptureState(state);
             SaveFile(saveFile, state);
         }
@@ -89,19 +99,27 @@ namespace RPGEngine.Saving
             File.Delete(path!);
         }
 
+        public IEnumerable<string> ListSaves()
+        {
+            return Directory.EnumerateFiles(BasePath!, "*" + Extension)
+                .Select(Path.GetFileNameWithoutExtension);
+        }
+
         #endregion
 
         #region Private Methods
 
-        private Dictionary<string, object> LoadFile(string saveFile)
+        private IDictionary<string, JToken> LoadFile(string saveFile)
         {
             string path = GetPath(saveFile);
-            if (!File.Exists(path)) return new Dictionary<string, object>();
+            if (!File.Exists(path)) return new JObject().ToObject<IDictionary<string, JToken>>();
 
-            BinaryFormatter formatter = new BinaryFormatter();
-            using FileStream stream = File.Open(path!, FileMode.Open);
+            using StreamReader textReader = File.OpenText(path!);
+            using JsonTextReader reader = new JsonTextReader(textReader);
+            reader.FloatParseHandling = FloatParseHandling.Double;
 
-            Dictionary<string, object> state = (Dictionary<string, object>)formatter.Deserialize(stream);
+            JObject stateObject = JObject.Load(reader);
+            IDictionary<string, JToken> state = stateObject.ToObject<JObject>();
 
             int currentFileVersion = 0;
             if (state.ContainsKey("CurrentFileVersion"))
@@ -112,34 +130,35 @@ namespace RPGEngine.Saving
             if (currentFileVersion >= VersionControl.currentFileVersion || currentFileVersion >= minFileVersion)
                 return state;
 
-            Debug.LogWarning($"Save file is from an older version of the game and is not supported. " +
+            Debug.LogWarning("Save file is from an older version of the game and is not supported. " +
                              $"Expected version: {VersionControl.currentFileVersion}, " +
                              $"Minimum Expected version: {minFileVersion}, " +
                              $"Current version: {currentFileVersion}");
-            return new Dictionary<string, object>();
+            return new JObject().ToObject<IDictionary<string, JToken>>();
         }
 
-        private void SaveFile(string saveFile, object state)
+        private void SaveFile(string saveFile, IDictionary<string, JToken> state)
         {
             string path = GetPath(saveFile);
             Debug.Log($"Saving to {path}");
-            using FileStream stream = File.Open(path!, FileMode.Create);
-            BinaryFormatter formatter = new BinaryFormatter();
-            formatter.Serialize(stream, state!);
+            using StreamWriter textWriter = File.CreateText(path!);
+            using JsonTextWriter writer = new JsonTextWriter(textWriter);
+            writer.Formatting = Formatting.Indented;
+            JObject.FromObject(state!).WriteTo(writer);
         }
 
-        private void CaptureState(Dictionary<string, object> state)
+        private void CaptureState(IDictionary<string, JToken> state)
         {
             state["CurrentFileVersion"] = currentFileVersion;
-            foreach (SavableEntity entity in FindObjectsOfType<SavableEntity>(includeInactive))
+            foreach (JsonSavableEntity entity in FindObjectsOfType<JsonSavableEntity>(includeInactive))
             {
-                state[entity.GetUniqueIdentifier()!] = entity.CaptureState();
+                state[entity.GetUniqueIdentifier()!] = entity.Capture();
             }
 
             state["lastSceneBuildIndex"] = SceneManager.GetActiveScene().buildIndex;
         }
 
-        private void RestoreState(Dictionary<string, object> state)
+        private void RestoreState(IDictionary<string, JToken> state)
         {
             int currentFileVersion = 0;
             if (state.ContainsKey("CurrentFileVersion"))
@@ -147,23 +166,21 @@ namespace RPGEngine.Saving
                 currentFileVersion = (int)state["CurrentFileVersion"];
             }
 
-            foreach (SavableEntity entity in FindObjectsOfType<SavableEntity>(includeInactive))
+            foreach (JsonSavableEntity entity in FindObjectsOfType<JsonSavableEntity>(includeInactive))
             {
                 string id = entity.GetUniqueIdentifier();
                 if (!string.IsNullOrWhiteSpace(id) && state.ContainsKey(id))
                 {
-                    entity.RestoreState(state[id], currentFileVersion);
+                    entity.Restore(state[id], currentFileVersion);
                 }
             }
         }
 
         private string GetPath(string saveFile)
         {
-            string basePath = Path.Combine(Application.persistentDataPath!, "Saves");
+            if (!Directory.Exists(BasePath)) Directory.CreateDirectory(BasePath!);
 
-            if (!Directory.Exists(basePath)) Directory.CreateDirectory(basePath);
-
-            return Path.Combine(basePath, saveFile + ".sav");
+            return Path.Combine(BasePath, saveFile + Extension);
         }
 
         #endregion

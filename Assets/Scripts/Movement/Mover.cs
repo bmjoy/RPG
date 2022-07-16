@@ -2,6 +2,7 @@
 // 06-30-2022
 // James LaFritz
 
+using Newtonsoft.Json.Linq;
 using RPGEngine.Attributes;
 using RPGEngine.Core;
 using RPGEngine.Saving;
@@ -18,7 +19,7 @@ namespace RPGEngine.Movement
     /// <p>
     /// Implements
     /// <see cref="IAction"/>
-    /// <see cref="ISavable"/>
+    /// <see cref="IJsonSavable"/>
     /// </p>
     /// <p>
     /// <a href="https://docs.unity3d.com/ScriptReference/RequireComponent.html">UnityEngine.RequireComponent</a>(
@@ -29,7 +30,7 @@ namespace RPGEngine.Movement
     /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html"/>
     /// </summary>
     [RequireComponent(typeof(NavMeshAgent), typeof(ActionScheduler), typeof(Health))]
-    public class Mover : MonoBehaviour, IAction, ISavable
+    public class Mover : MonoBehaviour, IAction, IJsonSavable
     {
         #region Component References
 
@@ -127,34 +128,27 @@ namespace RPGEngine.Movement
             public SerializableVector3 rotation;
         }
 
-        #region Implementation of ISaveable
+        #region Implementation of IJsonSavable
 
         /// <inheritdoc />
-        public object CaptureState()
+        public JToken CaptureAsJToken()
         {
-            MoverSaveData data = new MoverSaveData();
-            Transform transform1 = transform;
-            data.position = new SerializableVector3(transform1.position);
-            data.rotation = new SerializableVector3(transform1.eulerAngles);
+            //MoverSaveData data = new MoverSaveData();
+            //Transform transform1 = transform;
+            //data.position = new SerializableVector3(transform1.position);
+            //data.rotation = new SerializableVector3(transform1.eulerAngles);
 
-            return data;
+            return null;
         }
 
         /// <inheritdoc />
-        public void RestoreState(object state, int version)
+        public void RestoreFromJToken(JToken state, int version)
         {
             if (m_hasAgent) m_navMeshAgent.enabled = false;
 
-            if (version < 2)
-            {
-                MoverSaveData data = (MoverSaveData)state;
-                transform.position = data.position.ToVector();
-                transform.eulerAngles = data.rotation.ToVector();
-            }
-            else
-            {
-                Debug.LogWarning("Unexpected save data");
-            }
+            //MoverSaveData data = (MoverSaveData)state;
+            //transform.position = data.position.ToVector();
+            //transform.eulerAngles = data.rotation.ToVector();
 
             if (m_hasAgent) m_navMeshAgent.enabled = true;
         }

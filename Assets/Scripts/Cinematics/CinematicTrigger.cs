@@ -2,6 +2,7 @@
 // 07-07-2022
 // James LaFritz
 
+using Newtonsoft.Json.Linq;
 using RPGEngine.Core;
 using RPGEngine.Saving;
 using UnityEngine;
@@ -15,17 +16,17 @@ namespace RPGEngine.Cinematics
     /// to play a cut scene.
     /// <p>
     /// Implements
-    /// <see cref="ISavable"/>
+    /// <see cref="IJsonSavable"/>
     /// </p>
     /// <p>
     /// <a href="https://docs.unity3d.com/ScriptReference/RequireComponent.html">UnityEngine.RequireComponent</a>(
     /// typeof(<a href="https://docs.unity3d.com/2021.3/Documentation/ScriptReference/Playables.PlayableDirector.html">UnityEngine.Playables.PlayableDirector</a>)
-    /// , typeof(<see cref="SavableEntity"/>)
+    /// , typeof(<see cref="JsonSavableEntity"/>)
     /// )</p>
     /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html"/>
     /// </summary>
-    [RequireComponent(typeof(PlayableDirector), typeof(SavableEntity))]
-    public class CinematicTrigger : MonoBehaviour, ISavable
+    [RequireComponent(typeof(PlayableDirector), typeof(JsonSavableEntity))]
+    public class CinematicTrigger : MonoBehaviour, IJsonSavable
     {
         #region Component References
 
@@ -77,6 +78,26 @@ namespace RPGEngine.Cinematics
             if (!triggered) return;
             m_director.Play();
             m_director.time = m_director.duration;
+        }
+
+        #endregion
+
+        #region Implementation of IJsonSavable
+
+        /// <inheritdoc />
+        public JToken CaptureAsJToken()
+        {
+            //return triggered;
+            return null;
+        }
+
+        /// <inheritdoc />
+        public void RestoreFromJToken(JToken state, int version)
+        {
+            // triggered = (bool)state;
+            // if (!triggered) return;
+            // m_director.Play();
+            // m_director.time = m_director.duration;
         }
 
         #endregion

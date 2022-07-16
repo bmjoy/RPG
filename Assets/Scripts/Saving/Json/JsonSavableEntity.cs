@@ -1,16 +1,18 @@
-using System.Collections.Generic;
-using UnityEngine;
+// JsonSavableEntity.cs
+// 07-15-2022
+// James LaFritz
 
-#if UNITY_EDITOR
+using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
 using UnityEditor;
-#endif
+using UnityEngine;
 
 namespace RPGEngine.Saving
 {
     /// <summary>
     /// A <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html">UnityEngine.MonoBehavior</a>
     /// for all game objects that need to save data.
-    /// To be placed on any GameObject that has <see cref="ISavable"/> components that
+    /// To be placed on any GameObject that has <see cref="IJsonSavable"/> components that
     /// require saving.
     ///
     /// This class gives the GameObject a unique ID in the scene file. The ID is
@@ -22,7 +24,7 @@ namespace RPGEngine.Saving
     /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html"/>
     /// </summary>
     [ExecuteAlways]
-    public class SavableEntity : MonoBehaviour
+    public class JsonSavableEntity : MonoBehaviour
     {
         #region Inspector Fields
 
@@ -38,7 +40,8 @@ namespace RPGEngine.Saving
         /// <summary>
         /// <para>Cached State.</para>
         /// </summary>
-        private static readonly Dictionary<string, SavableEntity> GlobalLookup = new Dictionary<string, SavableEntity>();
+        private static readonly Dictionary<string, JsonSavableEntity> GlobalLookup = new Dictionary<string,
+            JsonSavableEntity>();
 
         #region Public Methods
 
@@ -52,43 +55,39 @@ namespace RPGEngine.Saving
         }
 
         /// <summary>
-        /// Will capture the state of all `<see cref="ISavable"/>s` on this component.
+        /// Will capture the state of all `<see cref="IJsonSavable"/>s` on this component.
         /// </summary>
-        /// <returns>System.Serializable` object that represents the state.</returns>
-        public object CaptureState()
+        /// <returns><a href="https://www.newtonsoft.com/json/help/html/T_Newtonsoft_Json_Linq_JToken.htm">JToken</a> object that represents the state.</returns>
+        public JToken Capture()
         {
-            Dictionary<string, object> state = new Dictionary<string, object>();
-            foreach (ISavable savable in GetComponents<ISavable>())
+            JObject state = new JObject();
+            IDictionary<string, JToken> stateDict = state;
+            foreach (IJsonSavable jsonSavable in GetComponents<IJsonSavable>())
             {
-                object captureState = savable.CaptureState();
-                string component = savable.GetType().ToString();
-                Debug.Log(
-                    $"<color=blue>{name}:</color> <color=brown>Capture:</color> <color=darkblue>{component}</color> = <color=teal>{captureState}</color>");
-                state[component!] = captureState;
+                JToken token = jsonSavable.CaptureAsJToken();
+                string component = jsonSavable.GetType().ToString();
+                LogToken(component, token);
+                stateDict[jsonSavable.GetType().ToString()!] = jsonSavable.CaptureAsJToken();
             }
 
             return state;
         }
 
         /// <summary>
-        /// Will restore the state that was captured by `CaptureState`.
+        /// Will restore the state of all `<see cref="IJsonSavable"/>s` on this component that was captured by `CaptureState`.
         /// </summary>
-        /// <param name="state">The same object that was returned by `CaptureState`.</param>
+        /// <param name="state"><a href="https://www.newtonsoft.com/json/help/html/T_Newtonsoft_Json_Linq_JToken.htm">JToken</a> object that represents the state of the entity.</param>
         /// <param name="currentFileVersion">The current version of the save file.</param>
-        public void RestoreState(object state, int currentFileVersion)
+        public void Restore(JToken state, int currentFileVersion)
         {
-            foreach (ISavable savable in GetComponents<ISavable>())
+            IDictionary<string, JToken> stateDict = state.ToObject<JObject>();
+            foreach (IJsonSavable jsonSavable in GetComponents<IJsonSavable>())
             {
-                Dictionary<string, object> stateDict = (Dictionary<string, object>)state;
-                string typeString = savable.GetType().ToString()!;
-                if (stateDict.ContainsKey(typeString))
-                {
-                    string component = savable.GetType().ToString();
-                    object restoreState = stateDict[typeString];
-                    Debug.Log(
-                        $"<color=blue>{name}:</color> <color=brown>Capture:</color> <color=darkblue>{component}</color> = <color=teal>{restoreState}</color>");
-                    savable.RestoreState(restoreState, currentFileVersion);
-                }
+                string component = jsonSavable.GetType().ToString();
+                if (!stateDict.ContainsKey(component!)) continue;
+                JToken token = stateDict[component];
+                LogToken(component, token);
+                jsonSavable.RestoreFromJToken(token, currentFileVersion);
             }
         }
 
@@ -122,6 +121,13 @@ namespace RPGEngine.Saving
         #endregion
 
         #region Private Methods
+
+        private void LogToken(string component, JToken token)
+        {
+            Debug.Log(
+                $"<color=blue>{name}:</color> <color=brown>Capture:</color> <color=darkblue>{component}</color> = <color=teal>{token}</color>");
+        }
+
 
         private bool IsUnique(string candidate)
         {

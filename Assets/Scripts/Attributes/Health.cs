@@ -2,6 +2,7 @@
 // 07-05-2022
 // James LaFritz
 
+using Newtonsoft.Json.Linq;
 using RPGEngine.Core;
 using RPGEngine.Saving;
 using Unity.Mathematics;
@@ -15,7 +16,7 @@ namespace RPGEngine.Attributes
     /// represents The Health Attribute.
     /// <p>
     /// Implements
-    /// <see cref="ISavable"/>
+    /// <see cref="IJsonSavable"/>
     /// </p>
     /// <p>
     /// <a href="https://docs.unity3d.com/ScriptReference/RequireComponent.html">UnityEngine.RequireComponent</a>(
@@ -24,7 +25,7 @@ namespace RPGEngine.Attributes
     /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html"/>
     /// </summary>
     [RequireComponent(typeof(ActionScheduler))]
-    public class Health : MonoBehaviour, ISavable
+    public class Health : MonoBehaviour, IJsonSavable
     {
         #region Inspector Fields
 
@@ -88,27 +89,28 @@ namespace RPGEngine.Attributes
 
         #endregion
 
-        #region Implementation of ISaveable
+        #region Implementation of IJsonSavable
 
         /// <inheritdoc />
-        public object CaptureState()
+        public JToken CaptureAsJToken()
         {
-            return value;
+            //return value;
+            return null;
         }
 
         /// <inheritdoc />
-        public void RestoreState(object state, int version)
+        public void RestoreFromJToken(JToken state, int version)
         {
-            value = (float)state;
-            if (value <= 0)
-            {
-                value = 0;
-                Die();
-            }
-            else
-            {
-                IsDead = false;
-            }
+            // value = (float)state;
+            // if (value <= 0)
+            // {
+            //     value = 0;
+            //     Die();
+            // }
+            // else
+            // {
+            //     IsDead = false;
+            // }
         }
 
         #endregion
