@@ -15,5 +15,5 @@ MonoBehaviour:
   weaponPrefab: {fileID: 0}
   range: 3
   timeBetweenAttacks: 2
-  damage: 6
+  damage: 18
   animatorOverrideController: {fileID: 0}

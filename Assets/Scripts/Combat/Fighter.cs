@@ -238,7 +238,7 @@ namespace RPGEngine.Combat
         /// </summary>
         private void Hit()
         {
-            if (!m_hasTarget || m_hasWeapon) return;
+            if (!m_hasTarget || !m_hasWeapon) return;
 
             m_target.TakeDamage(weapon.Damage);
         }
