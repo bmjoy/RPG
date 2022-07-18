@@ -9,8 +9,6 @@ AnimatorOverrideController:
   m_Name: BlackNight
   m_Controller: {fileID: 9100000, guid: 9c776d0d271edd54283e40236ab705bb, type: 2}
   m_Clips:
-  - m_OriginalClip: {fileID: -203655887218126122, guid: 86874c949ddbf954faf07f082c5ec1a3, type: 3}
-    m_OverrideClip: {fileID: 7400000, guid: 3e4c45655f766e74e9a7fbb77fb47f04, type: 3}
   - m_OriginalClip: {fileID: -203655887218126122, guid: 762d2630375693847b9f23948b540408, type: 3}
     m_OverrideClip: {fileID: 7400000, guid: 7b543b1243c1b104792293ef5d5afc02, type: 3}
   - m_OriginalClip: {fileID: -203655887218126122, guid: cee3dd6511557ec48b2334c9f203e6b1, type: 3}
@@ -19,3 +17,5 @@ AnimatorOverrideController:
     m_OverrideClip: {fileID: 7400000, guid: d954392d4d1588b499a68d5696c3c8c2, type: 3}
   - m_OriginalClip: {fileID: -203655887218126122, guid: 309efc32423e4164db36a13eaf163b50, type: 3}
     m_OverrideClip: {fileID: 7400000, guid: ef127ff061d5ea84fa8e9da14786f516, type: 3}
+  - m_OriginalClip: {fileID: 6720303635017113406, guid: 86874c949ddbf954faf07f082c5ec1a3, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: 3e4c45655f766e74e9a7fbb77fb47f04, type: 3}

@@ -8,7 +8,6 @@ using RPGEngine.Core;
 using RPGEngine.Movement;
 using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.Serialization;
 using static RPGEngine.Core.StringReferences;
 
 namespace RPGEngine.Combat
@@ -33,17 +32,11 @@ namespace RPGEngine.Combat
     {
         #region Inspector Fields
 
-        [Header("Weapon Attributes")]
-        [SerializeField]
-        private float weaponRange = 2f;
-
-        [SerializeField] private float timeBetweenAttacks = 1f;
-        [FormerlySerializedAs("weapondamage")] [SerializeField] private float weaponDamage = 10f;
-        [SerializeField] private AnimatorOverrideController animatorOverrideController;
-
         [Header("Weapons")]
         [SerializeField]
-        GameObject weaponPrefab;
+        Weapon weapon;
+
+        private bool m_hasWeapon;
 
         [Header("Weapon Slots")]
         [SerializeField]
@@ -159,6 +152,7 @@ namespace RPGEngine.Combat
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;
+            float weaponRange = m_hasWeapon ? weapon.Range : weapon != null ? weapon.Range : 0;
             Gizmos.DrawWireSphere(transform.position, weaponRange);
         }
 
@@ -204,15 +198,15 @@ namespace RPGEngine.Combat
 
         private bool GetIsInRange(Transform targetTransform)
         {
-            return targetTransform != null &&
-                   Vector3.Distance(transform.position, targetTransform.position) < weaponRange;
+            return targetTransform != null && m_hasWeapon &&
+                   Vector3.Distance(transform.position, targetTransform.position) < weapon.Range;
         }
 
         private void AttackBehavior()
         {
-            if (!m_hasTarget) return;
+            if (!m_hasTarget || !m_hasWeapon) return;
 
-            if (m_timeSinceLastAttack < timeBetweenAttacks) return;
+            if (m_timeSinceLastAttack < weapon.TimeBetweenAttacks) return;
             transform.LookAt(m_target.transform);
             TriggerAttack();
         }
@@ -244,17 +238,16 @@ namespace RPGEngine.Combat
         /// </summary>
         private void Hit()
         {
-            if (!m_hasTarget) return;
+            if (!m_hasTarget || m_hasWeapon) return;
 
-            m_target.TakeDamage(weaponDamage);
+            m_target.TakeDamage(weapon.Damage);
         }
 
         private void SpawnWeapon()
         {
-            if (weaponPrefab == null) return;
-            Instantiate(weaponPrefab, rightHandWeaponSlot);
-            if (!m_hasAnimator && animatorOverrideController == null) return;
-            m_animator.runtimeAnimatorController = animatorOverrideController;
+            m_hasWeapon = weapon != null;
+            if (!m_hasWeapon) return;
+            weapon.Spawn(rightHandWeaponSlot, m_animator);
         }
 
         #endregion

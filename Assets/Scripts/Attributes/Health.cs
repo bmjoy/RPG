@@ -129,7 +129,11 @@ namespace RPGEngine.Attributes
 
             value = math.min(math.max(value - damage, 0), max);
 
-            //Debug.Log($"{name} takes {damage} damage. Health is now {m_value}");
+            Debug.Log($"<color=blue>{name}:</color> " +
+                      $"<color=brown><color=darkblue>takes <color=red{damage}<color> damage.</color> " +
+                      $"<color=teal>Health is now <color=#38761d>{value}</color> / <color=#274e13>{max}</color></color>");
+
+            Debug.Log($"{name} takes {damage} damage. Health is now {value}");
 
             if (value == 0)
             {
