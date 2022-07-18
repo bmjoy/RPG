@@ -353,7 +353,7 @@ MonoBehaviour:
   m_Priority: 100
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 7356412880735521957}
+  m_Follow: {fileID: 3919083114906986689}
   m_Lens:
     FieldOfView: 60
     OrthographicSize: 5
@@ -363,7 +363,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.599119, y: 1}
+    m_SensorSize: {x: 1.5988806, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -404,7 +404,7 @@ Transform:
   - {fileID: 4522115884350414603}
   - {fileID: 867597762750394557}
   - {fileID: 4522115884421233322}
-  - {fileID: 7356412880735521957}
+  - {fileID: 3919083114906986689}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -421,7 +421,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   persistentObjectPrefab: {fileID: 1459885162407604437, guid: 08ff75dbdf98663458299952816a3d63, type: 3}
---- !u!1001 &3922185703829132204
+--- !u!1001 &7357259753233561544
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -454,15 +454,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5798768902406184713, guid: 8ff474ac4656ee840961f0554046ed3e, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5798768902406184713, guid: 8ff474ac4656ee840961f0554046ed3e, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5798768902406184713, guid: 8ff474ac4656ee840961f0554046ed3e, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5798768902406184713, guid: 8ff474ac4656ee840961f0554046ed3e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -476,18 +476,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7435615962961593395, guid: 8ff474ac4656ee840961f0554046ed3e, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 22100000, guid: 2607fa86c313493418fa3bb9aba7878e, type: 2}
-    - target: {fileID: 8784242633375978222, guid: 8ff474ac4656ee840961f0554046ed3e, type: 3}
-      propertyPath: m_Name
-      value: Dungeon Mason_TinyHeroModularCharacter
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ff474ac4656ee840961f0554046ed3e, type: 3}
---- !u!4 &7356412880735521957 stripped
+--- !u!4 &3919083114906986689 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5798768902406184713, guid: 8ff474ac4656ee840961f0554046ed3e, type: 3}
-  m_PrefabInstance: {fileID: 3922185703829132204}
+  m_PrefabInstance: {fileID: 7357259753233561544}
   m_PrefabAsset: {fileID: 0}

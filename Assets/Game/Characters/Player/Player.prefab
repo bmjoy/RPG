@@ -57,6 +57,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2efdfa238e590ca438eaddf8ba15b562, type: 3}
+--- !u!4 &5916438584489492543 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7458982837419109411, guid: 2efdfa238e590ca438eaddf8ba15b562, type: 3}
+  m_PrefabInstance: {fileID: 3862057496716815388}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5018954221707192325
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -120,6 +125,10 @@ PrefabInstance:
       propertyPath: m_Avatar
       value: 
       objectReference: {fileID: 9000000, guid: 0308cf4e83cf517488b60af58b290fe0, type: 3}
+    - target: {fileID: 2492308187424828470, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: 1b9a66141841dc3448d5544fb2519d1c, type: 2}
     - target: {fileID: 5792556325803201955, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
       propertyPath: max
       value: 160
@@ -137,9 +146,25 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7217525226749447344, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+      propertyPath: weaponPrefab
+      value: 
+      objectReference: {fileID: 2182897153529169382, guid: bb79cd3e7e0ab2242a13d4072f42698a, type: 3}
+    - target: {fileID: 7217525226749447344, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+      propertyPath: handTransform
+      value: 
+      objectReference: {fileID: 5916438584489492543}
+    - target: {fileID: 7217525226749447344, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
       propertyPath: combatTargetType
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7217525226749447344, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+      propertyPath: rightHandWeaponSlot
+      value: 
+      objectReference: {fileID: 5916438584489492543}
+    - target: {fileID: 7217525226749447344, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+      propertyPath: animatorOverrideController
+      value: 
+      objectReference: {fileID: 22100000, guid: 2607fa86c313493418fa3bb9aba7878e, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
 --- !u!1 &2279233125442343109 stripped

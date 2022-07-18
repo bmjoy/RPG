@@ -33,11 +33,25 @@ namespace RPGEngine.Combat
     {
         #region Inspector Fields
 
-        [SerializeField] private float weaponRange = 2f;
+        [Header("Weapon Attributes")]
+        [SerializeField]
+        private float weaponRange = 2f;
+
         [SerializeField] private float timeBetweenAttacks = 1f;
         [FormerlySerializedAs("weapondamage")] [SerializeField] private float weaponDamage = 10f;
+        [SerializeField] private AnimatorOverrideController animatorOverrideController;
 
-        [SerializeField] private CombatTargetType combatTargetType = CombatTargetType.Player;
+        [Header("Weapons")]
+        [SerializeField]
+        GameObject weaponPrefab;
+
+        [Header("Weapon Slots")]
+        [SerializeField]
+        Transform rightHandWeaponSlot;
+
+        [Header("Targeting")]
+        [SerializeField]
+        private CombatTargetType combatTargetType = CombatTargetType.Player;
 
         #endregion
 
@@ -103,6 +117,14 @@ namespace RPGEngine.Combat
             Debug.LogError($"{gameObject.name} requires a(n) {errorObject} in order to work", gameObject);
             enabled = false;
             // ReSharper restore Unity.InefficientPropertyAccess
+        }
+
+        /// <summary>
+        /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.Start.html"/>
+        /// </summary>
+        private void Start()
+        {
+            SpawnWeapon();
         }
 
         /// <summary>
@@ -225,6 +247,14 @@ namespace RPGEngine.Combat
             if (!m_hasTarget) return;
 
             m_target.TakeDamage(weaponDamage);
+        }
+
+        private void SpawnWeapon()
+        {
+            if (weaponPrefab == null) return;
+            Instantiate(weaponPrefab, rightHandWeaponSlot);
+            if (!m_hasAnimator && animatorOverrideController == null) return;
+            m_animator.runtimeAnimatorController = animatorOverrideController;
         }
 
         #endregion
