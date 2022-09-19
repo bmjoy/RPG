@@ -40,7 +40,8 @@ namespace RPGEngine.Combat
 
         [Header("Weapon Slots")]
         [SerializeField]
-        Transform rightHandWeaponSlot;
+        private Transform rightHandWeaponSlot;
+        [SerializeField] private Transform leftHandWeaponSlot;
 
         [Header("Targeting")]
         [SerializeField]
@@ -250,7 +251,7 @@ namespace RPGEngine.Combat
             _hasWeapon = weapon != null;
             if (!_hasWeapon) return;
             _currentWeapon = weapon;
-            weapon.Spawn(rightHandWeaponSlot, _animator);
+            weapon.Spawn(rightHandWeaponSlot, leftHandWeaponSlot,  _animator);
         }
 
         #endregion

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Modular RPG Hero Bow
+  m_Controller: {fileID: 9100000, guid: 9c776d0d271edd54283e40236ab705bb, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 6720303635017113406, guid: 86874c949ddbf954faf07f082c5ec1a3, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: 3e88f259de3e4324485ab932c09ff16d, type: 3}
+  - m_OriginalClip: {fileID: -203655887218126122, guid: 762d2630375693847b9f23948b540408, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: 3f68c6484cd868645a91d6e08607bc9c, type: 3}
+  - m_OriginalClip: {fileID: -203655887218126122, guid: cee3dd6511557ec48b2334c9f203e6b1, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: e10cd6dd952768342b73c2d93d6a8586, type: 3}
+  - m_OriginalClip: {fileID: -203655887218126122, guid: 41dc7147085bc3d40b9d59e13fcc96e8, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: cec221ec65ddabe4cb8588b6063294d5, type: 3}
+  - m_OriginalClip: {fileID: -203655887218126122, guid: 309efc32423e4164db36a13eaf163b50, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: 16cda1df8e8488140b452bf733ae803c, type: 3}

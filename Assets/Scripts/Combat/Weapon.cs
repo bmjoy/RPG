@@ -14,24 +14,22 @@ namespace RPGEngine.Combat
     public class Weapon : ScriptableObject
     {
         [SerializeField] private GameObject equippedPrefab;
+        [SerializeField] private AnimatorOverrideController animatorOverrideController;
+        [SerializeField] private bool isRightHanded = true;
 
         [Header("Weapon Attributes")] [SerializeField]
         private float range = 2f;
-
         [SerializeField] private float timeBetweenAttacks = 1f;
-
         [SerializeField] private float damage = 10f;
-
-        [SerializeField] private AnimatorOverrideController animatorOverrideController;
 
         public float Range => range;
         public float TimeBetweenAttacks => timeBetweenAttacks;
         public float Damage => damage;
 
-        public void Spawn(Transform handTransform, Animator animator)
+        public void Spawn(Transform rightHand, Transform leftHand,  Animator animator)
         {
             if (equippedPrefab != null)
-                Instantiate(equippedPrefab, handTransform);
+                Instantiate(equippedPrefab, isRightHanded ? rightHand : leftHand);
 
             if (animator == null || animatorOverrideController == null) return;
             animator.runtimeAnimatorController = animatorOverrideController;
