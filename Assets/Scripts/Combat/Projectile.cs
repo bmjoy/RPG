@@ -7,25 +7,34 @@ namespace RPGEngine.Combat
     {
         [SerializeField] private float moveSpeed;
         
-        private Health target;
+        private Health _target;
+        private float _damage;
 
         private void Update()
         {
-            if (!target) return;
+            if (!_target) return;
             transform.LookAt(GetAimLocation());
-            transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
+            transform.Translate(Vector3.forward * (moveSpeed * Time.deltaTime));
         }
 
-        public void SetTarget(Health target)
+        private void OnTriggerEnter(Collider other)
         {
-            this.target = target;
+            if (!other.GetComponent<Health>() != _target) return;
+            _target.TakeDamage(_damage);
+            Destroy(gameObject);
+        }
+
+        public void SetTarget(Health target, float damage)
+        {
+            _target = target;
+            _damage = damage;
         }
 
         private Vector3 GetAimLocation()
         {
-            CapsuleCollider targetCapsuleCollider = target.GetComponent<CapsuleCollider>();
-            if (!targetCapsuleCollider) return target.transform.position;
-            return target.transform.position + targetCapsuleCollider.center;
+            CapsuleCollider targetCapsuleCollider = _target.GetComponent<CapsuleCollider>();
+            if (!targetCapsuleCollider) return _target.transform.position;
+            return _target.transform.position + targetCapsuleCollider.center;
         }
     }
 }

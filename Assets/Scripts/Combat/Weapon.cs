@@ -43,7 +43,7 @@ namespace RPGEngine.Combat
         {
             Projectile projectileInstance =
                 Instantiate(projectile, GetParent(rightHand, leftHand).position, Quaternion.identity);
-            projectileInstance.SetTarget(target);
+            projectileInstance.SetTarget(target, damage);
         }
 
         public bool HasProjectile()
