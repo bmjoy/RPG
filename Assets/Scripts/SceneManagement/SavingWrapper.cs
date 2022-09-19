@@ -28,7 +28,7 @@ namespace RPGEngine.SceneManagement
 
         #region Required
 
-        SaveSystem m_savingSystem;
+        private SaveSystem _savingSystem;
 
         #endregion
 
@@ -36,12 +36,12 @@ namespace RPGEngine.SceneManagement
 
         #region Unity Messages
 
-        /// <summary>
+        /// <summary>s
         /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.Awake.html"/>
         /// </summary>
         private void Awake()
         {
-            m_savingSystem = GetComponent<SaveSystem>();
+            _savingSystem = GetComponent<SaveSystem>();
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace RPGEngine.SceneManagement
 
             if (hasFader) fader.FadeOutImmediate();
 
-            yield return m_savingSystem.LoadLastScene(DefaultSaveFile);
+            yield return _savingSystem.LoadLastScene(DefaultSaveFile);
 
             if (hasFader) yield return fader.FadeIn(fadeInTime);
         }
@@ -79,12 +79,12 @@ namespace RPGEngine.SceneManagement
 
         public void Load()
         {
-            m_savingSystem.Load(DefaultSaveFile);
+            _savingSystem.Load(DefaultSaveFile);
         }
 
         public void Save()
         {
-            m_savingSystem.Save(DefaultSaveFile);
+            _savingSystem.Save(DefaultSaveFile);
         }
     }
 }

@@ -15,7 +15,7 @@ namespace RPGEngine.Core
     {
         #region Private Fields
 
-        private IAction m_currentAction;
+        private IAction _currentAction;
 
         #endregion
 
@@ -27,8 +27,8 @@ namespace RPGEngine.Core
         /// <param name="action">The Action To Start.</param>
         public void StartAction(IAction action)
         {
-            if (m_currentAction != null && m_currentAction != action) m_currentAction.Cancel();
-            m_currentAction = action;
+            if (_currentAction != null && _currentAction != action) _currentAction.Cancel();
+            _currentAction = action;
         }
 
         /// <summary>

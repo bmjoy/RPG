@@ -15,7 +15,7 @@ namespace RPGEngine.Control
     {
         #region Private Fields
 
-        private readonly RaycastHit[] m_combatHits = new RaycastHit[10];
+        private readonly RaycastHit[] _combatHits = new RaycastHit[10];
 
         #endregion
 
@@ -39,11 +39,11 @@ namespace RPGEngine.Control
         private bool InteractWithCombat()
         {
             if (!hasFighter) return false;
-            int hits = Physics.RaycastNonAlloc(GetMouseFromMainCameraScreenPointToRay(), m_combatHits);
+            int hits = Physics.RaycastNonAlloc(GetMouseFromMainCameraScreenPointToRay(), _combatHits);
             if (hits == 0) return false;
             for (int i = 0; i < hits; i++)
             {
-                RaycastHit hit = m_combatHits[i];
+                RaycastHit hit = _combatHits[i];
                 CombatTarget target = hit.transform.GetComponent<CombatTarget>();
                 if (!fighter.CanAttack(target)) continue;
                 if (!Input.GetMouseButton(0)) return true;

@@ -9,9 +9,9 @@ namespace RPGEngine.Saving
     [System.Serializable]
     public struct SerializableVector3
     {
-        [JsonProperty] private float m_x;
-        [JsonProperty] private float m_y;
-        [JsonProperty] private float m_z;
+        [JsonProperty] private float _x;
+        [JsonProperty] private float _y;
+        [JsonProperty] private float _z;
 
         /// <summary>
         /// Create a new SerializableVector3 from a Vector3.
@@ -19,9 +19,9 @@ namespace RPGEngine.Saving
         /// <param name="vector">The Vector3 to create from.</param>
         public SerializableVector3(Vector3 vector)
         {
-            m_x = vector.x;
-            m_y = vector.y;
-            m_z = vector.z;
+            _x = vector.x;
+            _y = vector.y;
+            _z = vector.z;
         }
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace RPGEngine.Saving
         /// <returns>The Vector3 representation of this Serializable Vector3</returns>
         public Vector3 ToVector()
         {
-            return new Vector3(m_x, m_y, m_z);
+            return new Vector3(_x, _y, _z);
         }
     }
 }

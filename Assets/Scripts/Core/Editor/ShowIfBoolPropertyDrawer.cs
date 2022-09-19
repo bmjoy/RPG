@@ -18,7 +18,7 @@ namespace RPGEditor.Core
         /// <summary>
         /// The errormessage
         /// </summary>
-        private string m_errorMessage;
+        private string _errorMessage;
 
         #region Overrides of PropertyDrawer
 
@@ -27,10 +27,10 @@ namespace RPGEditor.Core
                                    GUIContent label)
         {
             ShowIfBoolAttribute attr = attribute as ShowIfBoolAttribute;
-            SerializedProperty showIfProp = PropertyDrawerHelper.FindProperty(property, attr.boolName, out m_errorMessage);
+            SerializedProperty showIfProp = PropertyDrawerHelper.FindProperty(property, attr.boolName, out _errorMessage);
             if (showIfProp == null)
             {
-                EditorGUI.LabelField(position, label.text, m_errorMessage);
+                EditorGUI.LabelField(position, label.text, _errorMessage);
                 return;
             }
 
@@ -52,7 +52,7 @@ namespace RPGEditor.Core
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
             ShowIfBoolAttribute attr = attribute as ShowIfBoolAttribute;
-            SerializedProperty showIfProp = PropertyDrawerHelper.FindProperty(property, attr.boolName, out m_errorMessage);
+            SerializedProperty showIfProp = PropertyDrawerHelper.FindProperty(property, attr.boolName, out _errorMessage);
             if (showIfProp == null) return base.GetPropertyHeight(property, label);
             if ((showIfProp.boolValue && attr.show) ||
                 (!showIfProp.boolValue && !attr.show))

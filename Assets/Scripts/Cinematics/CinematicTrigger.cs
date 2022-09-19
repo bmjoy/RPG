@@ -33,7 +33,7 @@ namespace RPGEngine.Cinematics
         #region Required
 
         /// <value>Cache the <a href="https://docs.unity3d.com/ScriptReference/Playables.PlayableDirector.html">UnityEngine.Playables.PlayableDirector</a></value>
-        private PlayableDirector m_director;
+        private PlayableDirector _director;
 
         #endregion
 
@@ -48,7 +48,7 @@ namespace RPGEngine.Cinematics
         /// </summary>
         private void Awake()
         {
-            m_director = GetComponent<PlayableDirector>();
+            _director = GetComponent<PlayableDirector>();
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace RPGEngine.Cinematics
         {
             if (triggered || !other.CompareTag("Player")) return;
             triggered = true;
-            m_director.Play();
+            _director.Play();
         }
 
         #endregion
@@ -76,8 +76,8 @@ namespace RPGEngine.Cinematics
         {
             triggered = (bool)state;
             if (!triggered) return;
-            m_director.Play();
-            m_director.time = m_director.duration;
+            _director.Play();
+            _director.time = _director.duration;
         }
 
         #endregion
@@ -96,8 +96,8 @@ namespace RPGEngine.Cinematics
             if (state == null || version < 2) return;
             triggered = state.ToObject<bool>();
             if (!triggered) return;
-            m_director.Play();
-            m_director.time = m_director.duration;
+            _director.Play();
+            _director.time = _director.duration;
         }
 
         #endregion

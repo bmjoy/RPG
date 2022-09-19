@@ -39,24 +39,24 @@ namespace RPGEngine.Movement
         #region Required
 
         /// <value>Cache the <see cref="ActionScheduler"/></value>
-        private ActionScheduler m_actionScheduler;
+        private ActionScheduler _actionScheduler;
 
         /// <value>Cache the <see cref="Health"/></value>
-        private Health m_health;
+        private Health _health;
 
         #endregion
 
         #region Optional
 
         /// <value>Cache the <a href="https://docs.unity3d.com/ScriptReference/AI.NavMeshAgent.html">UnityEngine.AI.NaveMeshAgent</a></value>
-        private NavMeshAgent m_navMeshAgent;
+        private NavMeshAgent _navMeshAgent;
 
-        private bool m_hasAgent;
+        private bool _hasAgent;
 
         /// <value>Cache the <a href="https://docs.unity3d.com/ScriptReference/Animator.html">UnityEngine.Animator</a></value>
-        private Animator m_animator;
+        private Animator _animator;
 
-        private bool m_hasAnimator;
+        private bool _hasAnimator;
         private static int _forwardSpeed;
 
         #endregion
@@ -70,20 +70,20 @@ namespace RPGEngine.Movement
         /// </summary>
         private void Awake()
         {
-            m_animator = GetComponentInChildren<Animator>();
-            m_hasAnimator = m_animator != null;
+            _animator = GetComponentInChildren<Animator>();
+            _hasAnimator = _animator != null;
 
-            if (m_hasAnimator)
+            if (_hasAnimator)
             {
                 _forwardSpeed = Animator.StringToHash(forwardSpeedFloat);
             }
 
-            m_navMeshAgent = GetComponent<NavMeshAgent>();
-            m_hasAgent = m_navMeshAgent != null;
+            _navMeshAgent = GetComponent<NavMeshAgent>();
+            _hasAgent = _navMeshAgent != null;
 
-            m_actionScheduler = GetComponent<ActionScheduler>();
+            _actionScheduler = GetComponent<ActionScheduler>();
 
-            m_health = GetComponent<Health>();
+            _health = GetComponent<Health>();
         }
 
         /// <summary>
@@ -91,17 +91,17 @@ namespace RPGEngine.Movement
         /// </summary>
         private void Update()
         {
-            if (m_navMeshAgent.isActiveAndEnabled && m_health.IsDead)
+            if (_navMeshAgent.isActiveAndEnabled && _health.IsDead)
             {
-                m_navMeshAgent.destination = transform.position;
-                m_navMeshAgent.ResetPath();
-                m_navMeshAgent.velocity = Vector3.zero;
-                m_navMeshAgent.isStopped = true;
+                _navMeshAgent.destination = transform.position;
+                _navMeshAgent.ResetPath();
+                _navMeshAgent.velocity = Vector3.zero;
+                _navMeshAgent.isStopped = true;
                 UpdateAnimator();
-                m_navMeshAgent.enabled = false;
+                _navMeshAgent.enabled = false;
             }
 
-            if (m_health.IsDead) return;
+            if (_health.IsDead) return;
 
             UpdateAnimator();
         }
@@ -113,9 +113,9 @@ namespace RPGEngine.Movement
         /// <inheritdoc />
         public void Cancel()
         {
-            if (m_hasAgent)
+            if (_hasAgent)
             {
-                m_navMeshAgent.isStopped = true;
+                _navMeshAgent.isStopped = true;
             }
         }
 
@@ -152,7 +152,7 @@ namespace RPGEngine.Movement
         public void RestoreFromJToken(JToken state, int version)
         {
             if (state == null || version < 4) return;
-            if (m_hasAgent) m_navMeshAgent.enabled = false;
+            if (_hasAgent) _navMeshAgent.enabled = false;
 
             MoverLoadData data = new MoverLoadData();
             switch (version)
@@ -177,7 +177,7 @@ namespace RPGEngine.Movement
             transform1.position = data.position;
             transform1.eulerAngles = data.rotation;
 
-            if (m_hasAgent) m_navMeshAgent.enabled = true;
+            if (_hasAgent) _navMeshAgent.enabled = true;
         }
 
         #endregion
@@ -192,7 +192,7 @@ namespace RPGEngine.Movement
         /// <param name="destination"><a href="https://docs.unity3d.com/2021.3/Documentation/ScriptReference/Vector3.html">UnityEngine.Vector3</a> To move To</param>
         public void StartMoveAction(Vector3 destination)
         {
-            m_actionScheduler.StartAction(this);
+            _actionScheduler.StartAction(this);
             MoveTo(destination);
         }
 
@@ -202,7 +202,7 @@ namespace RPGEngine.Movement
         /// <param name="destination"><a href="https://docs.unity3d.com/2021.3/Documentation/ScriptReference/Vector3.html">UnityEngine.Vector3</a> To move To</param>
         public void MoveTo(Vector3 destination)
         {
-            if (m_hasAgent)
+            if (_hasAgent)
             {
                 MoveNavMeshAgentTo(destination);
             }
@@ -210,8 +210,8 @@ namespace RPGEngine.Movement
 
         public void SetMoveSpeed(float speed)
         {
-            if (!m_hasAgent) return;
-            m_navMeshAgent.speed = speed;
+            if (!_hasAgent) return;
+            _navMeshAgent.speed = speed;
         }
 
         #endregion
@@ -225,9 +225,9 @@ namespace RPGEngine.Movement
         /// <param name="destination"><a href="https://docs.unity3d.com/2021.3/Documentation/ScriptReference/Vector3.html">UnityEngine.Vector3</a> To move To</param>
         private void MoveNavMeshAgentTo(Vector3 destination)
         {
-            if (!m_hasAgent) return;
-            m_navMeshAgent!.destination = destination;
-            m_navMeshAgent!.isStopped = false;
+            if (!_hasAgent) return;
+            _navMeshAgent!.destination = destination;
+            _navMeshAgent!.isStopped = false;
         }
 
         /// <summary>
@@ -236,13 +236,13 @@ namespace RPGEngine.Movement
         /// </summary>
         private void UpdateAnimator()
         {
-            if (!m_hasAnimator) return;
+            if (!_hasAnimator) return;
 
-            Vector3 velocity = m_navMeshAgent.velocity;
+            Vector3 velocity = _navMeshAgent.velocity;
             Vector3 localVelocity = transform.InverseTransformDirection(velocity);
             float speed = localVelocity.z;
 
-            m_animator.SetFloat(_forwardSpeed, speed);
+            _animator.SetFloat(_forwardSpeed, speed);
         }
 
         #endregion

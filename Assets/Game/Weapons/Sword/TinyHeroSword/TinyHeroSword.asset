@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f2304dd3a9345f0a93d88cd5dd66c7a, type: 3}
   m_Name: TinyHeroSword
   m_EditorClassIdentifier: 
-  weaponPrefab: {fileID: 2182897153529169382, guid: bb79cd3e7e0ab2242a13d4072f42698a, type: 3}
+  equippedPrefab: {fileID: 2182897153529169382, guid: bb79cd3e7e0ab2242a13d4072f42698a, type: 3}
   range: 2
   timeBetweenAttacks: 1
-  damage: 10
+  damage: 6
   animatorOverrideController: {fileID: 22100000, guid: 2607fa86c313493418fa3bb9aba7878e, type: 2}

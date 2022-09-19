@@ -19,7 +19,7 @@ namespace RPGEngine.SceneManagement
     [RequireComponent(typeof(CanvasGroup))]
     public class Fader : MonoBehaviour
     {
-        private CanvasGroup m_canvasGroup;
+        private CanvasGroup _canvasGroup;
 
         #region Unity Messages
 
@@ -28,14 +28,14 @@ namespace RPGEngine.SceneManagement
         /// </summary>
         private void Awake()
         {
-            m_canvasGroup = GetComponent<CanvasGroup>();
+            _canvasGroup = GetComponent<CanvasGroup>();
         }
 
         #endregion
 
         public void FadeOutImmediate()
         {
-            m_canvasGroup.alpha = 1;
+            _canvasGroup.alpha = 1;
         }
 
         /// <summary>
@@ -43,13 +43,13 @@ namespace RPGEngine.SceneManagement
         /// </summary>
         public IEnumerator FadeOut(float time)
         {
-            while (m_canvasGroup.alpha < 1)
+            while (_canvasGroup.alpha < 1)
             {
-                m_canvasGroup.alpha += Time.deltaTime / time;
+                _canvasGroup.alpha += Time.deltaTime / time;
                 yield return null;
             }
 
-            m_canvasGroup.alpha = 1f;
+            _canvasGroup.alpha = 1f;
         }
 
         /// <summary>
@@ -57,13 +57,13 @@ namespace RPGEngine.SceneManagement
         /// </summary>
         public IEnumerator FadeIn(float time)
         {
-            while (m_canvasGroup.alpha > 0)
+            while (_canvasGroup.alpha > 0)
             {
-                m_canvasGroup.alpha -= Time.deltaTime / time;
+                _canvasGroup.alpha -= Time.deltaTime / time;
                 yield return null;
             }
 
-            m_canvasGroup.alpha = 0f;
+            _canvasGroup.alpha = 0f;
         }
     }
 }

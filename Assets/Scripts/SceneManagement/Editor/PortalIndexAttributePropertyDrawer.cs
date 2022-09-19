@@ -24,7 +24,7 @@ namespace RPGEditor.SceneManagement
         /// <summary>
         /// The errormessage
         /// </summary>
-        private string m_errorMessage;
+        private string _errorMessage;
 
         #region Overrides of PropertyDrawer
 
@@ -42,28 +42,28 @@ namespace RPGEditor.SceneManagement
 
             if (property.propertyType != SerializedPropertyType.Integer)
             {
-                m_errorMessage = $"{nameof(PortalIndexAttribute)} can only be used on integer properties.";
-                Debug.LogError(m_errorMessage);
-                EditorGUI.LabelField(position, label.text, m_errorMessage);
+                _errorMessage = $"{nameof(PortalIndexAttribute)} can only be used on integer properties.";
+                Debug.LogError(_errorMessage);
+                EditorGUI.LabelField(position, label.text, _errorMessage);
                 return;
             }
 
             PortalIndexAttribute attr = attribute as PortalIndexAttribute;
 
             SerializedProperty sceneProp =
-                PropertyDrawerHelper.FindProperty(property, attr.scene, out m_errorMessage);
+                PropertyDrawerHelper.FindProperty(property, attr.scene, out _errorMessage);
             if (sceneProp == null)
             {
-                Debug.LogError(m_errorMessage);
-                EditorGUI.LabelField(position, label.text, m_errorMessage);
+                Debug.LogError(_errorMessage);
+                EditorGUI.LabelField(position, label.text, _errorMessage);
                 return;
             }
 
             if (sceneProp.propertyType != SerializedPropertyType.Integer)
             {
-                m_errorMessage = $"{nameof(sceneProp)} must be an int field.";
-                Debug.LogError(m_errorMessage);
-                EditorGUI.LabelField(position, label.text, m_errorMessage);
+                _errorMessage = $"{nameof(sceneProp)} must be an int field.";
+                Debug.LogError(_errorMessage);
+                EditorGUI.LabelField(position, label.text, _errorMessage);
                 return;
             }
 

@@ -36,7 +36,7 @@ namespace RPGEngine.Combat
         [SerializeField]
         Weapon weapon;
 
-        private bool m_hasWeapon;
+        private bool _hasWeapon;
 
         [Header("Weapon Slots")]
         [SerializeField]
@@ -50,10 +50,10 @@ namespace RPGEngine.Combat
 
         #region Private Fields
 
-        private Health m_target;
-        private bool m_hasTarget;
+        private Health _target;
+        private bool _hasTarget;
 
-        private float m_timeSinceLastAttack = math.INFINITY;
+        private float _timeSinceLastAttack = math.INFINITY;
 
         #endregion
 
@@ -62,19 +62,19 @@ namespace RPGEngine.Combat
         #region Required
 
         /// <value>Cache the <see cref="Mover"/></value>
-        private Mover m_mover;
+        private Mover _mover;
 
         /// <value>Cache the <see cref="ActionScheduler"/></value>
-        private ActionScheduler m_actionScheduler;
+        private ActionScheduler _actionScheduler;
 
         #endregion
 
         #region Optional
 
         /// <value>Cache the <a href="https://docs.unity3d.com/ScriptReference/Animator.html">UnityEngine.Animator</a></value>
-        private Animator m_animator;
+        private Animator _animator;
 
-        private bool m_hasAnimator;
+        private bool _hasAnimator;
         private static int _attackHash;
         private static int _stopAttackHash;
 
@@ -89,21 +89,21 @@ namespace RPGEngine.Combat
         /// </summary>
         private void Awake()
         {
-            m_mover = GetComponent<Mover>();
-            m_actionScheduler = GetComponent<ActionScheduler>();
+            _mover = GetComponent<Mover>();
+            _actionScheduler = GetComponent<ActionScheduler>();
 
-            m_animator = GetComponentInChildren<Animator>();
-            m_hasAnimator = m_animator != null;
+            _animator = GetComponentInChildren<Animator>();
+            _hasAnimator = _animator != null;
 
-            if (m_hasAnimator)
+            if (_hasAnimator)
             {
                 _attackHash = Animator.StringToHash(attackTrigger);
                 _stopAttackHash = Animator.StringToHash(stopAttackTrigger);
             }
 
             string errorObject = "";
-            if (m_mover == null) errorObject = nameof(m_mover);
-            if (m_actionScheduler == null) errorObject += nameof(m_actionScheduler);
+            if (_mover == null) errorObject = nameof(_mover);
+            if (_actionScheduler == null) errorObject += nameof(_actionScheduler);
             if (string.IsNullOrEmpty(errorObject)) return;
 
             // ReSharper disable Unity.InefficientPropertyAccess
@@ -125,23 +125,23 @@ namespace RPGEngine.Combat
         /// </summary>
         private void Update()
         {
-            m_timeSinceLastAttack += Time.deltaTime;
+            _timeSinceLastAttack += Time.deltaTime;
 
-            if (!m_hasTarget) return;
+            if (!_hasTarget) return;
 
-            if (m_target.IsDead)
+            if (_target.IsDead)
             {
                 Cancel();
                 return;
             }
 
-            if (!GetIsInRange(m_target.transform))
+            if (!GetIsInRange(_target.transform))
             {
-                m_mover.MoveTo(m_target.transform.position);
+                _mover.MoveTo(_target.transform.position);
             }
             else
             {
-                m_mover.Cancel();
+                _mover.Cancel();
                 AttackBehavior();
             }
         }
@@ -152,7 +152,7 @@ namespace RPGEngine.Combat
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;
-            float weaponRange = m_hasWeapon ? weapon.Range : weapon != null ? weapon.Range : 0;
+            float weaponRange = _hasWeapon ? weapon.Range : weapon != null ? weapon.Range : 0;
             Gizmos.DrawWireSphere(transform.position, weaponRange);
         }
 
@@ -163,9 +163,9 @@ namespace RPGEngine.Combat
         /// <inheritdoc />
         public void Cancel()
         {
-            m_hasTarget = false;
-            m_target = null;
-            m_mover.Cancel();
+            _hasTarget = false;
+            _target = null;
+            _mover.Cancel();
             TriggerCancelAttack();
         }
 
@@ -179,9 +179,9 @@ namespace RPGEngine.Combat
         /// <param name="target">The <see cref="CombatTarget"/> to attack.</param>
         public void Attack([NotNull] CombatTarget target)
         {
-            m_actionScheduler.StartAction(this);
-            m_target = target.GetComponent<Health>();
-            m_hasTarget = m_target != null;
+            _actionScheduler.StartAction(this);
+            _target = target.GetComponent<Health>();
+            _hasTarget = _target != null;
         }
 
         public bool CanAttack(CombatTarget combatTarget)
@@ -198,26 +198,26 @@ namespace RPGEngine.Combat
 
         private bool GetIsInRange(Transform targetTransform)
         {
-            return targetTransform != null && m_hasWeapon &&
+            return targetTransform != null && _hasWeapon &&
                    Vector3.Distance(transform.position, targetTransform.position) < weapon.Range;
         }
 
         private void AttackBehavior()
         {
-            if (!m_hasTarget || !m_hasWeapon) return;
+            if (!_hasTarget || !_hasWeapon) return;
 
-            if (m_timeSinceLastAttack < weapon.TimeBetweenAttacks) return;
-            transform.LookAt(m_target.transform);
+            if (_timeSinceLastAttack < weapon.TimeBetweenAttacks) return;
+            transform.LookAt(_target.transform);
             TriggerAttack();
         }
 
         private void TriggerAttack()
         {
-            if (m_hasAnimator)
+            if (_hasAnimator)
             {
-                m_animator.ResetTrigger(_stopAttackHash);
+                _animator.ResetTrigger(_stopAttackHash);
                 // This will trigger Hit() from the Animation Event.
-                m_animator.SetTrigger(_attackHash);
+                _animator.SetTrigger(_attackHash);
             }
             else
             {
@@ -227,9 +227,9 @@ namespace RPGEngine.Combat
 
         private void TriggerCancelAttack()
         {
-            if (!m_hasAnimator) return;
-            m_animator.ResetTrigger(_attackHash);
-            m_animator.SetTrigger(_stopAttackHash);
+            if (!_hasAnimator) return;
+            _animator.ResetTrigger(_attackHash);
+            _animator.SetTrigger(_stopAttackHash);
         }
 
         /// <summary>
@@ -238,16 +238,16 @@ namespace RPGEngine.Combat
         /// </summary>
         private void Hit()
         {
-            if (!m_hasTarget || !m_hasWeapon) return;
+            if (!_hasTarget || !_hasWeapon) return;
 
-            m_target.TakeDamage(weapon.Damage);
+            _target.TakeDamage(weapon.Damage);
         }
 
         private void SpawnWeapon()
         {
-            m_hasWeapon = weapon != null;
-            if (!m_hasWeapon) return;
-            weapon.Spawn(rightHandWeaponSlot, m_animator);
+            _hasWeapon = weapon != null;
+            if (!_hasWeapon) return;
+            weapon.Spawn(rightHandWeaponSlot, _animator);
         }
 
         #endregion

@@ -27,15 +27,15 @@ namespace RPGEngine.Cinematics
         #region Required
 
         /// <value>Cache the <a href="https://docs.unity3d.com/ScriptReference/Playables.PlayableDirector.html">UnityEngine.Playables.PlayableDirector</a></value>
-        private PlayableDirector m_director;
+        private PlayableDirector _director;
 
         #endregion
 
         #endregion
 
-        private ActionScheduler m_actionScheduler;
-        private PlayerController m_controller;
-        private bool m_hasPlayerController;
+        private ActionScheduler _actionScheduler;
+        private PlayerController _controller;
+        private bool _hasPlayerController;
 
         #region Unity Messages
 
@@ -44,7 +44,7 @@ namespace RPGEngine.Cinematics
         /// </summary>
         private void Awake()
         {
-            m_director = GetComponent<PlayableDirector>();
+            _director = GetComponent<PlayableDirector>();
         }
 
         /// <summary>
@@ -52,9 +52,9 @@ namespace RPGEngine.Cinematics
         /// </summary>
         private void OnEnable()
         {
-            m_director.played += DisableControl;
-            m_director.stopped += EnableControl;
-            m_director.paused += EnableControl;
+            _director.played += DisableControl;
+            _director.stopped += EnableControl;
+            _director.paused += EnableControl;
         }
 
         /// <summary>
@@ -62,29 +62,29 @@ namespace RPGEngine.Cinematics
         /// </summary>
         private void OnDisable()
         {
-            m_director.played -= DisableControl;
-            m_director.stopped -= EnableControl;
+            _director.played -= DisableControl;
+            _director.stopped -= EnableControl;
         }
 
         #endregion
 
         private void DisableControl(PlayableDirector director)
         {
-            if (director != m_director) return;
+            if (director != _director) return;
             Debug.Log($"{director.name} is playing.");
             GameObject player = GameObject.FindWithTag("Player");
             if (player == null) return;
-            m_actionScheduler = player.GetComponent<ActionScheduler>();
-            if (m_actionScheduler != null) m_actionScheduler.CancelCurrentAction();
-            m_controller = player.GetComponent<PlayerController>();
-            if (m_controller != null) m_controller.enabled = false;
+            _actionScheduler = player.GetComponent<ActionScheduler>();
+            if (_actionScheduler != null) _actionScheduler.CancelCurrentAction();
+            _controller = player.GetComponent<PlayerController>();
+            if (_controller != null) _controller.enabled = false;
         }
 
         private void EnableControl(PlayableDirector director)
         {
-            if (director != m_director) return;
+            if (director != _director) return;
             Debug.Log($"{director.name} is stopped.");
-            if (m_controller != null) m_controller.enabled = true;
+            if (_controller != null) _controller.enabled = true;
         }
     }
 }

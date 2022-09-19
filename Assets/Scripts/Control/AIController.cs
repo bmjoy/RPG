@@ -53,7 +53,7 @@ namespace RPGEngine.Control
         #region Required
 
         /// <value>Cache the <see cref="ActionScheduler"/></value>
-        private ActionScheduler m_actionScheduler;
+        private ActionScheduler _actionScheduler;
 
         #endregion
 
@@ -65,11 +65,11 @@ namespace RPGEngine.Control
 
         #region Private Fields
 
-        private readonly Collider[] m_combatTargetColliders = new Collider[100];
+        private readonly Collider[] _combatTargetColliders = new Collider[100];
 
-        private Vector3 m_startPosition;
-        private float m_timeSinceLastSawTarget = math.INFINITY;
-        private float m_timeSinceLastWaypoint = math.INFINITY;
+        private Vector3 _startPosition;
+        private float _timeSinceLastSawTarget = math.INFINITY;
+        private float _timeSinceLastWaypoint = math.INFINITY;
 
         #endregion
 
@@ -81,7 +81,7 @@ namespace RPGEngine.Control
         protected override void Awake()
         {
             base.Awake();
-            m_actionScheduler = GetComponent<ActionScheduler>();
+            _actionScheduler = GetComponent<ActionScheduler>();
         }
 
         #endregion
@@ -91,7 +91,7 @@ namespace RPGEngine.Control
         /// </summary>
         private void Start()
         {
-            m_startPosition = transform.position;
+            _startPosition = transform.position;
         }
 
         /// <summary>
@@ -108,8 +108,8 @@ namespace RPGEngine.Control
             else
                 PatrolBehavior();
 
-            m_timeSinceLastSawTarget += Time.deltaTime;
-            m_timeSinceLastWaypoint += Time.deltaTime;
+            _timeSinceLastSawTarget += Time.deltaTime;
+            _timeSinceLastWaypoint += Time.deltaTime;
         }
 
         /// <summary>
@@ -127,19 +127,19 @@ namespace RPGEngine.Control
 
         private void AttackBehavior([NotNull] CombatTarget closestTarget)
         {
-            m_timeSinceLastSawTarget = 0;
+            _timeSinceLastSawTarget = 0;
             mover.SetMoveSpeed(chaseSpeed);
             fighter.Attack(closestTarget);
         }
 
         private void SuspiciousBehavior()
         {
-            m_actionScheduler.CancelCurrentAction();
+            _actionScheduler.CancelCurrentAction();
         }
 
         private void PatrolBehavior()
         {
-            Vector3 nextPosition = m_startPosition;
+            Vector3 nextPosition = _startPosition;
             mover.SetMoveSpeed(patrolSpeed);
 
             if (patrolPath != null)
@@ -149,7 +149,7 @@ namespace RPGEngine.Control
                 nextPosition = GetCurrentWaypoint();
             }
 
-            if (m_timeSinceLastWaypoint < waypointTime)
+            if (_timeSinceLastWaypoint < waypointTime)
             {
                 SuspiciousBehavior();
             }
@@ -168,12 +168,12 @@ namespace RPGEngine.Control
         {
             if (patrolPath == null) return;
             patrolPath.NextIndex();
-            m_timeSinceLastWaypoint = 0;
+            _timeSinceLastWaypoint = 0;
         }
 
         private Vector3 GetCurrentWaypoint()
         {
-            return patrolPath == null ? m_startPosition : patrolPath.GetWaypoint();
+            return patrolPath == null ? _startPosition : patrolPath.GetWaypoint();
         }
 
         private bool IsChasing(CombatTarget closestTarget)
@@ -183,7 +183,7 @@ namespace RPGEngine.Control
 
         private bool IsLookingForTarget()
         {
-            return m_timeSinceLastSawTarget < lookTime;
+            return _timeSinceLastSawTarget < lookTime;
         }
 
         #endregion
@@ -204,9 +204,9 @@ namespace RPGEngine.Control
         /// <returns></returns>
         private CombatTarget[] GetAllCombatTargetsInRange(float range)
         {
-            Physics.OverlapSphereNonAlloc(transform.position, range, m_combatTargetColliders);
+            Physics.OverlapSphereNonAlloc(transform.position, range, _combatTargetColliders);
 
-            return (from targetCollider in m_combatTargetColliders
+            return (from targetCollider in _combatTargetColliders
                     where targetCollider != null
                     select targetCollider.GetComponent<CombatTarget>()
                     into target

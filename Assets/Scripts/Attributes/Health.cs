@@ -44,16 +44,16 @@ namespace RPGEngine.Attributes
 
         #region Required
 
-        private ActionScheduler m_actionScheduler;
+        private ActionScheduler _actionScheduler;
 
         #endregion
 
         #region Optional
 
         /// <value>Cache the <a href="https://docs.unity3d.com/ScriptReference/Animator.html">UnityEngine.Animator</a></value>
-        private Animator m_animator;
+        private Animator _animator;
 
-        private bool m_hasAnimator;
+        private bool _hasAnimator;
         private static int _dieHash;
 
         #endregion
@@ -62,7 +62,7 @@ namespace RPGEngine.Attributes
 
         #region Properties
 
-        /// <value>Is the GameObject dead. (m_value == 0)</value>
+        /// <value>Is the GameObject dead. (_value == 0)</value>
         public bool IsDead { get; private set; }
 
         #endregion
@@ -76,12 +76,12 @@ namespace RPGEngine.Attributes
         {
             value = max;
 
-            m_actionScheduler = GetComponent<ActionScheduler>();
+            _actionScheduler = GetComponent<ActionScheduler>();
 
-            m_animator = GetComponentInChildren<Animator>();
-            m_hasAnimator = m_animator != null;
+            _animator = GetComponentInChildren<Animator>();
+            _hasAnimator = _animator != null;
 
-            if (m_hasAnimator)
+            if (_hasAnimator)
             {
                 _dieHash = Animator.StringToHash(deathTrigger);
             }
@@ -147,10 +147,10 @@ namespace RPGEngine.Attributes
         {
             if (IsDead) return;
             IsDead = true;
-            m_actionScheduler.CancelCurrentAction();
-            if (m_hasAnimator)
+            _actionScheduler.CancelCurrentAction();
+            if (_hasAnimator)
             {
-                m_animator.SetTrigger(_dieHash);
+                _animator.SetTrigger(_dieHash);
             }
         }
 

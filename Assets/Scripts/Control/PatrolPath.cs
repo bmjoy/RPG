@@ -18,8 +18,8 @@ namespace RPGEngine.Control
         [SerializeField] private Color waypointEndColor = Color.red;
         [SerializeField] private Color waypointPathColor = Color.gray;
 
-        private int m_currentWaypointIndex;
-        private int m_currentDirection = 1;
+        private int _currentWaypointIndex;
+        private int _currentDirection = 1;
 
         private const float WaypointGizmoRadius = .3f;
 
@@ -57,21 +57,21 @@ namespace RPGEngine.Control
 
         public Vector3 GetWaypoint()
         {
-            return GetWaypoint(m_currentWaypointIndex);
+            return GetWaypoint(_currentWaypointIndex);
         }
 
         public void NextIndex()
         {
-            if (m_currentDirection > 0)
+            if (_currentDirection > 0)
             {
-                m_currentWaypointIndex = GetNextIndex(m_currentWaypointIndex);
-                if (!loop && m_currentWaypointIndex == transform.childCount - 1)
+                _currentWaypointIndex = GetNextIndex(_currentWaypointIndex);
+                if (!loop && _currentWaypointIndex == transform.childCount - 1)
                     ChangeDirection();
             }
             else
             {
-                m_currentWaypointIndex = GetPreviousIndex(m_currentWaypointIndex);
-                if (!loop && m_currentWaypointIndex == 0)
+                _currentWaypointIndex = GetPreviousIndex(_currentWaypointIndex);
+                if (!loop && _currentWaypointIndex == 0)
                     ChangeDirection();
             }
         }
@@ -97,7 +97,7 @@ namespace RPGEngine.Control
 
         private void ChangeDirection()
         {
-            m_currentDirection *= -1;
+            _currentDirection *= -1;
         }
     }
 }

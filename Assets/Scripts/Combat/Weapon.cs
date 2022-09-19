@@ -13,7 +13,7 @@ namespace RPGEngine.Combat
     [CreateAssetMenu(fileName = "Weapon", menuName = "Weapons/Make New Weapon", order = 0)]
     public class Weapon : ScriptableObject
     {
-        [SerializeField] GameObject weaponPrefab;
+        [SerializeField] private GameObject equippedPrefab;
 
         [Header("Weapon Attributes")] [SerializeField]
         private float range = 2f;
@@ -30,8 +30,8 @@ namespace RPGEngine.Combat
 
         public void Spawn(Transform handTransform, Animator animator)
         {
-            if (weaponPrefab != null)
-                Instantiate(weaponPrefab, handTransform);
+            if (equippedPrefab != null)
+                Instantiate(equippedPrefab, handTransform);
 
             if (animator == null || animatorOverrideController == null) return;
             animator.runtimeAnimatorController = animatorOverrideController;

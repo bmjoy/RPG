@@ -22,10 +22,10 @@ namespace RPGEditor.Saving
         private const string HelpBoxText =
             "Every Save File has a Version Number. When trying to load a save, only files with the current version (or the minimum legacy version) will be valid.";
 
-        private int m_cachedVersionNumber;
-        private int m_cachedMinVersionNumber;
-        private bool m_legacySupport;
-        private GUIStyle m_centeredLabel;
+        private int _cachedVersionNumber;
+        private int _cachedMinVersionNumber;
+        private bool _legacySupport;
+        private GUIStyle _centeredLabel;
 
         #region Window Managment
 
@@ -43,12 +43,12 @@ namespace RPGEditor.Saving
             };
             window.position = windowRect;
 
-            window.m_legacySupport = VersionControl.minFileVersion != VersionControl.currentFileVersion;
-            window.m_cachedVersionNumber = VersionControl.currentFileVersion;
-            window.m_cachedMinVersionNumber = VersionControl.minFileVersion;
+            window._legacySupport = VersionControl.minFileVersion != VersionControl.currentFileVersion;
+            window._cachedVersionNumber = VersionControl.currentFileVersion;
+            window._cachedMinVersionNumber = VersionControl.minFileVersion;
 
-            window.m_centeredLabel = EditorStyles.boldLabel;
-            window.m_centeredLabel.alignment = TextAnchor.MiddleCenter;
+            window._centeredLabel = EditorStyles.boldLabel;
+            window._centeredLabel.alignment = TextAnchor.MiddleCenter;
             window.Show();
         }
 
@@ -64,41 +64,41 @@ namespace RPGEditor.Saving
             //Version Number Editing
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("Current Version NR.", GUILayout.MaxWidth(150));
-            if (m_cachedVersionNumber == 1) GUI.enabled = false;
+            if (_cachedVersionNumber == 1) GUI.enabled = false;
             if (GUILayout.Button("-", GUILayout.MaxWidth(25))) ShiftCurrentVersion(-1);
             if (!GUI.enabled) GUI.enabled = true;
-            EditorGUILayout.LabelField($"{m_cachedVersionNumber}", m_centeredLabel, GUILayout.MaxWidth(35));
+            EditorGUILayout.LabelField($"{_cachedVersionNumber}", _centeredLabel, GUILayout.MaxWidth(35));
             if (GUILayout.Button("+", GUILayout.MaxWidth(25))) ShiftCurrentVersion(1);
             EditorGUILayout.EndHorizontal();
 
             // Legacy Version Number Editing
-            m_legacySupport = EditorGUILayout.Toggle("Backwards Compatibility", m_legacySupport);
-            if (m_legacySupport)
+            _legacySupport = EditorGUILayout.Toggle("Backwards Compatibility", _legacySupport);
+            if (_legacySupport)
             {
-                if (m_cachedMinVersionNumber > m_cachedVersionNumber)
+                if (_cachedMinVersionNumber > _cachedVersionNumber)
                 {
-                    m_cachedMinVersionNumber = m_cachedVersionNumber;
+                    _cachedMinVersionNumber = _cachedVersionNumber;
                 }
 
                 EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.LabelField("Min. Version NR.", GUILayout.MaxWidth(150));
-                if (m_cachedMinVersionNumber <= 1) GUI.enabled = false;
+                if (_cachedMinVersionNumber <= 1) GUI.enabled = false;
                 if (GUILayout.Button("-", GUILayout.MaxWidth(25))) ShiftMinVersion(-1);
                 if (!GUI.enabled) GUI.enabled = true;
-                EditorGUILayout.LabelField($"{m_cachedMinVersionNumber}", m_centeredLabel, GUILayout.MaxWidth(35));
-                if (m_cachedMinVersionNumber >= m_cachedVersionNumber) GUI.enabled = false;
+                EditorGUILayout.LabelField($"{_cachedMinVersionNumber}", _centeredLabel, GUILayout.MaxWidth(35));
+                if (_cachedMinVersionNumber >= _cachedVersionNumber) GUI.enabled = false;
                 if (GUILayout.Button("+", GUILayout.MaxWidth(25))) ShiftMinVersion(1);
                 if (!GUI.enabled) GUI.enabled = true;
                 EditorGUILayout.EndHorizontal();
             }
             else
             {
-                m_cachedMinVersionNumber = m_cachedVersionNumber;
+                _cachedMinVersionNumber = _cachedVersionNumber;
             }
 
             // Apply Changes
-            if (m_cachedVersionNumber == VersionControl.currentFileVersion &&
-                m_cachedMinVersionNumber == VersionControl.minFileVersion)
+            if (_cachedVersionNumber == VersionControl.currentFileVersion &&
+                _cachedMinVersionNumber == VersionControl.minFileVersion)
             {
                 GUI.enabled = false;
             }
@@ -117,23 +117,23 @@ namespace RPGEditor.Saving
 
         private void ShiftCurrentVersion(int increment)
         {
-            m_cachedVersionNumber += increment;
+            _cachedVersionNumber += increment;
 
-            if (!m_legacySupport)
+            if (!_legacySupport)
             {
-                m_cachedMinVersionNumber = m_cachedVersionNumber;
+                _cachedMinVersionNumber = _cachedVersionNumber;
             }
         }
 
         private void ShiftMinVersion(int increment)
         {
-            m_cachedMinVersionNumber += increment;
+            _cachedMinVersionNumber += increment;
         }
 
         private void UpdateVersionNumber()
         {
-            VersionControl.currentFileVersion = m_cachedVersionNumber;
-            VersionControl.minFileVersion = m_cachedMinVersionNumber;
+            VersionControl.currentFileVersion = _cachedVersionNumber;
+            VersionControl.minFileVersion = _cachedMinVersionNumber;
         }
 
         #endregion
