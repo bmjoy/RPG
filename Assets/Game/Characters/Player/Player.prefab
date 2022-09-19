@@ -134,6 +134,14 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 22100000, guid: 1b9a66141841dc3448d5544fb2519d1c, type: 2}
+    - target: {fileID: 4419522053908095799, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+      propertyPath: m_Height
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4419522053908095799, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+      propertyPath: m_Center.y
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 5792556325803201955, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
       propertyPath: max
       value: 160
