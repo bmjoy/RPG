@@ -155,7 +155,7 @@ namespace RPGEngine.Combat
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;
-            float weaponRange = _hasWeapon ? defaultWeapon.Range : defaultWeapon != null ? defaultWeapon.Range : 0;
+            float weaponRange = _hasWeapon ? _currentWeapon.Range : _currentWeapon != null ? _currentWeapon.Range : 0;
             Gizmos.DrawWireSphere(transform.position, weaponRange);
         }
 
@@ -209,7 +209,7 @@ namespace RPGEngine.Combat
         {
             if (!_hasTarget || !_hasWeapon) return;
 
-            if (_timeSinceLastAttack < defaultWeapon.TimeBetweenAttacks) return;
+            if (_timeSinceLastAttack < _currentWeapon.TimeBetweenAttacks) return;
             transform.LookAt(_target.transform);
             TriggerAttack();
         }
