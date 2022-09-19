@@ -3,6 +3,7 @@
 // James LaFritz
 
 using System.IO;
+using System.Linq;
 using RPGEngine.Saving;
 using UnityEditor;
 using UnityEngine;
@@ -43,9 +44,9 @@ namespace RPGEditor.Saving
             };
             window.position = windowRect;
 
-            window._legacySupport = VersionControl.minFileVersion != VersionControl.currentFileVersion;
-            window._cachedVersionNumber = VersionControl.currentFileVersion;
-            window._cachedMinVersionNumber = VersionControl.minFileVersion;
+            window._legacySupport = VersionControl.MinFileVersion != VersionControl.CurrentFileVersion;
+            window._cachedVersionNumber = VersionControl.CurrentFileVersion;
+            window._cachedMinVersionNumber = VersionControl.MinFileVersion;
 
             window._centeredLabel = EditorStyles.boldLabel;
             window._centeredLabel.alignment = TextAnchor.MiddleCenter;
@@ -97,8 +98,8 @@ namespace RPGEditor.Saving
             }
 
             // Apply Changes
-            if (_cachedVersionNumber == VersionControl.currentFileVersion &&
-                _cachedMinVersionNumber == VersionControl.minFileVersion)
+            if (_cachedVersionNumber == VersionControl.CurrentFileVersion &&
+                _cachedMinVersionNumber == VersionControl.MinFileVersion)
             {
                 GUI.enabled = false;
             }
@@ -132,8 +133,31 @@ namespace RPGEditor.Saving
 
         private void UpdateVersionNumber()
         {
-            VersionControl.currentFileVersion = _cachedVersionNumber;
-            VersionControl.minFileVersion = _cachedMinVersionNumber;
+            VersionControl.CurrentFileVersion = _cachedVersionNumber;
+            VersionControl.MinFileVersion = _cachedMinVersionNumber;
+            
+            var files = Directory.EnumerateFiles(Directory.GetCurrentDirectory(), "VersionControl.cs",
+                SearchOption.AllDirectories).Where(f => File.ReadAllText(f).Contains("namespace RPGEngine.Saving"));
+
+            foreach (var file in files)
+            {
+                if (!File.Exists(file)) continue;
+                
+                //HARDCODED VERSION UPDATE (Ugly but saves playing around with reading textfiles)
+                string[] code =
+                {
+                    "namespace RPGEngine.Saving",
+                    "{",
+                    "\tpublic static class VersionControl",
+                    "\t{",
+                    $"\t\tpublic static int CurrentFileVersion = {_cachedVersionNumber};",
+                    $"\t\tpublic static int MinFileVersion = {_cachedMinVersionNumber};",
+                    "\t}",
+                    "}"
+                };
+                
+                File.WriteAllLines(file, code);
+            }
         }
 
         #endregion
