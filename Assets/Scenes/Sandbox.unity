@@ -3384,7 +3384,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.599018, y: 1}
+    m_SensorSize: {x: 1.5992844, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -5401,7 +5401,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.599018, y: 1}
+    m_SensorSize: {x: 1.5992844, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -7039,6 +7039,38 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3449273650737028643, guid: 1c31014c89dadc94d8fcbc93bc5f5d55, type: 3}
   m_PrefabInstance: {fileID: 1196946841}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1214751527
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1214751528}
+  m_Layer: 0
+  m_Name: Pickups
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1214751528
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1214751527}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1447484805}
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1228291711
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7976,6 +8008,68 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7451c03c073dd074795e801bd6368f3c, type: 3}
+--- !u!1001 &1447484804
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1214751528}
+    m_Modifications:
+    - target: {fileID: 1553708594281505987, guid: 1206a105510654f4e833110fa91b0fb3, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1553708594281505987, guid: 1206a105510654f4e833110fa91b0fb3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 31.107061
+      objectReference: {fileID: 0}
+    - target: {fileID: 1553708594281505987, guid: 1206a105510654f4e833110fa91b0fb3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.73
+      objectReference: {fileID: 0}
+    - target: {fileID: 1553708594281505987, guid: 1206a105510654f4e833110fa91b0fb3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 38.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 1553708594281505987, guid: 1206a105510654f4e833110fa91b0fb3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1553708594281505987, guid: 1206a105510654f4e833110fa91b0fb3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1553708594281505987, guid: 1206a105510654f4e833110fa91b0fb3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1553708594281505987, guid: 1206a105510654f4e833110fa91b0fb3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1553708594281505987, guid: 1206a105510654f4e833110fa91b0fb3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1553708594281505987, guid: 1206a105510654f4e833110fa91b0fb3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1553708594281505987, guid: 1206a105510654f4e833110fa91b0fb3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2969988665885939607, guid: 1206a105510654f4e833110fa91b0fb3, type: 3}
+      propertyPath: m_Name
+      value: Sword Pickup
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1206a105510654f4e833110fa91b0fb3, type: 3}
+--- !u!4 &1447484805 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1553708594281505987, guid: 1206a105510654f4e833110fa91b0fb3, type: 3}
+  m_PrefabInstance: {fileID: 1447484804}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1465932098
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11829,7 +11923,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.599018, y: 1}
+    m_SensorSize: {x: 1.5992844, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

@@ -34,7 +34,7 @@ namespace RPGEngine.Combat
 
         [Header("Weapons")]
         [SerializeField]
-        Weapon weapon;
+        private Weapon defaultWeapon;
 
         private bool _hasWeapon;
 
@@ -54,6 +54,8 @@ namespace RPGEngine.Combat
         private bool _hasTarget;
 
         private float _timeSinceLastAttack = math.INFINITY;
+        
+        private Weapon _currentWeapon;
 
         #endregion
 
@@ -117,7 +119,7 @@ namespace RPGEngine.Combat
         /// </summary>
         private void Start()
         {
-            SpawnWeapon();
+            EquipWeapon(defaultWeapon);
         }
 
         /// <summary>
@@ -152,7 +154,7 @@ namespace RPGEngine.Combat
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;
-            float weaponRange = _hasWeapon ? weapon.Range : weapon != null ? weapon.Range : 0;
+            float weaponRange = _hasWeapon ? defaultWeapon.Range : defaultWeapon != null ? defaultWeapon.Range : 0;
             Gizmos.DrawWireSphere(transform.position, weaponRange);
         }
 
@@ -199,14 +201,14 @@ namespace RPGEngine.Combat
         private bool GetIsInRange(Transform targetTransform)
         {
             return targetTransform != null && _hasWeapon &&
-                   Vector3.Distance(transform.position, targetTransform.position) < weapon.Range;
+                   Vector3.Distance(transform.position, targetTransform.position) < _currentWeapon.Range;
         }
 
         private void AttackBehavior()
         {
             if (!_hasTarget || !_hasWeapon) return;
 
-            if (_timeSinceLastAttack < weapon.TimeBetweenAttacks) return;
+            if (_timeSinceLastAttack < defaultWeapon.TimeBetweenAttacks) return;
             transform.LookAt(_target.transform);
             TriggerAttack();
         }
@@ -240,13 +242,14 @@ namespace RPGEngine.Combat
         {
             if (!_hasTarget || !_hasWeapon) return;
 
-            _target.TakeDamage(weapon.Damage);
+            _target.TakeDamage(_currentWeapon.Damage);
         }
 
-        private void SpawnWeapon()
+        public void EquipWeapon(Weapon weapon)
         {
             _hasWeapon = weapon != null;
             if (!_hasWeapon) return;
+            _currentWeapon = weapon;
             weapon.Spawn(rightHandWeaponSlot, _animator);
         }
 

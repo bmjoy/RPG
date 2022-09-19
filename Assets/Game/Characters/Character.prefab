@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1576178308592006924}
   - component: {fileID: 2492308187424828470}
+  - component: {fileID: 1164040594672599156}
   - component: {fileID: 4419522053908095799}
   - component: {fileID: 6863629442196216029}
   - component: {fileID: 146272141616909365}
@@ -60,6 +61,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!54 &1164040594672599156
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6487327744266254528}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!136 &4419522053908095799
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -172,7 +189,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed0da08eefb34868854214beb5cdf027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponRange: 2
-  timeBetweenAttacks: 1
-  weaponDamage: 2
+  defaultWeapon: {fileID: 0}
+  rightHandWeaponSlot: {fileID: 0}
   combatTargetType: 0
