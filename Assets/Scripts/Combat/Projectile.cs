@@ -1,4 +1,4 @@
-using System;
+using RPGEngine.Attributes;
 using UnityEngine;
 
 namespace RPGEngine.Combat
@@ -7,7 +7,7 @@ namespace RPGEngine.Combat
     {
         [SerializeField] private float moveSpeed;
         
-        public Transform target;
+        private Health target;
 
         private void Update()
         {
@@ -16,11 +16,16 @@ namespace RPGEngine.Combat
             transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
         }
 
+        public void SetTarget(Health target)
+        {
+            this.target = target;
+        }
+
         private Vector3 GetAimLocation()
         {
             CapsuleCollider targetCapsuleCollider = target.GetComponent<CapsuleCollider>();
-            if (!targetCapsuleCollider) return target.position;
-            return target.position + targetCapsuleCollider.center;
+            if (!targetCapsuleCollider) return target.transform.position;
+            return target.transform.position + targetCapsuleCollider.center;
         }
     }
 }

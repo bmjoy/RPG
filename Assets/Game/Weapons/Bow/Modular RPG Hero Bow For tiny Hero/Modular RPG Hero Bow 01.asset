@@ -16,5 +16,6 @@ MonoBehaviour:
   animatorOverrideController: {fileID: 22100000, guid: bc40714f59d455542a3ecb8266d7815e, type: 2}
   isRightHanded: 0
   range: 10
-  timeBetweenAttacks: 1
+  timeBetweenAttacks: 1.2
   damage: 7
+  projectile: {fileID: 1349118332736865992, guid: 7eca0259138125e49a8d3ab4b783e792, type: 3}
