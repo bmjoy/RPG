@@ -124,13 +124,13 @@ namespace RPGEngine.Movement
         #region Saving and Loading
 
         [System.Serializable]
-        struct MoverSaveData
+        private struct MoverSaveData
         {
             public SerializableVector3 position;
             public SerializableVector3 rotation;
         }
 
-        struct MoverLoadData
+        private struct MoverLoadData
         {
             public Vector3 position;
             public Vector3 rotation;

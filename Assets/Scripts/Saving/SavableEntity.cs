@@ -3,6 +3,7 @@
 // James LaFritz
 
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using Newtonsoft.Json.Linq;
 using UnityEditor;
 using UnityEngine;
@@ -124,8 +125,11 @@ namespace RPGEngine.Saving
 
         private void LogToken(string component, JToken token)
         {
-            Debug.Log(
-                $"<color=blue>{name}:</color> <color=brown>Capture:</color> <color=darkblue>{component}</color> = <color=teal>{token}</color>");
+            string message = $"<color=blue>{name}:</color> <color=brown>Capture:</color>";
+            message += $" <color=darkblue>{component ?? "null"}</color>";
+            message += $" = <color=teal>{token ?? "null"}</color>";
+            message = Regex.Replace(message, @"\r\n?|\n", "");
+            Debug.Log(message);
         }
 
 
