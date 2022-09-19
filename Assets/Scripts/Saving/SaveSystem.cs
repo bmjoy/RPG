@@ -124,12 +124,12 @@ namespace RPGEngine.Saving
                 currentFileVersion = (int)state["CurrentFileVersion"];
             }
 
-            if (currentFileVersion >= VersionControl.currentFileVersion || currentFileVersion >= minFileVersion)
+            if (currentFileVersion >= VersionControl.CurrentFileVersion || currentFileVersion >= MinFileVersion)
                 return state;
 
             Debug.LogWarning("Save file is from an older version of the game and is not supported. " +
-                             $"Expected version: {VersionControl.currentFileVersion}, " +
-                             $"Minimum Expected version: {minFileVersion}, " +
+                             $"Expected version: {VersionControl.CurrentFileVersion}, " +
+                             $"Minimum Expected version: {MinFileVersion}, " +
                              $"Current version: {currentFileVersion}");
             return new JObject().ToObject<IDictionary<string, JToken>>();
         }
@@ -147,7 +147,7 @@ namespace RPGEngine.Saving
 
         private void CaptureState(IDictionary<string, JToken> state)
         {
-            state["CurrentFileVersion"] = currentFileVersion;
+            state["CurrentFileVersion"] = CurrentFileVersion;
             foreach (SavableEntity entity in FindObjectsOfType<SavableEntity>(includeInactive))
             {
                 state[entity.GetUniqueIdentifier()!] = entity.Capture();
