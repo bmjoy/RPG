@@ -47,6 +47,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 15
+  isHoming: 0
+  timeToLive: 6
+  hitEffect: {fileID: 194666, guid: 268f984e175944440bf68fb3d316673d, type: 3}
+  hitEffectTime: 2
 --- !u!136 &5943810519284277561
 CapsuleCollider:
   m_ObjectHideFlags: 0

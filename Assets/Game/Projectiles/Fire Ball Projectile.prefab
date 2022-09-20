@@ -49,6 +49,8 @@ MonoBehaviour:
   moveSpeed: 5
   isHoming: 1
   timeToLive: 20
+  hitEffect: {fileID: 130848, guid: d16221e794fe16e4e8994a7f8c770561, type: 3}
+  hitEffectTime: 2
 --- !u!136 &5943810519284277561
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -116,6 +118,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 460430, guid: 3b671081e44be1c4aa4355e8ba6e8a5e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 497034, guid: 3b671081e44be1c4aa4355e8ba6e8a5e, type: 3}
+      propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
