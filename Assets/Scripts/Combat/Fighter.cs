@@ -2,10 +2,13 @@
 // 07-03-2022
 // James LaFritz
 
+using System.Collections.Generic;
 using JetBrains.Annotations;
+using Newtonsoft.Json.Linq;
 using RPGEngine.Attributes;
 using RPGEngine.Core;
 using RPGEngine.Movement;
+using RPGEngine.Saving;
 using Unity.Mathematics;
 using UnityEngine;
 using static RPGEngine.Core.StringReferences;
@@ -28,7 +31,7 @@ namespace RPGEngine.Combat
     /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html"/>
     /// </summary>
     [RequireComponent(typeof(Mover), typeof(ActionScheduler))]
-    public class Fighter : MonoBehaviour, IAction
+    public class Fighter : MonoBehaviour, IAction, ISavable
     {
         #region Inspector Fields
 
@@ -120,7 +123,7 @@ namespace RPGEngine.Combat
         /// </summary>
         private void Start()
         {
-            EquipWeapon(defaultWeapon);
+            if (!_currentWeapon) EquipWeapon(defaultWeapon);
         }
 
         /// <summary>
@@ -157,6 +160,31 @@ namespace RPGEngine.Combat
             Gizmos.color = Color.red;
             var weaponRange = _hasWeapon ? _currentWeapon.Range : defaultWeapon != null ? defaultWeapon.Range : 0;
             Gizmos.DrawWireSphere(transform.position, weaponRange);
+        }
+
+        #endregion
+        
+        #region Implementation of IJsonSavable
+
+        /// <inheritdoc />
+        public JToken CaptureAsJToken()
+        {
+            JObject state = new JObject();
+            IDictionary<string, JToken> stateDict = state;
+            stateDict["Current Weapon"] = _currentWeapon.name;
+            return state;
+        }
+
+        /// <inheritdoc />
+        public void RestoreFromJToken(JToken state, int version)
+        {
+            if (state == null || version < 6) return;
+
+            IDictionary<string, JToken> stateDict = state.ToObject<IDictionary<string, JToken>>();
+            if (stateDict == null || stateDict.Count < 1) return;
+            if (stateDict.ContainsKey("Current Weapon"))
+                EquipWeapon(Resources.Load<Weapon>(stateDict["Current Weapon"].ToString()));
+                
         }
 
         #endregion

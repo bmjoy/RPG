@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f2304dd3a9345f0a93d88cd5dd66c7a, type: 3}
-  m_Name: Evil Mage Staff
+  m_Name: Crossbowman Weapon
   m_EditorClassIdentifier: 
   equippedPrefab: {fileID: 0}
   animatorOverrideController: {fileID: 0}
-  isRightHanded: 1
+  isWeaponRightHanded: 1
   range: 10
   timeBetweenAttacks: 2
-  damage: 8
-  projectile: {fileID: 0}
+  damage: 2
+  projectile: {fileID: 4461289873566701149, guid: 6610fd7e6c281464d909e5aa78312c50, type: 3}
+  isProjectileRightHanded: 1

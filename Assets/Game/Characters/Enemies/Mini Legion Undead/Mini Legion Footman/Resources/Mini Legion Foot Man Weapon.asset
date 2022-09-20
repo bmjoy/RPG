@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f2304dd3a9345f0a93d88cd5dd66c7a, type: 3}
-  m_Name: Crossbowman Weapon
+  m_Name: Mini Legion Foot Man Weapon
   m_EditorClassIdentifier: 
   equippedPrefab: {fileID: 0}
-  animatorOverrideController: {fileID: 0}
-  isRightHanded: 0
-  range: 10
+  animatorOverrideController: {fileID: 22100000, guid: 872aa8a819584e54ab25beba33cfc744, type: 2}
+  isWeaponRightHanded: 1
+  range: 3
   timeBetweenAttacks: 2
-  damage: 2
-  projectile: {fileID: 4461289873566701149, guid: 6610fd7e6c281464d909e5aa78312c50, type: 3}
+  damage: 5
+  projectile: {fileID: 0}
+  isProjectileRightHanded: 1

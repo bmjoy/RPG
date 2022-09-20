@@ -80,6 +80,7 @@ namespace RPGEngine.SceneManagement
         public void Load()
         {
             _savingSystem.Load(DefaultSaveFile);
+            _savingSystem.Load(DefaultSaveFile);
         }
 
         public void Save()
