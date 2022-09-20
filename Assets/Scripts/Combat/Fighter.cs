@@ -212,6 +212,7 @@ namespace RPGEngine.Combat
             if (_timeSinceLastAttack < _currentWeapon.TimeBetweenAttacks) return;
             transform.LookAt(_target.transform);
             TriggerAttack();
+            _timeSinceLastAttack = Time.deltaTime;
         }
 
         private void TriggerAttack()
