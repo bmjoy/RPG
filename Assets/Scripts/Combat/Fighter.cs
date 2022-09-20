@@ -244,7 +244,7 @@ namespace RPGEngine.Combat
             if (!_hasTarget || !_hasWeapon) return;
 
             if (_currentWeapon.HasProjectile())
-                _currentWeapon.LaunchProjectile(rightHandWeaponSlot, leftHandWeaponSlot, _target);
+                _currentWeapon.LaunchProjectile(rightHandWeaponSlot, leftHandWeaponSlot, _target, tag);
             else 
                 _target.TakeDamage(_currentWeapon.Damage);
         }

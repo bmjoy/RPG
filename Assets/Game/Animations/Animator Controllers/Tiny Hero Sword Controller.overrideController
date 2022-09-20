@@ -6,16 +6,16 @@ AnimatorOverrideController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Sword and Shield Animator Override Controller
+  m_Name: Tiny Hero Sword Controller
   m_Controller: {fileID: 9100000, guid: 9c776d0d271edd54283e40236ab705bb, type: 2}
   m_Clips:
   - m_OriginalClip: {fileID: 6720303635017113406, guid: 86874c949ddbf954faf07f082c5ec1a3, type: 3}
-    m_OverrideClip: {fileID: -203655887218126122, guid: d1d95e20fccbb14418e6953bce2e294c, type: 3}
+    m_OverrideClip: {fileID: 1827226128182048838, guid: a55f0e8fd223ffc498678ffd76daf802, type: 3}
   - m_OriginalClip: {fileID: -203655887218126122, guid: 762d2630375693847b9f23948b540408, type: 3}
-    m_OverrideClip: {fileID: -203655887218126122, guid: 32bdaa6085d40c5409a1d21a31c6e2dc, type: 3}
+    m_OverrideClip: {fileID: 1827226128182048838, guid: f4b79da8760375b49a1649d8fe1862b6, type: 3}
   - m_OriginalClip: {fileID: -203655887218126122, guid: cee3dd6511557ec48b2334c9f203e6b1, type: 3}
-    m_OverrideClip: {fileID: -203655887218126122, guid: 779c27c97fa91a948a17747e1728408d, type: 3}
+    m_OverrideClip: {fileID: 1827226128182048838, guid: 532b01cdb8a5edc409dce2979cb662ff, type: 3}
   - m_OriginalClip: {fileID: -203655887218126122, guid: 41dc7147085bc3d40b9d59e13fcc96e8, type: 3}
-    m_OverrideClip: {fileID: -203655887218126122, guid: 504fa19a0c5e04947803bce5108bd958, type: 3}
+    m_OverrideClip: {fileID: 1827226128182048838, guid: 428720ce8e984a44aa50cf4b2a6c861c, type: 3}
   - m_OriginalClip: {fileID: -203655887218126122, guid: 309efc32423e4164db36a13eaf163b50, type: 3}
-    m_OverrideClip: {fileID: -203655887218126122, guid: 08f3b47af09e0174f93f2c861388befb, type: 3}
+    m_OverrideClip: {fileID: 1827226128182048838, guid: 97433405b8976da4c898f14da1c9dc25, type: 3}

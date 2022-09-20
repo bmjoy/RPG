@@ -8,7 +8,7 @@ namespace RPGEngine.Combat
         [SerializeField] private float moveSpeed;
         [SerializeField] private bool isHoming;
         [SerializeField] private float timeToLive = 6f;
-        
+
         private Health _target;
         private float _damage;
 
@@ -26,11 +26,12 @@ namespace RPGEngine.Combat
 
         private void OnTriggerEnter(Collider other)
         {
+            if (other.CompareTag(tag)) return;
             Health health = other.GetComponent<Health>();
             if (health)
             {
                 if (health.IsDead) return;
-                _target.TakeDamage(_damage);
+                health.TakeDamage(_damage);
             }
             Destroy(gameObject);
         }

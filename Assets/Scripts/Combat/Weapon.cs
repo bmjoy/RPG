@@ -18,7 +18,7 @@ namespace RPGEngine.Combat
 
         [SerializeField] private GameObject equippedPrefab;
         [SerializeField] private AnimatorOverrideController animatorOverrideController;
-        [SerializeField] private bool isRightHanded = true;
+        [SerializeField] private bool isWeaponRightHanded = true;
 
         [Header("Weapon Attributes")] [SerializeField]
         private float range = 2f;
@@ -27,6 +27,8 @@ namespace RPGEngine.Combat
 
         [Header("Weapon Projectile")] [SerializeField]
         private Projectile projectile;
+
+        [SerializeField] private bool isProjectileRightHanded = true;
 
         public float Range => range;
         public float TimeBetweenAttacks => timeBetweenAttacks;
@@ -37,7 +39,7 @@ namespace RPGEngine.Combat
             DestroyOldWeapon(rightHand, leftHand);
             if (equippedPrefab != null)
             {
-                GameObject weapon = Instantiate(equippedPrefab, GetParent(rightHand, leftHand));
+                GameObject weapon = Instantiate(equippedPrefab, GetParent(rightHand, leftHand, isWeaponRightHanded));
                 weapon.name = WeaponName;
             }
 
@@ -45,10 +47,11 @@ namespace RPGEngine.Combat
             animator.runtimeAnimatorController = animatorOverrideController;
         }
 
-        public void LaunchProjectile(Transform rightHand, Transform leftHand, Health target)
+        public void LaunchProjectile(Transform rightHand, Transform leftHand, Health target, string tag)
         {
             Projectile projectileInstance =
-                Instantiate(projectile, GetParent(rightHand, leftHand).position, Quaternion.identity);
+                Instantiate(projectile, GetParent(rightHand, leftHand, isProjectileRightHanded).position, Quaternion.identity);
+            projectileInstance.tag = tag;
             projectileInstance.SetTarget(target, damage);
         }
 
@@ -57,7 +60,7 @@ namespace RPGEngine.Combat
             return projectile;
         }
 
-        private Transform GetParent(Transform rightHand, Transform leftHand)
+        private Transform GetParent(Transform rightHand, Transform leftHand, bool isRightHanded)
         {
             return isRightHanded ? rightHand : leftHand;
         }

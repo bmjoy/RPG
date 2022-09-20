@@ -14,9 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   equippedPrefab: {fileID: 0}
   animatorOverrideController: {fileID: 0}
-  isWeaponRightHanded: 0
+  isRightHanded: 0
   range: 10
   timeBetweenAttacks: 2
   damage: 2
   projectile: {fileID: 4461289873566701149, guid: 6610fd7e6c281464d909e5aa78312c50, type: 3}
-  isProjectileRightHanded: 0

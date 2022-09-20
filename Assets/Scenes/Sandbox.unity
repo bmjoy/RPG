@@ -7269,6 +7269,7 @@ Transform:
   m_Children:
   - {fileID: 437654276321176348}
   - {fileID: 5677287968071810748}
+  - {fileID: 2088040620}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -12033,6 +12034,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7222841803044733558, guid: e54272278e2b9ec4688d7cd6da8c3479, type: 3}
   m_PrefabInstance: {fileID: 2083767086}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &2088040620 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2342443031782403166, guid: 26de4e26b1d33ae4b9a8bc31f4d671e9, type: 3}
+  m_PrefabInstance: {fileID: 6360632965297792721}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2098282463
 GameObject:
   m_ObjectHideFlags: 0
@@ -12575,6 +12581,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7507004965942696815, guid: c8855e46be4f13e4c8ca5b36cc25a8b6, type: 3}
   m_PrefabInstance: {fileID: 5677287968071810747}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6360632965297792721
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1214751528}
+    m_Modifications:
+    - target: {fileID: 2034046820634926858, guid: 26de4e26b1d33ae4b9a8bc31f4d671e9, type: 3}
+      propertyPath: m_Name
+      value: Tiny Hero Wand Pick Up
+      objectReference: {fileID: 0}
+    - target: {fileID: 2342443031782403166, guid: 26de4e26b1d33ae4b9a8bc31f4d671e9, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2342443031782403166, guid: 26de4e26b1d33ae4b9a8bc31f4d671e9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 29.870667
+      objectReference: {fileID: 0}
+    - target: {fileID: 2342443031782403166, guid: 26de4e26b1d33ae4b9a8bc31f4d671e9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.519865
+      objectReference: {fileID: 0}
+    - target: {fileID: 2342443031782403166, guid: 26de4e26b1d33ae4b9a8bc31f4d671e9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 35.19319
+      objectReference: {fileID: 0}
+    - target: {fileID: 2342443031782403166, guid: 26de4e26b1d33ae4b9a8bc31f4d671e9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2342443031782403166, guid: 26de4e26b1d33ae4b9a8bc31f4d671e9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2342443031782403166, guid: 26de4e26b1d33ae4b9a8bc31f4d671e9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2342443031782403166, guid: 26de4e26b1d33ae4b9a8bc31f4d671e9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2342443031782403166, guid: 26de4e26b1d33ae4b9a8bc31f4d671e9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2342443031782403166, guid: 26de4e26b1d33ae4b9a8bc31f4d671e9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2342443031782403166, guid: 26de4e26b1d33ae4b9a8bc31f4d671e9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 26de4e26b1d33ae4b9a8bc31f4d671e9, type: 3}
 --- !u!1001 &7116801669906230379
 PrefabInstance:
   m_ObjectHideFlags: 0
