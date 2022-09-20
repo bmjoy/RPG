@@ -256,9 +256,9 @@ namespace RPGEngine.Combat
 
         public void EquipWeapon(Weapon weapon)
         {
-            _hasWeapon = weapon != null;
-            if (!_hasWeapon) return;
+            if (!weapon) return;
             _currentWeapon = weapon;
+            _hasWeapon = true;
             weapon.Spawn(rightHandWeaponSlot, leftHandWeaponSlot,  _animator);
         }
 
