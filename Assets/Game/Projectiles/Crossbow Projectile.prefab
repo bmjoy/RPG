@@ -19,6 +19,10 @@ PrefabInstance:
       propertyPath: m_Parameters.colorGradient.key0.r
       value: 0.10849059
       objectReference: {fileID: 0}
+    - target: {fileID: 1349118332736865992, guid: 7eca0259138125e49a8d3ab4b783e792, type: 3}
+      propertyPath: isHoming
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3073704603831552971, guid: 7eca0259138125e49a8d3ab4b783e792, type: 3}
       propertyPath: m_RootOrder
       value: 0

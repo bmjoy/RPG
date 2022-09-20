@@ -18,7 +18,7 @@ namespace RPGEngine.Combat
 
         [SerializeField] private GameObject equippedPrefab;
         [SerializeField] private AnimatorOverrideController animatorOverrideController;
-        [SerializeField] private bool isWeaponRightHanded = true;
+        [SerializeField] private bool isRightHanded = true;
 
         [Header("Weapon Attributes")] [SerializeField]
         private float range = 2f;
@@ -27,7 +27,6 @@ namespace RPGEngine.Combat
 
         [Header("Weapon Projectile")] [SerializeField]
         private Projectile projectile;
-        [SerializeField] private bool isProjectileRightHanded = true;
 
         public float Range => range;
         public float TimeBetweenAttacks => timeBetweenAttacks;
@@ -38,7 +37,7 @@ namespace RPGEngine.Combat
             DestroyOldWeapon(rightHand, leftHand);
             if (equippedPrefab != null)
             {
-                GameObject weapon = Instantiate(equippedPrefab, GetParent(rightHand, leftHand, isWeaponRightHanded));
+                GameObject weapon = Instantiate(equippedPrefab, GetParent(rightHand, leftHand));
                 weapon.name = WeaponName;
             }
 
@@ -49,7 +48,7 @@ namespace RPGEngine.Combat
         public void LaunchProjectile(Transform rightHand, Transform leftHand, Health target)
         {
             Projectile projectileInstance =
-                Instantiate(projectile, GetParent(rightHand, leftHand, isProjectileRightHanded).position, Quaternion.identity);
+                Instantiate(projectile, GetParent(rightHand, leftHand).position, Quaternion.identity);
             projectileInstance.SetTarget(target, damage);
         }
 
@@ -58,15 +57,16 @@ namespace RPGEngine.Combat
             return projectile;
         }
 
-        private Transform GetParent(Transform rightHand, Transform leftHand, bool isRightHanded)
+        private Transform GetParent(Transform rightHand, Transform leftHand)
         {
             return isRightHanded ? rightHand : leftHand;
         }
 
         private static void DestroyOldWeapon(Transform rightHand, Transform leftHand)
         {
-            Transform oldWeapon = rightHand.Find(WeaponName);
-            if (!oldWeapon) oldWeapon = leftHand.Find(WeaponName);
+            Transform oldWeapon = null;
+            if (rightHand) oldWeapon = rightHand.Find(WeaponName);
+            if (!oldWeapon && leftHand) oldWeapon = leftHand.Find(WeaponName);
             if (!oldWeapon) return;
             oldWeapon.name = "DESTROYING";
             Destroy(oldWeapon.gameObject);

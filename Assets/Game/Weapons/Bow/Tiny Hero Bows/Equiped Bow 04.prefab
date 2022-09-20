@@ -83,5 +83,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Equiped Bow 04
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3734222396266808090, guid: 20aa9eda6744b5247945d83056792fbf, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 20aa9eda6744b5247945d83056792fbf, type: 3}
