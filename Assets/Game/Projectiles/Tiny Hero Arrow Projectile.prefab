@@ -110,6 +110,14 @@ PrefabInstance:
       propertyPath: moveSpeed
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 1349118332736865992, guid: 7eca0259138125e49a8d3ab4b783e792, type: 3}
+      propertyPath: destroyOnHit.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1349118332736865992, guid: 7eca0259138125e49a8d3ab4b783e792, type: 3}
+      propertyPath: destroyOnHit.Array.data[0]
+      value: 
+      objectReference: {fileID: 5605444366308757065}
     - target: {fileID: 3073704603831552971, guid: 7eca0259138125e49a8d3ab4b783e792, type: 3}
       propertyPath: m_RootOrder
       value: 0

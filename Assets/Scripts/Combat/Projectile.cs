@@ -7,17 +7,12 @@ namespace RPGEngine.Combat
     {
         [SerializeField] private float moveSpeed;
         [SerializeField] private bool isHoming;
-        [SerializeField] private float timeToLive = 6f;
         [SerializeField] private GameObject hitEffect;
-        [SerializeField] private float hitEffectTime = 4f;
+        [SerializeField] private GameObject[] destroyOnHit;
+        [SerializeField] private float lifeAfterImpact = 1;
 
         private Health _target;
         private float _damage;
-
-        private void Start()
-        {
-            Destroy(gameObject, timeToLive);
-        }
 
         private void Update()
         {
@@ -36,12 +31,16 @@ namespace RPGEngine.Combat
                 health.TakeDamage(_damage);
             }
 
-            if (hitEffect)
+            moveSpeed = 0f;
+
+            if (hitEffect) Instantiate(hitEffect, GetAimLocation(other.transform), Quaternion.identity);
+
+            foreach (GameObject toDestroy in destroyOnHit)
             {
-                GameObject hit = Instantiate(hitEffect, GetAimLocation(other.transform), Quaternion.identity);
-                Destroy(hit, hitEffectTime);
+                Destroy(toDestroy);
             }
-            Destroy(gameObject);
+            
+            Destroy(gameObject, lifeAfterImpact);
         }
 
         public void SetTarget(Health target, float damage)

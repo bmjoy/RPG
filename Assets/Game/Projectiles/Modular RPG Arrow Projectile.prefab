@@ -7,6 +7,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1349118332736865992, guid: 7eca0259138125e49a8d3ab4b783e792, type: 3}
+      propertyPath: destroyOnHit.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1349118332736865992, guid: 7eca0259138125e49a8d3ab4b783e792, type: 3}
+      propertyPath: destroyOnHit.Array.data[0]
+      value: 
+      objectReference: {fileID: 7881435644119694580}
     - target: {fileID: 3073704603831552971, guid: 7eca0259138125e49a8d3ab4b783e792, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -50,6 +58,10 @@ PrefabInstance:
     - target: {fileID: 3073704603831552971, guid: 7eca0259138125e49a8d3ab4b783e792, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3640626551083290865, guid: 7eca0259138125e49a8d3ab4b783e792, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5426452312171023505, guid: 7eca0259138125e49a8d3ab4b783e792, type: 3}
       propertyPath: m_Name
@@ -131,3 +143,8 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 532c7a2f80133ed41b42e2b7a36ecc44, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06748c8fe4cc92844a1a1c60c7887a67, type: 3}
+--- !u!1 &7881435644119694580 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 06748c8fe4cc92844a1a1c60c7887a67, type: 3}
+  m_PrefabInstance: {fileID: 7881435644119661140}
+  m_PrefabAsset: {fileID: 0}
