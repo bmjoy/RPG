@@ -65,13 +65,13 @@ namespace RPGEngine.Cinematics
 
         #region Implementation of ISaveable
 
-        /// <inheritdoc />
+        /// <inheritdoc cref="ISavable" />
         public object CaptureState()
         {
             return triggered;
         }
 
-        /// <inheritdoc />
+        /// <inheritdoc cref="ISavable"/>
         public void RestoreState(object state, int version)
         {
             triggered = (bool)state;

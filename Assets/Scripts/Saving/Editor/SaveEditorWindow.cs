@@ -143,7 +143,7 @@ namespace RPGEditor.Saving
             {
                 if (!File.Exists(file)) continue;
                 
-                //HARDCODED VERSION UPDATE (Ugly but saves playing around with reading textfiles)
+                //HARDCODED VERSION UPDATE (Ugly but saves playing around with reading text files)
                 string[] code =
                 {
                     "namespace RPGEngine.Saving",

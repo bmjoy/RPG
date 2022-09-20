@@ -33,7 +33,7 @@ namespace RPGEngine.Saving
         /// </summary>
         /// <param name="saveFile">The name of the save file without extensions.</param>
         /// <param name="state"><a href="https://www.newtonsoft.com/json/help/html/T_Newtonsoft_Json_Linq_JObject.htm">JObject</a> that represents the state.</param>
-        public abstract void SavetoFile(string saveFile, JObject state);
+        public abstract void SaveToFile(string saveFile, JObject state);
 
         /// <summary>
         /// Load the state from a file.

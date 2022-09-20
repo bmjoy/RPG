@@ -2,7 +2,7 @@ using UnityEditor;
 using UnityEngine;
 using static RPGEngine.Core.StringReferences;
 
-namespace RPGEditor.Core
+namespace RPGEditor.Core.Editor
 {
     public class StringReferencesEditor : EditorWindow
     {
@@ -19,10 +19,10 @@ namespace RPGEditor.Core
             {
                 GUILayout.Label("Animator Parameters", EditorStyles.boldLabel);
 
-                forwardSpeedFloat = EditorGUILayout.TextField("Forward Speed Float", forwardSpeedFloat);
-                attackTrigger = EditorGUILayout.TextField("Attack Trigger", attackTrigger);
-                stopAttackTrigger = EditorGUILayout.TextField("Stop Attack Trigger", stopAttackTrigger);
-                deathTrigger = EditorGUILayout.TextField("Death Trigger", deathTrigger);
+                ForwardSpeedFloat = EditorGUILayout.TextField("Forward Speed Float", ForwardSpeedFloat);
+                AttackTrigger = EditorGUILayout.TextField("Attack Trigger", AttackTrigger);
+                StopAttackTrigger = EditorGUILayout.TextField("Stop Attack Trigger", StopAttackTrigger);
+                DeathTrigger = EditorGUILayout.TextField("Death Trigger", DeathTrigger);
             }
         }
     }

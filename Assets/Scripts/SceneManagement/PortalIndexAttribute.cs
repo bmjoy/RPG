@@ -24,6 +24,6 @@ namespace RPGEngine.SceneManagement
         /// The name of the serialized Scene property to use.
         /// Must be an integer.
         /// </summary>
-        public string scene;
+        public string Scene;
     }
 }

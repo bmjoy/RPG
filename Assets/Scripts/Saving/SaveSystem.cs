@@ -108,27 +108,27 @@ namespace RPGEngine.Saving
 
         private IDictionary<string, JToken> LoadFile(string saveFile)
         {
-            if (strategy == null)
+            if (!strategy)
             {
                 Debug.LogError("Saving strategy is null. Please set a saving strategy in the inspector.");
-                new JObject().ToObject<IDictionary<string, JToken>>();
+                return new JObject().ToObject<IDictionary<string, JToken>>();
             }
 
             JObject stateObject = strategy.LoadFromFile(saveFile);
-
             IDictionary<string, JToken> state = stateObject.ToObject<JObject>();
-
+            if (state == null) return new JObject().ToObject<IDictionary<string, JToken>>();
+            
             int currentFileVersion = 0;
             if (state.ContainsKey("CurrentFileVersion"))
             {
                 currentFileVersion = (int)state["CurrentFileVersion"];
             }
 
-            if (currentFileVersion >= VersionControl.CurrentFileVersion || currentFileVersion >= MinFileVersion)
+            if (currentFileVersion >= CurrentFileVersion || currentFileVersion >= MinFileVersion)
                 return state;
 
             Debug.LogWarning("Save file is from an older version of the game and is not supported. " +
-                             $"Expected version: {VersionControl.CurrentFileVersion}, " +
+                             $"Expected version: {CurrentFileVersion}, " +
                              $"Minimum Expected version: {MinFileVersion}, " +
                              $"Current version: {currentFileVersion}");
             return new JObject().ToObject<IDictionary<string, JToken>>();
@@ -136,13 +136,13 @@ namespace RPGEngine.Saving
 
         private void SaveFile(string saveFile, IDictionary<string, JToken> state)
         {
-            if (strategy == null)
+            if (!strategy)
             {
                 Debug.LogError("Saving strategy is null. Please set a saving strategy in the inspector.");
                 return;
             }
 
-            strategy.SavetoFile(saveFile, JObject.FromObject(state!));
+            strategy.SaveToFile(saveFile, JObject.FromObject(state!));
         }
 
         private void CaptureState(IDictionary<string, JToken> state)

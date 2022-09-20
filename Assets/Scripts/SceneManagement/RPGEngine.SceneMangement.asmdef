@@ -1,6 +1,6 @@
 {
     "name": "RPGEngine.SceneMangement",
-    "rootNamespace": "RPGEngine.SceneMangement",
+    "rootNamespace": "RPGEngine.SceneManagement",
     "references": [
         "GUID:af582b87786f1fa4e9c93b3740c979c3",
         "GUID:bdbbfebdee7cf194a959b5d651eb5398",

@@ -41,7 +41,7 @@ namespace RPGEngine.Core
         /// </summary>
         private void LateUpdate()
         {
-            if (target == null) return;
+            if (!target) return;
 
             transform.position = target.position;
         }

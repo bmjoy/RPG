@@ -29,7 +29,7 @@ namespace RPGEngine.Saving
         public override string Extension => ".savText";
 
         /// <inheritdoc />
-        public override void SavetoFile(string saveFile, JObject state)
+        public override void SaveToFile(string saveFile, JObject state)
         {
             string path = GetPath(saveFile);
             Debug.Log($"Saving to {path} ");
@@ -98,7 +98,7 @@ namespace RPGEngine.Saving
         {
             SerializedObject serializedObject = new SerializedObject(this);
             SerializedProperty property = serializedObject.FindProperty("key");
-            property.stringValue = System.Guid.NewGuid().ToString();
+            property.stringValue = Guid.NewGuid().ToString();
             serializedObject.ApplyModifiedProperties();
         }
 

@@ -6,9 +6,9 @@ namespace RPGEngine.Core
 {
     public static class StringReferences
     {
-        public static string forwardSpeedFloat = "ForwardSpeed";
-        public static string attackTrigger = "Attack";
-        public static string stopAttackTrigger = "StopAttack";
-        public static string deathTrigger = "Die";
+        public static string ForwardSpeedFloat = "ForwardSpeed";
+        public static string AttackTrigger = "Attack";
+        public static string StopAttackTrigger = "StopAttack";
+        public static string DeathTrigger = "Die";
     }
 }

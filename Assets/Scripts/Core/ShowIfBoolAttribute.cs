@@ -15,12 +15,12 @@ namespace RPGEngine.Core
         /// <summary>
         /// The name of the serialized bool property to use.
         /// </summary>
-        public string boolName;
+        public readonly string BoolName;
 
         /// <summary>
         /// The value of the bool to show this property.
         /// </summary>
-        public bool show;
+        public readonly bool Show;
 
         /// <summary>
         /// Show/Hide a field based on a bool value in the same script.
@@ -40,8 +40,8 @@ namespace RPGEngine.Core
         /// </example>
         public ShowIfBoolAttribute(string boolName, bool show = true)
         {
-            this.boolName = boolName;
-            this.show = show;
+            BoolName = boolName;
+            Show = show;
         }
     }
 }

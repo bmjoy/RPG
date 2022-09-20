@@ -13,7 +13,7 @@ namespace RPGEngine.SceneManagement
     public struct DestinationPortal
     {
         [Scene] public int scene;
-        [PortalIndex(scene = "scene")] public int portal;
+        [PortalIndex(Scene = "scene")] public int portal;
     }
 
     /// <summary>
@@ -27,7 +27,7 @@ namespace RPGEngine.SceneManagement
     /// </summary>
     public class Portal : MonoBehaviour
     {
-        [SerializeField] private int portalIndex = 0;
+        [SerializeField] private int portalIndex;
         [SerializeField] private Transform spawnPoint;
         [SerializeField] private DestinationPortal destination;
         [SerializeField] float fadeOutTime = 1f;
@@ -91,7 +91,7 @@ namespace RPGEngine.SceneManagement
             }
 
             Fader fader = FindObjectOfType<Fader>();
-            bool hasFader = fader != null;
+            bool hasFader = fader;
 
             transform.parent = null;
             DontDestroyOnLoad(gameObject);
@@ -99,7 +99,7 @@ namespace RPGEngine.SceneManagement
             if (hasFader) yield return fader.FadeOut(fadeOutTime);
 
             SavingWrapper savingWrapper = FindObjectOfType<SavingWrapper>();
-            bool hasSaving = savingWrapper != null;
+            bool hasSaving = savingWrapper;
             if (hasSaving) savingWrapper.Save();
 
             yield return SceneManager.LoadSceneAsync(destination.scene);
@@ -139,12 +139,12 @@ namespace RPGEngine.SceneManagement
 
         private void UpdatePlayer(Portal otherPortal)
         {
-            if (otherPortal == null) return;
+            if (!otherPortal) return;
 
             GameObject player = GameObject.FindWithTag("Player");
-            if (player == null) return;
+            if (!player) return;
             NavMeshAgent playerNaveMesh = player.GetComponent<NavMeshAgent>();
-            bool hasNavMesh = playerNaveMesh != null && playerNaveMesh.isActiveAndEnabled;
+            bool hasNavMesh = playerNaveMesh && playerNaveMesh.isActiveAndEnabled;
 
             if (hasNavMesh) playerNaveMesh.enabled = false;
             player.transform.position = otherPortal.spawnPoint.position;

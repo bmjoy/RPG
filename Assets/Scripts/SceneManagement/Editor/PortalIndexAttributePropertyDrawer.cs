@@ -5,6 +5,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using RPGEditor.Core;
+using RPGEditor.Core.Editor;
 using RPGEngine.SceneManagement;
 using UnityEditor;
 using UnityEditor.SceneManagement;
@@ -22,7 +23,7 @@ namespace RPGEditor.SceneManagement
     public class PortalIndexAttributePropertyDrawer : PropertyDrawer
     {
         /// <summary>
-        /// The errormessage
+        /// The error message
         /// </summary>
         private string _errorMessage;
 
@@ -49,9 +50,9 @@ namespace RPGEditor.SceneManagement
             }
 
             PortalIndexAttribute attr = attribute as PortalIndexAttribute;
-
+            if (attr == null) return; 
             SerializedProperty sceneProp =
-                PropertyDrawerHelper.FindProperty(property, attr.scene, out _errorMessage);
+                PropertyDrawerHelper.FindProperty(property, attr.Scene, out _errorMessage);
             if (sceneProp == null)
             {
                 Debug.LogError(_errorMessage);

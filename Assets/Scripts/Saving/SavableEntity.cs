@@ -82,9 +82,10 @@ namespace RPGEngine.Saving
         public void Restore(JToken state, int currentFileVersion)
         {
             IDictionary<string, JToken> stateDict = state.ToObject<JObject>();
+            if (stateDict == null) return;
             foreach (ISavable jsonSavable in GetComponents<ISavable>())
             {
-                string component = jsonSavable.GetType().ToString();
+                var component = jsonSavable.GetType().ToString();
                 if (!stateDict.ContainsKey(component!)) continue;
                 JToken token = stateDict[component];
                 LogToken(component, token);
@@ -140,7 +141,7 @@ namespace RPGEngine.Saving
 
             if (GlobalLookup[candidate] == this) return true;
 
-            if (GlobalLookup[candidate] == null)
+            if (!GlobalLookup[candidate])
             {
                 GlobalLookup.Remove(candidate);
                 return true;

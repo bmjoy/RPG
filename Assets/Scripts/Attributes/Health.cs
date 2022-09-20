@@ -83,7 +83,7 @@ namespace RPGEngine.Attributes
 
             if (_hasAnimator)
             {
-                _dieHash = Animator.StringToHash(deathTrigger);
+                _dieHash = Animator.StringToHash(DeathTrigger);
             }
         }
 

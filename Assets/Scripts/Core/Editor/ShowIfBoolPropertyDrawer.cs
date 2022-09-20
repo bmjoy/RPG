@@ -6,7 +6,7 @@ using RPGEngine.Core;
 using UnityEditor;
 using UnityEngine;
 
-namespace RPGEditor.Core
+namespace RPGEditor.Core.Editor
 {
     /// <summary>
     /// The show if bool property drawer class
@@ -26,8 +26,8 @@ namespace RPGEditor.Core
         public override void OnGUI(Rect position, SerializedProperty property,
                                    GUIContent label)
         {
-            ShowIfBoolAttribute attr = attribute as ShowIfBoolAttribute;
-            SerializedProperty showIfProp = PropertyDrawerHelper.FindProperty(property, attr.boolName, out _errorMessage);
+            if (attribute is not ShowIfBoolAttribute attr) return;
+            SerializedProperty showIfProp = PropertyDrawerHelper.FindProperty(property, attr.BoolName, out _errorMessage);
             if (showIfProp == null)
             {
                 EditorGUI.LabelField(position, label.text, _errorMessage);
@@ -38,8 +38,8 @@ namespace RPGEditor.Core
             EditorGUI.indentLevel = 0;
             using (new EditorGUI.PropertyScope(position, label, property))
             {
-                if ((showIfProp.boolValue && attr.show) ||
-                    (!showIfProp.boolValue && !attr.show))
+                if ((showIfProp.boolValue && attr.Show) ||
+                    (!showIfProp.boolValue && !attr.Show))
                 {
                     EditorGUI.PropertyField(position, property, label, true);
                 }
@@ -51,11 +51,11 @@ namespace RPGEditor.Core
         /// <inheritdoc />
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
-            ShowIfBoolAttribute attr = attribute as ShowIfBoolAttribute;
-            SerializedProperty showIfProp = PropertyDrawerHelper.FindProperty(property, attr.boolName, out _errorMessage);
+            if (attribute is not ShowIfBoolAttribute attr) return base.GetPropertyHeight(property, label);
+            SerializedProperty showIfProp = PropertyDrawerHelper.FindProperty(property, attr.BoolName, out _errorMessage);
             if (showIfProp == null) return base.GetPropertyHeight(property, label);
-            if ((showIfProp.boolValue && attr.show) ||
-                (!showIfProp.boolValue && !attr.show))
+            if ((showIfProp.boolValue && attr.Show) ||
+                (!showIfProp.boolValue && !attr.Show))
                 return EditorGUI.GetPropertyHeight(property, label, true);
             return -EditorGUIUtility.standardVerticalSpacing;
         }

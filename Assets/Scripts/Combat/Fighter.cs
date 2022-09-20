@@ -103,8 +103,8 @@ namespace RPGEngine.Combat
 
             if (_hasAnimator)
             {
-                _attackHash = Animator.StringToHash(attackTrigger);
-                _stopAttackHash = Animator.StringToHash(stopAttackTrigger);
+                _attackHash = Animator.StringToHash(AttackTrigger);
+                _stopAttackHash = Animator.StringToHash(StopAttackTrigger);
             }
 
             string errorObject = "";

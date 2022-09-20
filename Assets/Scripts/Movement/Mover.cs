@@ -3,7 +3,6 @@
 // James LaFritz
 
 using System.Collections.Generic;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RPGEngine.Attributes;
 using RPGEngine.Core;
@@ -75,7 +74,7 @@ namespace RPGEngine.Movement
 
             if (_hasAnimator)
             {
-                _forwardSpeed = Animator.StringToHash(forwardSpeedFloat);
+                _forwardSpeed = Animator.StringToHash(ForwardSpeedFloat);
             }
 
             _navMeshAgent = GetComponent<NavMeshAgent>();
@@ -132,8 +131,8 @@ namespace RPGEngine.Movement
 
         private struct MoverLoadData
         {
-            public Vector3 position;
-            public Vector3 rotation;
+            public Vector3 Position;
+            public Vector3 Rotation;
         }
 
         #region Implementation of IJsonSavable
@@ -160,22 +159,22 @@ namespace RPGEngine.Movement
                 case 4:
                 {
                     MoverSaveData sd = state.ToObject<MoverSaveData>();
-                    data.position = sd.position.ToVector();
-                    data.rotation = sd.rotation.ToVector();
+                    data.Position = sd.position.ToVector();
+                    data.Rotation = sd.rotation.ToVector();
                     break;
                 }
                 case > 4:
                     data = new MoverLoadData()
                     {
-                        position = state.ToObject<MoverLoadData>().position,
-                        rotation = state.ToObject<MoverLoadData>().rotation
+                        Position = state.ToObject<MoverLoadData>().Position,
+                        Rotation = state.ToObject<MoverLoadData>().Rotation
                     };
                     break;
             }
 
             Transform transform1 = transform;
-            transform1.position = data.position;
-            transform1.eulerAngles = data.rotation;
+            transform1.position = data.Position;
+            transform1.eulerAngles = data.Rotation;
 
             if (_hasAgent) _navMeshAgent.enabled = true;
         }

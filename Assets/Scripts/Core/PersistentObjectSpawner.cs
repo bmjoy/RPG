@@ -1,4 +1,4 @@
-// PeristentObjectSpawner.cs
+// PersistentObjectSpawner.cs
 // 07-13-2022
 // James LaFritz
 

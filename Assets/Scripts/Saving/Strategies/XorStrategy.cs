@@ -4,7 +4,6 @@
 
 using System.IO;
 using System.Text;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 
@@ -30,7 +29,7 @@ namespace RPGEngine.Saving
         public override string Extension => ".sav";
 
         /// <inheritdoc />
-        public override void SavetoFile(string saveFile, JObject state)
+        public override void SaveToFile(string saveFile, JObject state)
         {
             string path = GetPath(saveFile);
             Debug.Log($"Saving to {path} ");

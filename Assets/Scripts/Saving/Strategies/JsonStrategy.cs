@@ -21,7 +21,7 @@ namespace RPGEngine.Saving
         public override string Extension => ".json";
 
         /// <inheritdoc />
-        public override void SavetoFile(string saveFile, JObject state)
+        public override void SaveToFile(string saveFile, JObject state)
         {
             string path = GetPath(saveFile);
             Debug.Log($"Saving to {path} ");

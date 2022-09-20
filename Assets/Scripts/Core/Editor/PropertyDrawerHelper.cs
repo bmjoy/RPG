@@ -4,7 +4,7 @@
 
 using UnityEditor;
 
-namespace RPGEditor.Core
+namespace RPGEditor.Core.Editor
 {
     /// <summary>
     /// Collection of helper methods when coding a PropertyDrawer editor.
@@ -24,7 +24,7 @@ namespace RPGEditor.Core
             SerializedProperty prop = property.serializedObject.FindProperty(propertyName);
             errorMessage = string.Empty;
             if (prop != null) return prop;
-            string propPath =
+            var propPath =
                 property.propertyPath.Substring(
                     0, property.propertyPath.IndexOf($".{property.name}", System.StringComparison.Ordinal));
             prop = property.serializedObject.FindProperty($"{propPath}.{propertyName}");

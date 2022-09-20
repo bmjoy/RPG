@@ -6,7 +6,7 @@ using RPGEngine.Core;
 using UnityEditor;
 using UnityEngine;
 
-namespace RPGEditor.Core
+namespace RPGEditor.Core.Editor
 {
     /// <summary>
     /// A property drawer for ReadOnlyAttribute
