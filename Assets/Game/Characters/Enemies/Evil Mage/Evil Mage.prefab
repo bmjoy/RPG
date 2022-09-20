@@ -1,5 +1,80 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &5792570310321176046
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 7230299043453838596}
+    m_Modifications:
+    - target: {fileID: 100030, guid: c494d9eff8644a94683dfd34b29171e7, type: 3}
+      propertyPath: m_Name
+      value: EvilMageMesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 400030, guid: c494d9eff8644a94683dfd34b29171e7, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400030, guid: c494d9eff8644a94683dfd34b29171e7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400030, guid: c494d9eff8644a94683dfd34b29171e7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400030, guid: c494d9eff8644a94683dfd34b29171e7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400030, guid: c494d9eff8644a94683dfd34b29171e7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400030, guid: c494d9eff8644a94683dfd34b29171e7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400030, guid: c494d9eff8644a94683dfd34b29171e7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400030, guid: c494d9eff8644a94683dfd34b29171e7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400030, guid: c494d9eff8644a94683dfd34b29171e7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400030, guid: c494d9eff8644a94683dfd34b29171e7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400030, guid: c494d9eff8644a94683dfd34b29171e7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 13700000, guid: c494d9eff8644a94683dfd34b29171e7, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 94d5d665d0a8c574597f451ca909d580, type: 2}
+    - target: {fileID: 13700002, guid: c494d9eff8644a94683dfd34b29171e7, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 94d5d665d0a8c574597f451ca909d580, type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c494d9eff8644a94683dfd34b29171e7, type: 3}
+--- !u!4 &5792570310321301268 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400122, guid: c494d9eff8644a94683dfd34b29171e7, type: 3}
+  m_PrefabInstance: {fileID: 5792570310321176046}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5792570310321301366 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400024, guid: c494d9eff8644a94683dfd34b29171e7, type: 3}
+  m_PrefabInstance: {fileID: 5792570310321176046}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8180959688631046664
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -54,18 +129,18 @@ PrefabInstance:
     - target: {fileID: 2492308187424828470, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
       propertyPath: m_Avatar
       value: 
-      objectReference: {fileID: 9000000, guid: d06688f72e50aaa48b0dea3435bfe092, type: 3}
+      objectReference: {fileID: 9000000, guid: c494d9eff8644a94683dfd34b29171e7, type: 3}
     - target: {fileID: 2492308187424828470, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 22100000, guid: 872aa8a819584e54ab25beba33cfc744, type: 2}
+      objectReference: {fileID: 22100000, guid: b66dd254b9cfd914f983688d61f0bcec, type: 2}
     - target: {fileID: 5792556325803201955, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
       propertyPath: max
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6487327744266254528, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
       propertyPath: m_Name
-      value: Enemy
+      value: Evil Mage
       objectReference: {fileID: 0}
     - target: {fileID: 6863629442196216029, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
       propertyPath: m_Speed
@@ -94,11 +169,19 @@ PrefabInstance:
     - target: {fileID: 7217525226749447344, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
       propertyPath: defaultWeapon
       value: 
-      objectReference: {fileID: 11400000, guid: 91fcd7fdb83107c43878449c8a27fd63, type: 2}
+      objectReference: {fileID: 11400000, guid: 622acc48410f27e40b0c11a6030e9fb7, type: 2}
+    - target: {fileID: 7217525226749447344, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+      propertyPath: leftHandWeaponSlot
+      value: 
+      objectReference: {fileID: 5792570310321301366}
     - target: {fileID: 7217525226749447344, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
       propertyPath: timeBetweenAttacks
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7217525226749447344, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+      propertyPath: rightHandWeaponSlot
+      value: 
+      objectReference: {fileID: 5792570310321301268}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
 --- !u!1 &3138733273306524360 stripped
@@ -119,10 +202,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   combatTargetType: 0
-  chaseRange: 6
+  chaseRange: 12
   chaseSpeed: 5.5
   lookTime: 4
   patrolPath: {fileID: 0}
   patrolSpeed: 0.5
   waypointTolerance: 0.3
   waypointTime: 3
+--- !u!4 &7230299043453838596 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1576178308592006924, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+  m_PrefabInstance: {fileID: 8180959688631046664}
+  m_PrefabAsset: {fileID: 0}
