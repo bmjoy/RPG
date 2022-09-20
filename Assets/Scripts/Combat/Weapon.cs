@@ -43,8 +43,12 @@ namespace RPGEngine.Combat
                 weapon.name = WeaponName;
             }
 
-            if (animator == null || animatorOverrideController == null) return;
-            animator.runtimeAnimatorController = animatorOverrideController;
+            if (!animator) return;
+            if (animatorOverrideController) animator.runtimeAnimatorController = animatorOverrideController;
+            else if (animator.runtimeAnimatorController is AnimatorOverrideController overrideController)
+            { 
+                animator.runtimeAnimatorController = overrideController.runtimeAnimatorController;
+            }
         }
 
         public void LaunchProjectile(Transform rightHand, Transform leftHand, Health target, string tag)
