@@ -19,7 +19,7 @@ namespace RPGEngine.Combat
 
         private void OnTriggerEnter(Collider other)
         {
-            if (!other.GetComponent<Health>() != _target) return;
+            if (other.GetComponent<Health>() != _target) return;
             _target.TakeDamage(_damage);
             Destroy(gameObject);
         }

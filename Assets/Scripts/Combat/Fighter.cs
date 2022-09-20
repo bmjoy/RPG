@@ -155,7 +155,7 @@ namespace RPGEngine.Combat
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;
-            float weaponRange = _hasWeapon ? _currentWeapon.Range : _currentWeapon != null ? _currentWeapon.Range : 0;
+            var weaponRange = _hasWeapon ? _currentWeapon.Range : defaultWeapon != null ? defaultWeapon.Range : 0;
             Gizmos.DrawWireSphere(transform.position, weaponRange);
         }
 
@@ -184,15 +184,15 @@ namespace RPGEngine.Combat
         {
             _actionScheduler.StartAction(this);
             _target = target.GetComponent<Health>();
-            _hasTarget = _target != null;
+            _hasTarget = _target;
         }
 
         public bool CanAttack(CombatTarget combatTarget)
         {
-            if (combatTarget == null) return false;
+            if (!combatTarget) return false;
             if (combatTarget.Type != combatTargetType) return false;
             Health targetHealth = combatTarget.GetComponent<Health>();
-            return targetHealth != null && !targetHealth.IsDead;
+            return targetHealth && !targetHealth.IsDead;
         }
 
         #endregion
@@ -201,7 +201,7 @@ namespace RPGEngine.Combat
 
         private bool GetIsInRange(Transform targetTransform)
         {
-            return targetTransform != null && _hasWeapon &&
+            return targetTransform && _hasWeapon &&
                    Vector3.Distance(transform.position, targetTransform.position) < _currentWeapon.Range;
         }
 

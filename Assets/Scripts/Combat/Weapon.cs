@@ -16,7 +16,7 @@ namespace RPGEngine.Combat
     {
         [SerializeField] private GameObject equippedPrefab;
         [SerializeField] private AnimatorOverrideController animatorOverrideController;
-        [SerializeField] private bool isRightHanded = true;
+        [SerializeField] private bool isWeaponRightHanded = true;
 
         [Header("Weapon Attributes")] [SerializeField]
         private float range = 2f;
@@ -25,6 +25,7 @@ namespace RPGEngine.Combat
 
         [Header("Weapon Projectile")] [SerializeField]
         private Projectile projectile;
+        [SerializeField] private bool isProjectileRightHanded = true;
 
         public float Range => range;
         public float TimeBetweenAttacks => timeBetweenAttacks;
@@ -33,7 +34,7 @@ namespace RPGEngine.Combat
         public void Spawn(Transform rightHand, Transform leftHand,  Animator animator)
         {
             if (equippedPrefab != null)
-                Instantiate(equippedPrefab, GetParent(rightHand, leftHand));
+                Instantiate(equippedPrefab, GetParent(rightHand, leftHand, isWeaponRightHanded));
 
             if (animator == null || animatorOverrideController == null) return;
             animator.runtimeAnimatorController = animatorOverrideController;
@@ -42,7 +43,7 @@ namespace RPGEngine.Combat
         public void LaunchProjectile(Transform rightHand, Transform leftHand, Health target)
         {
             Projectile projectileInstance =
-                Instantiate(projectile, GetParent(rightHand, leftHand).position, Quaternion.identity);
+                Instantiate(projectile, GetParent(rightHand, leftHand, isProjectileRightHanded).position, Quaternion.identity);
             projectileInstance.SetTarget(target, damage);
         }
 
@@ -51,7 +52,7 @@ namespace RPGEngine.Combat
             return projectile;
         }
 
-        private Transform GetParent(Transform rightHand, Transform leftHand)
+        private Transform GetParent(Transform rightHand, Transform leftHand, bool isRightHanded)
         {
             return isRightHanded ? rightHand : leftHand;
         }

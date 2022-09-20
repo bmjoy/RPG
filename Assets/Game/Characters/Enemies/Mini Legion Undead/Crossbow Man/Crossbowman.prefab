@@ -78,6 +78,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 660215013825396072, guid: dd093df38a0c4374790dc4a9aeb9c387, type: 3}
+      propertyPath: chaseRange
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 1558623196858982072, guid: dd093df38a0c4374790dc4a9aeb9c387, type: 3}
       propertyPath: defaultWeapon
       value: 
