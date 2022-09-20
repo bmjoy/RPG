@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Crossbowman Weapon
   m_EditorClassIdentifier: 
   equippedPrefab: {fileID: 0}
-  animatorOverrideController: {fileID: 0}
+  animatorOverrideController: {fileID: 22100000, guid: dc0467012aab3b54db7d25b6db2026c9, type: 2}
   isWeaponRightHanded: 1
   range: 10
   timeBetweenAttacks: 2
