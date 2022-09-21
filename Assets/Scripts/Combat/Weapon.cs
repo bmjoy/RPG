@@ -11,7 +11,7 @@ namespace RPGEngine.Combat
     /// Weapon Data
     /// <seealso href="https://docs.unity3d.com/ScriptReference/ScriptableObject.html"/>
     /// </summary>
-    [CreateAssetMenu(fileName = "Weapon", menuName = "Weapons/Make New Weapon", order = 0)]
+    [CreateAssetMenu(fileName = "Weapon", menuName = "RPG Project/Items/Make New Weapon", order = 0)]
     public class Weapon : ScriptableObject
     {
         private const string WeaponName = "Weapon";

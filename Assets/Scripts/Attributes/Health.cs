@@ -5,6 +5,7 @@
 using Newtonsoft.Json.Linq;
 using RPGEngine.Core;
 using RPGEngine.Saving;
+using RPGEngine.Stats;
 using Unity.Mathematics;
 using UnityEngine;
 using static RPGEngine.Core.StringReferences;
@@ -85,6 +86,8 @@ namespace RPGEngine.Attributes
             {
                 _dieHash = Animator.StringToHash(DeathTrigger);
             }
+
+            value = GetComponent<BaseStats>().GetHealth();
         }
 
         #endregion
