@@ -17,8 +17,8 @@ GameObject:
   - component: {fileID: 8558057351939896882}
   - component: {fileID: 6863629442196216028}
   - component: {fileID: 6587453408859046323}
-  - component: {fileID: 5792556325803201955}
   - component: {fileID: 7217525226749447344}
+  - component: {fileID: 5792556325803201955}
   - component: {fileID: 78802484035129814}
   m_Layer: 0
   m_Name: Character
@@ -164,20 +164,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
---- !u!114 &5792556325803201955
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6487327744266254528}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02b0cc1378a846a182959fb0da0ec476, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  max: 100
-  value: 0
 --- !u!114 &7217525226749447344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,6 +180,20 @@ MonoBehaviour:
   rightHandWeaponSlot: {fileID: 0}
   leftHandWeaponSlot: {fileID: 0}
   combatTargetType: 0
+--- !u!114 &5792556325803201955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6487327744266254528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02b0cc1378a846a182959fb0da0ec476, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  max: 100
+  value: 0
 --- !u!114 &78802484035129814
 MonoBehaviour:
   m_ObjectHideFlags: 0
