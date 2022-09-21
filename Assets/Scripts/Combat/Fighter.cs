@@ -223,6 +223,12 @@ namespace RPGEngine.Combat
             return targetHealth && !targetHealth.IsDead;
         }
 
+        public Health GetTarget(out bool hasTarget)
+        {
+            hasTarget = _hasTarget;
+            return _hasTarget ? _target : null;
+        }
+
         #endregion
 
         #region Private Methods

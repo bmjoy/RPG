@@ -2,6 +2,7 @@
 // 07-05-2022
 // James LaFritz
 
+using System.Security.Cryptography.X509Certificates;
 using Newtonsoft.Json.Linq;
 using RPGEngine.Core;
 using RPGEngine.Saving;
@@ -65,6 +66,8 @@ namespace RPGEngine.Attributes
 
         /// <value>Is the GameObject dead. (_value == 0)</value>
         public bool IsDead { get; private set; }
+        public float Value => value;
+        public float Max => max;
 
         #endregion
 
@@ -75,8 +78,6 @@ namespace RPGEngine.Attributes
         /// </summary>
         private void Awake()
         {
-            value = max;
-
             _actionScheduler = GetComponent<ActionScheduler>();
 
             _animator = GetComponentInChildren<Animator>();
@@ -87,7 +88,7 @@ namespace RPGEngine.Attributes
                 _dieHash = Animator.StringToHash(DeathTrigger);
             }
 
-            value = GetComponent<BaseStats>().GetHealth();
+            value = max = GetComponent<BaseStats>().GetHealth();
         }
 
         #endregion
@@ -140,6 +141,11 @@ namespace RPGEngine.Attributes
             {
                 Die();
             }
+        }
+
+        public float GetPercentage()
+        {
+            return IsDead ? 0 : value / max;
         }
 
         #endregion
