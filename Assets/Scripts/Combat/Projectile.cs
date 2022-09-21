@@ -13,6 +13,7 @@ namespace RPGEngine.Combat
 
         private Health _target;
         private float _damage;
+        private GameObject _instigator;
 
         private void Update()
         {
@@ -28,7 +29,7 @@ namespace RPGEngine.Combat
             if (health)
             {
                 if (health.IsDead) return;
-                health.TakeDamage(_damage);
+                health.TakeDamage(_instigator, _damage);
             }
 
             moveSpeed = 0f;
@@ -43,10 +44,11 @@ namespace RPGEngine.Combat
             Destroy(gameObject, lifeAfterImpact);
         }
 
-        public void SetTarget(Health target, float damage)
+        public void SetTarget(Health target, GameObject instigator, float damage)
         {
             _target = target;
             _damage = damage;
+            _instigator = instigator;
             LookAtTarget();
         }
 

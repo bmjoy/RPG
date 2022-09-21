@@ -2,7 +2,6 @@
 // 07-05-2022
 // James LaFritz
 
-using System.Security.Cryptography.X509Certificates;
 using Newtonsoft.Json.Linq;
 using RPGEngine.Core;
 using RPGEngine.Saving;
@@ -127,20 +126,32 @@ namespace RPGEngine.Attributes
         /// If the health is less than 0, set the health to 0 and set the Die trigger if there is an animator.
         /// </summary>
         /// <param name="damage">The amount to reduce the health by.</param>
-        public void TakeDamage(float damage)
+        public void TakeDamage(GameObject instigator, float damage)
         {
             if (IsDead) return;
 
             value = math.min(math.max(value - damage, 0), max);
 
-            Debug.Log($"<color=blue>{name}:</color> " +
-                      $"<color=darkblue>takes <color=red>{damage}</color> damage.</color> " +
+            Debug.Log($"<color=blue>{name}:</color> <color=darkblue>takes <color=red>{damage}</color> damage.</color> " +
                       $"<color=teal>Health is now <color=#38761d>{value}</color> / <color=#274e13>{max}</color></color>");
 
-            if (value == 0)
-            {
-                Die();
-            }
+            if (value != 0) return;
+            AwardExp(instigator);
+            Die();
+        }
+
+        private void AwardExp(GameObject instigator)
+        {
+            if (!instigator.CompareTag("Player")) return;
+            
+            float expAmount = 0;
+            BaseStats stats = GetComponent<BaseStats>();
+            if (stats) expAmount = stats.GetExperience();
+            
+            Experience exp = instigator.GetComponent<Experience>();
+            if (exp) exp.GainExperience(expAmount);
+            
+            Debug.Log($"<color=red>{instigator.name}</color> <color=darkblue>receives <color=red>{expAmount}</color> EXP</color>");
         }
 
         public float GetPercentage()
