@@ -1,4 +1,3 @@
-using System.Linq;
 using RPGEngine.Core;
 using UnityEngine;
 
@@ -8,7 +7,7 @@ namespace RPGEngine.Stats
     public class Progression : ScriptableObject
     {
         [System.Serializable]
-        private struct ProgressionFormula
+        public struct ProgressionFormula
         {
             [Range(1,1000)]
             [SerializeField] private float startingValue;
@@ -29,55 +28,65 @@ namespace RPGEngine.Stats
                 return value + c * curve.Evaluate(1f / level);
             }
         }
+
+        [System.Serializable]
+        private struct ProgressionStat
+        {
+            [SerializeField] private Stat stat;
+            [SerializeField] private ProgressionFormula progression;
+            public Stat Stat => stat;
+            public ProgressionFormula Progression => progression;
+        }
         
         [System.Serializable]
         private struct ProgressionCharacterClass
         {
             [SerializeField] private CharacterClass characterClass;
-            [SerializeField] private ProgressionFormula experienceToLevel;
-            [SerializeField] private ProgressionFormula health;
-            [SerializeField] private ProgressionFormula damage;
+            [SerializeField] private ProgressionStat[] stats;
 
-            public float GetExperienceToLevel(CharacterClass characterClassToCheck, int level)
+            public CharacterClass CharacterClass => characterClass;
+            public ProgressionFormula this[Stat stat] => FindStat(stat);
+
+            private ProgressionFormula FindStat(Stat stat)
             {
-                return characterClass == characterClassToCheck ? experienceToLevel.Calculate(level) : float.NegativeInfinity;
-            }
-            public float GetHealth(CharacterClass characterClassToCheck, int level)
-            {
-                return characterClass == characterClassToCheck ? health.Calculate(level) : float.NegativeInfinity;
-            }
-            
-            public float GetDamage(CharacterClass characterClassToCheck, int level)
-            {
-                return characterClass == characterClassToCheck ? damage.Calculate(level) : float.NegativeInfinity;
+                foreach (ProgressionStat s in stats)
+                {
+                    if (s.Stat == stat) return s.Progression;
+                }
+
+                throw new System.ArgumentOutOfRangeException(
+                    nameof(stat), $"Progression Character Class does not contain a Stat of {stat}");
             }
         }
         
         [SerializeField] private ProgressionCharacterClass[] characterClasses;
+        public ProgressionFormula this[CharacterClass cc, Stat stat] => FindProgressionCharacterClassWithStat(cc, stat);
 
-        
-        public float GetExperienceToLevel(CharacterClass characterClass, int level)
+        private ProgressionFormula FindProgressionCharacterClassWithStat(CharacterClass cc, Stat stat)
         {
-            if (characterClasses == null) return 0;
+            var ccFound = false;
+            var error = "";
+            foreach (ProgressionCharacterClass pcc in characterClasses)
+            {
+                if (pcc.CharacterClass != cc) continue;
+                try
+                {
+                    return pcc[stat];
+                }
+                catch (System.ArgumentOutOfRangeException e)
+                {
+                    error =
+                        $"{(ccFound ? $"Multiple progressions for {cc} found:\n{error}\n" : "")}No {stat} found in {cc}\n{e}";
+                }
+                    
+                ccFound = true;
+            }
+            
+            if (!ccFound)
+                throw new System.ArgumentOutOfRangeException(
+                    nameof(characterClasses), $"No Progression {cc} found");
 
-            return characterClasses.Select(progression => progression.GetExperienceToLevel(characterClass, level))
-                .FirstOrDefault(value => !float.IsNegativeInfinity(value));
-        }
-        
-        public float GetHealth(CharacterClass characterClass, int level)
-        {
-            if (characterClasses == null) return 0;
-
-            return characterClasses.Select(progression => progression.GetHealth(characterClass, level))
-                .FirstOrDefault(value => !float.IsNegativeInfinity(value));
-        }
-        
-        public float GetDamage(CharacterClass characterClass, int level)
-        {
-            if (characterClasses == null) return 0;
-
-            return characterClasses.Select(progression => progression.GetDamage(characterClass, level))
-                .FirstOrDefault(value => !float.IsNegativeInfinity(value));
+            throw new System.ArgumentOutOfRangeException(nameof(characterClasses), error);
         }
     }
 }

@@ -87,7 +87,7 @@ namespace RPGEngine.Attributes
                 _dieHash = Animator.StringToHash(DeathTrigger);
             }
 
-            value = max = GetComponent<BaseStats>().GetHealth();
+            value = max = GetComponent<BaseStats>().GetStatValue(Stat.Health);
         }
 
         #endregion
@@ -125,6 +125,7 @@ namespace RPGEngine.Attributes
         /// Reduce the value of the heath by the amount of damage.
         /// If the health is less than 0, set the health to 0 and set the Die trigger if there is an animator.
         /// </summary>
+        /// <param name="instigator">The Game Object that did the damage.</param>
         /// <param name="damage">The amount to reduce the health by.</param>
         public void TakeDamage(GameObject instigator, float damage)
         {
@@ -146,7 +147,7 @@ namespace RPGEngine.Attributes
             
             float expAmount = 0;
             BaseStats stats = GetComponent<BaseStats>();
-            if (stats) expAmount = stats.GetExperience();
+            if (stats) expAmount = stats.GetStatValue(Stat.ExperienceReward);
             
             Experience exp = instigator.GetComponent<Experience>();
             if (exp) exp.GainExperience(expAmount);

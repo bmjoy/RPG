@@ -8,14 +8,17 @@ namespace RPGEngine.Stats
         [SerializeField] private CharacterClass characterClass;
         [SerializeField] private Progression progression;
 
-        public float GetHealth()
+        public float GetStatValue(Stat stat)
         {
-            return progression.GetHealth(characterClass, startingLevel);
-        }
-
-        public float GetExperience()
-        {
-            return 10;
+            try
+            {
+                return progression[characterClass, stat].Calculate(startingLevel);
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogWarning(e);
+                return 0;
+            }
         }
     }
 }
