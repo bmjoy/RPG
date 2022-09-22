@@ -4,6 +4,6 @@ namespace RPGEngine.Stats
     {
         Health,
         ExperienceReward,
-        Damage
+        ExperienceToLevel
     }
 }

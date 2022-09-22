@@ -25,7 +25,7 @@ namespace RPGEngine.Attributes
     /// )</p>
     /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html"/>
     /// </summary>
-    [RequireComponent(typeof(ActionScheduler))]
+    [RequireComponent(typeof(ActionScheduler), typeof(BaseStats))]
     public class Health : MonoBehaviour, ISavable
     {
         #region Inspector Fields
@@ -46,6 +46,7 @@ namespace RPGEngine.Attributes
         #region Required
 
         private ActionScheduler _actionScheduler;
+        private BaseStats _baseStats;
 
         #endregion
 
@@ -87,7 +88,8 @@ namespace RPGEngine.Attributes
                 _dieHash = Animator.StringToHash(DeathTrigger);
             }
 
-            value = max = GetComponent<BaseStats>().GetStatValue(Stat.Health);
+            _baseStats = GetComponent<BaseStats>();
+            value = max = _baseStats.GetStatValue(Stat.Health);
         }
 
         #endregion
