@@ -42,12 +42,10 @@ namespace RPGEngine.SceneManagement
         private void Awake()
         {
             _savingSystem = GetComponent<SaveSystem>();
+            StartCoroutine(LoadLastScene());
         }
-
-        /// <summary>
-        /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.Start.html"/>
-        /// </summary>
-        private IEnumerator Start()
+        
+        private IEnumerator LoadLastScene()
         {
             Fader fader = FindObjectOfType<Fader>();
             bool hasFader = fader != null;
