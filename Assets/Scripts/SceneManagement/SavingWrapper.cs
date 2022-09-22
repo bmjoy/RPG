@@ -73,6 +73,9 @@ namespace RPGEngine.SceneManagement
             {
                 Save();
             }
+            
+            if (Input.GetKeyDown(KeyCode.Delete))
+                Delete();
         }
 
         #endregion
@@ -86,6 +89,11 @@ namespace RPGEngine.SceneManagement
         public void Save()
         {
             _savingSystem.Save(DefaultSaveFile);
+        }
+
+        public void Delete()
+        {
+            _savingSystem.Delete(DefaultSaveFile);
         }
     }
 }

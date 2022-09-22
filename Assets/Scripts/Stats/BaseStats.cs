@@ -21,11 +21,7 @@ namespace RPGEngine.Stats
         {
             try
             {
-                int level = GetLevel();
-                float value = progression[characterClass, stat].Calculate(level);
-                if (characterClass == CharacterClass.Player)
-                    Debug.Log($"{characterClass}-{level}-{stat}={value}");
-                return value;
+                return progression[characterClass, stat].Calculate(GetLevel());;
             }
             catch (System.Exception e)
             {
