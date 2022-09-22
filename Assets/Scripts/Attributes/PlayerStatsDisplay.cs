@@ -1,3 +1,4 @@
+using RPGEngine.Stats;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,11 +23,13 @@ namespace RPGEngine.Attributes
 
         [SerializeField] private Image experienceValueImage;
         [SerializeField] private TMP_Text experienceValueText;
+        [SerializeField] private TMP_Text levelValueText;
         
         private Experience _experienceStat;
         private bool _hasExperienceStat;
         private bool _hasExperienceValueImage;
         private bool _hasExperienceText;
+        private bool _hasLevelText;
 
         #endregion
 
@@ -36,6 +39,7 @@ namespace RPGEngine.Attributes
             _hasExperienceStat = _experienceStat;
             _hasExperienceValueImage = experienceValueImage;
             _hasExperienceText = experienceValueText;
+            _hasLevelText = levelValueText;
 
             _health = GameObject.FindWithTag("Player").GetComponent<Health>();
             _hasHealth = _health;
@@ -46,7 +50,7 @@ namespace RPGEngine.Attributes
         private void Update()
         {
             UpdatePlayerHealth();
-            UpdatePlayerStat();
+            UpdatePlayerExperience();
         }
 
         private void UpdatePlayerHealth()
@@ -56,11 +60,12 @@ namespace RPGEngine.Attributes
             if (_hasText) healthValueText.text = $"{_health.Value}/{_health.Max}";
         }
 
-        private void UpdatePlayerStat()
+        private void UpdatePlayerExperience()
         {
             if (!_hasExperienceStat) return;
             if (_hasExperienceValueImage) experienceValueImage.fillAmount = _experienceStat.GetPercentage();
-            if (_hasExperienceText) experienceValueText.text = $"{_experienceStat.Value}/{_experienceStat.ExperienceToNextLevel}";
+            if (_hasExperienceText) experienceValueText.text = $"{_experienceStat.Value}/{_experienceStat.ExperienceToNextLevel:0}";
+            if (_hasLevelText) levelValueText.text = $"{_experienceStat.CurrentLevel}";
         }
     }
 }

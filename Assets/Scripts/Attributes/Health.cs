@@ -30,9 +30,6 @@ namespace RPGEngine.Attributes
     {
         #region Inspector Fields
 
-        /// <value>The maximum health of the object.</value>
-        [SerializeField] float max = 100f;
-
         #endregion
 
         #region Private Fields
@@ -67,7 +64,8 @@ namespace RPGEngine.Attributes
         /// <value>Is the GameObject dead. (_value == 0)</value>
         public bool IsDead { get; private set; }
         public float Value => value;
-        public float Max => max;
+
+        public float Max => _baseStats.GetStatValue(Stat.Health);
 
         #endregion
 
@@ -89,7 +87,7 @@ namespace RPGEngine.Attributes
             }
 
             _baseStats = GetComponent<BaseStats>();
-            value = max = _baseStats.GetStatValue(Stat.Health);
+            value = _baseStats.GetStatValue(Stat.Health);
         }
 
         #endregion
@@ -133,10 +131,10 @@ namespace RPGEngine.Attributes
         {
             if (IsDead) return;
 
-            value = math.min(math.max(value - damage, 0), max);
+            value = math.min(math.max(value - damage, 0), Max);
 
             Debug.Log($"<color=blue>{name}:</color> <color=darkblue>takes <color=red>{damage}</color> damage.</color> " +
-                      $"<color=teal>Health is now <color=#38761d>{value}</color> / <color=#274e13>{max}</color></color>");
+                      $"<color=teal>Health is now <color=#38761d>{value}</color> / <color=#274e13>{Max}</color></color>");
 
             if (value != 0) return;
             AwardExp(instigator);
@@ -159,7 +157,7 @@ namespace RPGEngine.Attributes
 
         public float GetPercentage()
         {
-            return IsDead ? 0 : value / max;
+            return IsDead ? 0 : value / Max;
         }
 
         #endregion

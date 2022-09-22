@@ -1,9 +1,9 @@
+using System;
 using Newtonsoft.Json.Linq;
 using RPGEngine.Saving;
-using RPGEngine.Stats;
 using UnityEngine;
 
-namespace RPGEngine.Attributes
+namespace RPGEngine.Stats
 {
     [RequireComponent(typeof(BaseStats))]
     public class Experience : MonoBehaviour, ISavable
@@ -11,6 +11,10 @@ namespace RPGEngine.Attributes
         #region Inspector Fields
 
         [SerializeField] private float value;
+
+        #endregion
+
+        #region Private Fields
 
         #endregion
 
@@ -32,7 +36,9 @@ namespace RPGEngine.Attributes
 
         public float Value => value;
 
-        public float ExperienceToNextLevel { get; private set; } = 100;
+        public float ExperienceToNextLevel { get; set; }
+
+        public int CurrentLevel { get; private set; }
 
         #endregion
 
@@ -44,6 +50,11 @@ namespace RPGEngine.Attributes
         private void Awake()
         {
             _baseStats = GetComponent<BaseStats>();
+        }
+
+        private void Start()
+        {
+            GainExperience(0);
         }
 
         #endregion
@@ -67,7 +78,15 @@ namespace RPGEngine.Attributes
 
         #region Public Methods
 
-        public void GainExperience(float amount) => value += amount;
+        public void GainExperience(float amount)
+        {
+            value += amount;
+            int level = _baseStats.GetLevel();
+            if (level != CurrentLevel)
+            {
+                CurrentLevel = level;
+            }
+        }
 
         public float GetPercentage()
         {

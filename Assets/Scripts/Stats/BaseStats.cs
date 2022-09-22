@@ -8,17 +8,59 @@ namespace RPGEngine.Stats
         [SerializeField] private CharacterClass characterClass;
         [SerializeField] private Progression progression;
 
+        private Experience _experience;
+        private bool _hasExperience;
+
+        private void Awake()
+        {
+            _experience = GetComponent<Experience>();
+            _hasExperience = _experience;
+        }
+
         public float GetStatValue(Stat stat)
         {
             try
             {
-                return progression[characterClass, stat].Calculate(startingLevel);
+                int level = GetLevel();
+                float value = progression[characterClass, stat].Calculate(level);
+                if (characterClass == CharacterClass.Player)
+                    Debug.Log($"{characterClass}-{level}-{stat}={value}");
+                return value;
             }
             catch (System.Exception e)
             {
                 Debug.LogWarning(e);
                 return 0;
             }
+        }
+
+        public int GetLevel()
+        {
+            if (!_hasExperience) return startingLevel;
+            int level = startingLevel;
+            float experienceToNextLevel = GetExperienceNeeded(level);
+            while(experienceToNextLevel < _experience.Value)
+            {
+                level++;
+                experienceToNextLevel = GetExperienceNeeded(level);
+            }
+
+            _experience.ExperienceToNextLevel = experienceToNextLevel;
+
+            return level;
+        }
+
+        private float GetExperienceNeeded(int level)
+        {
+            try
+            {
+                return progression[characterClass, Stat.ExperienceToLevel].Calculate(level);
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogWarning(e);
+            }
+            return Mathf.Infinity;
         }
     }
 }
