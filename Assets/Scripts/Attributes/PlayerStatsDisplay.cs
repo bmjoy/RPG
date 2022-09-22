@@ -33,39 +33,65 @@ namespace RPGEngine.Attributes
 
         #endregion
 
+        private BaseStats _baseStats;
+        private bool _hasBaseStats;
+
         private void Awake()
         {
-            _experienceStat = GameObject.FindWithTag("Player").GetComponent<Experience>();
+            GameObject player = GameObject.FindWithTag("Player");
+            if (!player) return;
+
+            _baseStats = player.GetComponent<BaseStats>();
+            _hasBaseStats = _baseStats;
+            
+            _experienceStat = player.GetComponent<Experience>();
             _hasExperienceStat = _experienceStat;
             _hasExperienceValueImage = experienceValueImage;
             _hasExperienceText = experienceValueText;
             _hasLevelText = levelValueText;
 
-            _health = GameObject.FindWithTag("Player").GetComponent<Health>();
+            _health = player.GetComponent<Health>();
             _hasHealth = _health;
             _hasHealthImage = healthImage;
             _hasText = healthValueText;
         }
 
+        private void OnEnable()
+        {
+            if (_hasExperienceStat) _experienceStat.OnExperienceGained += UpdatePlayerExperience;
+            if (_hasBaseStats) _baseStats.OnLevelChanged += UpdateLevel;
+        }
+
+        private void OnDisable()
+        {
+            if (_hasExperienceStat) _experienceStat.OnExperienceGained -= UpdatePlayerExperience;
+            if (_hasBaseStats) _baseStats.OnLevelChanged -= UpdateLevel;
+        }
+
         private void Update()
         {
             UpdatePlayerHealth();
-            UpdatePlayerExperience();
         }
 
         private void UpdatePlayerHealth()
         {
             if (!_hasHealth) return;
             if (_hasHealthImage) healthImage.fillAmount = _health.GetPercentage();
-            if (_hasText) healthValueText.text = $"{_health.Value}/{_health.Max}";
+            if (_hasText) healthValueText.text = $"{_health.Value:F0}/{_health.Max:F0}";
         }
 
         private void UpdatePlayerExperience()
         {
             if (!_hasExperienceStat) return;
             if (_hasExperienceValueImage) experienceValueImage.fillAmount = _experienceStat.GetPercentage();
-            if (_hasExperienceText) experienceValueText.text = $"{_experienceStat.Value}/{_experienceStat.ExperienceToNextLevel:0}";
-            if (_hasLevelText) levelValueText.text = $"{_experienceStat.CurrentLevel}";
+            if (_hasExperienceText) experienceValueText.text = $"{_experienceStat.Value:F0}/{_experienceStat.ExperienceToLevel:F0}";
+        }
+
+        private void UpdateLevel(int level)
+        {
+            UpdatePlayerExperience();
+            if (!_hasBaseStats) return;
+            if (_hasLevelText) levelValueText.text = $"{level}";
         }
     }
 }

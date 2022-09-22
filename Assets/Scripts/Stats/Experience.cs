@@ -36,9 +36,13 @@ namespace RPGEngine.Stats
 
         public float Value => value;
 
-        public float ExperienceToNextLevel { get; set; }
+        public float ExperienceToLevel => _baseStats.GetStatValue(Stat.ExperienceToLevel);
 
-        public int CurrentLevel { get; private set; }
+        #endregion
+
+        #region Events
+
+       public event Action OnExperienceGained;
 
         #endregion
 
@@ -81,16 +85,12 @@ namespace RPGEngine.Stats
         public void GainExperience(float amount)
         {
             value += amount;
-            int level = _baseStats.GetLevel();
-            if (level != CurrentLevel)
-            {
-                CurrentLevel = level;
-            }
+            OnExperienceGained?.Invoke();
         }
 
         public float GetPercentage()
         {
-            return value / ExperienceToNextLevel;
+            return value / ExperienceToLevel;
         }
 
         #endregion

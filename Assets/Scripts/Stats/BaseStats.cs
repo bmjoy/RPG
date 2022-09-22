@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace RPGEngine.Stats
@@ -11,37 +12,61 @@ namespace RPGEngine.Stats
         private Experience _experience;
         private bool _hasExperience;
 
+        private int _currentLevel;
+        public Action<int> OnLevelChanged;
+
         private void Awake()
         {
             _experience = GetComponent<Experience>();
             _hasExperience = _experience;
         }
 
+        private void OnEnable()
+        {
+            if (_hasExperience) _experience.OnExperienceGained += UpdateLevel;
+        }
+
+        private void OnDisable()
+        {
+            if (_hasExperience) _experience.OnExperienceGained -= UpdateLevel;
+        }
+
+        private void Start()
+        {
+            UpdateLevel();
+        }
+
+        private void UpdateLevel()
+        {
+            var newLevel = CalculateLevel();
+            if (newLevel <= _currentLevel) return;
+            _currentLevel = newLevel;
+            OnLevelChanged?.Invoke(newLevel);
+        }
+
         public float GetStatValue(Stat stat)
         {
             try
             {
-                return progression[characterClass, stat].Calculate(GetLevel());;
+                return progression[characterClass, stat].Calculate(_currentLevel);;
             }
-            catch (System.Exception e)
+            catch (Exception e)
             {
                 Debug.LogWarning(e);
                 return 0;
             }
         }
 
-        public int GetLevel()
+        private int CalculateLevel()
         {
             if (!_hasExperience) return startingLevel;
-            int level = startingLevel;
-            float experienceToNextLevel = GetExperienceNeeded(level);
+            var level = startingLevel;
+            var experienceToNextLevel = GetExperienceNeeded(level);
             while(experienceToNextLevel < _experience.Value)
             {
                 level++;
                 experienceToNextLevel = GetExperienceNeeded(level);
             }
-
-            _experience.ExperienceToNextLevel = experienceToNextLevel;
 
             return level;
         }
