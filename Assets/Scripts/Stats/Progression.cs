@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using RPGEngine.Core;
 using UnityEngine;
 
@@ -43,50 +45,65 @@ namespace RPGEngine.Stats
         {
             [SerializeField] private CharacterClass characterClass;
             [SerializeField] private ProgressionStat[] stats;
+            
+            private Dictionary<Stat, ProgressionFormula> _lookupTable;
 
             public CharacterClass CharacterClass => characterClass;
             public ProgressionFormula this[Stat stat] => FindStat(stat);
 
             private ProgressionFormula FindStat(Stat stat)
             {
-                foreach (ProgressionStat s in stats)
-                {
-                    if (s.Stat == stat) return s.Progression;
-                }
+                BuildLookupTable();
 
-                throw new System.ArgumentOutOfRangeException(
-                    nameof(stat), $"Progression Character Class does not contain a Stat of {stat}");
+                if (!_lookupTable.ContainsKey(stat))
+                    throw new System.ArgumentOutOfRangeException(nameof(stat),
+                        $"Progression does not contain an entry for {stat} in the class {characterClass}");
+
+                return _lookupTable[stat];
+            }
+
+            private void BuildLookupTable()
+            {
+                if (_lookupTable != null) return;
+                _lookupTable = stats.ToDictionary(pStat => pStat.Stat, pStat => pStat.Progression);
             }
         }
         
         [SerializeField] private ProgressionCharacterClass[] characterClasses;
+
+        private Dictionary<CharacterClass, ProgressionCharacterClass> _lookupTable;
         public ProgressionFormula this[CharacterClass cc, Stat stat] => FindProgressionCharacterClassWithStat(cc, stat);
 
         private ProgressionFormula FindProgressionCharacterClassWithStat(CharacterClass cc, Stat stat)
         {
-            var ccFound = false;
-            var error = "";
-            foreach (ProgressionCharacterClass pcc in characterClasses)
+            try
             {
-                if (pcc.CharacterClass != cc) continue;
-                try
-                {
-                    return pcc[stat];
-                }
-                catch (System.ArgumentOutOfRangeException e)
-                {
-                    error =
-                        $"{(ccFound ? $"Multiple progressions for {cc} found:\n{error}\n" : "")}No {stat} found in {cc}\n{e}";
-                }
-                    
-                ccFound = true;
+                BuildLookupTable();
+                return _lookupTable[cc][stat];
             }
-            
-            if (!ccFound)
-                throw new System.ArgumentOutOfRangeException(
-                    nameof(characterClasses), $"No Progression {cc} found");
+            catch (System.ArgumentOutOfRangeException)
+            {
+                throw new System.ArgumentOutOfRangeException(nameof(characterClasses),
+                    $"{name} does not contain an entry for {stat} in the class {cc}");
+            }
+            catch (System.Exception e)
+            {
+                if(!_lookupTable.ContainsKey(cc))
+                {
+                    throw new System.ArgumentOutOfRangeException(nameof(characterClasses),
+                        $"{name} does not contain an entry for characterClass {cc}");
+                }
 
-            throw new System.ArgumentOutOfRangeException(nameof(characterClasses), error);
+                throw new System.Exception($"{name}: Something went Horribly wrong!\n{e}");
+            }
+        }
+
+        private void BuildLookupTable()
+        {
+            if (_lookupTable != null) return;
+
+            _lookupTable = characterClasses.ToDictionary(pcc => pcc.CharacterClass,
+                pcc => pcc);
         }
     }
 }
