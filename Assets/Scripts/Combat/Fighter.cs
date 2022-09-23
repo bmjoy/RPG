@@ -9,6 +9,7 @@ using RPGEngine.Attributes;
 using RPGEngine.Core;
 using RPGEngine.Movement;
 using RPGEngine.Saving;
+using RPGEngine.Stats;
 using Unity.Mathematics;
 using UnityEngine;
 using static RPGEngine.Core.StringReferences;
@@ -30,7 +31,7 @@ namespace RPGEngine.Combat
     /// )</p>
     /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html"/>
     /// </summary>
-    [RequireComponent(typeof(Mover), typeof(ActionScheduler))]
+    [RequireComponent(typeof(Mover), typeof(ActionScheduler), typeof(BaseStats))]
     public class Fighter : MonoBehaviour, IAction, ISavable
     {
         #region Inspector Fields
@@ -73,6 +74,8 @@ namespace RPGEngine.Combat
         /// <value>Cache the <see cref="ActionScheduler"/></value>
         private ActionScheduler _actionScheduler;
 
+        private BaseStats _baseStats;
+
         #endregion
 
         #region Optional
@@ -97,6 +100,7 @@ namespace RPGEngine.Combat
         {
             _mover = GetComponent<Mover>();
             _actionScheduler = GetComponent<ActionScheduler>();
+            _baseStats = GetComponent<BaseStats>();
 
             _animator = GetComponentInChildren<Animator>();
             _hasAnimator = _animator != null;
@@ -278,10 +282,13 @@ namespace RPGEngine.Combat
         {
             if (!_hasTarget || !_hasWeapon) return;
 
+            var damageAmount = _baseStats.GetStatValue(Stat.Damage);
+
             if (_currentWeapon.HasProjectile())
-                _currentWeapon.LaunchProjectile(rightHandWeaponSlot, leftHandWeaponSlot, _target, gameObject, tag);
-            else 
-                _target.TakeDamage(gameObject, _currentWeapon.Damage);
+                _currentWeapon.LaunchProjectile(rightHandWeaponSlot, leftHandWeaponSlot, _target, gameObject,
+                    damageAmount, tag);
+            else
+                _target.TakeDamage(gameObject, damageAmount);
         }
 
         private void Shoot()
