@@ -56,11 +56,6 @@ namespace RPGEngine.Stats
             _baseStats = GetComponent<BaseStats>();
         }
 
-        private void Start()
-        {
-            GainExperience(0);
-        }
-
         #endregion
 
         #region Implementation of IJsonSavable

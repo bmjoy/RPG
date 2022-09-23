@@ -30,11 +30,13 @@ namespace RPGEngine.Attributes
     {
         #region Inspector Fields
 
+        [SerializeField, Range(0, 1)] private float healthRegenOnLevelUpPercent = .75f;
+
         #endregion
 
         #region Private Fields
 
-        [ReadOnly, SerializeField] private float value;
+        private float _value = -1;
 
         #endregion
 
@@ -63,9 +65,15 @@ namespace RPGEngine.Attributes
 
         /// <value>Is the GameObject dead. (_value == 0)</value>
         public bool IsDead { get; private set; }
-        public float Value => value;
+        public float Value => _value;
 
-        public float Max => _baseStats.GetStatValue(Stat.Health);
+        public float Max { get; private set; }
+
+        #endregion
+
+        #region Events
+
+        public event System.Action OnHealthChange;
 
         #endregion
 
@@ -87,7 +95,22 @@ namespace RPGEngine.Attributes
             }
 
             _baseStats = GetComponent<BaseStats>();
-            value = _baseStats.GetStatValue(Stat.Health);
+        }
+
+        private void Start()
+        {
+            Max = _baseStats.GetStatValue(Stat.Health);
+            if (_value < 0) _value = Max;
+        }
+
+        private void OnEnable()
+        {
+            _baseStats.OnLevelChanged += RegenerateHealth;
+        }
+
+        private void OnDisable()
+        {
+            _baseStats.OnLevelChanged -= RegenerateHealth;
         }
 
         #endregion
@@ -97,17 +120,17 @@ namespace RPGEngine.Attributes
         /// <inheritdoc />
         public JToken CaptureAsJToken()
         {
-            return JToken.FromObject(value);
+            return JToken.FromObject(_value);
         }
 
         /// <inheritdoc />
         public void RestoreFromJToken(JToken state, int version)
         {
             if (state == null) return;
-            value = state.ToObject<float>();
-            if (value <= 0)
+            _value = state.ToObject<float>();
+            if (_value <= 0)
             {
-                value = 0;
+                _value = 0;
                 Die();
             }
             else
@@ -131,12 +154,14 @@ namespace RPGEngine.Attributes
         {
             if (IsDead) return;
 
-            value = math.min(math.max(value - damage, 0), Max);
+            _value = math.min(math.max(_value - damage, 0), Max);
 
             Debug.Log($"<color=blue>{name}:</color> <color=darkblue>takes <color=red>{damage}</color> damage.</color> " +
-                      $"<color=teal>Health is now <color=#38761d>{value}</color> / <color=#274e13>{Max}</color></color>");
+                      $"<color=teal>Health is now <color=#38761d>{_value}</color> / <color=#274e13>{Max}</color></color>");
 
-            if (value != 0) return;
+            OnHealthChange?.Invoke();
+
+            if (_value != 0) return;
             AwardExp(instigator);
             Die();
         }
@@ -157,7 +182,7 @@ namespace RPGEngine.Attributes
 
         public float GetPercentage()
         {
-            return IsDead ? 0 : value / Max;
+            return IsDead ? 0 : _value / Max;
         }
 
         #endregion
@@ -173,6 +198,15 @@ namespace RPGEngine.Attributes
             {
                 _animator.SetTrigger(_dieHash);
             }
+        }
+
+        private void RegenerateHealth()
+        {
+            float currentPercentage = GetPercentage();
+            Max = _baseStats.GetStatValue(Stat.Health);
+            _value = Mathf.Max(Max * currentPercentage, Max * healthRegenOnLevelUpPercent);
+            
+            OnHealthChange?.Invoke();
         }
 
         #endregion

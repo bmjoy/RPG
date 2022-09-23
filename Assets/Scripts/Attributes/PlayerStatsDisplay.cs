@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using RPGEngine.Stats;
 using TMPro;
 using UnityEngine;
@@ -56,21 +58,25 @@ namespace RPGEngine.Attributes
             _hasText = healthValueText;
         }
 
+        private IEnumerator Start()
+        {
+            yield return null;
+            UpdatePlayerHealth();
+            UpdateLevel();
+        }
+
         private void OnEnable()
         {
             if (_hasExperienceStat) _experienceStat.OnExperienceGained += UpdatePlayerExperience;
             if (_hasBaseStats) _baseStats.OnLevelChanged += UpdateLevel;
+            if (_hasHealth) _health.OnHealthChange += UpdatePlayerHealth;
         }
 
         private void OnDisable()
         {
             if (_hasExperienceStat) _experienceStat.OnExperienceGained -= UpdatePlayerExperience;
             if (_hasBaseStats) _baseStats.OnLevelChanged -= UpdateLevel;
-        }
-
-        private void Update()
-        {
-            UpdatePlayerHealth();
+            if (_hasHealth) _health.OnHealthChange -= UpdatePlayerHealth;
         }
 
         private void UpdatePlayerHealth()
@@ -87,11 +93,11 @@ namespace RPGEngine.Attributes
             if (_hasExperienceText) experienceValueText.text = $"{_experienceStat.Value:F0}/{_experienceStat.ExperienceToLevel:F0}";
         }
 
-        private void UpdateLevel(int level)
+        private void UpdateLevel()
         {
             UpdatePlayerExperience();
             if (!_hasBaseStats) return;
-            if (_hasLevelText) levelValueText.text = $"{level}";
+            if (_hasLevelText) levelValueText.text = $"{_baseStats.CurrentLevel}";
         }
     }
 }

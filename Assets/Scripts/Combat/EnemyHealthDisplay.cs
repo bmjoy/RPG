@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using RPGEngine.Combat;
 using TMPro;
 using UnityEngine;
@@ -16,7 +18,6 @@ namespace RPGEngine.Attributes
         private bool _hasHealth;
         private Fighter _player;
         private bool _hasPlayer;
-        private bool _hasHealthObjects;
         private bool _hasHealthImage;
         private bool _hasText;
         private bool _hasTitleText;
@@ -28,10 +29,21 @@ namespace RPGEngine.Attributes
             _hasHealthImage = healthImage;
             _hasText = healthValueText;
             _hasTitleText = titleText;
-            _hasHealthObjects = healthObjects is { Length: > 0 };
+        }
+
+        private IEnumerator Start()
+        {
+            if (!_hasPlayer) yield break;
+            yield return null;
+            UpdateDisplay();
         }
 
         private void Update()
+        {
+            UpdateDisplay();
+        }
+
+        private void UpdateDisplay()
         {
             if (!_hasPlayer) return;
             _health = _player.GetTarget(out _hasHealth);

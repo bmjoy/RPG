@@ -8,17 +8,21 @@ namespace RPGEngine.Stats
         [SerializeField, Range(1, 99)] private int startingLevel = 1;
         [SerializeField] private CharacterClass characterClass;
         [SerializeField] private Progression progression;
+        [SerializeField] private GameObject levelUpEffect;
 
         private Experience _experience;
         private bool _hasExperience;
-
         private int _currentLevel;
-        public Action<int> OnLevelChanged;
+
+        public int CurrentLevel => _currentLevel;
+        public event Action OnLevelChanged;
 
         private void Awake()
         {
             _experience = GetComponent<Experience>();
             _hasExperience = _experience;
+            
+            _currentLevel = CalculateLevel();
         }
 
         private void OnEnable()
@@ -31,17 +35,19 @@ namespace RPGEngine.Stats
             if (_hasExperience) _experience.OnExperienceGained -= UpdateLevel;
         }
 
-        private void Start()
-        {
-            UpdateLevel();
-        }
-
         private void UpdateLevel()
         {
             var newLevel = CalculateLevel();
             if (newLevel <= _currentLevel) return;
             _currentLevel = newLevel;
-            OnLevelChanged?.Invoke(newLevel);
+            OnLevelChanged?.Invoke();
+            LevelUpEffect();
+        }
+
+        private void LevelUpEffect()
+        {
+            if (levelUpEffect) 
+                Instantiate(levelUpEffect, transform);
         }
 
         public float GetStatValue(Stat stat)
