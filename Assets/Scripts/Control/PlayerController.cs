@@ -47,7 +47,7 @@ namespace RPGEngine.Control
                 CombatTarget target = hit.transform.GetComponent<CombatTarget>();
                 if (!fighter.CanAttack(target)) continue;
                 if (!Input.GetMouseButton(0)) return true;
-                Debug.Assert(target != null, nameof(target) + " != null");
+                Debug.Assert(target, nameof(target) + " != null");
                 fighter.Attack(target);
 
                 return true;

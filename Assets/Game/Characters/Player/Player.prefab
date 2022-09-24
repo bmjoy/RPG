@@ -513,6 +513,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 78802484035129814, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+      propertyPath: onLevelUp
+      value: 
+      objectReference: {fileID: 11400000, guid: 9c68cb1447fa32341af9735bfa851866, type: 2}
+    - target: {fileID: 78802484035129814, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
       propertyPath: levelUpEffect
       value: 
       objectReference: {fileID: 5686991338302916764, guid: e421c6a80a2b9e347a6628a1b6cdfad5, type: 3}
@@ -520,6 +524,22 @@ PrefabInstance:
       propertyPath: characterClass
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 78802484035129814, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+      propertyPath: onLevelChanged
+      value: 
+      objectReference: {fileID: 11400000, guid: 1632b24cf25199c488afc3bc387be60c, type: 2}
+    - target: {fileID: 78802484035129814, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+      propertyPath: onExperienceChanged
+      value: 
+      objectReference: {fileID: 11400000, guid: b6eb793d7984e4f4dae567704a6e72a0, type: 2}
+    - target: {fileID: 78802484035129814, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+      propertyPath: onExperiencedChanged
+      value: 
+      objectReference: {fileID: 11400000, guid: b6eb793d7984e4f4dae567704a6e72a0, type: 2}
+    - target: {fileID: 78802484035129814, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+      propertyPath: onExperienceMaxChanged
+      value: 
+      objectReference: {fileID: 11400000, guid: a645d652f01415a40a5776449bdf299c, type: 2}
     - target: {fileID: 146272141616909365, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
       propertyPath: uniqueIdentifier
       value: Player-d04a6e11-7a16-4f22-a703-977a30c2ddfb
@@ -592,6 +612,26 @@ PrefabInstance:
       propertyPath: max
       value: 160
       objectReference: {fileID: 0}
+    - target: {fileID: 5792556325803201955, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+      propertyPath: onLevelUp
+      value: 
+      objectReference: {fileID: 11400000, guid: 9c68cb1447fa32341af9735bfa851866, type: 2}
+    - target: {fileID: 5792556325803201955, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+      propertyPath: characterDied
+      value: 
+      objectReference: {fileID: 11400000, guid: 52c8d8f1d34332b47ad243d873123d37, type: 2}
+    - target: {fileID: 5792556325803201955, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+      propertyPath: onLevelChanged
+      value: 
+      objectReference: {fileID: 11400000, guid: 1632b24cf25199c488afc3bc387be60c, type: 2}
+    - target: {fileID: 5792556325803201955, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+      propertyPath: onHealthChanged
+      value: 
+      objectReference: {fileID: 11400000, guid: 7557a76f51288854ba690569d9c1981f, type: 2}
+    - target: {fileID: 5792556325803201955, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+      propertyPath: onHealthMaxChanged
+      value: 
+      objectReference: {fileID: 11400000, guid: 9b7a84f958686594db8787532287f14b, type: 2}
     - target: {fileID: 6487327744266254528, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
       propertyPath: m_Name
       value: Player
@@ -624,6 +664,10 @@ PrefabInstance:
       propertyPath: handTransform
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7217525226749447344, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+      propertyPath: onTargetChanged
+      value: 
+      objectReference: {fileID: 11400000, guid: 4d96ea58b407c464abc8f9b73c973b6d, type: 2}
     - target: {fileID: 7217525226749447344, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
       propertyPath: combatTargetType
       value: 1
@@ -672,7 +716,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfde78b4ec334a468193c2a4aee4df6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: 0
+  onExperiencedChanged: {fileID: 11400000, guid: b6eb793d7984e4f4dae567704a6e72a0, type: 2}
+  characterDied: {fileID: 11400000, guid: 52c8d8f1d34332b47ad243d873123d37, type: 2}
 --- !u!4 &5798768902406184713 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1576178308592006924, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}

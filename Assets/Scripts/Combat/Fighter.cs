@@ -51,12 +51,13 @@ namespace RPGEngine.Combat
         [SerializeField]
         private CombatTargetType combatTargetType = CombatTargetType.Player;
 
+        [SerializeField] private GameObjectGameEvent onTargetChanged;
+
         #endregion
 
         #region Private Fields
 
         private Health _target;
-        private bool _hasTarget;
 
         private float _timeSinceLastAttack = math.INFINITY;
         
@@ -111,7 +112,7 @@ namespace RPGEngine.Combat
                 _stopAttackHash = Animator.StringToHash(StopAttackTrigger);
             }
 
-            string errorObject = "";
+            var errorObject = "";
             if (_mover == null) errorObject = nameof(_mover);
             if (_actionScheduler == null) errorObject += nameof(_actionScheduler);
             if (string.IsNullOrEmpty(errorObject)) return;
@@ -137,7 +138,7 @@ namespace RPGEngine.Combat
         {
             _timeSinceLastAttack += Time.deltaTime;
 
-            if (!_hasTarget) return;
+            if (!_target) return;
 
             if (_target.IsDead)
             {
@@ -198,8 +199,7 @@ namespace RPGEngine.Combat
         /// <inheritdoc />
         public void Cancel()
         {
-            _hasTarget = false;
-            _target = null;
+            ChangeTarget(null);
             _mover.Cancel();
             TriggerCancelAttack();
         }
@@ -215,8 +215,7 @@ namespace RPGEngine.Combat
         public void Attack([NotNull] CombatTarget target)
         {
             _actionScheduler.StartAction(this);
-            _target = target.GetComponent<Health>();
-            _hasTarget = _target;
+            ChangeTarget(target);
         }
 
         public bool CanAttack(CombatTarget combatTarget)
@@ -227,15 +226,29 @@ namespace RPGEngine.Combat
             return targetHealth && !targetHealth.IsDead;
         }
 
-        public Health GetTarget(out bool hasTarget)
-        {
-            hasTarget = _hasTarget;
-            return _hasTarget ? _target : null;
-        }
-
         #endregion
 
         #region Private Methods
+
+        private void ChangeTarget(CombatTarget target)
+        {
+            if (!target)
+            {
+                _target = null;
+                if (onTargetChanged) onTargetChanged.Invoke(null);
+                return;
+            }
+
+            _target = target.GetComponent<Health>();
+            if (!_target)if (!target)
+            {
+                _target = null;
+                if (onTargetChanged) onTargetChanged.Invoke(null);
+                return;
+            }
+            if (onTargetChanged) onTargetChanged.Invoke(_target.gameObject);
+            _target.OnHealthChange();
+        }
 
         private bool GetIsInRange(Transform targetTransform)
         {
@@ -245,7 +258,7 @@ namespace RPGEngine.Combat
 
         private void AttackBehavior()
         {
-            if (!_hasTarget || !_hasWeapon) return;
+            if (!_target || !_hasWeapon) return;
 
             if (_timeSinceLastAttack < _currentWeapon.TimeBetweenAttacks) return;
             transform.LookAt(_target.transform);
@@ -280,7 +293,7 @@ namespace RPGEngine.Combat
         /// </summary>
         private void Hit()
         {
-            if (!_hasTarget || !_hasWeapon) return;
+            if (!_target || !_hasWeapon) return;
 
             var damageAmount = _baseStats.GetStatValue(Stat.Damage);
 
@@ -289,11 +302,6 @@ namespace RPGEngine.Combat
                     damageAmount, tag);
             else
                 _target.TakeDamage(gameObject, damageAmount);
-        }
-
-        private void Shoot()
-        {
-            Hit();
         }
 
         public void EquipWeapon(Weapon weapon)

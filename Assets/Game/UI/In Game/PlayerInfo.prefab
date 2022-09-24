@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1502382635515673183}
+  - component: {fileID: 2501234222095941376}
   m_Layer: 0
   m_Name: ExperinceDisplay
   m_TagString: Untagged
@@ -38,6 +39,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2501234222095941376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1234780067016737664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9455eefa05249c9af2b075e3edc8b80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  statChangedEvent: {fileID: 11400000, guid: b6eb793d7984e4f4dae567704a6e72a0, type: 2}
+  statMaxValueChanged: {fileID: 11400000, guid: a645d652f01415a40a5776449bdf299c, type: 2}
+  statValueImage: {fileID: 3355485008649285549}
+  statValueText: {fileID: 4227883124555099107}
 --- !u!1 &2033150683328119486
 GameObject:
   m_ObjectHideFlags: 0
@@ -127,7 +145,7 @@ GameObject:
   - component: {fileID: 6898671988586642509}
   - component: {fileID: 201037490188430193}
   - component: {fileID: 6652425462574348104}
-  - component: {fileID: 5628914967203653508}
+  - component: {fileID: 6475805985971182815}
   m_Layer: 0
   m_Name: PlayerInfo
   m_TagString: Untagged
@@ -237,7 +255,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2593632637379892576}
   m_CullTransparentMesh: 1
---- !u!114 &5628914967203653508
+--- !u!114 &6475805985971182815
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -246,14 +264,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 2593632637379892576}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17b8a0faef6e466e996e369e5601e1c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 11532cf4e2114ba18ea443eab94a6bb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthImage: {fileID: 8383299265788410296}
-  healthValueText: {fileID: 420278233058514417}
-  experienceValueImage: {fileID: 3355485008649285549}
-  experienceValueText: {fileID: 4227883124555099107}
-  levelValueText: {fileID: 3654821412784821257}
+  targetChangeEvent: {fileID: 0}
+  targetTag: Player
+  showObjects:
+  - {fileID: 3175928629617401411}
+  - {fileID: 2501234222095941376}
+  - {fileID: 5934360916619582344}
+  titleText: {fileID: 6896601645931810111}
 --- !u!1 &2602305071521833492
 GameObject:
   m_ObjectHideFlags: 0
@@ -748,7 +768,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7451872571894800961}
-  - component: {fileID: 6462150869546237609}
+  - component: {fileID: 3175928629617401411}
   m_Layer: 0
   m_Name: Health Display
   m_TagString: Untagged
@@ -775,10 +795,10 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 180, y: 0}
-  m_SizeDelta: {x: 340, y: 25}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &6462150869546237609
+--- !u!114 &3175928629617401411
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -787,11 +807,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 4427932995184650481}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Script: {fileID: 11500000, guid: e9455eefa05249c9af2b075e3edc8b80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HorizontalFit: 0
-  m_VerticalFit: 0
+  target: {fileID: 0}
+  statChangedEvent: {fileID: 11400000, guid: 7557a76f51288854ba690569d9c1981f, type: 2}
+  statMaxValueChanged: {fileID: 11400000, guid: 9b7a84f958686594db8787532287f14b, type: 2}
+  statValueImage: {fileID: 8383299265788410296}
+  statValueText: {fileID: 420278233058514417}
 --- !u!1 &4833396604134502121
 GameObject:
   m_ObjectHideFlags: 0
@@ -936,6 +959,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7722070614177773185}
+  - component: {fileID: 5934360916619582344}
   m_Layer: 0
   m_Name: Level
   m_TagString: Untagged
@@ -965,6 +989,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &5934360916619582344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5944801275721011562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17b8a0faef6e466e996e369e5601e1c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  statChangedEvent: {fileID: 11400000, guid: 1632b24cf25199c488afc3bc387be60c, type: 2}
+  statValueText: {fileID: 3654821412784821257}
 --- !u!1 &6629107577861477171
 GameObject:
   m_ObjectHideFlags: 0
@@ -977,7 +1016,7 @@ GameObject:
   - component: {fileID: 962178270336095130}
   - component: {fileID: 420278233058514417}
   m_Layer: 0
-  m_Name: Text (TMP)
+  m_Name: Value Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1188,7 +1227,7 @@ GameObject:
   - component: {fileID: 5898888310394801346}
   - component: {fileID: 4227883124555099107}
   m_Layer: 0
-  m_Name: Text (TMP)
+  m_Name: Value Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

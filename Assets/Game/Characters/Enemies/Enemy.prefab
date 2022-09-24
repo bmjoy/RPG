@@ -63,8 +63,24 @@ PrefabInstance:
       propertyPath: max
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 5792556325803201955, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+      propertyPath: characterDied
+      value: 
+      objectReference: {fileID: 11400000, guid: 52c8d8f1d34332b47ad243d873123d37, type: 2}
+    - target: {fileID: 5792556325803201955, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+      propertyPath: onHealthChanged
+      value: 
+      objectReference: {fileID: 11400000, guid: 36e2b11c09fd0a54a873ca1de2492822, type: 2}
+    - target: {fileID: 5792556325803201955, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+      propertyPath: onHealthMaxChanged
+      value: 
+      objectReference: {fileID: 11400000, guid: 8b35fa6b6a69dba40bd3937b7e11677a, type: 2}
     - target: {fileID: 6487327744266254528, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
       propertyPath: m_Name
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 6487327744266254528, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+      propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 6863629442196216029, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}

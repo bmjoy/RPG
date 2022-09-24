@@ -1,4 +1,5 @@
-using System;
+using System.Collections;
+using RPGEngine.Core;
 using UnityEngine;
 
 namespace RPGEngine.Stats
@@ -8,39 +9,49 @@ namespace RPGEngine.Stats
         [SerializeField, Range(1, 99)] private int startingLevel = 1;
         [SerializeField] private CharacterClass characterClass;
         [SerializeField] private Progression progression;
+        [SerializeField] private GameObjectFloatGameEvent onExperienceChanged;
+        [SerializeField] private GameObjectFloatGameEvent onExperienceMaxChanged;
+        [SerializeField] private GameObjectFloatGameEvent onLevelChanged;
+        [SerializeField] private GameObjectGameEvent onLevelUp;
         [SerializeField] private GameObject levelUpEffect;
 
         private Experience _experience;
+        private float _experienceToNextLevel;
         private bool _hasExperience;
         private int _currentLevel;
-
-        public int CurrentLevel => _currentLevel;
-        public event Action OnLevelChanged;
 
         private void Awake()
         {
             _experience = GetComponent<Experience>();
             _hasExperience = _experience;
-            
+        }
+
+        private IEnumerator Start()
+        {
             _currentLevel = CalculateLevel();
+            yield return null;
+            if (onExperienceMaxChanged) onExperienceMaxChanged.Invoke(gameObject, _experienceToNextLevel);
+            if (onLevelChanged) onLevelChanged.Invoke(gameObject, _currentLevel);
         }
 
         private void OnEnable()
         {
-            if (_hasExperience) _experience.OnExperienceGained += UpdateLevel;
+            if (onExperienceChanged) onExperienceChanged.RegisterListener(UpdateLevel);
         }
 
         private void OnDisable()
         {
-            if (_hasExperience) _experience.OnExperienceGained -= UpdateLevel;
+            if (onExperienceChanged) onExperienceChanged.UnregisterListener(UpdateLevel);
         }
 
-        private void UpdateLevel()
+        private void UpdateLevel(GameObject sender, float amount)
         {
+            if (sender != gameObject) return;
             var newLevel = CalculateLevel();
             if (newLevel <= _currentLevel) return;
             _currentLevel = newLevel;
-            OnLevelChanged?.Invoke();
+            if (onLevelUp) onLevelUp.Invoke(gameObject);
+            if (onLevelChanged) onLevelChanged.Invoke(gameObject, newLevel);
             LevelUpEffect();
         }
 
@@ -54,9 +65,9 @@ namespace RPGEngine.Stats
         {
             try
             {
-                return progression[characterClass, stat].Calculate(_currentLevel);;
+                return progression[characterClass, stat].Calculate(_currentLevel);
             }
-            catch (Exception e)
+            catch (System.Exception e)
             {
                 Debug.LogWarning(e);
                 return 0;
@@ -67,12 +78,14 @@ namespace RPGEngine.Stats
         {
             if (!_hasExperience) return startingLevel;
             var level = startingLevel;
-            var experienceToNextLevel = GetExperienceNeeded(level);
-            while(experienceToNextLevel < _experience.Value)
+            _experienceToNextLevel = GetExperienceNeeded(level);
+            while(_experienceToNextLevel < _experience.Value)
             {
                 level++;
-                experienceToNextLevel = GetExperienceNeeded(level);
+                _experienceToNextLevel = GetExperienceNeeded(level);
             }
+            
+            if (onExperienceMaxChanged) onExperienceMaxChanged.Invoke(gameObject, _experienceToNextLevel);
 
             return level;
         }

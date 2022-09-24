@@ -1,5 +1,6 @@
-using System;
+using System.Collections;
 using Newtonsoft.Json.Linq;
+using RPGEngine.Core;
 using RPGEngine.Saving;
 using UnityEngine;
 
@@ -10,7 +11,12 @@ namespace RPGEngine.Stats
     {
         #region Inspector Fields
 
-        [SerializeField] private float value;
+        #region Events
+
+        [SerializeField] private GameObjectFloatGameEvent onExperiencedChanged;
+        [SerializeField] private GameObjectFloatGameEvent characterDied;
+
+        #endregion
 
         #endregion
 
@@ -18,42 +24,28 @@ namespace RPGEngine.Stats
 
         #endregion
 
-        #region Component References
-
-        #region Required
-
-        private BaseStats _baseStats;
-
-        #endregion
-
-        #region Optional
-
-        #endregion
-
-        #endregion
-
         #region Properties
 
-        public float Value => value;
-
-        public float ExperienceToLevel => _baseStats.GetStatValue(Stat.ExperienceToLevel);
-
-        #endregion
-
-        #region Events
-
-       public event Action OnExperienceGained;
+        public float Value { get; private set; }
 
         #endregion
 
         #region Unity Messages
 
-        /// <summary>
-        /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.Awake.html"/>
-        /// </summary>
-        private void Awake()
+        private IEnumerator Start()
         {
-            _baseStats = GetComponent<BaseStats>();
+            yield return null;
+            if (onExperiencedChanged) onExperiencedChanged.Invoke(gameObject, Value);
+        }
+
+        private void OnEnable()
+        {
+            if (characterDied) characterDied.RegisterListener(GainExperience);
+        }
+
+        private void OnDisable()
+        {
+            if (characterDied) characterDied.UnregisterListener(GainExperience);
         }
 
         #endregion
@@ -63,29 +55,25 @@ namespace RPGEngine.Stats
         /// <inheritdoc />
         public JToken CaptureAsJToken()
         {
-            return JToken.FromObject(value);
+            return JToken.FromObject(Value);
         }
 
         /// <inheritdoc />
         public void RestoreFromJToken(JToken state, int version)
         {
             if (state == null) return;
-            value = state.ToObject<float>();
+            Value = state.ToObject<float>();
         }
 
         #endregion
 
-        #region Public Methods
+        #region Private Methods
 
-        public void GainExperience(float amount)
+        private void GainExperience(GameObject sender, float amount)
         {
-            value += amount;
-            OnExperienceGained?.Invoke();
-        }
-
-        public float GetPercentage()
-        {
-            return value / ExperienceToLevel;
+            if (sender == gameObject) return;
+            Value += amount;
+            if (onExperiencedChanged) onExperiencedChanged.Invoke(gameObject, Value);
         }
 
         #endregion

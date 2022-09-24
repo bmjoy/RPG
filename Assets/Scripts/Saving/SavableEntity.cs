@@ -67,7 +67,7 @@ namespace RPGEngine.Saving
             {
                 JToken token = jsonSavable.CaptureAsJToken();
                 string component = jsonSavable.GetType().ToString();
-                LogToken(component, token);
+                LogToken(component, token, "Capture");
                 stateDict[jsonSavable.GetType().ToString()!] = jsonSavable.CaptureAsJToken();
             }
 
@@ -88,7 +88,7 @@ namespace RPGEngine.Saving
                 var component = jsonSavable.GetType().ToString();
                 if (!stateDict.ContainsKey(component!)) continue;
                 JToken token = stateDict[component];
-                LogToken(component, token);
+                LogToken(component, token, "Restore");
                 jsonSavable.RestoreFromJToken(token, currentFileVersion);
             }
         }
@@ -124,9 +124,9 @@ namespace RPGEngine.Saving
 
         #region Private Methods
 
-        private void LogToken(string component, JToken token)
+        private void LogToken(string component, JToken token, string callingMethod)
         {
-            string message = $"<color=blue>{name}:</color> <color=brown>Capture:</color>";
+            string message = $"<color=blue>{name}:</color> <color=brown>{callingMethod}:</color>";
             message += $" <color=darkblue>{component ?? "null"}</color>";
             message += $" = <color=teal>{token ?? "null"}</color>";
             message = Regex.Replace(message, @"\r\n?|\n", "");

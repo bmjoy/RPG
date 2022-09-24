@@ -2,6 +2,7 @@
 // 07-05-2022
 // James LaFritz
 
+using System.Collections;
 using Newtonsoft.Json.Linq;
 using RPGEngine.Core;
 using RPGEngine.Saving;
@@ -32,11 +33,21 @@ namespace RPGEngine.Attributes
 
         [SerializeField, Range(0, 1)] private float healthRegenOnLevelUpPercent = .75f;
 
+        #region Events
+
+        [SerializeField] private GameObjectFloatGameEvent characterDied;
+        [SerializeField] private GameObjectFloatGameEvent onHealthChanged;
+        [SerializeField] private GameObjectFloatGameEvent onHealthMaxChanged;
+        [SerializeField] private GameObjectGameEvent onLevelUp;
+        
+        #endregion
+
         #endregion
 
         #region Private Fields
 
         private float _value = -1;
+        private float _max;
 
         #endregion
 
@@ -65,15 +76,6 @@ namespace RPGEngine.Attributes
 
         /// <value>Is the GameObject dead. (_value == 0)</value>
         public bool IsDead { get; private set; }
-        public float Value => _value;
-
-        public float Max { get; private set; }
-
-        #endregion
-
-        #region Events
-
-        public event System.Action OnHealthChange;
 
         #endregion
 
@@ -97,20 +99,26 @@ namespace RPGEngine.Attributes
             _baseStats = GetComponent<BaseStats>();
         }
 
-        private void Start()
+        private IEnumerator Start()
         {
-            Max = _baseStats.GetStatValue(Stat.Health);
-            if (_value < 0) _value = Max;
+            yield return null;
+            
+            _max = _baseStats.GetStatValue(Stat.Health);
+            if (_value < 0) _value = _max;
+            
+            //Debug.LogWarning($"{name}: Health Start");
+
+            OnHealthChange();
         }
 
         private void OnEnable()
         {
-            _baseStats.OnLevelChanged += RegenerateHealth;
+            if (onLevelUp) onLevelUp.RegisterListener(RegenerateHealth);
         }
 
         private void OnDisable()
         {
-            _baseStats.OnLevelChanged -= RegenerateHealth;
+            if (onLevelUp) onLevelUp.UnregisterListener(RegenerateHealth);
         }
 
         #endregion
@@ -154,35 +162,21 @@ namespace RPGEngine.Attributes
         {
             if (IsDead) return;
 
-            _value = math.min(math.max(_value - damage, 0), Max);
+            _value = math.min(math.max(_value - damage, 0), _max);
 
             Debug.Log($"<color=blue>{name}:</color> <color=darkblue>takes <color=red>{damage}</color> damage.</color> " +
-                      $"<color=teal>Health is now <color=#38761d>{_value}</color> / <color=#274e13>{Max}</color></color>");
+                      $"<color=teal>Health is now <color=#38761d>{_value}</color> / <color=#274e13>{_max}</color></color>");
 
-            OnHealthChange?.Invoke();
+            if(onHealthChanged) onHealthChanged.Invoke(gameObject, _value);
 
             if (_value != 0) return;
-            AwardExp(instigator);
             Die();
         }
 
-        private void AwardExp(GameObject instigator)
+        public void OnHealthChange()
         {
-            if (!instigator.CompareTag("Player")) return;
-            
-            float expAmount = 0;
-            BaseStats stats = GetComponent<BaseStats>();
-            if (stats) expAmount = stats.GetStatValue(Stat.ExperienceReward);
-            
-            Experience exp = instigator.GetComponent<Experience>();
-            if (exp) exp.GainExperience(expAmount);
-            
-            Debug.Log($"<color=red>{instigator.name}</color> <color=darkblue>receives <color=red>{expAmount}</color> EXP</color>");
-        }
-
-        public float GetPercentage()
-        {
-            return IsDead ? 0 : _value / Max;
+            if (onHealthMaxChanged) onHealthMaxChanged.Invoke(gameObject, _max);
+            if(onHealthChanged) onHealthChanged.Invoke(gameObject, _value);
         }
 
         #endregion
@@ -194,19 +188,27 @@ namespace RPGEngine.Attributes
             if (IsDead) return;
             IsDead = true;
             _actionScheduler.CancelCurrentAction();
-            if (_hasAnimator)
-            {
-                _animator.SetTrigger(_dieHash);
-            }
+            if (_hasAnimator) _animator.SetTrigger(_dieHash);
+            if (characterDied) characterDied.Invoke(gameObject, GetAwardExp());
         }
 
-        private void RegenerateHealth()
+        private float GetAwardExp()
         {
-            float currentPercentage = GetPercentage();
-            Max = _baseStats.GetStatValue(Stat.Health);
-            _value = Mathf.Max(Max * currentPercentage, Max * healthRegenOnLevelUpPercent);
-            
-            OnHealthChange?.Invoke();
+            float expAmount = 0;
+            BaseStats stats = GetComponent<BaseStats>();
+            if (stats) expAmount = stats.GetStatValue(Stat.ExperienceReward);
+
+            return expAmount;
+        }
+
+        private void RegenerateHealth(GameObject sender)
+        {
+            if (sender != gameObject) return;
+
+            var currentPercentage = IsDead ? 0 : _value / _max;
+            _max = _baseStats.GetStatValue(Stat.Health);
+            _value = Mathf.Max(_max * currentPercentage, _max * healthRegenOnLevelUpPercent);
+            OnHealthChange();
         }
 
         #endregion

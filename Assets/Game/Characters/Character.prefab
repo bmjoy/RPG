@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 78802484035129814}
   m_Layer: 0
   m_Name: Character
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -180,6 +180,7 @@ MonoBehaviour:
   rightHandWeaponSlot: {fileID: 0}
   leftHandWeaponSlot: {fileID: 0}
   combatTargetType: 0
+  onTargetChanged: {fileID: 0}
 --- !u!114 &5792556325803201955
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,8 +193,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02b0cc1378a846a182959fb0da0ec476, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  max: 100
-  value: 0
+  healthRegenOnLevelUpPercent: 0.75
+  characterDied: {fileID: 0}
+  onHealthChanged: {fileID: 0}
+  onHealthMaxChanged: {fileID: 0}
+  onLevelChanged: {fileID: 0}
 --- !u!114 &78802484035129814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,3 +213,6 @@ MonoBehaviour:
   startingLevel: 1
   characterClass: 1
   progression: {fileID: 11400000, guid: fc3fa767bd1b87c4b95d316a546b1e1c, type: 2}
+  onExperiencedChanged: {fileID: 0}
+  onLevelUp: {fileID: 0}
+  levelUpEffect: {fileID: 0}
