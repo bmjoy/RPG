@@ -104,10 +104,9 @@ namespace RPGEngine.Attributes
             yield return null;
             
             _max = _baseStats.GetStatValue(Stat.Health);
+            
             if (_value < 0) _value = _max;
             
-            //Debug.LogWarning($"{name}: Health Start");
-
             OnHealthChange();
         }
 

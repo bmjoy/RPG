@@ -1,3 +1,4 @@
+using System;
 using RPGEngine.Core;
 using UnityEngine;
 
@@ -8,15 +9,14 @@ namespace RPGEngine.UI.Stats
         [SerializeField] protected GameObject target;
         [SerializeField] private GameObjectFloatGameEvent statChangedEvent;
 
-        public GameObject Target { set => target = value; } 
+        public GameObject Target { set => target = value; }
 
-        protected virtual void OnEnable()
+        protected virtual void Awake()
         {
             if (statChangedEvent) statChangedEvent.RegisterListener(OnStatValueChanged);
-            //Debug.LogWarning($"{name}: On Enable");
         }
 
-        protected virtual  void OnDisable()
+        protected virtual void OnDestroy()
         {
             if (statChangedEvent) statChangedEvent.UnregisterListener(OnStatValueChanged);
         }

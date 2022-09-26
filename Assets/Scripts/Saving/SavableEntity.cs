@@ -36,6 +36,8 @@ namespace RPGEngine.Saving
         [SerializeField]
         private string uniqueIdentifier = "";
 
+        [Header("Debug")] [SerializeField] private bool logInfo;
+
         #endregion
 
         /// <summary>
@@ -61,7 +63,7 @@ namespace RPGEngine.Saving
         /// <returns><a href="https://www.newtonsoft.com/json/help/html/T_Newtonsoft_Json_Linq_JToken.htm">JToken</a> object that represents the state.</returns>
         public JToken Capture()
         {
-            JObject state = new JObject();
+            JObject state = new();
             IDictionary<string, JToken> stateDict = state;
             foreach (ISavable jsonSavable in GetComponents<ISavable>())
             {
@@ -126,6 +128,7 @@ namespace RPGEngine.Saving
 
         private void LogToken(string component, JToken token, string callingMethod)
         {
+            if (!logInfo) return;
             string message = $"<color=blue>{name}:</color> <color=brown>{callingMethod}:</color>";
             message += $" <color=darkblue>{component ?? "null"}</color>";
             message += $" = <color=teal>{token ?? "null"}</color>";

@@ -56,7 +56,7 @@ namespace RPGEngine.Stats
                 BuildLookupTable();
 
                 if (!_lookupTable.ContainsKey(stat))
-                    throw new System.ArgumentOutOfRangeException(nameof(stat),
+                    throw new System.ArgumentOutOfRangeException(nameof(stats),
                         $"Progression does not contain an entry for {stat} in the class {characterClass}");
 
                 return _lookupTable[stat];
@@ -83,15 +83,14 @@ namespace RPGEngine.Stats
             }
             catch (System.ArgumentOutOfRangeException)
             {
-                throw new System.ArgumentOutOfRangeException(nameof(characterClasses),
-                    $"{name} does not contain an entry for {stat} in the class {cc}");
+                throw;
             }
             catch (System.Exception e)
             {
                 if(!_lookupTable.ContainsKey(cc))
                 {
                     throw new System.ArgumentOutOfRangeException(nameof(characterClasses),
-                        $"{name} does not contain an entry for characterClass {cc}");
+                        $"{name} does not contain an entry for characterClass {cc}\n{e}");
                 }
 
                 throw new System.Exception($"{name}: Something went Horribly wrong!\n{e}");

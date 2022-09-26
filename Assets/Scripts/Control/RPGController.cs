@@ -13,8 +13,8 @@ namespace RPGEngine.Control
     /// A <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html">UnityEngine.MonoBehavior</a> that is the Base for all Controllers in Game.
     /// <p>
     /// <a href="https://docs.unity3d.com/ScriptReference/RequireComponent.html">UnityEngine.RequireComponent</a>(
-    /// typeof(<see cref="Mover"/>)
-    /// , typeof(<see cref="Health"/>)
+    /// typeof(<see cref="Movement.Mover"/>)
+    /// , typeof(<see cref="Attributes.Health"/>)
     /// )</p>
     /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html"/>
     /// </summary>
@@ -31,20 +31,20 @@ namespace RPGEngine.Control
 
         #region Required
 
-        /// <value>Cache the <see cref="Mover"/></value>
-        protected Mover mover;
+        /// <value>Cache the <see cref="Movement.Mover"/></value>
+        protected Mover Mover;
 
-        /// <value>Cache the <see cref="Health"/></value>
-        protected Health health;
+        /// <value>Cache the <see cref="Attributes.Health"/></value>
+        protected Health Health;
 
         #endregion
 
         #region Optional
 
-        /// <value>Cache the <see cref="Fighter"/></value>
-        protected Fighter fighter;
+        /// <value>Cache the <see cref="Combat.Fighter"/></value>
+        protected Fighter Fighter;
 
-        protected bool hasFighter;
+        protected bool HasFighter;
 
         #endregion
 
@@ -57,10 +57,10 @@ namespace RPGEngine.Control
         /// </summary>
         protected virtual void Awake()
         {
-            fighter = GetComponent<Fighter>();
-            hasFighter = fighter != null;
-            mover = GetComponent<Mover>();
-            health = GetComponent<Health>();
+            Fighter = GetComponent<Fighter>();
+            HasFighter = Fighter != null;
+            Mover = GetComponent<Mover>();
+            Health = GetComponent<Health>();
         }
 
         #endregion

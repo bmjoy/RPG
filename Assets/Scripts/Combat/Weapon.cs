@@ -24,6 +24,7 @@ namespace RPGEngine.Combat
         private float range = 2f;
         [SerializeField] private float timeBetweenAttacks = 1f;
         [SerializeField] private float damage = 10f;
+        [SerializeField] private float damagePercentageBonus = 0;
 
         [Header("Weapon Projectile")] [SerializeField]
         private Projectile projectile;
@@ -33,6 +34,7 @@ namespace RPGEngine.Combat
         public float Range => range;
         public float TimeBetweenAttacks => timeBetweenAttacks;
         public float Damage => damage;
+        public float DamagePercentageBonus => damagePercentageBonus;
 
         public void Spawn(Transform rightHand, Transform leftHand,  Animator animator)
         {

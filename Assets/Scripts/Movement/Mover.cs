@@ -153,7 +153,7 @@ namespace RPGEngine.Movement
             if (state == null || version < 4) return;
             if (_hasAgent) _navMeshAgent.enabled = false;
 
-            MoverLoadData data = new MoverLoadData();
+            MoverLoadData data = new();
             switch (version)
             {
                 case 4:

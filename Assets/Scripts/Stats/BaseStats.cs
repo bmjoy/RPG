@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using RPGEngine.Core;
 using UnityEngine;
 
@@ -32,36 +33,20 @@ namespace RPGEngine.Stats
             yield return null;
             if (onExperienceMaxChanged) onExperienceMaxChanged.Invoke(gameObject, _experienceToNextLevel);
             if (onLevelChanged) onLevelChanged.Invoke(gameObject, _currentLevel);
-        }
-
-        private void OnEnable()
-        {
             if (onExperienceChanged) onExperienceChanged.RegisterListener(UpdateLevel);
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
             if (onExperienceChanged) onExperienceChanged.UnregisterListener(UpdateLevel);
         }
 
-        private void UpdateLevel(GameObject sender, float amount)
-        {
-            if (sender != gameObject) return;
-            var newLevel = CalculateLevel();
-            if (newLevel <= _currentLevel) return;
-            _currentLevel = newLevel;
-            if (onLevelUp) onLevelUp.Invoke(gameObject);
-            if (onLevelChanged) onLevelChanged.Invoke(gameObject, newLevel);
-            LevelUpEffect();
-        }
-
-        private void LevelUpEffect()
-        {
-            if (levelUpEffect) 
-                Instantiate(levelUpEffect, transform);
-        }
-
         public float GetStatValue(Stat stat)
+        {
+            return (GetBaseStat(stat) + GetAdditiveModifiers(stat)) * (1 + GetPercentageModifiers(stat));
+        }
+
+        private float GetBaseStat(Stat stat)
         {
             try
             {
@@ -70,8 +55,19 @@ namespace RPGEngine.Stats
             catch (System.Exception e)
             {
                 Debug.LogWarning(e);
+                if (stat == Stat.ExperienceToLevel) return Mathf.Infinity;
                 return 0;
             }
+        }
+
+        private float GetAdditiveModifiers(Stat stat)
+        {
+            return GetComponents<IModifierProvider>().Sum(modifiers => modifiers.GetAdditiveModifiers(stat).Sum());
+        }
+
+        private float GetPercentageModifiers(Stat stat)
+        {
+            return GetComponents<IModifierProvider>().Sum(modifiers => modifiers.GetPercentageModifiers(stat).Sum());
         }
 
         private int CalculateLevel()
@@ -101,6 +97,25 @@ namespace RPGEngine.Stats
                 Debug.LogWarning(e);
             }
             return Mathf.Infinity;
+        }
+
+        private void UpdateLevel(GameObject sender, float amount)
+        {
+            if (sender != gameObject) return;
+            var newLevel = CalculateLevel();
+            if (name == "Player")
+                Debug.LogError($"UpdateLevel:({_currentLevel}={newLevel}), {_experienceToNextLevel}");
+            if (newLevel <= _currentLevel) return;
+            _currentLevel = newLevel;
+            if (onLevelUp) onLevelUp.Invoke(gameObject);
+            if (onLevelChanged) onLevelChanged.Invoke(gameObject, newLevel);
+            LevelUpEffect();
+        }
+
+        private void LevelUpEffect()
+        {
+            if (levelUpEffect) 
+                Instantiate(levelUpEffect, transform);
         }
     }
 }

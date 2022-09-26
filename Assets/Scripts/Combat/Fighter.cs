@@ -32,7 +32,7 @@ namespace RPGEngine.Combat
     /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html"/>
     /// </summary>
     [RequireComponent(typeof(Mover), typeof(ActionScheduler), typeof(BaseStats))]
-    public class Fighter : MonoBehaviour, IAction, ISavable
+    public class Fighter : MonoBehaviour, IAction, ISavable, IModifierProvider
     {
         #region Inspector Fields
 
@@ -112,6 +112,8 @@ namespace RPGEngine.Combat
                 _stopAttackHash = Animator.StringToHash(StopAttackTrigger);
             }
 
+            EquipWeapon(defaultWeapon);
+
             var errorObject = "";
             if (_mover == null) errorObject = nameof(_mover);
             if (_actionScheduler == null) errorObject += nameof(_actionScheduler);
@@ -121,14 +123,6 @@ namespace RPGEngine.Combat
             Debug.LogError($"{gameObject.name} requires a(n) {errorObject} in order to work", gameObject);
             enabled = false;
             // ReSharper restore Unity.InefficientPropertyAccess
-        }
-
-        /// <summary>
-        /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.Start.html"/>
-        /// </summary>
-        private void Start()
-        {
-            if (!_currentWeapon) EquipWeapon(defaultWeapon);
         }
 
         /// <summary>
@@ -202,6 +196,26 @@ namespace RPGEngine.Combat
             ChangeTarget(null);
             _mover.Cancel();
             TriggerCancelAttack();
+        }
+
+        #endregion
+
+        #region Implementation of IModifierProvider
+
+        public IEnumerable<float> GetAdditiveModifiers(Stat stat)
+        {
+            if (stat == Stat.Damage)
+            {
+                yield return _currentWeapon.Damage;
+            }
+        }
+        
+        public IEnumerable<float> GetPercentageModifiers(Stat stat)
+        {
+            if (stat == Stat.Damage)
+            {
+                yield return _currentWeapon.DamagePercentageBonus;
+            }
         }
 
         #endregion

@@ -9,7 +9,7 @@ namespace RPGEngine.UI.Stats
         
         private bool _hasText;
 
-        private void Awake()
+        protected override void Awake()
         {
             _hasText = statValueText;
         }

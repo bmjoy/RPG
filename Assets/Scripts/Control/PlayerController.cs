@@ -26,7 +26,7 @@ namespace RPGEngine.Control
         /// </summary>
         private void Update()
         {
-            if (health.IsDead) return;
+            if (Health.IsDead) return;
             if (InteractWithCombat()) return;
             if (InteractWithMovement()) return;
             //Debug.Log("Nothing To Do");
@@ -38,17 +38,17 @@ namespace RPGEngine.Control
 
         private bool InteractWithCombat()
         {
-            if (!hasFighter) return false;
+            if (!HasFighter) return false;
             int hits = Physics.RaycastNonAlloc(GetMouseFromMainCameraScreenPointToRay(), _combatHits);
             if (hits == 0) return false;
             for (int i = 0; i < hits; i++)
             {
                 RaycastHit hit = _combatHits[i];
                 CombatTarget target = hit.transform.GetComponent<CombatTarget>();
-                if (!fighter.CanAttack(target)) continue;
+                if (!Fighter.CanAttack(target)) continue;
                 if (!Input.GetMouseButton(0)) return true;
                 Debug.Assert(target, nameof(target) + " != null");
-                fighter.Attack(target);
+                Fighter.Attack(target);
 
                 return true;
             }
@@ -66,7 +66,7 @@ namespace RPGEngine.Control
             bool hasHIt = Physics.Raycast(GetMouseFromMainCameraScreenPointToRay(), out RaycastHit hit);
             if (!hasHIt || !Input.GetMouseButton(0)) return hasHIt;
 
-            mover.StartMoveAction(hit.point);
+            Mover.StartMoveAction(hit.point);
 
             return true;
         }

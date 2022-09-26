@@ -11918,6 +11918,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uniqueIdentifier: Intro Sequence-09810c25-a882-4e46-8007-c277d46d6e87
+  logInfo: 0
 --- !u!1001 &2040310692
 PrefabInstance:
   m_ObjectHideFlags: 0

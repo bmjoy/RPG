@@ -49,18 +49,7 @@ namespace RPGEngine.Saving
                 buildIndex = (int)state["lastSceneBuildIndex"];
             }
 
-            if (buildIndex == SceneManager.GetActiveScene().buildIndex)
-            {
-                RestoreState(state);
-                yield break;
-            }
-
-            AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(buildIndex);
-            while (!asyncLoad.isDone)
-            {
-                yield return null;
-            }
-
+            yield return SceneManager.LoadSceneAsync(buildIndex);
             RestoreState(state);
         }
 

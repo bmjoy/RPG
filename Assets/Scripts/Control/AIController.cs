@@ -99,9 +99,9 @@ namespace RPGEngine.Control
         /// </summary>
         private void Update()
         {
-            if (health.IsDead) return;
+            if (Health.IsDead) return;
             CombatTarget closestTarget = GetClosestTarget(chaseRange);
-            if (IsChasing(closestTarget) && hasFighter && fighter.CanAttack(closestTarget))
+            if (IsChasing(closestTarget) && HasFighter && Fighter.CanAttack(closestTarget))
                 AttackBehavior(closestTarget!);
             else if (IsLookingForTarget())
                 SuspiciousBehavior();
@@ -128,8 +128,8 @@ namespace RPGEngine.Control
         private void AttackBehavior([NotNull] CombatTarget closestTarget)
         {
             _timeSinceLastSawTarget = 0;
-            mover.SetMoveSpeed(chaseSpeed);
-            fighter.Attack(closestTarget);
+            Mover.SetMoveSpeed(chaseSpeed);
+            Fighter.Attack(closestTarget);
         }
 
         private void SuspiciousBehavior()
@@ -140,9 +140,9 @@ namespace RPGEngine.Control
         private void PatrolBehavior()
         {
             Vector3 nextPosition = _startPosition;
-            mover.SetMoveSpeed(patrolSpeed);
+            Mover.SetMoveSpeed(patrolSpeed);
 
-            if (patrolPath != null)
+            if (patrolPath)
             {
                 if (AtWaypoint())
                     CycleWaypoint();
@@ -155,7 +155,7 @@ namespace RPGEngine.Control
             }
             else
             {
-                mover.StartMoveAction(nextPosition);
+                Mover.StartMoveAction(nextPosition);
             }
         }
 
@@ -166,19 +166,19 @@ namespace RPGEngine.Control
 
         private void CycleWaypoint()
         {
-            if (patrolPath == null) return;
+            if (!patrolPath) return;
             patrolPath.NextIndex();
             _timeSinceLastWaypoint = 0;
         }
 
         private Vector3 GetCurrentWaypoint()
         {
-            return patrolPath == null ? _startPosition : patrolPath.GetWaypoint();
+            return !patrolPath ? _startPosition : patrolPath.GetWaypoint();
         }
 
         private bool IsChasing(CombatTarget closestTarget)
         {
-            return closestTarget != null;
+            return closestTarget;
         }
 
         private bool IsLookingForTarget()

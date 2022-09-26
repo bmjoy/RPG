@@ -44,18 +44,6 @@ namespace RPGEngine.SceneManagement
             _savingSystem = GetComponent<SaveSystem>();
             StartCoroutine(LoadLastScene());
         }
-        
-        private IEnumerator LoadLastScene()
-        {
-            Fader fader = FindObjectOfType<Fader>();
-            bool hasFader = fader != null;
-
-            if (hasFader) fader.FadeOutImmediate();
-
-            yield return _savingSystem.LoadLastScene(DefaultSaveFile);
-
-            if (hasFader) yield return fader.FadeIn(fadeInTime);
-        }
 
         /// <summary>
         /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.Update.html"/>
@@ -64,7 +52,7 @@ namespace RPGEngine.SceneManagement
         {
             if (Input.GetKeyDown(KeyCode.L))
             {
-                Load();
+                StartCoroutine(LoadLastScene());
             }
 
             if (Input.GetKeyDown(KeyCode.S))
@@ -81,7 +69,6 @@ namespace RPGEngine.SceneManagement
         public void Load()
         {
             _savingSystem.Load(DefaultSaveFile);
-            _savingSystem.Load(DefaultSaveFile);
         }
 
         public void Save()
@@ -92,6 +79,15 @@ namespace RPGEngine.SceneManagement
         public void Delete()
         {
             _savingSystem.Delete(DefaultSaveFile);
+        }
+
+        private IEnumerator LoadLastScene()
+        {
+            yield return _savingSystem.LoadLastScene(DefaultSaveFile);
+            Fader fader = FindObjectOfType<Fader>();
+            if (!fader) yield break;
+            fader.FadeOutImmediate();
+            yield return fader.FadeIn(fadeInTime);
         }
     }
 }

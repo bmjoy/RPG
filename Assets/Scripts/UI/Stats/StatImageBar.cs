@@ -16,21 +16,18 @@ namespace RPGEngine.UI.Stats
         
         private float _value;
         private float _max;
-        private void Awake()
+        
+        protected override void Awake()
         {
+            base.Awake();
             _hasImage = statValueImage;
             _hasText = statValueText;
-        }
-        
-        protected override void OnEnable()
-        {
-            base.OnEnable();
             if (statMaxValueChanged) statMaxValueChanged.RegisterListener(OnStatMaxValueChanged);
         }
 
-        protected override void OnDisable()
+        protected override void OnDestroy()
         {
-            base.OnDisable();
+            base.OnDestroy();
             if (statMaxValueChanged) statMaxValueChanged.UnregisterListener(OnStatMaxValueChanged);
         }
 
