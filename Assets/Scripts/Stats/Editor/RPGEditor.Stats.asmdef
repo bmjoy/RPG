@@ -1,0 +1,18 @@
+{
+    "name": "RPGEditor.Stats",
+    "rootNamespace": "RPGEditor.Stats",
+    "references": [
+        "GUID:341246058b14c6d44a5824d5992fee05"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

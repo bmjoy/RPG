@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" noNamespaceSchemaLocation="../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <ui:VisualElement >
+        <uie:EnumField name="characterClass" binding-path="characterClass" />
+        <uie:PropertyField name="stats" binding-path="stats" />
+    </ui:VisualElement>
+</ui:UXML>

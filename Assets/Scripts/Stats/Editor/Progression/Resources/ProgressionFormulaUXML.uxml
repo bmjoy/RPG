@@ -1,0 +1,13 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" noNamespaceSchemaLocation="../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <ui:Template name="LevelsScrollView" src="project://database/Assets/Scripts/Stats/Editor/Progression/Resources/LevelsScrollView.uxml?fileID=9197481963319205126&amp;guid=b4deb01d1da61aa428bc5c3d8ba3d9bd&amp;type=3#LevelsScrollView" />
+    <ui:VisualElement >
+        <ui:VisualElement style="flex-shrink: 1; flex-direction: row; flex-grow: 0;">
+            <ui:Slider picking-mode="Ignore" label="Starting Value" value="50" high-value="5000" name="startingValueSlider" binding-path="startingValue" show-input-field="true" style="flex-direction: column; width: 100px;" />
+            <ui:Slider picking-mode="Ignore" label="% Add" value="0.25" name="percentageAddSlider" binding-path="percentageAdd" show-input-field="true" style="flex-direction: column; width: 100px;" />
+            <ui:Slider picking-mode="Ignore" label="Absolute Add" value="100" high-value="5000" name="absoluteAddSlider" binding-path="absoluteAdd" show-input-field="true" style="flex-direction: column; width: 100px;" />
+            <ui:Toggle name="useCurve" binding-path="useCurve" />
+            <uie:CurveField name="curve" binding-path="curve" style="min-width: 50px;" />
+        </ui:VisualElement>
+        <ui:Instance template="LevelsScrollView" name="LevelsScrollView" />
+    </ui:VisualElement>
+</ui:UXML>

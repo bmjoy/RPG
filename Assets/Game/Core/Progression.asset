@@ -15,12 +15,12 @@ MonoBehaviour:
   characterClasses:
   - characterClass: 0
     stats:
-    - stat: 0
+    - stat: 1
       progression:
-        startingValue: 50
-        percentageAdded: 0.215
-        absoluteAdded: 3
-        useCurve: 1
+        startingValue: 2000
+        percentageAdd: 0
+        absoluteAdd: 2000
+        useCurve: 0
         curve:
           serializedVersion: 2
           m_Curve:
@@ -44,13 +44,52 @@ MonoBehaviour:
             outWeight: 0
           m_PreInfinity: 2
           m_PostInfinity: 2
-          m_RotationOrder: 0
+          m_RotationOrder: 4
     - stat: 2
       progression:
+        startingValue: 200
+        percentageAdd: 0
+        absoluteAdd: 40
+        useCurve: 0
+        curve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 0.91185546
+            outSlope: 0.91185546
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0.102792084
+          - serializedVersion: 3
+            time: 0.47115046
+            value: 0.11027999
+            inSlope: 0.06595819
+            outSlope: 0.06595819
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.08978711
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 4.528305
+            outSlope: 4.528305
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.024999976
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+    - stat: 3
+      progression:
         startingValue: 10
-        percentageAdded: 0.25
-        absoluteAdded: 10
-        useCurve: 1
+        percentageAdd: 0
+        absoluteAdd: 0
+        useCurve: 0
         curve:
           serializedVersion: 2
           m_Curve:
@@ -74,57 +113,45 @@ MonoBehaviour:
             outWeight: 0
           m_PreInfinity: 2
           m_PostInfinity: 2
-          m_RotationOrder: 0
-    - stat: 3
-      progression:
-        startingValue: 10
-        percentageAdded: 0.25
-        absoluteAdded: 3
-        useCurve: 1
-        curve:
-          serializedVersion: 2
-          m_Curve:
-          - serializedVersion: 3
-            time: 0
-            value: 0
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0
-          - serializedVersion: 3
-            time: 1
-            value: 1
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 0
+          m_RotationOrder: 4
   - characterClass: 1
     stats:
     - stat: 0
       progression:
-        startingValue: 40
-        percentageAdded: 0
-        absoluteAdded: 0
+        startingValue: 80
+        percentageAdd: 0
+        absoluteAdd: 40
         useCurve: 0
         curve:
           serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 0
-          m_PostInfinity: 0
-          m_RotationOrder: 0
-    - stat: 1
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+    - stat: 2
       progression:
-        startingValue: 10
-        percentageAdded: 0.015
-        absoluteAdded: 0
-        useCurve: 1
+        startingValue: 60
+        percentageAdd: 0
+        absoluteAdd: 30
+        useCurve: 0
         curve:
           serializedVersion: 2
           m_Curve:
@@ -148,84 +175,262 @@ MonoBehaviour:
             outWeight: 0
           m_PreInfinity: 2
           m_PostInfinity: 2
-          m_RotationOrder: 0
+          m_RotationOrder: 4
+    - stat: 3
+      progression:
+        startingValue: 8
+        percentageAdd: 0
+        absoluteAdd: 1.6
+        useCurve: 0
+        curve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
   - characterClass: 2
     stats:
     - stat: 0
       progression:
-        startingValue: 30
-        percentageAdded: 0
-        absoluteAdded: 0
+        startingValue: 80
+        percentageAdd: 0
+        absoluteAdd: 40
         useCurve: 0
         curve:
           serializedVersion: 2
           m_Curve: []
-          m_PreInfinity: 0
-          m_PostInfinity: 0
-          m_RotationOrder: 0
-    - stat: 1
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+    - stat: 2
       progression:
-        startingValue: 7
-        percentageAdded: 0
-        absoluteAdded: 0
+        startingValue: 60
+        percentageAdd: 0
+        absoluteAdd: 30
         useCurve: 0
         curve:
           serializedVersion: 2
           m_Curve: []
-          m_PreInfinity: 0
-          m_PostInfinity: 0
-          m_RotationOrder: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+    - stat: 3
+      progression:
+        startingValue: 5
+        percentageAdd: 0
+        absoluteAdd: 1
+        useCurve: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+  - characterClass: 5
+    stats:
+    - stat: 0
+      progression:
+        startingValue: 40
+        percentageAdd: 0
+        absoluteAdd: 20
+        useCurve: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+    - stat: 2
+      progression:
+        startingValue: 24
+        percentageAdd: 0
+        absoluteAdd: 12
+        useCurve: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+    - stat: 3
+      progression:
+        startingValue: 3.2
+        percentageAdd: 0
+        absoluteAdd: 0.64
+        useCurve: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
   - characterClass: 3
     stats:
     - stat: 0
       progression:
-        startingValue: 20
-        percentageAdded: 0
-        absoluteAdded: 0
+        startingValue: 64
+        percentageAdd: 0
+        absoluteAdd: 32
         useCurve: 0
         curve:
           serializedVersion: 2
           m_Curve: []
-          m_PreInfinity: 0
-          m_PostInfinity: 0
-          m_RotationOrder: 0
-    - stat: 1
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+    - stat: 2
       progression:
-        startingValue: 6
-        percentageAdded: 0
-        absoluteAdded: 0
+        startingValue: 32
+        percentageAdd: 0
+        absoluteAdd: 16
         useCurve: 0
         curve:
           serializedVersion: 2
           m_Curve: []
-          m_PreInfinity: 0
-          m_PostInfinity: 0
-          m_RotationOrder: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+    - stat: 3
+      progression:
+        startingValue: 4
+        percentageAdd: 0
+        absoluteAdd: 0.8
+        useCurve: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
   - characterClass: 4
     stats:
     - stat: 0
       progression:
-        startingValue: 100
-        percentageAdded: 0
-        absoluteAdded: 0
+        startingValue: 64
+        percentageAdd: 0
+        absoluteAdd: 32
         useCurve: 0
         curve:
           serializedVersion: 2
           m_Curve: []
-          m_PreInfinity: 0
-          m_PostInfinity: 0
-          m_RotationOrder: 0
-    - stat: 1
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+    - stat: 2
       progression:
-        startingValue: 50
-        percentageAdded: 0
-        absoluteAdded: 0
+        startingValue: 42
+        percentageAdd: 0
+        absoluteAdd: 21
         useCurve: 0
         curve:
           serializedVersion: 2
           m_Curve: []
-          m_PreInfinity: 0
-          m_PostInfinity: 0
-          m_RotationOrder: 0
-  - characterClass: 5
-    stats: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+    - stat: 3
+      progression:
+        startingValue: 4
+        percentageAdd: 0
+        absoluteAdd: 0.8
+        useCurve: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+  - characterClass: 6
+    stats:
+    - stat: 0
+      progression:
+        startingValue: 96
+        percentageAdd: 0
+        absoluteAdd: 48
+        useCurve: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+    - stat: 2
+      progression:
+        startingValue: 90
+        percentageAdd: 0
+        absoluteAdd: 45
+        useCurve: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+    - stat: 3
+      progression:
+        startingValue: 12
+        percentageAdd: 0
+        absoluteAdd: 2.4
+        useCurve: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+  - characterClass: 7
+    stats:
+    - stat: 0
+      progression:
+        startingValue: 160
+        percentageAdd: 0
+        absoluteAdd: 80
+        useCurve: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+    - stat: 2
+      progression:
+        startingValue: 120
+        percentageAdd: 0
+        absoluteAdd: 60
+        useCurve: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+    - stat: 3
+      progression:
+        startingValue: 16
+        percentageAdd: 0
+        absoluteAdd: 32
+        useCurve: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
