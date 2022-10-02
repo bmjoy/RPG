@@ -3,6 +3,7 @@
 // James LaFritz
 
 using RPGEngine.Attributes;
+using RPGEngine.Core;
 using UnityEngine;
 
 namespace RPGEngine.Combat
@@ -24,7 +25,7 @@ namespace RPGEngine.Combat
         private float range = 2f;
         [SerializeField] private float timeBetweenAttacks = 1f;
         [SerializeField] private float damage = 10f;
-        [SerializeField] private float damagePercentageBonus = 0;
+        [SerializeField] private float damagePercentageBonus;
 
         [Header("Weapon Projectile")] [SerializeField]
         private Projectile projectile;
@@ -39,7 +40,7 @@ namespace RPGEngine.Combat
         public void Spawn(Transform rightHand, Transform leftHand,  Animator animator)
         {
             DestroyOldWeapon(rightHand, leftHand);
-            if (equippedPrefab != null)
+            if (equippedPrefab)
             {
                 GameObject weapon = Instantiate(equippedPrefab, GetParent(rightHand, leftHand, isWeaponRightHanded));
                 weapon.name = WeaponName;
@@ -53,12 +54,12 @@ namespace RPGEngine.Combat
             }
         }
 
-        public void LaunchProjectile(Transform rightHand, Transform leftHand, Health target, GameObject instigator, float calculatedDamage, string tag)
+        public void LaunchProjectile(Transform rightHand, Transform leftHand, Health target, GameObjectFloatGameEvent dealDamage, float calculatedDamage, string tag)
         {
             Projectile projectileInstance =
                 Instantiate(projectile, GetParent(rightHand, leftHand, isProjectileRightHanded).position, Quaternion.identity);
             projectileInstance.tag = tag;
-            projectileInstance.SetTarget(target, instigator, calculatedDamage);
+            projectileInstance.SetTarget(target, dealDamage, calculatedDamage);
         }
 
         public bool HasProjectile()

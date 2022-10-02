@@ -103,8 +103,6 @@ namespace RPGEngine.Stats
         {
             if (sender != gameObject) return;
             var newLevel = CalculateLevel();
-            if (name == "Player")
-                Debug.LogError($"UpdateLevel:({_currentLevel}={newLevel}), {_experienceToNextLevel}");
             if (newLevel <= _currentLevel) return;
             _currentLevel = newLevel;
             if (onLevelUp) onLevelUp.Invoke(gameObject);

@@ -10,7 +10,6 @@ using RPGEngine.Core;
 using RPGEngine.Movement;
 using RPGEngine.Saving;
 using RPGEngine.Stats;
-using Unity.Mathematics;
 using UnityEngine;
 using static RPGEngine.Core.StringReferences;
 
@@ -52,6 +51,7 @@ namespace RPGEngine.Combat
         private CombatTargetType combatTargetType = CombatTargetType.Player;
 
         [SerializeField] private GameObjectGameEvent onTargetChanged;
+        [SerializeField] private GameObjectFloatGameEvent dealDamage;
 
         #endregion
 
@@ -59,7 +59,7 @@ namespace RPGEngine.Combat
 
         private Health _target;
 
-        private float _timeSinceLastAttack = math.INFINITY;
+        private float _timeSinceLastAttack;
         
         private Weapon _currentWeapon;
 
@@ -130,15 +130,19 @@ namespace RPGEngine.Combat
         /// </summary>
         private void Update()
         {
+            //if (name != "Player") return;
             _timeSinceLastAttack += Time.deltaTime;
 
             if (!_target) return;
+            //Debug.Log($"{name} has Target");
 
             if (_target.IsDead)
             {
                 Cancel();
                 return;
             }
+            
+            //Debug.Log($"{_target.name} Is Alive");
 
             if (!GetIsInRange(_target.transform))
             {
@@ -248,18 +252,22 @@ namespace RPGEngine.Combat
         {
             if (!target)
             {
+                //Debug.Log("Target is null");
                 _target = null;
                 if (onTargetChanged) onTargetChanged.Invoke(null);
                 return;
             }
 
             _target = target.GetComponent<Health>();
-            if (!_target)if (!target)
+            if (!_target)
             {
+                //Debug.Log($"{target.name} has no health");
                 _target = null;
                 if (onTargetChanged) onTargetChanged.Invoke(null);
                 return;
             }
+            // if (name == "Player")
+            //         Debug.Log($"{name} is targeting {target.name}");
             if (onTargetChanged) onTargetChanged.Invoke(_target.gameObject);
             _target.OnHealthChange();
         }
@@ -312,10 +320,8 @@ namespace RPGEngine.Combat
             var damageAmount = _baseStats.GetStatValue(Stat.Damage);
 
             if (_currentWeapon.HasProjectile())
-                _currentWeapon.LaunchProjectile(rightHandWeaponSlot, leftHandWeaponSlot, _target, gameObject,
-                    damageAmount, tag);
-            else
-                _target.TakeDamage(gameObject, damageAmount);
+                _currentWeapon.LaunchProjectile(rightHandWeaponSlot, leftHandWeaponSlot, _target, dealDamage, damageAmount, tag);
+            else if (dealDamage) dealDamage.Invoke(_target.gameObject, damageAmount);
         }
 
         public void EquipWeapon(Weapon weapon)

@@ -1,4 +1,5 @@
 using RPGEngine.Attributes;
+using RPGEngine.Core;
 using UnityEngine;
 
 namespace RPGEngine.Combat
@@ -13,7 +14,7 @@ namespace RPGEngine.Combat
 
         private Health _target;
         private float _damage;
-        private GameObject _instigator;
+        private GameObjectFloatGameEvent _dealDamage;
 
         private void Update()
         {
@@ -25,12 +26,7 @@ namespace RPGEngine.Combat
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag(tag)) return;
-            Health health = other.GetComponent<Health>();
-            if (health)
-            {
-                if (health.IsDead) return;
-                health.TakeDamage(_instigator, _damage);
-            }
+            if (_dealDamage) _dealDamage.Invoke(other.gameObject, _damage);
 
             moveSpeed = 0f;
 
@@ -44,11 +40,11 @@ namespace RPGEngine.Combat
             Destroy(gameObject, lifeAfterImpact);
         }
 
-        public void SetTarget(Health target, GameObject instigator, float damage)
+        public void SetTarget(Health target, GameObjectFloatGameEvent dealDamage, float damage)
         {
             _target = target;
+            _dealDamage = dealDamage;
             _damage = damage;
-            _instigator = instigator;
             LookAtTarget();
         }
 

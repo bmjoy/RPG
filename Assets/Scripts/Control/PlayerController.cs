@@ -2,8 +2,10 @@
 // 07-03-2022
 // James LaFritz
 
-using RPGEngine.Combat;
+using RPGEngine.Core;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.EventSystems;
 
 namespace RPGEngine.Control
 {
@@ -13,9 +15,23 @@ namespace RPGEngine.Control
     /// </summary>
     public class PlayerController : RPGController
     {
+        [System.Serializable]
+        struct CursorMapping
+        {
+            public CursorType type;
+            public Texture2D texture;
+            public Vector2 hotspot;
+        }
+
+        [SerializeField] private CursorMapping[] cursorMappings;
+
+        [SerializeField] private float maxNavPathLength = 20;
+
         #region Private Fields
 
-        private readonly RaycastHit[] _combatHits = new RaycastHit[10];
+        private readonly RaycastHit[] _objectHits = new RaycastHit[10];
+
+        private CursorMapping _cursorMapping;
 
         #endregion
 
@@ -26,34 +42,65 @@ namespace RPGEngine.Control
         /// </summary>
         private void Update()
         {
-            if (Health.IsDead) return;
-            if (InteractWithCombat()) return;
+            if (InteractWithUI()) return;
+            if (Health.IsDead)
+            {
+                SetCursor(CursorType.Dead);
+                return;
+            }
+            if (InteractWithComponent()) return;
             if (InteractWithMovement()) return;
-            //Debug.Log("Nothing To Do");
+
+            SetCursor(CursorType.None);
         }
 
         #endregion
 
         #region Private Methods
 
-        private bool InteractWithCombat()
+        private bool InteractWithUI()
         {
-            if (!HasFighter) return false;
-            int hits = Physics.RaycastNonAlloc(GetMouseFromMainCameraScreenPointToRay(), _combatHits);
+            if (!EventSystem.current.IsPointerOverGameObject()) return false;
+            
+            SetCursor(CursorType.UI);
+            return true;
+        }
+        
+        private bool InteractWithComponent()
+        {
+            var hits = Physics.RaycastNonAlloc(GetMouseFromMainCameraScreenPointToRay(), _objectHits);
             if (hits == 0) return false;
+            SortObjectHits(hits);
+            
+            for (var i = 0; i < hits; i++)
+            {
+                RaycastHit hit = _objectHits[i];
+                IRaycastable[] raycastables = hit.transform.GetComponents<IRaycastable>();
+                if (raycastables == null) continue;
+                
+                foreach (IRaycastable raycastable in raycastables)
+                {
+                    if (!raycastable.HandleRaycast(this, hit)) continue;
+                    SetCursor(raycastable.GetCursorType());
+                    return true;
+                }
+            }
+            
+            return false;
+        }
+
+        public void SortObjectHits(int hits)
+        {
+            float[] distance = new float[_objectHits.Length];
+            for (int i = 0; i < distance.Length; i++)
+            {
+                distance[i] = float.MaxValue;
+            }
             for (int i = 0; i < hits; i++)
             {
-                RaycastHit hit = _combatHits[i];
-                CombatTarget target = hit.transform.GetComponent<CombatTarget>();
-                if (!Fighter.CanAttack(target)) continue;
-                if (!Input.GetMouseButton(0)) return true;
-                Debug.Assert(target, nameof(target) + " != null");
-                Fighter.Attack(target);
-
-                return true;
+                distance[i] = _objectHits[i].distance;
             }
-
-            return false;
+            System.Array.Sort(distance, _objectHits);
         }
 
         private bool InteractWithMovement()
@@ -63,17 +110,64 @@ namespace RPGEngine.Control
 
         private bool MoveToCursor()
         {
-            bool hasHIt = Physics.Raycast(GetMouseFromMainCameraScreenPointToRay(), out RaycastHit hit);
+            var hasHIt = RaycastNavMesh(out Vector3 target);
+            if (hasHIt) SetCursor(CursorType.Movement);
             if (!hasHIt || !Input.GetMouseButton(0)) return hasHIt;
 
-            Mover.StartMoveAction(hit.point);
+            Mover.StartMoveAction(target);
 
             return true;
+        }
+
+        private bool RaycastNavMesh(out Vector3 target)
+        {
+            target = Vector3.zero;
+            if(!Physics.Raycast(GetMouseFromMainCameraScreenPointToRay(), out RaycastHit hit)) return false;
+            if (!NavMesh.SamplePosition(hit.point, out NavMeshHit navMeshHit, 1.0f, NavMesh.AllAreas))
+                return false;
+
+            target = navMeshHit.position;
+
+            NavMeshPath path = new NavMeshPath();
+            if (!NavMesh.CalculatePath(transform.position, target, NavMesh.AllAreas, path))
+                return false;
+            if (path.status != NavMeshPathStatus.PathComplete)
+                return false;
+            if (GetPathLength(path) > maxNavPathLength) return false;
+            
+            return true;
+        }
+
+        private float GetPathLength(NavMeshPath path)
+        {
+            float length = 0;
+            if (path.corners.Length < 2) return length;
+            for (var i = 0; i < path.corners.Length - 1; i++)
+                length += Vector3.Distance(path.corners[i], path.corners[i + 1]);
+            //Debug.Log(length);
+            return length;
         }
 
         private Ray GetMouseFromMainCameraScreenPointToRay()
         {
             return Camera.main.ScreenPointToRay(Input.mousePosition);
+        }
+
+        private void SetCursor(CursorType type)
+        {
+            if (_cursorMapping.type == type) return;
+            _cursorMapping = GetCursorMapping(type);
+            Cursor.SetCursor(_cursorMapping.texture, _cursorMapping.hotspot, CursorMode.Auto);
+        }
+
+        private CursorMapping GetCursorMapping(CursorType type)
+        {
+            foreach (CursorMapping mapping in cursorMappings)
+            {
+                if (mapping.type == type) return mapping;
+            }
+
+            return cursorMappings[0];
         }
 
         #endregion

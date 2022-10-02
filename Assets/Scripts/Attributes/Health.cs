@@ -35,6 +35,7 @@ namespace RPGEngine.Attributes
 
         #region Events
 
+        [SerializeField] private GameObjectFloatGameEvent receivedDamage;
         [SerializeField] private GameObjectFloatGameEvent characterDied;
         [SerializeField] private GameObjectFloatGameEvent onHealthChanged;
         [SerializeField] private GameObjectFloatGameEvent onHealthMaxChanged;
@@ -113,11 +114,13 @@ namespace RPGEngine.Attributes
         private void OnEnable()
         {
             if (onLevelUp) onLevelUp.RegisterListener(RegenerateHealth);
+            if (receivedDamage) receivedDamage.RegisterListener(TakeDamage);
         }
 
         private void OnDisable()
         {
             if (onLevelUp) onLevelUp.UnregisterListener(RegenerateHealth);
+            if (receivedDamage) receivedDamage.UnregisterListener(TakeDamage);
         }
 
         #endregion
@@ -155,11 +158,13 @@ namespace RPGEngine.Attributes
         /// Reduce the value of the heath by the amount of damage.
         /// If the health is less than 0, set the health to 0 and set the Die trigger if there is an animator.
         /// </summary>
-        /// <param name="instigator">The Game Object that did the damage.</param>
+        /// <param name="gameObjectToReceiveDamage">The Game Object that receives the damage.</param>
         /// <param name="damage">The amount to reduce the health by.</param>
-        public void TakeDamage(GameObject instigator, float damage)
+        private void TakeDamage(GameObject gameObjectToReceiveDamage, float damage)
         {
             if (IsDead) return;
+            
+            if (gameObjectToReceiveDamage != gameObject) return;
 
             _value = math.min(math.max(_value - damage, 0), _max);
 

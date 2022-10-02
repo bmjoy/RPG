@@ -103,7 +103,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 0
 --- !u!225 &4412178298205168141
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -113,8 +113,8 @@ CanvasGroup:
   m_GameObject: {fileID: 4412178298205168137}
   m_Enabled: 1
   m_Alpha: 0
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!222 &4412178298205168138
 CanvasRenderer:

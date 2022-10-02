@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 
 namespace RPGEditor.Stats
 {
-    [CustomPropertyDrawer(typeof(Progression.ProgressionCharacterClass))]
+    //[CustomPropertyDrawer(typeof(Progression.ProgressionCharacterClass))]
     public class ProgressionCharacterClassPropertyDrawer : PropertyDrawer
     {
         public override VisualElement CreatePropertyGUI(SerializedProperty property)

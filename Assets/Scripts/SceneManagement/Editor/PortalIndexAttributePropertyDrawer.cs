@@ -4,7 +4,6 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using RPGEditor.Core;
 using RPGEditor.Core.Editor;
 using RPGEngine.SceneManagement;
 using UnityEditor;

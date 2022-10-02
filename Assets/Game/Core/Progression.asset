@@ -88,7 +88,7 @@ MonoBehaviour:
       progression:
         startingValue: 10
         percentageAdd: 0
-        absoluteAdd: 0
+        absoluteAdd: 5
         useCurve: 0
         curve:
           serializedVersion: 2

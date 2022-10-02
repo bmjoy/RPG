@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using RPGEngine.Core;
 using UnityEngine;
 
 namespace RPGEngine.Stats
@@ -10,15 +11,15 @@ namespace RPGEngine.Stats
         [System.Serializable]
         public struct ProgressionFormula
         {
-            //[Range(1,1000)]
+            [Range(1,5000)]
             [SerializeField] private float startingValue;
-            //[Range(0,1)]
+            [Range(0,10)]
             [SerializeField] private float percentageAdd;
-            //[Range(0,1000)]
+            [Range(0,5000)]
             [SerializeField] private float absoluteAdd;
 
             [SerializeField] private bool useCurve;
-            [SerializeField] private  AnimationCurve curve;
+            [SerializeField, ShowIfBool("useCurve")] private  AnimationCurve curve;
 
             public float StartingValue
             {
@@ -195,9 +196,6 @@ namespace RPGEngine.Stats
 
         public void RebuildLookUpData()
         {
-#if !UNITY_EDITOR
-                return;
-#endif
             _lookupTable = null;
             BuildLookupTable();
         }
