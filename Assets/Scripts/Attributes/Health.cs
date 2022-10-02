@@ -168,8 +168,8 @@ namespace RPGEngine.Attributes
 
             _value = math.min(math.max(_value - damage, 0), _max);
 
-            Debug.Log($"<color=blue>{name}:</color> <color=darkblue>takes <color=red>{damage}</color> damage.</color> " +
-                      $"<color=teal>Health is now <color=#38761d>{_value}</color> / <color=#274e13>{_max}</color></color>");
+            // Debug.Log($"<color=blue>{name}:</color> <color=darkblue>takes <color=red>{damage}</color> damage.</color> " +
+            //           $"<color=teal>Health is now <color=#38761d>{_value}</color> / <color=#274e13>{_max}</color></color>");
 
             if(onHealthChanged) onHealthChanged.Invoke(gameObject, _value);
 
