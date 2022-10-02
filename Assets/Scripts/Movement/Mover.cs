@@ -33,6 +33,9 @@ namespace RPGEngine.Movement
     [RequireComponent(typeof(NavMeshAgent), typeof(ActionScheduler), typeof(Health))]
     public class Mover : MonoBehaviour, IAction, ISavable
     {
+        [SerializeField] private BoolGameEvent gamePausedEvent;
+        private bool _gamePaused;
+        
         #region Component References
 
         #region Required
@@ -84,12 +87,23 @@ namespace RPGEngine.Movement
 
             _health = GetComponent<Health>();
         }
+        private void OnEnable()
+        {
+            if (gamePausedEvent) gamePausedEvent.RegisterListener(OnPauseGame);
+        }
+
+        private void OnDisable()
+        {
+            
+            if (gamePausedEvent) gamePausedEvent.UnregisterListener(OnPauseGame);
+        }
 
         /// <summary>
         /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.Update.html"/>
         /// </summary>
         private void Update()
         {
+            if (_gamePaused) return;
             if (_navMeshAgent.isActiveAndEnabled && _health.IsDead)
             {
                 _navMeshAgent.destination = transform.position;
@@ -242,6 +256,11 @@ namespace RPGEngine.Movement
             float speed = localVelocity.z;
 
             _animator.SetFloat(_forwardSpeed, speed);
+        }
+
+        private void OnPauseGame(bool paused)
+        {
+            _gamePaused = paused;
         }
 
         #endregion

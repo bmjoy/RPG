@@ -34,6 +34,8 @@ namespace RPGEngine.Combat
     public class Fighter : MonoBehaviour, IAction, ISavable, IModifierProvider
     {
         #region Inspector Fields
+        
+        [SerializeField] private BoolGameEvent gamePaused;
 
         [Header("Weapons")]
         [SerializeField]
@@ -62,6 +64,8 @@ namespace RPGEngine.Combat
         private float _timeSinceLastAttack;
         
         private Weapon _currentWeapon;
+
+        private bool _gamePaused;
 
         #endregion
 
@@ -125,11 +129,22 @@ namespace RPGEngine.Combat
             // ReSharper restore Unity.InefficientPropertyAccess
         }
 
+        private void OnEnable()
+        {
+            if(gamePaused) gamePaused.RegisterListener(OnGamePaused);
+        }
+
+        private void OnDisable()
+        {
+            if(gamePaused) gamePaused.UnregisterListener(OnGamePaused);
+        }
+
         /// <summary>
         /// <seealso href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.Update.html"/>
         /// </summary>
         private void Update()
         {
+            if (_gamePaused) return;
             //if (name != "Player") return;
             _timeSinceLastAttack += Time.deltaTime;
 
@@ -320,7 +335,8 @@ namespace RPGEngine.Combat
             var damageAmount = _baseStats.GetStatValue(Stat.Damage);
 
             if (_currentWeapon.HasProjectile())
-                _currentWeapon.LaunchProjectile(rightHandWeaponSlot, leftHandWeaponSlot, _target, dealDamage, damageAmount, tag);
+                _currentWeapon.LaunchProjectile(rightHandWeaponSlot, leftHandWeaponSlot, _target, dealDamage,
+                    damageAmount, tag, gamePaused, _gamePaused);
             else if (dealDamage) dealDamage.Invoke(_target.gameObject, damageAmount);
         }
 
@@ -330,6 +346,11 @@ namespace RPGEngine.Combat
             _currentWeapon = weapon;
             _hasWeapon = true;
             weapon.Spawn(rightHandWeaponSlot, leftHandWeaponSlot,  _animator);
+        }
+
+        private void OnGamePaused(bool paused)
+        {
+            _gamePaused = paused;
         }
 
         #endregion

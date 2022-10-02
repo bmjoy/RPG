@@ -115,3 +115,4 @@ MonoBehaviour:
   fadeOutTime: 0.5
   fadeInTime: 1
   fadeWaitTime: 0.75
+  gamePausedEvent: {fileID: 11400000, guid: 56f8b7c20861cb840960ab9444c0cafd, type: 2}

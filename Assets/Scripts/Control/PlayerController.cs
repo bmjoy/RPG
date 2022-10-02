@@ -24,7 +24,6 @@ namespace RPGEngine.Control
         }
 
         [SerializeField] private CursorMapping[] cursorMappings;
-
         [SerializeField] private float maxNavPathLength = 20;
 
         #region Private Fields
@@ -32,7 +31,7 @@ namespace RPGEngine.Control
         private readonly RaycastHit[] _objectHits = new RaycastHit[10];
 
         private CursorMapping _cursorMapping;
-
+        
         #endregion
 
         #region Unity Messages
@@ -42,6 +41,7 @@ namespace RPGEngine.Control
         /// </summary>
         private void Update()
         {
+            if (GamePaused) return;
             if (InteractWithUI()) return;
             if (Health.IsDead)
             {
@@ -89,7 +89,7 @@ namespace RPGEngine.Control
             return false;
         }
 
-        public void SortObjectHits(int hits)
+        private void SortObjectHits(int hits)
         {
             float[] distance = new float[_objectHits.Length];
             for (int i = 0; i < distance.Length; i++)

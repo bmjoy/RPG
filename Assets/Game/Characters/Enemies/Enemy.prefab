@@ -195,6 +195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e92be3f58ad4247a0f583c70ac0972e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gamePausedEvent: {fileID: 11400000, guid: 56f8b7c20861cb840960ab9444c0cafd, type: 2}
   combatTargetType: 0
   chaseRange: 6
   chaseSpeed: 5.5

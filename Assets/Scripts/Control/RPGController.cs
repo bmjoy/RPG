@@ -4,6 +4,7 @@
 
 using RPGEngine.Attributes;
 using RPGEngine.Combat;
+using RPGEngine.Core;
 using RPGEngine.Movement;
 using UnityEngine;
 
@@ -21,8 +22,10 @@ namespace RPGEngine.Control
     [RequireComponent(typeof(Mover), typeof(Health))]
     public abstract class RPGController : MonoBehaviour
     {
+
         #region Inspector Fields
 
+        [SerializeField] private BoolGameEvent gamePausedEvent;
         [SerializeField] protected CombatTargetType combatTargetType = CombatTargetType.Player;
 
         #endregion
@@ -50,6 +53,9 @@ namespace RPGEngine.Control
 
         #endregion
 
+        protected bool GamePaused = true;
+
+
         #region Unity Messages
 
         /// <summary>
@@ -63,6 +69,21 @@ namespace RPGEngine.Control
             Health = GetComponent<Health>();
         }
 
+        protected virtual void OnEnable()
+        {
+            if (gamePausedEvent) gamePausedEvent.RegisterListener(OnGamePaused);
+        }
+
+        protected virtual void OnDisable()
+        {
+            if (gamePausedEvent) gamePausedEvent.UnregisterListener(OnGamePaused);
+        }
+
         #endregion
+
+        private void OnGamePaused(bool paused)
+        {
+            GamePaused = paused;
+        }
     }
 }

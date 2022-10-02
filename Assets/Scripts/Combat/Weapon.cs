@@ -54,12 +54,12 @@ namespace RPGEngine.Combat
             }
         }
 
-        public void LaunchProjectile(Transform rightHand, Transform leftHand, Health target, GameObjectFloatGameEvent dealDamage, float calculatedDamage, string tag)
+        public void LaunchProjectile(Transform rightHand, Transform leftHand, Health target, GameObjectFloatGameEvent dealDamage, float calculatedDamage, string tag, BoolGameEvent gamePausedEvent, bool isPaused)
         {
             Projectile projectileInstance =
                 Instantiate(projectile, GetParent(rightHand, leftHand, isProjectileRightHanded).position, Quaternion.identity);
             projectileInstance.tag = tag;
-            projectileInstance.SetTarget(target, dealDamage, calculatedDamage);
+            projectileInstance.SetTarget(target, dealDamage, calculatedDamage, gamePausedEvent, isPaused);
         }
 
         public bool HasProjectile()

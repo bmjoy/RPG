@@ -3,6 +3,7 @@
 // James LaFritz
 
 using System.Collections;
+using RPGEngine.Core;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
@@ -33,6 +34,7 @@ namespace RPGEngine.SceneManagement
         [SerializeField] float fadeOutTime = 1f;
         [SerializeField] float fadeInTime = 2f;
         [SerializeField] float fadeWaitTime = 0.5f;
+        [SerializeField] private BoolGameEvent gamePausedEvent;
 
         public int Index
         {
@@ -96,6 +98,9 @@ namespace RPGEngine.SceneManagement
             transform.parent = null;
             DontDestroyOnLoad(gameObject);
 
+            // Remove Control
+            if (gamePausedEvent) gamePausedEvent.Invoke(true);
+
             if (hasFader) yield return fader.FadeOut(fadeOutTime);
 
             SavingWrapper savingWrapper = FindObjectOfType<SavingWrapper>();
@@ -103,6 +108,9 @@ namespace RPGEngine.SceneManagement
             if (hasSaving) savingWrapper.Save();
 
             yield return SceneManager.LoadSceneAsync(destination.scene);
+
+            // Remove Control
+            if (gamePausedEvent) gamePausedEvent.Invoke(true);
 
             if (hasSaving) savingWrapper.Load();
 
@@ -114,6 +122,9 @@ namespace RPGEngine.SceneManagement
             if (hasSaving) savingWrapper.Save();
 
             if (hasFader) yield return fader.FadeIn(fadeInTime);
+
+            // Restore Control
+            if (gamePausedEvent) gamePausedEvent.Invoke(false);
 
             Destroy(gameObject);
         }

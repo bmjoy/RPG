@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60ef095666b349f4ab2301ebd2119d2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gamePausedEvent: {fileID: 11400000, guid: 56f8b7c20861cb840960ab9444c0cafd, type: 2}
 --- !u!114 &6587453408859046323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,6 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed0da08eefb34868854214beb5cdf027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gamePaused: {fileID: 11400000, guid: 56f8b7c20861cb840960ab9444c0cafd, type: 2}
   defaultWeapon: {fileID: 0}
   rightHandWeaponSlot: {fileID: 0}
   leftHandWeaponSlot: {fileID: 0}

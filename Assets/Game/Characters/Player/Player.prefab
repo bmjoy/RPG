@@ -632,6 +632,10 @@ PrefabInstance:
       propertyPath: onHealthMaxChanged
       value: 
       objectReference: {fileID: 11400000, guid: 9b7a84f958686594db8787532287f14b, type: 2}
+    - target: {fileID: 6356527288291233820, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6487327744266254528, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
       propertyPath: m_Name
       value: Player
@@ -703,6 +707,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7afce2fda5cd4a6793ddc1e2309d0cfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gamePausedEvent: {fileID: 11400000, guid: 56f8b7c20861cb840960ab9444c0cafd, type: 2}
   combatTargetType: 0
   cursorMappings:
   - type: 0

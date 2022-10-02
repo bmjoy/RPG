@@ -15,9 +15,23 @@ namespace RPGEngine.Combat
         private Health _target;
         private float _damage;
         private GameObjectFloatGameEvent _dealDamage;
+        private BoolGameEvent _gamePausedEvent;
+        private bool _gamePaused;
+
+        private void OnEnable()
+        {
+            if (_gamePausedEvent) _gamePausedEvent.RegisterListener(OnPauseGame);
+        }
+
+        private void OnDisable()
+        {
+            
+            if (_gamePausedEvent) _gamePausedEvent.UnregisterListener(OnPauseGame);
+        }
 
         private void Update()
         {
+            if (_gamePaused) return;
             if (isHoming) LookAtTarget();
 
             transform.Translate(Vector3.forward * (moveSpeed * Time.deltaTime));
@@ -40,12 +54,16 @@ namespace RPGEngine.Combat
             Destroy(gameObject, lifeAfterImpact);
         }
 
-        public void SetTarget(Health target, GameObjectFloatGameEvent dealDamage, float damage)
+        public void SetTarget(Health target, GameObjectFloatGameEvent dealDamage, float damage,
+            BoolGameEvent gamePausedEvent, bool isPaused)
         {
+            _gamePausedEvent = gamePausedEvent;
+            if (_gamePausedEvent) _gamePausedEvent.RegisterListener(OnPauseGame);
             _target = target;
             _dealDamage = dealDamage;
             _damage = damage;
             LookAtTarget();
+            OnPauseGame(isPaused);
         }
 
         private void LookAtTarget()
@@ -60,6 +78,11 @@ namespace RPGEngine.Combat
             CapsuleCollider targetCapsuleCollider = target.GetComponent<CapsuleCollider>();
             if (!targetCapsuleCollider) return target.transform.position;
             return target.transform.position + targetCapsuleCollider.center;
+        }
+
+        private void OnPauseGame(bool paused)
+        {
+            _gamePaused = paused;
         }
     }
 }

@@ -59,4 +59,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cea0963cb5dd41159d8682a15a0e415d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gamePausedEvent: {fileID: 11400000, guid: 56f8b7c20861cb840960ab9444c0cafd, type: 2}
   fadeInTime: 1

@@ -59,10 +59,6 @@ namespace RPGEngine.Control
 
         #region Optional
 
-        /// <value>Cache the <see cref="Combat.Fighter"/></value>
-        private Fighter _fighter;
-        private bool _hasFighter;
-
         #endregion
 
         #endregion
@@ -86,8 +82,6 @@ namespace RPGEngine.Control
         {
             base.Awake();
             
-            _fighter = GetComponent<Fighter>();
-            _hasFighter = _fighter != null;
             _actionScheduler = GetComponent<ActionScheduler>();
         }
 
@@ -107,8 +101,10 @@ namespace RPGEngine.Control
         private void Update()
         {
             if (Health.IsDead) return;
+            if (GamePaused) return;
+            
             CombatTarget closestTarget = GetClosestTarget(chaseRange);
-            if (IsChasing(closestTarget) && _hasFighter && _fighter.CanAttack(closestTarget))
+            if (IsChasing(closestTarget) && HasFighter && Fighter.CanAttack(closestTarget))
                 AttackBehavior(closestTarget!);
             else if (IsLookingForTarget())
                 SuspiciousBehavior();
@@ -136,7 +132,7 @@ namespace RPGEngine.Control
         {
             _timeSinceLastSawTarget = 0;
             Mover.SetMoveSpeed(chaseSpeed);
-            _fighter.Attack(closestTarget);
+            if (HasFighter) Fighter.Attack(closestTarget);
         }
 
         private void SuspiciousBehavior()

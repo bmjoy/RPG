@@ -3,6 +3,7 @@
 // James LaFritz
 
 using System.Collections;
+using RPGEngine.Core;
 using RPGEngine.Saving;
 using UnityEngine;
 
@@ -21,6 +22,8 @@ namespace RPGEngine.SceneManagement
     public class SavingWrapper : MonoBehaviour
     {
         private const string DefaultSaveFile = "save";
+
+        [SerializeField] private BoolGameEvent gamePausedEvent;
 
         [SerializeField] float fadeInTime = 0.75f;
 
@@ -83,11 +86,14 @@ namespace RPGEngine.SceneManagement
 
         private IEnumerator LoadLastScene()
         {
+            if (gamePausedEvent) gamePausedEvent.Invoke(true);
             yield return _savingSystem.LoadLastScene(DefaultSaveFile);
+            if (gamePausedEvent) gamePausedEvent.Invoke(true);
             Fader fader = FindObjectOfType<Fader>();
             if (!fader) yield break;
             fader.FadeOutImmediate();
             yield return fader.FadeIn(fadeInTime);
+            if (gamePausedEvent) gamePausedEvent.Invoke(false);
         }
     }
 }
