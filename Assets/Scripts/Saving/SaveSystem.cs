@@ -79,7 +79,7 @@ namespace RPGEngine.Saving
         /// <param name="saveFile">The name of the save file to Delete</param>
         public void Delete(string saveFile)
         {
-            if (strategy == null) return;
+            if (!strategy) return;
             File.Delete(strategy.GetPath(saveFile)!);
         }
 
