@@ -20,6 +20,7 @@ namespace RPGEngine.SceneManagement
     public class Fader : MonoBehaviour
     {
         private CanvasGroup _canvasGroup;
+        private Coroutine _currentFade;
 
         #region Unity Messages
 
@@ -43,13 +44,7 @@ namespace RPGEngine.SceneManagement
         /// </summary>
         public IEnumerator FadeOut(float time)
         {
-            while (_canvasGroup.alpha < 1)
-            {
-                _canvasGroup.alpha += Time.deltaTime / time;
-                yield return null;
-            }
-
-            _canvasGroup.alpha = 1f;
+            return Fade(1, time);
         }
 
         /// <summary>
@@ -57,13 +52,25 @@ namespace RPGEngine.SceneManagement
         /// </summary>
         public IEnumerator FadeIn(float time)
         {
-            while (_canvasGroup.alpha > 0)
+            return Fade(0, time);
+        }
+
+        public IEnumerator Fade(float target, float time)
+        {
+            if (_currentFade != null) StopCoroutine(_currentFade);
+            _currentFade = StartCoroutine(FadeRoutine(target, time));
+            yield return _currentFade;
+        }
+
+        private IEnumerator FadeRoutine(float target, float time)
+        {
+            while (!Mathf.Approximately(_canvasGroup.alpha, target))
             {
-                _canvasGroup.alpha -= Time.deltaTime / time;
+                _canvasGroup.alpha = Mathf.MoveTowards(_canvasGroup.alpha, target, Time.deltaTime / time);
                 yield return null;
             }
 
-            _canvasGroup.alpha = 0f;
+            _canvasGroup.alpha = target;
         }
     }
 }
