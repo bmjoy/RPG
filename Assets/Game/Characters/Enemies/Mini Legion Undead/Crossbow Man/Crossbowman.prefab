@@ -91,9 +91,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 162315610170399545}
     - target: {fileID: 1558623196858982072, guid: dd093df38a0c4374790dc4a9aeb9c387, type: 3}
+      propertyPath: defaultWeaponConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: 6501f22f9cc0b9745ae7d88925b1aa2d, type: 2}
+    - target: {fileID: 1558623196858982072, guid: dd093df38a0c4374790dc4a9aeb9c387, type: 3}
       propertyPath: rightHandWeaponSlot
       value: 
       objectReference: {fileID: 162315610170399533}
+    - target: {fileID: 1825579317984806928, guid: dd093df38a0c4374790dc4a9aeb9c387, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3007965424719086100, guid: dd093df38a0c4374790dc4a9aeb9c387, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3138733273306524360, guid: dd093df38a0c4374790dc4a9aeb9c387, type: 3}
       propertyPath: m_Name
       value: Crossbowman
@@ -114,6 +126,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 22100000, guid: dc0467012aab3b54db7d25b6db2026c9, type: 2}
+    - target: {fileID: 6473688792396802337, guid: dd093df38a0c4374790dc4a9aeb9c387, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7230299043453838596, guid: dd093df38a0c4374790dc4a9aeb9c387, type: 3}
       propertyPath: m_RootOrder
       value: 0

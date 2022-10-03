@@ -142,10 +142,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2969988665885939607, guid: 1206a105510654f4e833110fa91b0fb3, type: 3}
       propertyPath: m_Name
-      value: Tiny Hero Bow 04 Pickup Variant
+      value: Tiny Hero Bow 04 Pickup
       objectReference: {fileID: 0}
     - target: {fileID: 5735982252259021044, guid: 1206a105510654f4e833110fa91b0fb3, type: 3}
       propertyPath: weapon
+      value: 
+      objectReference: {fileID: 11400000, guid: 0d4ca5d7383230942861cc9b73a95da4, type: 2}
+    - target: {fileID: 5735982252259021044, guid: 1206a105510654f4e833110fa91b0fb3, type: 3}
+      propertyPath: weaponConfig
       value: 
       objectReference: {fileID: 11400000, guid: 0d4ca5d7383230942861cc9b73a95da4, type: 2}
     m_RemovedComponents: []

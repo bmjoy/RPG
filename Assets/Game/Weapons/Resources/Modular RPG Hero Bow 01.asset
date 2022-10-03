@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f2304dd3a9345f0a93d88cd5dd66c7a, type: 3}
   m_Name: Modular RPG Hero Bow 01
   m_EditorClassIdentifier: 
-  equippedPrefab: {fileID: 8075942111882651257, guid: 7fc4eb40a123b3345b9c72d9ce83f1a4, type: 3}
+  equippedPrefab: {fileID: 8444577124652515664, guid: 7fc4eb40a123b3345b9c72d9ce83f1a4, type: 3}
   animatorOverrideController: {fileID: 22100000, guid: bc40714f59d455542a3ecb8266d7815e, type: 2}
   isWeaponRightHanded: 0
   range: 10
   timeBetweenAttacks: 1.2
   damage: 7
+  damagePercentageBonus: 0
   projectile: {fileID: 4461289873566701149, guid: 860cee276ef664543b522350aa1e4533, type: 3}
   isProjectileRightHanded: 1

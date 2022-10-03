@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 103410, guid: 3f0d7a0f7d525454eb522dc56efe605d, type: 3}
       propertyPath: m_Name
-      value: Modular RPG Hero Bow 01
+      value: Equiped Modular RPG Hero Bow 01
       objectReference: {fileID: 0}
     - target: {fileID: 429248, guid: 3f0d7a0f7d525454eb522dc56efe605d, type: 3}
       propertyPath: m_RootOrder
@@ -57,3 +57,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f0d7a0f7d525454eb522dc56efe605d, type: 3}
+--- !u!1 &8075942111882651257 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 103410, guid: 3f0d7a0f7d525454eb522dc56efe605d, type: 3}
+  m_PrefabInstance: {fileID: 8075942111882753419}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8444577124652515664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8075942111882651257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8740210fe43b4bc392650ccbfb641f78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

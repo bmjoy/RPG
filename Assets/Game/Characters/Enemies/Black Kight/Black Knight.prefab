@@ -36,6 +36,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3655196229053895099}
     - target: {fileID: 1558623196858982072, guid: dd093df38a0c4374790dc4a9aeb9c387, type: 3}
+      propertyPath: defaultWeaponConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: b5fbb821fed7c2949a877329af340dc9, type: 2}
+    - target: {fileID: 1558623196858982072, guid: dd093df38a0c4374790dc4a9aeb9c387, type: 3}
       propertyPath: rightHandWeaponSlot
       value: 
       objectReference: {fileID: 3655196229053895153}
@@ -49,7 +53,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3007965424719086100, guid: dd093df38a0c4374790dc4a9aeb9c387, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3007965424719086100, guid: dd093df38a0c4374790dc4a9aeb9c387, type: 3}
       propertyPath: m_LocalPosition.y

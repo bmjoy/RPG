@@ -62,6 +62,11 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 9500000, guid: d06688f72e50aaa48b0dea3435bfe092, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d06688f72e50aaa48b0dea3435bfe092, type: 3}
+--- !u!4 &2807111593316674647 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400014, guid: d06688f72e50aaa48b0dea3435bfe092, type: 3}
+  m_PrefabInstance: {fileID: 2807111593316546265}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2807111594026535937
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -69,9 +74,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1558623196858982072, guid: dd093df38a0c4374790dc4a9aeb9c387, type: 3}
+      propertyPath: defaultWeaponConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: 91fcd7fdb83107c43878449c8a27fd63, type: 2}
+    - target: {fileID: 1558623196858982072, guid: dd093df38a0c4374790dc4a9aeb9c387, type: 3}
+      propertyPath: rightHandWeaponSlot
+      value: 
+      objectReference: {fileID: 2807111593316674647}
+    - target: {fileID: 1825579317984806928, guid: dd093df38a0c4374790dc4a9aeb9c387, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3007965424719086100, guid: dd093df38a0c4374790dc4a9aeb9c387, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3138733273306524360, guid: dd093df38a0c4374790dc4a9aeb9c387, type: 3}
       propertyPath: m_Name
       value: Mini Legion Footman
+      objectReference: {fileID: 0}
+    - target: {fileID: 6473688792396802337, guid: dd093df38a0c4374790dc4a9aeb9c387, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7230299043453838596, guid: dd093df38a0c4374790dc4a9aeb9c387, type: 3}
       propertyPath: m_RootOrder

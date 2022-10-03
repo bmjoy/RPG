@@ -10,7 +10,7 @@ namespace RPGEngine.Combat
     {
         #region Inspector Fields
 
-        [SerializeField] private Weapon weapon;
+        [SerializeField] private WeaponConfig weaponConfig;
         [SerializeField] private float respawnTime = 5;
 
         #endregion
@@ -59,7 +59,7 @@ namespace RPGEngine.Combat
         private void Pickup(Fighter fighter)
         {
             if (fighter == null) return;
-            fighter.EquipWeapon(weapon);
+            fighter.EquipWeapon(weaponConfig);
             StartCoroutine(HideForSeconds(respawnTime));
         }
 

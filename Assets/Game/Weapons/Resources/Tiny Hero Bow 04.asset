@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f2304dd3a9345f0a93d88cd5dd66c7a, type: 3}
   m_Name: Tiny Hero Bow 04
   m_EditorClassIdentifier: 
-  equippedPrefab: {fileID: 8075942111882651257, guid: 7fc4eb40a123b3345b9c72d9ce83f1a4, type: 3}
+  equippedPrefab: {fileID: -599341303388553747, guid: ccd9feee528c725458b7c0948c0798ca, type: 3}
   animatorOverrideController: {fileID: 22100000, guid: 8b89f35e1bad2d742a88024ca12597c3, type: 2}
   isWeaponRightHanded: 0
   range: 10
   timeBetweenAttacks: 1.2
   damage: 7
+  damagePercentageBonus: 0
   projectile: {fileID: 8546990945727677376, guid: 49598af69a72db14a861f7b45467d583, type: 3}
   isProjectileRightHanded: 1

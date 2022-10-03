@@ -87,12 +87,28 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3980612132530275930}
     - target: {fileID: 1558623196858982072, guid: dd093df38a0c4374790dc4a9aeb9c387, type: 3}
+      propertyPath: defaultWeaponConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: 622acc48410f27e40b0c11a6030e9fb7, type: 2}
+    - target: {fileID: 1558623196858982072, guid: dd093df38a0c4374790dc4a9aeb9c387, type: 3}
       propertyPath: rightHandWeaponSlot
       value: 
       objectReference: {fileID: 3980612132530275896}
+    - target: {fileID: 1825579317984806928, guid: dd093df38a0c4374790dc4a9aeb9c387, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3007965424719086100, guid: dd093df38a0c4374790dc4a9aeb9c387, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3138733273306524360, guid: dd093df38a0c4374790dc4a9aeb9c387, type: 3}
       propertyPath: m_Name
       value: Evil Mage
+      objectReference: {fileID: 0}
+    - target: {fileID: 6473688792396802337, guid: dd093df38a0c4374790dc4a9aeb9c387, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7230299043453838596, guid: dd093df38a0c4374790dc4a9aeb9c387, type: 3}
       propertyPath: m_RootOrder

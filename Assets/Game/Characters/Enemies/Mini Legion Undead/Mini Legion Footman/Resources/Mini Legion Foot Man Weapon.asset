@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f2304dd3a9345f0a93d88cd5dd66c7a, type: 3}
   m_Name: Mini Legion Foot Man Weapon
   m_EditorClassIdentifier: 
-  equippedPrefab: {fileID: 0}
+  equippedPrefab: {fileID: 912820058163433990, guid: cfde101c180892a46aa7569d78fd5abc, type: 3}
   animatorOverrideController: {fileID: 22100000, guid: 872aa8a819584e54ab25beba33cfc744, type: 2}
   isWeaponRightHanded: 1
   range: 3
   timeBetweenAttacks: 2
   damage: 5
+  damagePercentageBonus: 0
   projectile: {fileID: 0}
   isProjectileRightHanded: 1

@@ -39,9 +39,9 @@ namespace RPGEngine.Combat
 
         [Header("Weapons")]
         [SerializeField]
-        private Weapon defaultWeapon;
+        private WeaponConfig defaultWeaponConfig;
 
-        private bool _hasWeapon;
+        private bool _hasWeaponConfig;
 
         [Header("Weapon Slots")]
         [SerializeField]
@@ -63,6 +63,8 @@ namespace RPGEngine.Combat
 
         private float _timeSinceLastAttack;
         
+        private WeaponConfig _currentWeaponConfig;
+
         private Weapon _currentWeapon;
 
         private bool _gamePaused;
@@ -91,6 +93,7 @@ namespace RPGEngine.Combat
         private bool _hasAnimator;
         private static int _attackHash;
         private static int _stopAttackHash;
+        private bool _hasWeapon;
 
         #endregion
 
@@ -116,7 +119,7 @@ namespace RPGEngine.Combat
                 _stopAttackHash = Animator.StringToHash(StopAttackTrigger);
             }
 
-            EquipWeapon(defaultWeapon);
+            EquipWeapon(defaultWeaponConfig);
 
             var errorObject = "";
             if (_mover == null) errorObject = nameof(_mover);
@@ -176,7 +179,7 @@ namespace RPGEngine.Combat
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;
-            var weaponRange = _hasWeapon ? _currentWeapon.Range : defaultWeapon != null ? defaultWeapon.Range : 0;
+            var weaponRange = _hasWeaponConfig ? _currentWeaponConfig.Range : defaultWeaponConfig != null ? defaultWeaponConfig.Range : 0;
             Gizmos.DrawWireSphere(transform.position, weaponRange);
         }
 
@@ -189,7 +192,7 @@ namespace RPGEngine.Combat
         {
             JObject state = new JObject();
             IDictionary<string, JToken> stateDict = state;
-            stateDict["Current Weapon"] = _currentWeapon.name;
+            stateDict["Current Weapon"] = _currentWeaponConfig.name;
             return state;
         }
 
@@ -201,7 +204,7 @@ namespace RPGEngine.Combat
             IDictionary<string, JToken> stateDict = state.ToObject<IDictionary<string, JToken>>();
             if (stateDict == null || stateDict.Count < 1) return;
             if (stateDict.ContainsKey("Current Weapon"))
-                EquipWeapon(Resources.Load<Weapon>(stateDict["Current Weapon"].ToString()));
+                EquipWeapon(Resources.Load<WeaponConfig>(stateDict["Current Weapon"].ToString()));
                 
         }
 
@@ -225,7 +228,7 @@ namespace RPGEngine.Combat
         {
             if (stat == Stat.Damage)
             {
-                yield return _currentWeapon.Damage;
+                yield return _currentWeaponConfig.Damage;
             }
         }
         
@@ -233,7 +236,7 @@ namespace RPGEngine.Combat
         {
             if (stat == Stat.Damage)
             {
-                yield return _currentWeapon.DamagePercentageBonus;
+                yield return _currentWeaponConfig.DamagePercentageBonus;
             }
         }
 
@@ -289,15 +292,15 @@ namespace RPGEngine.Combat
 
         private bool GetIsInRange(Transform targetTransform)
         {
-            return targetTransform && _hasWeapon &&
-                   Vector3.Distance(transform.position, targetTransform.position) < _currentWeapon.Range;
+            return targetTransform && _hasWeaponConfig &&
+                   Vector3.Distance(transform.position, targetTransform.position) < _currentWeaponConfig.Range;
         }
 
         private void AttackBehavior()
         {
-            if (!_target || !_hasWeapon) return;
+            if (!_target || !_hasWeaponConfig) return;
 
-            if (_timeSinceLastAttack < _currentWeapon.TimeBetweenAttacks) return;
+            if (_timeSinceLastAttack < _currentWeaponConfig.TimeBetweenAttacks) return;
             transform.LookAt(_target.transform);
             TriggerAttack();
             _timeSinceLastAttack = Time.deltaTime;
@@ -330,22 +333,25 @@ namespace RPGEngine.Combat
         /// </summary>
         private void Hit()
         {
-            if (!_target || !_hasWeapon) return;
+            if (!_target || !_hasWeaponConfig) return;
 
             var damageAmount = _baseStats.GetStatValue(Stat.Damage);
+            
+            if (_hasWeapon) _currentWeapon.OnHit();
 
-            if (_currentWeapon.HasProjectile())
-                _currentWeapon.LaunchProjectile(rightHandWeaponSlot, leftHandWeaponSlot, _target, dealDamage,
+            if (_currentWeaponConfig.HasProjectile())
+                _currentWeaponConfig.LaunchProjectile(rightHandWeaponSlot, leftHandWeaponSlot, _target, dealDamage,
                     damageAmount, tag, gamePaused, _gamePaused);
             else if (dealDamage) dealDamage.Invoke(_target.gameObject, damageAmount);
         }
 
-        public void EquipWeapon(Weapon weapon)
+        public void EquipWeapon(WeaponConfig weaponConfig)
         {
-            if (!weapon) return;
-            _currentWeapon = weapon;
-            _hasWeapon = true;
-            weapon.Spawn(rightHandWeaponSlot, leftHandWeaponSlot,  _animator);
+            if (!weaponConfig) return;
+            _currentWeaponConfig = weaponConfig;
+            _hasWeaponConfig = true;
+            _currentWeapon = weaponConfig.Spawn(rightHandWeaponSlot, leftHandWeaponSlot,  _animator);
+            _hasWeapon = _currentWeapon;
         }
 
         private void OnGamePaused(bool paused)

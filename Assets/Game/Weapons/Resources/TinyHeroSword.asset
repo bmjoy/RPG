@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f2304dd3a9345f0a93d88cd5dd66c7a, type: 3}
   m_Name: TinyHeroSword
   m_EditorClassIdentifier: 
-  equippedPrefab: {fileID: 2182897153529169382, guid: bb79cd3e7e0ab2242a13d4072f42698a, type: 3}
+  equippedPrefab: {fileID: 2152524459170686553, guid: bb79cd3e7e0ab2242a13d4072f42698a, type: 3}
   animatorOverrideController: {fileID: 22100000, guid: ecc33cd43cf89de47b3376e43e95b2aa, type: 2}
-  isRightHanded: 1
+  isWeaponRightHanded: 1
   range: 2
   timeBetweenAttacks: 1
   damage: 6
+  damagePercentageBonus: 0
   projectile: {fileID: 0}
+  isProjectileRightHanded: 1
