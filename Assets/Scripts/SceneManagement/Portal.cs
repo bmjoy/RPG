@@ -121,7 +121,7 @@ namespace RPGEngine.SceneManagement
 
             if (hasSaving) savingWrapper.Save();
 
-            if (hasFader) yield return fader.FadeIn(fadeInTime);
+            if (hasFader) fader.FadeIn(fadeInTime);
 
             // Restore Control
             if (gamePausedEvent) gamePausedEvent.Invoke(false);

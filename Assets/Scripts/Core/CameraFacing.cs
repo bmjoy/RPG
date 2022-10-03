@@ -16,7 +16,7 @@ namespace RPGEngine.Core
             if (!_camera) gameObject.SetActive(false);
         }
 
-        private void Update()
+        private void LateUpdate()
         {
             transform.forward = _camera.transform.forward;
         }

@@ -42,7 +42,7 @@ namespace RPGEngine.SceneManagement
         /// <summary>
         /// <seealso href="https://docs.unity3d.com/ScriptReference/Coroutine.html"/>
         /// </summary>
-        public IEnumerator FadeOut(float time)
+        public Coroutine FadeOut(float time)
         {
             return Fade(1, time);
         }
@@ -50,16 +50,16 @@ namespace RPGEngine.SceneManagement
         /// <summary>
         /// <seealso href="https://docs.unity3d.com/ScriptReference/Coroutine.html"/>
         /// </summary>
-        public IEnumerator FadeIn(float time)
+        public Coroutine FadeIn(float time)
         {
             return Fade(0, time);
         }
 
-        public IEnumerator Fade(float target, float time)
+        public Coroutine Fade(float target, float time)
         {
             if (_currentFade != null) StopCoroutine(_currentFade);
             _currentFade = StartCoroutine(FadeRoutine(target, time));
-            yield return _currentFade;
+            return _currentFade;
         }
 
         private IEnumerator FadeRoutine(float target, float time)
