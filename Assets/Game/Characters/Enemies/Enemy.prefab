@@ -176,6 +176,10 @@ PrefabInstance:
       propertyPath: timeBetweenAttacks
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7556294472429738520, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
 --- !u!1 &3138733273306524360 stripped
@@ -197,8 +201,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gamePausedEvent: {fileID: 11400000, guid: 56f8b7c20861cb840960ab9444c0cafd, type: 2}
   combatTargetType: 0
+  combatMask:
+    serializedVersion: 2
+    m_Bits: 64
   chaseRange: 6
   chaseSpeed: 5.5
+  receivedDamaged: {fileID: 11400000, guid: d034deb2a15e32a428ba6b8fb560446a, type: 2}
   lookTime: 4
   patrolPath: {fileID: 0}
   patrolSpeed: 0.5

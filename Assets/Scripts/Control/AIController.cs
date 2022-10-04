@@ -25,11 +25,15 @@ namespace RPGEngine.Control
     {
         #region Inspector Fields
 
+        [SerializeField] private LayerMask combatMask = 8;
+
         ///<value>The Range that the Enemy will chase a Combat Target.</value>
         [SerializeField] private float chaseRange = 5f;
 
         ///<value>The Speed to move when chasing.</value>
         [SerializeField] private float chaseSpeed = 2f;
+
+        [SerializeField] private GameObjectFloatGameEvent receivedDamaged;
 
         ///<value>The amount of time to look for target after target has been lost.</value>
         [SerializeField] private float lookTime = 5f;
@@ -65,11 +69,12 @@ namespace RPGEngine.Control
 
         #region Private Fields
 
-        private readonly Collider[] _combatTargetColliders = new Collider[100];
+        private readonly Collider[] _combatTargetColliders = new Collider[10];
 
         private Vector3 _startPosition;
         private float _timeSinceLastSawTarget = math.INFINITY;
         private float _timeSinceLastWaypoint = math.INFINITY;
+        private float _currentChaseRange;
 
         #endregion
 
@@ -83,6 +88,19 @@ namespace RPGEngine.Control
             base.Awake();
             
             _actionScheduler = GetComponent<ActionScheduler>();
+            _currentChaseRange = chaseRange;
+        }
+
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            if (receivedDamaged) receivedDamaged.RegisterListener(OnReceivedDamaged);
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            if (receivedDamaged) receivedDamaged.UnregisterListener(OnReceivedDamaged);
         }
 
         #endregion
@@ -102,10 +120,13 @@ namespace RPGEngine.Control
         {
             if (Health.IsDead) return;
             if (GamePaused) return;
-            
-            CombatTarget closestTarget = GetClosestTarget(chaseRange);
+
+            if (!Mathf.Approximately(_currentChaseRange, chaseRange) && !IsLookingForTarget())
+                _currentChaseRange = chaseRange;
+
+            CombatTarget closestTarget = GetClosestTarget(_currentChaseRange);
             if (IsChasing(closestTarget) && HasFighter && Fighter.CanAttack(closestTarget))
-                AttackBehavior(closestTarget!);
+                AttackBehavior(closestTarget);
             else if (IsLookingForTarget())
                 SuspiciousBehavior();
             else
@@ -121,12 +142,20 @@ namespace RPGEngine.Control
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.blue;
-            Gizmos.DrawWireSphere(transform.position, chaseRange);
+            Gizmos.DrawWireSphere(transform.position, _currentChaseRange);
         }
 
         #endregion
 
         #region Behavior Methods
+
+        private void OnReceivedDamaged(GameObject arg1, float arg2)
+        {
+            if (arg1 != gameObject) return;
+            _currentChaseRange = arg2 + chaseRange;
+            
+            _timeSinceLastSawTarget = 0;
+        }
 
         private void AttackBehavior([NotNull] CombatTarget closestTarget)
         {
@@ -198,6 +227,7 @@ namespace RPGEngine.Control
             CombatTarget[] combatTargets = GetAllCombatTargetsInRange(range);
             if (combatTargets.Length == 0) return null;
             CombatTarget closestTarget = combatTargets[0];
+            
             return closestTarget;
         }
 
@@ -207,7 +237,7 @@ namespace RPGEngine.Control
         /// <returns></returns>
         private CombatTarget[] GetAllCombatTargetsInRange(float range)
         {
-            Physics.OverlapSphereNonAlloc(transform.position, range, _combatTargetColliders);
+            Physics.OverlapSphereNonAlloc(transform.position, range, _combatTargetColliders, combatMask);
 
             return (from targetCollider in _combatTargetColliders
                     where targetCollider != null
