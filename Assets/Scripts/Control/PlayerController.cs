@@ -24,7 +24,6 @@ namespace RPGEngine.Control
         }
 
         [SerializeField] private CursorMapping[] cursorMappings;
-        [SerializeField] private float maxNavPathLength = 20;
 
         #region Private Fields
 
@@ -75,6 +74,7 @@ namespace RPGEngine.Control
             for (var i = 0; i < hits; i++)
             {
                 RaycastHit hit = _objectHits[i];
+                if (!Mover.CanMoveTo(hit.point)) continue;
                 IRaycastable[] raycastables = hit.transform.GetComponents<IRaycastable>();
                 if (raycastables == null) continue;
                 
@@ -111,6 +111,7 @@ namespace RPGEngine.Control
         private bool MoveToCursor()
         {
             var hasHIt = RaycastNavMesh(out Vector3 target);
+            if (!Mover.CanMoveTo(target)) return false;
             if (hasHIt) SetCursor(CursorType.Movement);
             if (!hasHIt || !Input.GetMouseButton(0)) return hasHIt;
 
@@ -128,24 +129,7 @@ namespace RPGEngine.Control
 
             target = navMeshHit.position;
 
-            NavMeshPath path = new NavMeshPath();
-            if (!NavMesh.CalculatePath(transform.position, target, NavMesh.AllAreas, path))
-                return false;
-            if (path.status != NavMeshPathStatus.PathComplete)
-                return false;
-            if (GetPathLength(path) > maxNavPathLength) return false;
-            
             return true;
-        }
-
-        private float GetPathLength(NavMeshPath path)
-        {
-            float length = 0;
-            if (path.corners.Length < 2) return length;
-            for (var i = 0; i < path.corners.Length - 1; i++)
-                length += Vector3.Distance(path.corners[i], path.corners[i + 1]);
-            //Debug.Log(length);
-            return length;
         }
 
         private Ray GetMouseFromMainCameraScreenPointToRay()

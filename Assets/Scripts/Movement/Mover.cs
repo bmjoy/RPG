@@ -35,6 +35,8 @@ namespace RPGEngine.Movement
     {
         [SerializeField] private BoolGameEvent gamePausedEvent;
         private bool _gamePaused;
+
+        [SerializeField] private float maxNavPathLength = 20;
         
         #region Component References
 
@@ -209,6 +211,15 @@ namespace RPGEngine.Movement
             MoveTo(destination);
         }
 
+        public bool CanMoveTo(Vector3 destination)
+        {
+            NavMeshPath path = new();
+            return
+                NavMesh.CalculatePath(transform.position, destination, NavMesh.AllAreas, path)
+                && path.status == NavMeshPathStatus.PathComplete
+                && !(GetPathLength(path) > maxNavPathLength);
+        }
+
         /// <summary>
         /// Move to the destination.
         /// </summary>
@@ -261,6 +272,16 @@ namespace RPGEngine.Movement
         private void OnPauseGame(bool paused)
         {
             _gamePaused = paused;
+        }
+
+        private float GetPathLength(NavMeshPath path)
+        {
+            float length = 0;
+            if (path.corners.Length < 2) return length;
+            for (var i = 0; i < path.corners.Length - 1; i++)
+                length += Vector3.Distance(path.corners[i], path.corners[i + 1]);
+            //Debug.Log(length);
+            return length;
         }
 
         #endregion

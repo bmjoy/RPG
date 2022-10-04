@@ -652,6 +652,10 @@ PrefabInstance:
       propertyPath: type
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6863629442196216028, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
+      propertyPath: maxNavPathLength
+      value: 24
+      objectReference: {fileID: 0}
     - target: {fileID: 7217525226749447344, guid: 71cf46d8029203b4ebed5fb3cd0898f0, type: 3}
       propertyPath: weapon
       value: 
@@ -732,7 +736,6 @@ MonoBehaviour:
   - type: 5
     texture: {fileID: 2800000, guid: b017dfab3916c1342b99c499d7ab500b, type: 3}
     hotspot: {x: 11, y: 6}
-  maxNavPathLength: 20
 --- !u!114 &6453593496252182893
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -258,6 +258,7 @@ namespace RPGEngine.Combat
         {
             if (!combatTarget) return false;
             if (combatTarget.Type != combatTargetType) return false;
+            if (!_mover.CanMoveTo(combatTarget.transform.position)) return false;
             Health targetHealth = combatTarget.GetComponent<Health>();
             return targetHealth && !targetHealth.IsDead;
         }
