@@ -11,6 +11,7 @@ namespace RPGEngine.UI.Stats
 
         protected override void Awake()
         {
+            base.Awake();
             _hasText = statValueText;
         }
 
