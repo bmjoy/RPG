@@ -177,6 +177,12 @@ namespace RPGEngine.Attributes
             Die();
         }
 
+        public void Heal(float healthToRestore)
+        {
+            _value = Mathf.Min(_value + healthToRestore, _max);
+            if (onHealthChanged) onHealthChanged.Invoke(gameObject, _value);
+        }
+
         public void OnHealthChange()
         {
             if (onHealthMaxChanged) onHealthMaxChanged.Invoke(gameObject, _max);

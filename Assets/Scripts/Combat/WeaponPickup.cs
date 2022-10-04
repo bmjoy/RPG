@@ -1,4 +1,5 @@
 using System.Collections;
+using RPGEngine.Attributes;
 using RPGEngine.Core;
 using RPGEngine.Movement;
 using UnityEngine;
@@ -11,6 +12,7 @@ namespace RPGEngine.Combat
         #region Inspector Fields
 
         [SerializeField] private WeaponConfig weaponConfig;
+        [SerializeField] private float healthToRestore;
         [SerializeField] private float respawnTime = 5;
 
         #endregion
@@ -31,7 +33,7 @@ namespace RPGEngine.Combat
         private void OnTriggerEnter(Collider other)
         {
             if (!other.CompareTag("Player")) return;
-            Pickup(other.GetComponent<Fighter>());
+            Pickup(other.gameObject);
         }
 
         #endregion
@@ -56,11 +58,21 @@ namespace RPGEngine.Combat
 
         #region Private Methods
 
-        private void Pickup(Fighter fighter)
+        private void Pickup(GameObject subject)
         {
+            if (!subject) return;
+
+            StartCoroutine(HideForSeconds(respawnTime));
+
+            if (healthToRestore > 0)
+            {
+                subject.GetComponent<Health>().Heal(healthToRestore);
+            }
+            
+            if (!weaponConfig) return;
+            Fighter fighter = subject.GetComponent<Fighter>();
             if (fighter == null) return;
             fighter.EquipWeapon(weaponConfig);
-            StartCoroutine(HideForSeconds(respawnTime));
         }
 
         private IEnumerator HideForSeconds(float seconds)
