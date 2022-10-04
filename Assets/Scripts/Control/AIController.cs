@@ -178,7 +178,8 @@ namespace RPGEngine.Control
             {
                 AIController ai = _nearbyEnemyColliders[i].collider.GetComponent<AIController>();
                 if (!ai) continue;
-                ai.OnReceivedDamaged(ai.gameObject, _currentChaseRange > chaseRange ? _currentChaseRange - chaseRange : shoutDistance);
+                ai._timeSinceLastSawTarget = _timeSinceLastSawTarget;
+                ai._currentChaseRange = _currentChaseRange;
             }
         }
 
