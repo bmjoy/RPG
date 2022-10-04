@@ -24,6 +24,7 @@ namespace RPGEngine.Control
         }
 
         [SerializeField] private CursorMapping[] cursorMappings;
+        [SerializeField] private float rayCastRadius = 1;
 
         #region Private Fields
 
@@ -67,7 +68,7 @@ namespace RPGEngine.Control
         
         private bool InteractWithComponent()
         {
-            var hits = Physics.RaycastNonAlloc(GetMouseFromMainCameraScreenPointToRay(), _objectHits);
+            var hits = Physics.SphereCastNonAlloc(GetMouseFromMainCameraScreenPointToRay(), rayCastRadius, _objectHits);
             if (hits == 0) return false;
             SortObjectHits(hits);
             

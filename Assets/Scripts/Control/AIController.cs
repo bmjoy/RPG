@@ -24,6 +24,8 @@ namespace RPGEngine.Control
     public class AIController : RPGController
     {
         #region Inspector Fields
+        
+        [SerializeField] private float shoutDistance = 5f;
 
         [SerializeField] private LayerMask combatMask = 8;
 
@@ -70,6 +72,7 @@ namespace RPGEngine.Control
         #region Private Fields
 
         private readonly Collider[] _combatTargetColliders = new Collider[10];
+        private readonly RaycastHit[] _nearbyEnemyColliders = new RaycastHit[200];
 
         private Vector3 _startPosition;
         private float _timeSinceLastSawTarget = math.INFINITY;
@@ -142,7 +145,10 @@ namespace RPGEngine.Control
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.blue;
-            Gizmos.DrawWireSphere(transform.position, _currentChaseRange);
+            Vector3 position = transform.position;
+            Gizmos.DrawWireSphere(position, _currentChaseRange);
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(position, shoutDistance);
         }
 
         #endregion
@@ -159,9 +165,21 @@ namespace RPGEngine.Control
 
         private void AttackBehavior([NotNull] CombatTarget closestTarget)
         {
+            AggravateNearByEnemies();
             _timeSinceLastSawTarget = 0;
             Mover.SetMoveSpeed(chaseSpeed);
             if (HasFighter) Fighter.Attack(closestTarget);
+        }
+
+        private void AggravateNearByEnemies()
+        {
+            var size = Physics.SphereCastNonAlloc(transform.position, shoutDistance, Vector3.up,  _nearbyEnemyColliders, 0);
+            for (var i = 0; i < size; i++)
+            {
+                AIController ai = _nearbyEnemyColliders[i].collider.GetComponent<AIController>();
+                if (!ai) continue;
+                ai.OnReceivedDamaged(ai.gameObject, _currentChaseRange > chaseRange ? _currentChaseRange - chaseRange : shoutDistance);
+            }
         }
 
         private void SuspiciousBehavior()

@@ -201,6 +201,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gamePausedEvent: {fileID: 11400000, guid: 56f8b7c20861cb840960ab9444c0cafd, type: 2}
   combatTargetType: 0
+  shoutDistance: 10
   combatMask:
     serializedVersion: 2
     m_Bits: 64
