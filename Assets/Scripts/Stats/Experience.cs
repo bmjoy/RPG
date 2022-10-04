@@ -36,14 +36,10 @@ namespace RPGEngine.Stats
         {
             yield return null;
             if (onExperiencedChanged) onExperiencedChanged.Invoke(gameObject, Value);
-        }
-
-        private void OnEnable()
-        {
             if (characterDied) characterDied.RegisterListener(GainExperience);
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
             if (characterDied) characterDied.UnregisterListener(GainExperience);
         }
