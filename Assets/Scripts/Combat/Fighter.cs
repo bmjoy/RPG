@@ -258,7 +258,7 @@ namespace RPGEngine.Combat
         {
             if (!combatTarget) return false;
             if (combatTarget.Type != combatTargetType) return false;
-            if (!_mover.CanMoveTo(combatTarget.transform.position)) return false;
+            if (!_mover.CanMoveTo(combatTarget.transform.position) && !GetIsInRange(combatTarget.transform)) return false;
             Health targetHealth = combatTarget.GetComponent<Health>();
             return targetHealth && !targetHealth.IsDead;
         }
@@ -271,7 +271,6 @@ namespace RPGEngine.Combat
         {
             if (!target)
             {
-                //Debug.Log("Target is null");
                 _target = null;
                 if (onTargetChanged) onTargetChanged.Invoke(null);
                 return;
@@ -280,13 +279,10 @@ namespace RPGEngine.Combat
             _target = target.GetComponent<Health>();
             if (!_target)
             {
-                //Debug.Log($"{target.name} has no health");
                 _target = null;
                 if (onTargetChanged) onTargetChanged.Invoke(null);
                 return;
             }
-            // if (name == "Player")
-            //         Debug.Log($"{name} is targeting {target.name}");
             if (onTargetChanged) onTargetChanged.Invoke(_target.gameObject);
             _target.OnHealthChange();
         }
