@@ -75,7 +75,7 @@ namespace RPGEngine.Stats
             if (!_hasExperience) return startingLevel;
             var level = startingLevel;
             _experienceToNextLevel = GetExperienceNeeded(level);
-            while(_experienceToNextLevel < _experience.Value)
+            while(_experienceToNextLevel <= _experience.Value)
             {
                 level++;
                 _experienceToNextLevel = GetExperienceNeeded(level);
