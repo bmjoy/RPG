@@ -65,15 +65,6 @@ namespace RPGEngine.Saving
         }
 
         /// <summary>
-        /// Load the scene from the provided save file.
-        /// </summary>
-        /// <param name="saveFile">The name of the save file to Load from.</param>
-        public void Load(string saveFile)
-        {
-            RestoreState(LoadFile(saveFile));
-        }
-
-        /// <summary>
         /// Delete the state in the given save file.
         /// </summary>
         /// <param name="saveFile">The name of the save file to Delete</param>
@@ -94,6 +85,15 @@ namespace RPGEngine.Saving
         #endregion
 
         #region Private Methods
+
+        /// <summary>
+        /// Load the scene from the provided save file.
+        /// </summary>
+        /// <param name="saveFile">The name of the save file to Load from.</param>
+        private void Load(string saveFile)
+        {
+            RestoreState(LoadFile(saveFile));
+        }
 
         private IDictionary<string, JToken> LoadFile(string saveFile)
         {
